@@ -44,11 +44,10 @@ namespace ConsoleGodmist.Characters
                             double dodge, double physicalDefense, double magicDefense, double speed,
                             CharacterClass characterClass) : base(name, maxHealth, minimalAttack, maximalAttack, critChance,
                                                                   dodge, physicalDefense, magicDefense, speed, 1) {
-                                CharacterClass = characterClass;
-                                Gold = 100;
-                                CurrentExperience = 0;
-                            }
-
+            CharacterClass = characterClass;
+            Gold = 100;
+            CurrentExperience = 0;
+        }
         public void GainGold(int gold) {
             Gold += gold;
         }

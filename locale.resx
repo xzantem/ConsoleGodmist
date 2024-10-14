@@ -295,4 +295,46 @@
   <data name="SelectDestination" xml:space="preserve">
     <value>Select expedition destination:</value>
   </data>
+  <data name="GoForward" xml:space="preserve">
+    <value>Go forward</value>
+  </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>Go back</value>
+  </data>
+  <data name="ShowCharacter" xml:space="preserve">
+    <value>Show character</value>
+  </data>
+  <data name="GoUp" xml:space="preserve">
+    <value>Go up</value>
+  </data>
+  <data name="GoDown" xml:space="preserve">
+    <value>Go down</value>
+  </data>
+  <data name="RestAtCampfire" xml:space="preserve">
+    <value>Rest at campfire</value>
+  </data>
+  <data name="CollectPlant" xml:space="preserve">
+    <value>Collect plant</value>
+  </data>
+  <data name="OpenStash" xml:space="preserve">
+    <value>Loot stash</value>
+  </data>
+  <data name="ExitDungeon" xml:space="preserve">
+    <value>Exit dungeon</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="DisarmTrap" xml:space="preserve">
+    <value>Disarm trap</value>
+  </data>
+  <data name="LocationScouted" xml:space="preserve">
+    <value>You were able to find a map of the current floor!</value>
+  </data>
 </root>

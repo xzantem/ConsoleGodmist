@@ -4,11 +4,9 @@ namespace ConsoleGodmist.Enums
         Empty,
         Battle,
         Stash,
+        Trap,
         Exit,
-        Door,
-        Gate,
-        Lever,
-        Item,
-        Impassable
+        Campfire,
+        Plant
     }
 }

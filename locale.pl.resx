@@ -295,4 +295,46 @@
   <data name="SelectDestination" xml:space="preserve">
     <value>Wybierz cel podróży:</value>
   </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>Idź do tyłu</value>
+  </data>
+  <data name="GoForward" xml:space="preserve">
+    <value>Idź do przodu</value>
+  </data>
+  <data name="ShowCharacter" xml:space="preserve">
+    <value>Pokaż postać</value>
+  </data>
+  <data name="GoDown" xml:space="preserve">
+    <value>Idź w dół</value>
+  </data>
+  <data name="GoUp" xml:space="preserve">
+    <value>Idź w górę</value>
+  </data>
+  <data name="RestAtCampfire" xml:space="preserve">
+    <value>Odpocznij przy ognisku</value>
+  </data>
+  <data name="CollectPlant" xml:space="preserve">
+    <value>Zbierz roślinę</value>
+  </data>
+  <data name="OpenStash" xml:space="preserve">
+    <value>Zbierz skarb</value>
+  </data>
+  <data name="ExitDungeon" xml:space="preserve">
+    <value>Wyjdź z lochu</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Poziom</value>
+  </data>
+  <data name="Floor" xml:space="preserve">
+    <value>Piętro</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="DisarmTrap" xml:space="preserve">
+    <value>Rozbrój pułapkę</value>
+  </data>
+  <data name="LocationScouted" xml:space="preserve">
+    <value>Odkryto mapę aktualnego piętra!</value>
+  </data>
 </root>

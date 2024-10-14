@@ -124,5 +124,36 @@ namespace ConsoleGodmist
                 baseStat += 9 * scaleFactor;
             return baseStat;
         }
+
+        public static T RandomChoice<T>(Dictionary<T, double> choices)
+        {
+            var result = Random.NextDouble();
+            if (Math.Abs(choices.Values.Sum() - 1) > 0.00001)
+            {
+                throw new ArgumentOutOfRangeException(nameof(choices), "Choices chances should add up to one");
+            }
+            double sum = 0;
+            foreach (var choice in choices)
+            {
+                sum += choice.Value;
+                if (result < sum)
+                    return choice.Key;
+            }
+
+            throw new NullReferenceException();
+        }
+        public static T RandomChoice<T>(Dictionary<T, int> choices)
+        {
+            var result = Random.Next(1, choices.Values.Sum() + 1);
+            double sum = 0;
+            foreach (var choice in choices)
+            {
+                sum += choice.Value;
+                if (result <= sum)
+                    return choice.Key;
+            }
+
+            throw new NullReferenceException();
+        }
     }
 }

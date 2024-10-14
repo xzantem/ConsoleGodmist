@@ -20,9 +20,8 @@ namespace ConsoleGodmist.Town
             switch (Array.IndexOf(choices, choice))
             {
                 case 0:
-                    var dungeonType = ChooseDungeon();
-                    Dungeon dungeon = new(dungeonType);
-                    dungeon.TraverseDungeon();
+                    DungeonMovementManager.EnterDungeon(new Dungeon(1, ChooseDungeon()));
+                    DungeonMovementManager.TraverseDungeon();
                 break;
                 case 6: AnsiConsole.Write(PlayerHandler.player.Name + ", Poziom " + PlayerHandler.player.Level + " " + PlayerHandler.player.CharacterClass); break;
                 case 7: Environment.Exit(0); break;

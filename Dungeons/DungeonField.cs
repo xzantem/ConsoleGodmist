@@ -12,5 +12,10 @@ namespace ConsoleGodmist.Dungeons
         public void Reveal() {
             Revealed = true;
         }
+
+        public void Clear()
+        {
+            FieldType = DungeonFieldType.Empty;
+        }
     }
 }
