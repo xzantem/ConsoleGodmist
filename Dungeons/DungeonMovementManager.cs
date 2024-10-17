@@ -60,7 +60,7 @@ public static class DungeonMovementManager
         string visited = (CurrentDungeon.Floors.Count - 1) == 0
             ? (CurrentDungeon.Floors.Count - 1).ToString()
             : ("-" + (CurrentDungeon.Floors.Count - 1));
-        locationText = " " + locale_main.Level + " " + CurrentDungeon.DungeonLevel + ", " + 
+        locationText = locale_main.Level + " " + CurrentDungeon.DungeonLevel + ", " + 
                        locale_main.Floor + " " + floor + " [" +
                         visited + "]\n" + locale_main.Map + ":";
         AnsiConsole.WriteLine(locationText);

@@ -4,7 +4,7 @@ namespace ConsoleGodmist.Items;
 
 public class BaseIngredient : IItem
 {
-    public string Name { get; set; }
+    public string Alias { get; set; }
     public int Weight { get; set; }
     public int ID { get; set; }
     public int Cost { get; set; }
@@ -20,9 +20,9 @@ public class BaseIngredient : IItem
         Weight = 0;
     }  
 
-    public BaseIngredient(string name, int id, int cost, ItemRarity rarity, string desc, ItemType itemType)
+    public BaseIngredient(string alias, int id, int cost, ItemRarity rarity, string desc, ItemType itemType)
     {
-        Name = name;
+        Alias = alias;
         Weight = 0;
         ID = id;
         Cost = cost;

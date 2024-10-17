@@ -315,4 +315,13 @@
   <data name="DeleteItemConfirmation" xml:space="preserve">
     <value>Czy na pewno chcesz wyrzucić</value>
   </data>
+  <data name="SelectDungeonLevel" xml:space="preserve">
+    <value>Wybierz poziom lochu</value>
+  </data>
+  <data name="InvalidLevel" xml:space="preserve">
+    <value>Wybrany poziom jest nieprawidłowy</value>
+  </data>
+  <data name="PressAnyKey" xml:space="preserve">
+    <value>Naciśnij dowolny przycisk, aby kontynuować</value>
+  </data>
 </root>

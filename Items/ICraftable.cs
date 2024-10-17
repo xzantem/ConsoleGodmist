@@ -2,6 +2,6 @@
 
 public interface ICraftable : IItem
 {
-    public Dictionary<IItem, int> CraftingRecipe { get; set; }
+    public Dictionary<string, int> CraftingRecipe { get; set; }
     public int CraftedAmount { get; set; }
 }

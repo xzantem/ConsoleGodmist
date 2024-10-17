@@ -51,12 +51,12 @@ public static class InventoryMenuHandler
                     index -= scrollAmount;
                     break;
                 case 2:
-                    AnsiConsole.Write(new Text($"{locale.locale_main.ChooseItem} {locale_main.ToInspect}:\n", 
+                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToInspect}:\n", 
                         Stylesheet.Styles["default"]));
-                    Inventory.Items.ElementAt(ChooseItem()).Key.Inspect();
+                    InspectItem();
                     break;
                 case 3:
-                    AnsiConsole.Write(new Text($"{locale.locale_main.ChooseItem} {locale_main.ToRemove}:\n", 
+                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToRemove}:\n", 
                         Stylesheet.Styles["default"]));
                     DeleteItem();
                     break;
@@ -69,9 +69,9 @@ public static class InventoryMenuHandler
                     SortInventory();
                     break;
                 case 6:
-                    AnsiConsole.Write(new Text($"{locale.locale_main.ChooseItem} {locale_main.ToUse}:\n", 
+                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToUse}:\n", 
                         Stylesheet.Styles["default"]));
-                    Inventory.Items.ElementAt(ChooseItem()).Key.Use();
+                    Inventory.UseItem(Inventory.Items.ElementAt(ChooseItem()).Key);
                     break;
                 case 7:
                     return;
@@ -94,28 +94,29 @@ public static class InventoryMenuHandler
     }
     private static void DeleteItem()
     {
-        var Item = Inventory.Items.ElementAt(ChooseItem());
-        if (Item.Key.Stackable && Item.Value > 1)
+        var item = Inventory.Items.ElementAt(ChooseItem());
+        if (item.Key.Stackable && item.Value > 1)
         {
             var number = AnsiConsole.Prompt(
-                new TextPrompt<int>($"{locale_main.HowManyToDelete} (max {Item.Value}): ")
-                    .Validate((Func<int, ValidationResult>)Validator));
-            if (!EngineMethods.Confirmation($"{locale_main.DeleteItemConfirmation}: {Item.Key.Name} ({number})?"))
+                new TextPrompt<int>($"{locale_main.HowManyToDelete} [[max {item.Value}]] ")
+                    .DefaultValue(1)
+                    .Validate(Validator));
+            if (!EngineMethods.Confirmation($"{locale_main.DeleteItemConfirmation}: {item.Key.Name} ({number})?"))
                 return;
-            Inventory.RemoveItem(Item.Key, number);
+            Inventory.RemoveItem(item.Key, number);
         }
         else
         {
-            if (!EngineMethods.Confirmation($"{locale_main.DeleteItemConfirmation}: {Item.Key.Name}?"))
+            if (!EngineMethods.Confirmation($"{locale_main.DeleteItemConfirmation}: {item.Key.Name}?"))
                 return;
-            Inventory.RemoveItem(Item.Key);
+            Inventory.RemoveItem(item.Key);
         }
         return;
 
         ValidationResult Validator(int n) {
-            if (n > Item.Value) return ValidationResult.Error(locale.locale_main.ChoseTooMany);
-            else if (n < 0) return ValidationResult.Error(locale.locale_main.IntBelowZero);
-            else return ValidationResult.Success(); }
+            if (n > item.Value) return ValidationResult.Error(locale.locale_main.ChoseTooMany);
+            return n < 0 ? ValidationResult.Error(locale.locale_main.IntBelowZero) : ValidationResult.Success();
+        }
     }
     private static void SortInventory()
     {
@@ -129,8 +130,13 @@ public static class InventoryMenuHandler
             .HighlightStyle(new Style(Color.Gold3_1)));
         Inventory.SortInventory((SortType)Array.IndexOf(choices, choice));
     }
-    private static void UseItem()
+
+    private static void InspectItem()
     {
-        
+        var item = Inventory.Items.ElementAt(ChooseItem());
+        item.Key.Inspect(item.Value);
+        var cont = AnsiConsole.Prompt(
+            new TextPrompt<string>(locale_main.PressAnyKey)
+                .AllowEmpty());
     }
 }

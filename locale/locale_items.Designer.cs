@@ -445,5 +445,14 @@ namespace ConsoleGodmist.locale {
                 return ResourceManager.GetString("WeaponGaldurite", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight.
+        /// </summary>
+        internal static string Weight {
+            get {
+                return ResourceManager.GetString("Weight", resourceCulture);
+            }
+        }
     }
 }

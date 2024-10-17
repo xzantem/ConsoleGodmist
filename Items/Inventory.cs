@@ -7,8 +7,8 @@ namespace ConsoleGodmist.Items;
 public class Inventory
 {
     public Dictionary<IItem, int> Items { get; private set; } = new();
-    public int PackWeight { get {return Items.Sum(item => item.Key.Weight * item.Value); } }
-    public int MaxPackWeight { get; protected set; } = 60;
+    private int PackWeight { get {return Items.Sum(item => item.Key.Weight * item.Value); } }
+    private int MaxPackWeight { get; set; } = 60;
 
     public void AddItem(IItem item, int quantity = 1)
     {
@@ -28,12 +28,12 @@ public class Inventory
         }
     }
 
-    public int GetItemCount(int id)
+    /*public int GetItemCount(int id)
     {
         return Items.ContainsKey(ItemManager.GetItemById(id)) ? Items[ItemManager.GetItemById(id)] : 0;
-    }
+    }*/
 
-    public void RemoveItemById(int id, int amount = 1)
+    /*public void RemoveItemById(int id, int amount = 1)
     {
         var item = ItemManager.GetItemById(id);
         if (Items.ContainsKey(item))
@@ -55,7 +55,7 @@ public class Inventory
         {
             AnsiConsole.WriteLine($"{locale_main.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
         } 
-    }
+    }*/
     public void RemoveItem(IItem item, int amount = 1)
     {
         if (Items.ContainsKey(item))

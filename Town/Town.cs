@@ -27,7 +27,7 @@ namespace ConsoleGodmist.Town
                 switch (Array.IndexOf(choices, choice))
                 {
                     case 0:
-                        DungeonMovementManager.EnterDungeon(new Dungeon(1, ChooseDungeon()));
+                        DungeonMovementManager.EnterDungeon(ChooseDungeon());
                         DungeonMovementManager.TraverseDungeon();
                         break;
                     case 1:
@@ -41,14 +41,14 @@ namespace ConsoleGodmist.Town
                 }
             }
         }
-        private static DungeonType ChooseDungeon() {
+        private static Dungeon ChooseDungeon() {
             AnsiConsole.WriteLine(locale_main.SelectDestination);
             string[] dungeonChoices = [locale_main.Catacombs, locale_main.Forest, locale_main.ElvishRuins, locale_main.Cove, locale_main.Desert, locale_main.Temple, locale_main.Mountains, locale_main.Swamp
             ];
             var dungeonChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(dungeonChoices)
                 .HighlightStyle(new Style(Color.Gold3_1)));
-            return Array.IndexOf(dungeonChoices, dungeonChoice) switch
+            var dungeonType = Array.IndexOf(dungeonChoices, dungeonChoice) switch
             {
                 0 => DungeonType.Catacombs,
                 1 => DungeonType.Forest,
@@ -60,6 +60,16 @@ namespace ConsoleGodmist.Town
                 7 => DungeonType.Swamp,
                 _ => DungeonType.Catacombs,
             };
+            var level = AnsiConsole.Prompt(
+                new TextPrompt<int>($"{locale_main.SelectDungeonLevel} [[1-50]] ")
+                    .DefaultValue(PlayerHandler.player.Level)
+                    .Validate((n) => n switch
+                        {
+                            <1 or >50 => ValidationResult.Error(locale_main.InvalidLevel),
+                            _ => ValidationResult.Success()
+                        }
+                        ));
+            return new Dungeon(level, dungeonType);
         }
     }
 }

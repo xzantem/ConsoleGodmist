@@ -315,4 +315,13 @@
   <data name="DeleteItemConfirmation" xml:space="preserve">
     <value>Are you sure you want to remove</value>
   </data>
+  <data name="SelectDungeonLevel" xml:space="preserve">
+    <value>Select dungeon level</value>
+  </data>
+  <data name="InvalidLevel" xml:space="preserve">
+    <value>The chosen level is not valid</value>
+  </data>
+  <data name="PressAnyKey" xml:space="preserve">
+    <value>Press any key to continue</value>
+  </data>
 </root>

@@ -402,6 +402,15 @@ namespace ConsoleGodmist.locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The chosen level is not valid.
+        /// </summary>
+        internal static string InvalidLevel {
+            get {
+                return ResourceManager.GetString("InvalidLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inventory.
         /// </summary>
         internal static string Inventory {
@@ -627,6 +636,15 @@ namespace ConsoleGodmist.locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press any key to continue.
+        /// </summary>
+        internal static string PressAnyKey {
+            get {
+                return ResourceManager.GetString("PressAnyKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quest log.
         /// </summary>
         internal static string QuestLog {
@@ -677,6 +695,15 @@ namespace ConsoleGodmist.locale {
         internal static string SelectDestination {
             get {
                 return ResourceManager.GetString("SelectDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select dungeon level.
+        /// </summary>
+        internal static string SelectDungeonLevel {
+            get {
+                return ResourceManager.GetString("SelectDungeonLevel", resourceCulture);
             }
         }
         

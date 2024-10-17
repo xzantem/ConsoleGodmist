@@ -1,8 +1,9 @@
-﻿using Spectre.Console;
+using Spectre.Console;
 using System.Threading;
 using System.Globalization;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Characters;
+using ConsoleGodmist.Items;
 using ConsoleGodmist.locale;
 
 namespace ConsoleGodmist.Components
@@ -38,11 +39,18 @@ namespace ConsoleGodmist.Components
                 .Title(locale_main.ChooseLanguage)
                 .HighlightStyle(new Style(Color.MediumPurple3)));
 
-            switch (Array.IndexOf(choices, choice))
+            Thread.CurrentThread.CurrentUICulture = Array.IndexOf(choices, choice) switch
             {
-                case 0: Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US"); break;
-                case 1: Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("pl-PL"); break;
-            }
+                0 => CultureInfo.GetCultureInfo("en-US"),
+                1 => CultureInfo.GetCultureInfo("pl-PL"),
+                _ => Thread.CurrentThread.CurrentUICulture
+            };
+            System.Globalization.CultureInfo.CurrentCulture = Array.IndexOf(choices, choice) switch
+            {
+                0 => CultureInfo.GetCultureInfo("en-US"),
+                1 => CultureInfo.GetCultureInfo("pl-PL"),
+                _ => Thread.CurrentThread.CurrentCulture
+            };
         }
 
         private static async void NewGame()

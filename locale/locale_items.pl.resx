@@ -140,4 +140,7 @@
   <data name="Type" xml:space="preserve">
     <value>Typ</value>
   </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Waga</value>
+  </data>
 </root>

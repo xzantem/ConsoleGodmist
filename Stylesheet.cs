@@ -11,7 +11,8 @@ public static class Stylesheet
         Styles = new Dictionary<string, Style>()
         {
             { "default", new Style(Color.White) },
-            { "gold", new Style(Color.Gold1) },
+            { "default-cursive", new Style(Color.White, Color.Black, Decoration.Italic) },
+            { "gold", new Style(Color.Gold3_1) },
             { "value-lost", new Style(Color.Red3_1) },
             { "value-gained", new Style(Color.DarkSlateGray2) },
             { "level-up", new Style(Color.Aqua, Color.Black, Decoration.Bold) },
