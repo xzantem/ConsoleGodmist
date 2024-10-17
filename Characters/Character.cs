@@ -1,5 +1,6 @@
 using System.Runtime;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.locale;
 
 namespace ConsoleGodmist.Characters
 {
@@ -101,7 +102,7 @@ namespace ConsoleGodmist.Characters
         protected Character(string name, double maxHealth, double minimalAttack, double maximalAttack, double critChance,
                             double dodge, double physicalDefense, double magicDefense, double speed, int level) 
         {
-            Name = name ?? locale.Nameless;
+            Name = name ?? locale_main.Nameless;
             MaximalHealth = Math.Max(0, maxHealth);
             CurrentHealth = maxHealth;
             MinimalAttack = minimalAttack;

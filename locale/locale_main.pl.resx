@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ChooseDifficulty" xml:space="preserve">
+    <value>Wybierz poziom trudności</value>
+        <comment />
+  </data>
+    <data name="ChooseLanguage" xml:space="preserve">
+    <value>Wybierz język</value>
+        <comment />
+  </data>
+    <data name="DeleteSaveFile" xml:space="preserve">
+    <value>Usuń zapis gry</value>
+        <comment />
+  </data>
+    <data name="English (Language)" xml:space="preserve">
+    <value>Angielski</value>
+        <comment />
+  </data>
+    <data name="ExitGame" xml:space="preserve">
+    <value>Wyjdź z gry</value>
+        <comment />
+  </data>
+    <data name="LoadGame" xml:space="preserve">
+    <value>Wczytaj grę</value>
+        <comment />
+  </data>
+    <data name="NewGame" xml:space="preserve">
+    <value>Nowa gra</value>
+        <comment />
+  </data>
+    <data name="Polish (Language)" xml:space="preserve">
+    <value>Polski</value>
+        <comment />
+  </data>
+    <data name="Easy" xml:space="preserve">
+    <value>Łatwy</value>
+        <comment />
+  </data>
+    <data name="Hard" xml:space="preserve">
+    <value>Trudny</value>
+        <comment />
+  </data>
+    <data name="Nightmare" xml:space="preserve">
+    <value>Koszmar</value>
+        <comment />
+  </data>
+    <data name="Normal" xml:space="preserve">
+    <value>Normalny</value>
+        <comment />
+  </data>
+    <data name="Opening_1" xml:space="preserve">
+    <value>Jesteś w drodze do miasta Arungard. Podobno od dwudziestu lat żaden z mieszkańców tego miasta nie ujrzał światła dziennego.</value>
+        <comment />
+  </data>
+    <data name="Opening_2" xml:space="preserve">
+    <value>Słyszałeś legendy o tym, że niejaki Ghorn wypowiedział zaklęcie i miasto spowiła Ciemność.</value>
+        <comment />
+  </data>
+    <data name="Opening_3" xml:space="preserve">
+    <value>Nic więcej Ci nie wiadomo.</value>
+        <comment />
+  </data>
+    <data name="Opening_4" xml:space="preserve">
+    <value>Dojechałeś już do miasta. Jego stare, elfickie mury i wieże od razu wywołały wielkie wrażenie.</value>
+        <comment />
+  </data>
+    <data name="Opening_5" xml:space="preserve">
+    <value>Podchodzisz do strażnika przy bramie.</value>
+        <comment />
+  </data>
+    <data name="TownGuard_Name" xml:space="preserve">
+    <value>Strażnik miasta Arungard</value>
+        <comment />
+  </data>
+    <data name="TownGuard_Line" xml:space="preserve">
+    <value>Kim jesteś i po co przybywasz?</value>
+        <comment />
+  </data>
+    <data name="Iam" xml:space="preserve">
+    <value>Jestem</value>
+        <comment />
+  </data>
+    <data name="WarriorLocative" xml:space="preserve">
+    <value>wojownikiem</value>
+        <comment />
+  </data>
+    <data name="ScoutLocative" xml:space="preserve">
+    <value>zwiadowcą</value>
+        <comment />
+  </data>
+    <data name="SorcererLocative" xml:space="preserve">
+    <value>czarodziejem</value>
+        <comment />
+  </data>
+    <data name="PaladinLocative" xml:space="preserve">
+    <value>paladynem</value>
+        <comment />
+  </data>
+    <data name="MyNameIs" xml:space="preserve">
+    <value>Nazywam się</value>
+        <comment />
+  </data>
+    <data name="WarriorNominativeC" xml:space="preserve">
+    <value>Wojownik</value>
+        <comment />
+  </data>
+    <data name="ScoutNominativeC" xml:space="preserve">
+    <value>Zwiadowca</value>
+        <comment />
+  </data>
+    <data name="SorcererNominativeC" xml:space="preserve">
+    <value>Czarodziej</value>
+        <comment />
+  </data>
+    <data name="PaladinNominativeC" xml:space="preserve">
+    <value>Paladyn</value>
+        <comment />
+  </data>
+    <data name="StartExpedition" xml:space="preserve">
+    <value>Wyrusz na wyprawę</value>
+        <comment />
+  </data>
+    <data name="Blacksmith" xml:space="preserve">
+    <value>Kowal</value>
+        <comment />
+  </data>
+    <data name="Alchemist" xml:space="preserve">
+    <value>Alchemik</value>
+        <comment />
+  </data>
+    <data name="Enchanter" xml:space="preserve">
+    <value>Zaklinacz</value>
+        <comment />
+  </data>
+    <data name="QuestLog" xml:space="preserve">
+    <value>Dziennik zadań</value>
+        <comment />
+  </data>
+    <data name="OpenInventory" xml:space="preserve">
+    <value>Otwórz ekwipunek</value>
+        <comment />
+  </data>
+    <data name="SaveGame" xml:space="preserve">
+    <value>Zapisz grę</value>
+        <comment />
+  </data>
+    <data name="Nameless" xml:space="preserve">
+    <value>Bezimienny</value>
+  </data>
+    <data name="Catacombs" xml:space="preserve">
+    <value>Katakumby</value>
+  </data>
+    <data name="Forest" xml:space="preserve">
+    <value>Las</value>
+  </data>
+    <data name="ElvishRuins" xml:space="preserve">
+    <value>Elfickie Ruiny</value>
+  </data>
+    <data name="Cove" xml:space="preserve">
+    <value>Zatoka</value>
+  </data>
+    <data name="Desert" xml:space="preserve">
+    <value>Pustynia</value>
+  </data>
+    <data name="Temple" xml:space="preserve">
+    <value>Świątynia</value>
+  </data>
+    <data name="Mountains" xml:space="preserve">
+    <value>Góry</value>
+  </data>
+    <data name="Swamp" xml:space="preserve">
+    <value>Bagno</value>
+  </data>
+    <data name="SelectDestination" xml:space="preserve">
+    <value>Wybierz cel podróży:</value>
+  </data>
+    <data name="GoBack" xml:space="preserve">
+    <value>Idź do tyłu</value>
+  </data>
+    <data name="GoForward" xml:space="preserve">
+    <value>Idź do przodu</value>
+  </data>
+    <data name="ShowCharacter" xml:space="preserve">
+    <value>Pokaż postać</value>
+  </data>
+    <data name="GoDown" xml:space="preserve">
+    <value>Idź w dół</value>
+  </data>
+    <data name="GoUp" xml:space="preserve">
+    <value>Idź w górę</value>
+  </data>
+    <data name="RestAtCampfire" xml:space="preserve">
+    <value>Odpocznij przy ognisku</value>
+  </data>
+    <data name="CollectPlant" xml:space="preserve">
+    <value>Zbierz roślinę</value>
+  </data>
+    <data name="OpenStash" xml:space="preserve">
+    <value>Zbierz skarb</value>
+  </data>
+    <data name="ExitDungeon" xml:space="preserve">
+    <value>Wyjdź z lochu</value>
+  </data>
+    <data name="Level" xml:space="preserve">
+    <value>Poziom</value>
+  </data>
+    <data name="Floor" xml:space="preserve">
+    <value>Piętro</value>
+  </data>
+    <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+    <data name="DisarmTrap" xml:space="preserve">
+    <value>Rozbrój pułapkę</value>
+  </data>
+    <data name="LocationScouted" xml:space="preserve">
+    <value>Odkryto mapę aktualnego piętra!</value>
+  </data>
+    <data name="NotEnoughWeight" xml:space="preserve">
+    <value>Za mało miejsca w plecaku, by podnieść</value>
+  </data>
+    <data name="NotEnoughItem" xml:space="preserve">
+    <value>Posiadasz za mało przedmiotu</value>
+  </data>
+    <data name="ItemNotFound" xml:space="preserve">
+    <value>Nie znaleziono przedmiotu</value>
+  </data>
+    <data name="Inventory" xml:space="preserve">
+    <value>Ekwipunek</value>
+  </data>
+    <data name="Settings" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+    <data name="ExitToMenu" xml:space="preserve">
+    <value>Wyjdź do menu</value>
+  </data>
+  <data name="CurrentGold" xml:space="preserve">
+    <value>Aktualne złoto</value>
+  </data>
+  <data name="YouGain" xml:space="preserve">
+    <value>Otrzymujesz</value>
+  </data>
+  <data name="ExperienceGenitive" xml:space="preserve">
+    <value>doświadczenia</value>
+  </data>
+  <data name="LevelUp" xml:space="preserve">
+    <value>Awansujesz na poziom</value>
+  </data>
+  <data name="CurrentLevel" xml:space="preserve">
+    <value>Aktualny poziom</value>
+  </data>
+  <data name="DeleteItem" xml:space="preserve">
+    <value>Wyrzuć przedmiot</value>
+  </data>
+  <data name="DeleteJunk" xml:space="preserve">
+    <value>Wyrzuć wyposażenie na inne klasy</value>
+  </data>
+  <data name="InspectItem" xml:space="preserve">
+    <value>Zbadaj przedmiot</value>
+  </data>
+  <data name="SortInventory" xml:space="preserve">
+    <value>Sortuj ekwipunek</value>
+  </data>
+  <data name="Y" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="DeleteJunkConfirmation" xml:space="preserve">
+    <value>Czy na pewno chcesz wyrzucić całe wyposażenia na inne klasy?</value>
+  </data>
+  <data name="ChooseSortingMethod" xml:space="preserve">
+    <value>Wybierz metodę sortowania</value>
+  </data>
+  <data name="ToInspect" xml:space="preserve">
+    <value>do zbadania</value>
+  </data>
+  <data name="ToRemove" xml:space="preserve">
+    <value>do wyrzucenia</value>
+  </data>
+  <data name="ChooseItem" xml:space="preserve">
+    <value>Wybierz przedmiot</value>
+  </data>
+  <data name="UseItem" xml:space="preserve">
+    <value>Użyj przedmiot</value>
+  </data>
+  <data name="ToUse" xml:space="preserve">
+    <value>do użycia</value>
+  </data>
+  <data name="HowManyToDelete" xml:space="preserve">
+    <value>Ile sztuk usunąć?</value>
+  </data>
+  <data name="ChoseTooMany" xml:space="preserve">
+    <value>Wpisana ilość jest za duża!</value>
+  </data>
+  <data name="IntBelowZero" xml:space="preserve">
+    <value>Ilość nie może być ujemna!</value>
+  </data>
+  <data name="DeleteItemConfirmation" xml:space="preserve">
+    <value>Czy na pewno chcesz wyrzucić</value>
+  </data>
+</root>

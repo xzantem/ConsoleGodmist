@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ChooseDifficulty" xml:space="preserve">
+    <value>Choose difficulty</value>
+        <comment />
+  </data>
+    <data name="ChooseLanguage" xml:space="preserve">
+    <value>Choose language</value>
+        <comment />
+  </data>
+    <data name="DeleteSaveFile" xml:space="preserve">
+    <value>Delete save file</value>
+        <comment />
+  </data>
+    <data name="Easy" xml:space="preserve">
+    <value>Easy</value>
+        <comment />
+  </data>
+    <data name="English (Language)" xml:space="preserve">
+    <value>English</value>
+        <comment />
+  </data>
+    <data name="ExitGame" xml:space="preserve">
+    <value>Exit game</value>
+        <comment />
+  </data>
+    <data name="Hard" xml:space="preserve">
+    <value>Hard</value>
+        <comment />
+  </data>
+    <data name="LoadGame" xml:space="preserve">
+    <value>Load game</value>
+        <comment />
+  </data>
+    <data name="NewGame" xml:space="preserve">
+    <value>New game</value>
+        <comment />
+  </data>
+    <data name="Nightmare" xml:space="preserve">
+    <value>Nightmare</value>
+        <comment />
+  </data>
+    <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+        <comment />
+  </data>
+    <data name="Polish (Language)" xml:space="preserve">
+    <value>Polish</value>
+        <comment />
+  </data>
+    <data name="Opening_1" xml:space="preserve">
+    <value>You are on your way to the town of Arungard. Supposedly for twenty years no inhabitant of this city has experienced any daylight.</value>
+        <comment />
+  </data>
+    <data name="Opening_2" xml:space="preserve">
+    <value>You've heard legends of the so-called Ghorn who uttered a spell and darkness enveloped the town.</value>
+        <comment />
+  </data>
+    <data name="Opening_3" xml:space="preserve">
+    <value>This is all that you know though.</value>
+        <comment />
+  </data>
+    <data name="Opening_4" xml:space="preserve">
+    <value>You reach the town. Its aged elfish walls and towers immediately had you impressed.</value>
+        <comment />
+  </data>
+    <data name="Opening_5" xml:space="preserve">
+    <value>You walk up to the guard near the gate.</value>
+        <comment />
+  </data>
+    <data name="TownGuard_Name" xml:space="preserve">
+    <value>Arungard Town Guard</value>
+        <comment />
+  </data>
+    <data name="TownGuard_Line" xml:space="preserve">
+    <value>Who are you, and what is your business in this town?</value>
+        <comment />
+  </data>
+    <data name="Iam" xml:space="preserve">
+    <value>I am a</value>
+        <comment />
+  </data>
+    <data name="WarriorLocative" xml:space="preserve">
+    <value>warrior</value>
+        <comment />
+  </data>
+    <data name="ScoutLocative" xml:space="preserve">
+    <value>scout</value>
+        <comment />
+  </data>
+    <data name="SorcererLocative" xml:space="preserve">
+    <value>sorcerer</value>
+        <comment />
+  </data>
+    <data name="PaladinLocative" xml:space="preserve">
+    <value>paladin</value>
+        <comment />
+  </data>
+    <data name="MyNameIs" xml:space="preserve">
+    <value>My name is</value>
+        <comment />
+  </data>
+    <data name="WarriorNominativeC" xml:space="preserve">
+    <value>Warrior</value>
+        <comment />
+  </data>
+    <data name="ScoutNominativeC" xml:space="preserve">
+    <value>Scout</value>
+        <comment />
+  </data>
+    <data name="SorcererNominativeC" xml:space="preserve">
+    <value>Sorcerer</value>
+        <comment />
+  </data>
+    <data name="PaladinNominativeC" xml:space="preserve">
+    <value>Paladin</value>
+        <comment />
+  </data>
+    <data name="StartExpedition" xml:space="preserve">
+    <value>Start expedition</value>
+        <comment />
+  </data>
+    <data name="Blacksmith" xml:space="preserve">
+    <value>Blacksmith</value>
+        <comment />
+  </data>
+    <data name="Alchemist" xml:space="preserve">
+    <value>Alchemist</value>
+        <comment />
+  </data>
+    <data name="Enchanter" xml:space="preserve">
+    <value>Enchanter</value>
+        <comment />
+  </data>
+    <data name="QuestLog" xml:space="preserve">
+    <value>Quest log</value>
+        <comment />
+  </data>
+    <data name="OpenInventory" xml:space="preserve">
+    <value>Open inventory</value>
+        <comment />
+  </data>
+    <data name="SaveGame" xml:space="preserve">
+    <value>Save game</value>
+        <comment />
+  </data>
+    <data name="Nameless" xml:space="preserve">
+    <value>Nameless</value>
+  </data>
+    <data name="Catacombs" xml:space="preserve">
+    <value>Catacombs</value>
+  </data>
+    <data name="Forest" xml:space="preserve">
+    <value>Forest</value>
+  </data>
+    <data name="ElvishRuins" xml:space="preserve">
+    <value>Elvish Ruins</value>
+  </data>
+    <data name="Cove" xml:space="preserve">
+    <value>Cove</value>
+  </data>
+    <data name="Desert" xml:space="preserve">
+    <value>Desert</value>
+  </data>
+    <data name="Temple" xml:space="preserve">
+    <value>Temple</value>
+  </data>
+    <data name="Mountains" xml:space="preserve">
+    <value>Mountains</value>
+  </data>
+    <data name="Swamp" xml:space="preserve">
+    <value>Swamp</value>
+  </data>
+    <data name="SelectDestination" xml:space="preserve">
+    <value>Select expedition destination:</value>
+  </data>
+    <data name="GoForward" xml:space="preserve">
+    <value>Go forward</value>
+  </data>
+    <data name="GoBack" xml:space="preserve">
+    <value>Go back</value>
+  </data>
+    <data name="ShowCharacter" xml:space="preserve">
+    <value>Show character</value>
+  </data>
+    <data name="GoUp" xml:space="preserve">
+    <value>Go up</value>
+  </data>
+    <data name="GoDown" xml:space="preserve">
+    <value>Go down</value>
+  </data>
+    <data name="RestAtCampfire" xml:space="preserve">
+    <value>Rest at campfire</value>
+  </data>
+    <data name="CollectPlant" xml:space="preserve">
+    <value>Collect plant</value>
+  </data>
+    <data name="OpenStash" xml:space="preserve">
+    <value>Loot stash</value>
+  </data>
+    <data name="ExitDungeon" xml:space="preserve">
+    <value>Exit dungeon</value>
+  </data>
+    <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+    <data name="Floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+    <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+    <data name="DisarmTrap" xml:space="preserve">
+    <value>Disarm trap</value>
+  </data>
+    <data name="LocationScouted" xml:space="preserve">
+    <value>You were able to find a map of the current floor!</value>
+  </data>
+    <data name="NotEnoughWeight" xml:space="preserve">
+    <value>Pack is too heavy to pick up</value>
+  </data>
+    <data name="NotEnoughItem" xml:space="preserve">
+    <value>You don't have enough of</value>
+  </data>
+    <data name="ItemNotFound" xml:space="preserve">
+    <value>Item not in inventory</value>
+  </data>
+    <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+    <data name="Settings" xml:space="preserve">
+    <value>Options</value>
+  </data>
+    <data name="ExitToMenu" xml:space="preserve">
+    <value>Exit to menu</value>
+  </data>
+  <data name="CurrentGold" xml:space="preserve">
+    <value>Current gold</value>
+  </data>
+  <data name="YouGain" xml:space="preserve">
+    <value>You gain</value>
+  </data>
+  <data name="ExperienceGenitive" xml:space="preserve">
+    <value>experience</value>
+  </data>
+  <data name="LevelUp" xml:space="preserve">
+    <value>Level up! You are now level</value>
+  </data>
+  <data name="CurrentLevel" xml:space="preserve">
+    <value>Current level</value>
+  </data>
+  <data name="InspectItem" xml:space="preserve">
+    <value>Inspect item</value>
+  </data>
+  <data name="DeleteItem" xml:space="preserve">
+    <value>Remove item</value>
+  </data>
+  <data name="DeleteJunk" xml:space="preserve">
+    <value>Remove equipment for other classes</value>
+  </data>
+  <data name="SortInventory" xml:space="preserve">
+    <value>Sort inventory</value>
+  </data>
+  <data name="Y" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="DeleteJunkConfirmation" xml:space="preserve">
+    <value>Are you sure you want to remove all equipment for other classes?</value>
+  </data>
+  <data name="ChooseSortingMethod" xml:space="preserve">
+    <value>Choose sorting method</value>
+  </data>
+  <data name="ChooseItem" xml:space="preserve">
+    <value>Choose item</value>
+  </data>
+  <data name="ToRemove" xml:space="preserve">
+    <value>to remove</value>
+  </data>
+  <data name="ToInspect" xml:space="preserve">
+    <value>to inspect</value>
+  </data>
+  <data name="UseItem" xml:space="preserve">
+    <value>Use item</value>
+  </data>
+  <data name="ToUse" xml:space="preserve">
+    <value>to use</value>
+  </data>
+  <data name="HowManyToDelete" xml:space="preserve">
+    <value>How many to delete?</value>
+  </data>
+  <data name="ChoseTooMany" xml:space="preserve">
+    <value>The amount entered is too high!</value>
+  </data>
+  <data name="IntBelowZero" xml:space="preserve">
+    <value>The amount cannot be negative!</value>
+  </data>
+  <data name="DeleteItemConfirmation" xml:space="preserve">
+    <value>Are you sure you want to remove</value>
+  </data>
+</root>

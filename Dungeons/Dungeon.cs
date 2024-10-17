@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Linq;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.locale;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Dungeons
@@ -42,19 +43,20 @@ namespace ConsoleGodmist.Dungeons
             CurrentFloor = Floors[0];
         }
 
-        public void AddNewFloor()
+        private void AddNewFloor()
         {
-            double length = Random.Shared.Next(4, 9) * (1 + (Floors.Count - 1) * 0.1);
+            var length = Random.Shared.Next(4, 9) * (1 + (Floors.Count - 1) * 0.1);
             length *= DungeonType switch
             {
                 DungeonType.Catacombs => 0.6,
                 DungeonType.Forest => 0.9,
                 DungeonType.ElvishRuins => 0.6,
                 DungeonType.Cove => 0.7,
-                DungeonType.Desert => 0.1,
+                DungeonType.Desert => 0.3,
                 DungeonType.Temple => 0.5,
                 DungeonType.Mountains => 1.1,
                 DungeonType.Swamp => 0.9,
+                _ => throw new ArgumentOutOfRangeException()
             };
             length = Math.Clamp(length, 1, 16);
             Floors.Add(new DungeonFloor((int)length, Floors.Count));
@@ -76,7 +78,7 @@ namespace ConsoleGodmist.Dungeons
         }
         public void ScoutFloor(DungeonFloor floor)
         {
-            AnsiConsole.Write(new Text(locale.LocationScouted + "\n"));
+            AnsiConsole.Write(new Text(locale_main.LocationScouted + "\n"));
             floor.StarterRoom.Reveal();
             floor.EndRoom.Reveal();
             foreach (var corridor in floor.Corridor)

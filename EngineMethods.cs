@@ -1,5 +1,6 @@
 ﻿using Spectre.Console;
 using System.Windows.Input;
+using ConsoleGodmist.locale;
 
 namespace ConsoleGodmist
 {
@@ -154,6 +155,21 @@ namespace ConsoleGodmist
             }
 
             throw new NullReferenceException();
+        }
+
+        public static Dictionary<string, int> ChoiceSelector()
+        {
+            return new Dictionary<string, int>();
+        }
+
+        public static bool Confirmation(string message, bool defaultValue = false)
+        {
+            return AnsiConsole.Prompt(
+                new TextPrompt<bool>(message)
+                    .AddChoice(true)
+                    .AddChoice(false)
+                    .DefaultValue(defaultValue)
+                    .WithConverter(choice => choice ? locale_main.Y : "N"));
         }
     }
 }

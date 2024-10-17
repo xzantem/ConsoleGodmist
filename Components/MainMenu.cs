@@ -3,6 +3,7 @@ using System.Threading;
 using System.Globalization;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Characters;
+using ConsoleGodmist.locale;
 
 namespace ConsoleGodmist.Components
 {
@@ -13,7 +14,8 @@ namespace ConsoleGodmist.Components
             AnsiConsole.Write(new FigletText("Godmist").Centered().Color(Color.DarkViolet_1));
             while(true)
             {
-                string[] choices = { locale.NewGame, locale.LoadGame, locale.DeleteSaveFile, locale.ChooseLanguage, locale.ExitGame };
+                string[] choices = [locale_main.NewGame, locale_main.LoadGame, locale_main.DeleteSaveFile, locale_main.ChooseLanguage, locale_main.ExitGame
+                ];
                 var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .AddChoices(choices)
                     .HighlightStyle(new Style(Color.MediumPurple3)));
@@ -30,10 +32,10 @@ namespace ConsoleGodmist.Components
 
         private static void ChooseLanguage()
         {
-            string[] choices = { locale.English__Language_, locale.Polish__Language_ };
+            string[] choices = [locale_main.English__Language_, locale_main.Polish__Language_];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices)
-                .Title(locale.ChooseLanguage)
+                .Title(locale_main.ChooseLanguage)
                 .HighlightStyle(new Style(Color.MediumPurple3)));
 
             switch (Array.IndexOf(choices, choice))
@@ -45,10 +47,11 @@ namespace ConsoleGodmist.Components
 
         private static async void NewGame()
         {
-            string[] choices = {$"{locale.Easy} (50%)", $"{locale.Normal} (100%)", $"{locale.Hard} (150%)", $"{locale.Nightmare} (200%)" };
+            string[] choices = [$"{locale_main.Easy} (50%)", $"{locale_main.Normal} (100%)", $"{locale_main.Hard} (150%)", $"{locale_main.Nightmare} (200%)"
+            ];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices)
-                .Title(locale.ChooseDifficulty)
+                .Title(locale_main.ChooseDifficulty)
                 .HighlightStyle(new Style(Color.MediumPurple3)));
             var difficulty = Array.IndexOf(choices, choice) switch
             {
@@ -58,18 +61,18 @@ namespace ConsoleGodmist.Components
                 3 => Difficulty.Nightmare,
                 _ => throw new NotImplementedException()
             };
-            Console.WriteLine(locale.Opening_1);
-            Console.WriteLine(locale.Opening_2);
-            Console.WriteLine(locale.Opening_3);
-            Console.WriteLine(locale.Opening_4);
-            Console.WriteLine(locale.Opening_5);
-            AnsiConsole.Write($"\n{locale.TownGuard_Name}: ", new Style(Color.CornflowerBlue));
-            Console.WriteLine(locale.TownGuard_Line);
+            Console.WriteLine(locale_main.Opening_1);
+            Console.WriteLine(locale_main.Opening_2);
+            Console.WriteLine(locale_main.Opening_3);
+            Console.WriteLine(locale_main.Opening_4);
+            Console.WriteLine(locale_main.Opening_5);
+            AnsiConsole.Write($"\n{locale_main.TownGuard_Name}: ", new Style(Color.CornflowerBlue));
+            Console.WriteLine(locale_main.TownGuard_Line);
 
-            string[] choices1 = { locale.WarriorLocative, locale.ScoutLocative, locale.SorcererLocative, locale.PaladinLocative };
+            string[] choices1 = { locale_main.WarriorLocative, locale_main.ScoutLocative, locale_main.SorcererLocative, locale_main.PaladinLocative };
             var choice1 = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices1)
-                .Title($"\n...: {locale.Iam} ")
+                .Title($"\n...: {locale_main.Iam} ")
                 .HighlightStyle(new Style(Color.MediumPurple3)));
             CharacterClass characterClass = Array.IndexOf(choices1, choice1) switch
             {
@@ -79,11 +82,11 @@ namespace ConsoleGodmist.Components
                 3 => CharacterClass.Paladin,
                 _ => CharacterClass.Warrior
             };
-            Console.WriteLine($"\n...: {locale.Iam} {choice1}");
+            Console.WriteLine($"\n...: {locale_main.Iam} {choice1}");
             var name = "";
             do
             {
-                Console.Write($"...: {locale.MyNameIs} ");
+                Console.Write($"...: {locale_main.MyNameIs} ");
                 name = Console.ReadLine();
             } while (name == "");
             PlayerHandler.player = characterClass switch {

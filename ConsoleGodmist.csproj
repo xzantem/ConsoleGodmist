@@ -14,18 +14,36 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="locale.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>locale.resx</DependentUpon>
-    </Compile>
+    <Folder Include="Items\Armors\" />
+    <Folder Include="Items\Weapons\" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="locale.resx">
+    <EmbeddedResource Update="locale\locale_items.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>locale.Designer.cs</LastGenOutput>
+      <LastGenOutput>locale_items.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="locale\locale_main.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>locale_main_new.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="locale\locale_main.pl.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>locale_main_new.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="locale\locale_items.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>locale_items.resx</DependentUpon>
+    </Compile>
+    <Compile Update="locale\locale_main.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>locale_main.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

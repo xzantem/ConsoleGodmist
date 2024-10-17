@@ -7,6 +7,7 @@ namespace ConsoleGodmist.Enums
         Trap,
         Exit,
         Campfire,
-        Plant
+        Plant,
+        Item
     }
 }
