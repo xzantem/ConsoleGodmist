@@ -171,5 +171,29 @@ namespace ConsoleGodmist
                     .DefaultValue(defaultValue)
                     .WithConverter(choice => choice ? locale_main.Y : "N"));
         }
+
+        public static void ClearConsole(int lines = 1)
+        {
+            for (var i = 0; i < lines; i++)
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                Console.Write(new string(' ', Console.WindowWidth));
+                Console.SetCursorPosition(0, Console.CursorTop);
+            }
+        }
+
+        public static void ClearWithLog(List<Text> logs)
+        {
+            AnsiConsole.Clear();
+            foreach (var log in logs)
+            {
+                AnsiConsole.Write(log);
+            }
+        }
+        public static void ClearWithLog(Text log)
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(log);
+        }
     }
 }

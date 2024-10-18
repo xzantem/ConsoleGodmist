@@ -252,76 +252,151 @@
     <data name="ExitToMenu" xml:space="preserve">
     <value>Exit to menu</value>
   </data>
-  <data name="CurrentGold" xml:space="preserve">
+    <data name="CurrentGold" xml:space="preserve">
     <value>Current gold</value>
   </data>
-  <data name="YouGain" xml:space="preserve">
+    <data name="YouGain" xml:space="preserve">
     <value>You gain</value>
   </data>
-  <data name="ExperienceGenitive" xml:space="preserve">
+    <data name="ExperienceGenitive" xml:space="preserve">
     <value>experience</value>
   </data>
-  <data name="LevelUp" xml:space="preserve">
+    <data name="LevelUp" xml:space="preserve">
     <value>Level up! You are now level</value>
   </data>
-  <data name="CurrentLevel" xml:space="preserve">
+    <data name="CurrentLevel" xml:space="preserve">
     <value>Current level</value>
   </data>
-  <data name="InspectItem" xml:space="preserve">
+    <data name="InspectItem" xml:space="preserve">
     <value>Inspect item</value>
   </data>
-  <data name="DeleteItem" xml:space="preserve">
+    <data name="DeleteItem" xml:space="preserve">
     <value>Remove item</value>
   </data>
-  <data name="DeleteJunk" xml:space="preserve">
+    <data name="DeleteJunk" xml:space="preserve">
     <value>Remove equipment for other classes</value>
   </data>
-  <data name="SortInventory" xml:space="preserve">
+    <data name="SortInventory" xml:space="preserve">
     <value>Sort inventory</value>
   </data>
-  <data name="Y" xml:space="preserve">
+    <data name="Y" xml:space="preserve">
     <value>Y</value>
   </data>
-  <data name="DeleteJunkConfirmation" xml:space="preserve">
+    <data name="DeleteJunkConfirmation" xml:space="preserve">
     <value>Are you sure you want to remove all equipment for other classes?</value>
   </data>
-  <data name="ChooseSortingMethod" xml:space="preserve">
+    <data name="ChooseSortingMethod" xml:space="preserve">
     <value>Choose sorting method</value>
   </data>
-  <data name="ChooseItem" xml:space="preserve">
+    <data name="ChooseItem" xml:space="preserve">
     <value>Choose item</value>
   </data>
-  <data name="ToRemove" xml:space="preserve">
+    <data name="ToRemove" xml:space="preserve">
     <value>to remove</value>
   </data>
-  <data name="ToInspect" xml:space="preserve">
+    <data name="ToInspect" xml:space="preserve">
     <value>to inspect</value>
   </data>
-  <data name="UseItem" xml:space="preserve">
+    <data name="UseItem" xml:space="preserve">
     <value>Use item</value>
   </data>
-  <data name="ToUse" xml:space="preserve">
+    <data name="ToUse" xml:space="preserve">
     <value>to use</value>
   </data>
-  <data name="HowManyToDelete" xml:space="preserve">
+    <data name="HowManyToDelete" xml:space="preserve">
     <value>How many to delete?</value>
   </data>
-  <data name="ChoseTooMany" xml:space="preserve">
+    <data name="ChoseTooMany" xml:space="preserve">
     <value>The amount entered is too high!</value>
   </data>
-  <data name="IntBelowZero" xml:space="preserve">
+    <data name="IntBelowZero" xml:space="preserve">
     <value>The amount cannot be negative!</value>
   </data>
-  <data name="DeleteItemConfirmation" xml:space="preserve">
+    <data name="DeleteItemConfirmation" xml:space="preserve">
     <value>Are you sure you want to remove</value>
   </data>
-  <data name="SelectDungeonLevel" xml:space="preserve">
+    <data name="SelectDungeonLevel" xml:space="preserve">
     <value>Select dungeon level</value>
   </data>
-  <data name="InvalidLevel" xml:space="preserve">
+    <data name="InvalidLevel" xml:space="preserve">
     <value>The chosen level is not valid</value>
   </data>
-  <data name="PressAnyKey" xml:space="preserve">
+    <data name="PressAnyKey" xml:space="preserve">
     <value>Press any key to continue</value>
+  </data>
+    <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+    <data name="LootBag" xml:space="preserve">
+    <value>Loot Bag</value>
+  </data>
+    <data name="Uncommon" xml:space="preserve">
+    <value>Uncommon</value>
+  </data>
+    <data name="Weapon" xml:space="preserve">
+    <value>Weapon</value>
+  </data>
+    <data name="Weight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+    <data name="Smithing" xml:space="preserve">
+    <value>Smithing</value>
+  </data>
+    <data name="Armor" xml:space="preserve">
+    <value>Armor</value>
+  </data>
+    <data name="Ancient" xml:space="preserve">
+    <value>Ancient</value>
+  </data>
+    <data name="Common" xml:space="preserve">
+    <value>Common</value>
+  </data>
+    <data name="Alchemy" xml:space="preserve">
+    <value>Alchemy</value>
+  </data>
+    <data name="Damaged" xml:space="preserve">
+    <value>Damaged</value>
+  </data>
+    <data name="Destroyed" xml:space="preserve">
+    <value>Destroyed</value>
+  </data>
+    <data name="Junk" xml:space="preserve">
+    <value>Junk</value>
+  </data>
+    <data name="Legendary" xml:space="preserve">
+    <value>Legendary</value>
+  </data>
+    <data name="Mythical" xml:space="preserve">
+    <value>Mythical</value>
+  </data>
+    <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+    <data name="WeaponGaldurite" xml:space="preserve">
+    <value>Weapon Galdurite</value>
+  </data>
+    <data name="Runeforging" xml:space="preserve">
+    <value>Runeforging</value>
+  </data>
+    <data name="Rarity" xml:space="preserve">
+    <value>Rarity</value>
+  </data>
+    <data name="Rare" xml:space="preserve">
+    <value>Rare</value>
+  </data>
+    <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+    <data name="Potion" xml:space="preserve">
+    <value>Potion</value>
+  </data>
+    <data name="Godly" xml:space="preserve">
+    <value>Godly</value>
+  </data>
+    <data name="ArmorGaldurite" xml:space="preserve">
+    <value>Armor Galdurite</value>
+  </data>
+  <data name="UnknownItem" xml:space="preserve">
+    <value>Unknown item</value>
   </data>
 </root>

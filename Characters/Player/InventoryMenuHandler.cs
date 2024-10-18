@@ -14,8 +14,6 @@ public static class InventoryMenuHandler
         const int pageSize = 10;
         var index = 0;
         
-        foreach (var item in ItemManager.Items)
-            Inventory.AddItem(item);
         while (true)
         {
             var tempIndex = 0;
@@ -51,25 +49,25 @@ public static class InventoryMenuHandler
                     index -= scrollAmount;
                     break;
                 case 2:
-                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToInspect}:\n", 
+                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToInspect}:\n\n", 
                         Stylesheet.Styles["default"]));
                     InspectItem();
                     break;
                 case 3:
-                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToRemove}:\n", 
+                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToRemove}:\n\n", 
                         Stylesheet.Styles["default"]));
                     DeleteItem();
                     break;
                 case 4:
                     if (!EngineMethods.Confirmation(locale_main.DeleteJunkConfirmation))
-                        return;
+                        break;
                     Inventory.RemoveJunk();
                     break;
                 case 5:
                     SortInventory();
                     break;
                 case 6:
-                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToUse}:\n", 
+                    AnsiConsole.Write(new Text($"{locale_main.ChooseItem} {locale_main.ToUse}:\n\n", 
                         Stylesheet.Styles["default"]));
                     Inventory.UseItem(Inventory.Items.ElementAt(ChooseItem()).Key);
                     break;
@@ -87,6 +85,8 @@ public static class InventoryMenuHandler
             (item.Key.Stackable
                 ? $"{1 + tempIndex++}. {item.Key.Name} - {item.Value}x"
                 : $"{1 + tempIndex++}. {item.Key.Name}").ToString()).ToArray();
+        if (choices.Length <= 1)
+            return 0;
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
@@ -103,13 +103,13 @@ public static class InventoryMenuHandler
                     .Validate(Validator));
             if (!EngineMethods.Confirmation($"{locale_main.DeleteItemConfirmation}: {item.Key.Name} ({number})?"))
                 return;
-            Inventory.RemoveItem(item.Key, number);
+            Inventory.TryRemoveItem(item.Key, number);
         }
         else
         {
             if (!EngineMethods.Confirmation($"{locale_main.DeleteItemConfirmation}: {item.Key.Name}?"))
                 return;
-            Inventory.RemoveItem(item.Key);
+            Inventory.TryRemoveItem(item.Key);
         }
         return;
 
@@ -123,7 +123,7 @@ public static class InventoryMenuHandler
         AnsiConsole.Write(new Text($"{locale.locale_main.ChooseSortingMethod}\n", Stylesheet.Styles["default"]));
         string[] choices =
         [
-            locale_items.Type, locale_items.Rarity, locale_items.Price, locale_items.Name
+            locale_main.Type, locale_main.Rarity, locale_main.Price, locale_main.Name
         ];
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices)

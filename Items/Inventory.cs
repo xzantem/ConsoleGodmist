@@ -56,7 +56,7 @@ public class Inventory
             AnsiConsole.WriteLine($"{locale_main.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
         } 
     }*/
-    public void RemoveItem(IItem item, int amount = 1)
+    public bool TryRemoveItem(IItem item, int amount = 1)
     {
         if (Items.ContainsKey(item))
         {
@@ -67,16 +67,13 @@ public class Inventory
                 {
                     Items.Remove(item);
                 }
+                return true;
             }
-            else
-            {
-                AnsiConsole.WriteLine($"{locale_main.NotEnoughItem}: {item.Name}!", Stylesheet.Styles["error"]);
-            }
+            AnsiConsole.WriteLine($"{locale_main.NotEnoughItem}: {item.Name}!", Stylesheet.Styles["error"]);
+            return false;
         }
-        else
-        {
-            AnsiConsole.WriteLine($"{locale_main.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
-        } 
+        AnsiConsole.WriteLine($"{locale_main.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
+        return false;
     }
     public void RemoveJunk()
     {
@@ -110,7 +107,7 @@ public class Inventory
         {
             if (item.Use())
             {
-                RemoveItem(item);
+                TryRemoveItem(item);
             }
         }
         else

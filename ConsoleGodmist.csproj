@@ -23,13 +23,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>locale_items.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="locale\locale_main.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>locale_main_new.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="locale\locale_main.pl.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>locale_main_new.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="locale\locale_main.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>locale_main_new.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

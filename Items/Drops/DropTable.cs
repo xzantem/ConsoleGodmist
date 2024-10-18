@@ -8,11 +8,12 @@ public class DropTable
     {
         Table = table;
     }
-    public Dictionary<IItem, int> GetDrops()
+    public Dictionary<IItem, int> GetDrops(int level)
     {
         return (from pool in Table where 
             Random.Shared.NextDouble() > pool.Value 
-            select pool.Key.GetRandomDrop()).ToDictionary(
-            item => item.Item, item => Random.Shared.Next(item.MinAmount, item.MaxAmount + 1));
+            select pool.Key.Choice(level)).ToDictionary(
+            item => item.Key, 
+            item => Random.Shared.Next(item.Value.MinAmount, item.Value.MaxAmount + 1));
     }
 }

@@ -324,4 +324,79 @@
   <data name="PressAnyKey" xml:space="preserve">
     <value>Naciśnij dowolny przycisk, aby kontynuować</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
+  <data name="LootBag" xml:space="preserve">
+    <value>Torba</value>
+  </data>
+  <data name="Uncommon" xml:space="preserve">
+    <value>Niepospolity</value>
+  </data>
+  <data name="Weapon" xml:space="preserve">
+    <value>Broń</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Waga</value>
+  </data>
+  <data name="Smithing" xml:space="preserve">
+    <value>Rzemieślnicze</value>
+  </data>
+  <data name="Armor" xml:space="preserve">
+    <value>Zbroja</value>
+  </data>
+  <data name="Ancient" xml:space="preserve">
+    <value>Starożytny</value>
+  </data>
+  <data name="Common" xml:space="preserve">
+    <value>Pospolity</value>
+  </data>
+  <data name="Alchemy" xml:space="preserve">
+    <value>Alchemiczne</value>
+  </data>
+  <data name="Damaged" xml:space="preserve">
+    <value>Uszkodzony</value>
+  </data>
+  <data name="Destroyed" xml:space="preserve">
+    <value>Zniszczony</value>
+  </data>
+  <data name="Junk" xml:space="preserve">
+    <value>Śmieć</value>
+  </data>
+  <data name="Legendary" xml:space="preserve">
+    <value>Legendarny</value>
+  </data>
+  <data name="Mythical" xml:space="preserve">
+    <value>Mityczny</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="WeaponGaldurite" xml:space="preserve">
+    <value>Galduryt do Broni</value>
+  </data>
+  <data name="Runeforging" xml:space="preserve">
+    <value>Runotwórcze</value>
+  </data>
+  <data name="Rarity" xml:space="preserve">
+    <value>Rzadkość</value>
+  </data>
+  <data name="Rare" xml:space="preserve">
+    <value>Rzadki</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Cena</value>
+  </data>
+  <data name="Potion" xml:space="preserve">
+    <value>Mikstura</value>
+  </data>
+  <data name="Godly" xml:space="preserve">
+    <value>Boski</value>
+  </data>
+  <data name="ArmorGaldurite" xml:space="preserve">
+    <value>Galduryt do Zbroi</value>
+  </data>
+  <data name="UnknownItem" xml:space="preserve">
+    <value>Nieznany przedmiot</value>
+  </data>
 </root>

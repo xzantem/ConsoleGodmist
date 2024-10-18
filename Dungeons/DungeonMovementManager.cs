@@ -14,6 +14,8 @@ public static class DungeonMovementManager
 
     private static int LocationIndex { get; set; }
     private static int LastMovement { get; set; }
+    
+    private static Action OnMove { get; set; }
 
     public static void EnterDungeon(Dungeon dungeon)
     {
@@ -174,13 +176,27 @@ public static class DungeonMovementManager
                     //Rest at Campfire
                     break;
                 case 8:
-                    //Collect Plant
+                    var plant = PlantDropManager.DropDatabase[CurrentDungeon.DungeonType]
+                        .GetDrop(CurrentDungeon.DungeonLevel);
+                    PlayerHandler.player.Inventory.AddItem(plant.Key, plant.Value);
+                    CurrentLocation.Clear();
                     break;
                 case 9:
                     //Open Stash
                     break;
                 case 10:
-                    //Disarm Trap
+                    var trap = new Trap(Difficulty.Hard, 0);
+                    if (trap.Activate())
+                    {
+                        //Display congrats message
+                        AnsiConsole.Write("Congrats");
+                    }
+                    else
+                    {
+                        //Display failure message
+                        AnsiConsole.Write("Fail");
+                        //Do not remove trap (Player can retry indefinitely as long as they do not walk on the trap)
+                    }
                     break;
                 default:
                     AnsiConsole.Write(new Text("Invalid action.\n", Stylesheet.Styles["error"]));
@@ -246,8 +262,17 @@ public static class DungeonMovementManager
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices.Keys)
             .HighlightStyle(new Style(Color.MediumPurple3)));
-        if (choices[choice] >= 0 || choices[choice] <= 3)
+        if (choices[choice] >= 0 && choices[choice] <= 3)
             LastMovement = choices[choice];
         return choices[choice];
+    }
+
+    private static void MoveForward()
+    {
+        
+    }
+    private static void MoveBackwards()
+    {
+        
     }
 }

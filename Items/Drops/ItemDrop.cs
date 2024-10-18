@@ -2,15 +2,19 @@
 
 public class ItemDrop
 {
-    private string ItemAlias { get; set; }
-    public int MinAmount { get; private set; }
-    public int MaxAmount { get; private set; }
-    public IItem Item => ItemManager.GetItem(ItemAlias);
+    public int MinAmount { get; set; }
+    public int MaxAmount { get; set; }
+    public int MinLevel { get; set; }
+    public int MaxLevel { get; set; }
+    
+    public int Weight { get; set; }
     public ItemDrop() { } // For JSON deserialization
-    public ItemDrop(string itemAlias, int minAmount = 1, int maxAmount = 1)
+    public ItemDrop(string itemAlias, int minLevel, int maxLevel, int weight, int minAmount = 1, int maxAmount = 1)
     {
-        ItemAlias = itemAlias;
+        MinLevel = minLevel;
+        MaxLevel = maxLevel;
         MinAmount = minAmount;
         MaxAmount = maxAmount;
+        Weight = weight;
     }
 }

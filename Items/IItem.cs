@@ -6,7 +6,8 @@ namespace ConsoleGodmist.Items;
 
 public interface IItem
 {
-    public string Name => locale_items.ResourceManager.GetString(Alias);
+    public string Name => locale_items.ResourceManager.GetString(Alias) == null ? Alias : 
+        locale_items.ResourceManager.GetString(Alias);
     public string Alias { get; }
     public int Weight { get; }
     public int ID { get; }
@@ -69,16 +70,16 @@ public interface IItem
     {
         return Rarity switch
         {
-            ItemRarity.Common => locale_items.Common,
-            ItemRarity.Uncommon => locale_items.Uncommon,
-            ItemRarity.Rare => locale_items.Rare,
-            ItemRarity.Ancient => locale_items.Ancient,
-            ItemRarity.Legendary => locale_items.Legendary,
-            ItemRarity.Mythical => locale_items.Mythical,
-            ItemRarity.Godly => locale_items.Godly,
-            ItemRarity.Destroyed => locale_items.Destroyed,
-            ItemRarity.Damaged => locale_items.Damaged,
-            ItemRarity.Junk => locale_items.Junk,
+            ItemRarity.Common => locale_main.Common,
+            ItemRarity.Uncommon => locale_main.Uncommon,
+            ItemRarity.Rare => locale_main.Rare,
+            ItemRarity.Ancient => locale_main.Ancient,
+            ItemRarity.Legendary => locale_main.Legendary,
+            ItemRarity.Mythical => locale_main.Mythical,
+            ItemRarity.Godly => locale_main.Godly,
+            ItemRarity.Destroyed => locale_main.Destroyed,
+            ItemRarity.Damaged => locale_main.Damaged,
+            ItemRarity.Junk => locale_main.Junk,
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -87,15 +88,15 @@ public interface IItem
     {
         return ItemType switch
         {
-            ItemType.Weapon => locale_items.Weapon,
-            ItemType.Armor => locale_items.Armor,
-            ItemType.Smithing => locale_items.Smithing,
-            ItemType.Alchemy => locale_items.Alchemy,
-            ItemType.Potion => locale_items.Potion,
-            ItemType.Runeforging => locale_items.Runeforging,
-            ItemType.WeaponGaldurite => locale_items.WeaponGaldurite,
-            ItemType.ArmorGaldurite => locale_items.ArmorGaldurite,
-            ItemType.LootBag => locale_items.LootBag,
+            ItemType.Weapon => locale_main.Weapon,
+            ItemType.Armor => locale_main.Armor,
+            ItemType.Smithing => locale_main.Smithing,
+            ItemType.Alchemy => locale_main.Alchemy,
+            ItemType.Potion => locale_main.Potion,
+            ItemType.Runeforging => locale_main.Runeforging,
+            ItemType.WeaponGaldurite => locale_main.WeaponGaldurite,
+            ItemType.ArmorGaldurite => locale_main.ArmorGaldurite,
+            ItemType.LootBag => locale_main.LootBag,
             _ => throw new ArgumentOutOfRangeException()
         };
     }
