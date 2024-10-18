@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Text.Json;
-using ConsoleGodmist.locale;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Items;

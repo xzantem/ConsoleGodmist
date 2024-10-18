@@ -1,6 +1,5 @@
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
-using ConsoleGodmist.locale;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Characters
@@ -44,38 +43,38 @@ namespace ConsoleGodmist.Characters
         }
         public void GainGold(int gold) {
             Gold += gold;
-            AnsiConsole.Write(new Text($"{locale_main.CurrentGold}: ", Stylesheet.Styles["default"]));
+            AnsiConsole.Write(new Text($"{locale.CurrentGold}: ", Stylesheet.Styles["default"]));
             AnsiConsole.Write(new Text($"{gold}cr", Stylesheet.Styles["gold"]));
             AnsiConsole.Write(new Text($" (+{gold}cr)\n", Stylesheet.Styles["value-gained"]));
         }
         public void LoseGold(int gold) {
             Gold -= gold;
-            AnsiConsole.Write(new Text($"{locale_main.CurrentGold}: ", Stylesheet.Styles["default"]));
+            AnsiConsole.Write(new Text($"{locale.CurrentGold}: ", Stylesheet.Styles["default"]));
             AnsiConsole.Write(new Text($"{gold}cr", Stylesheet.Styles["gold"]));
             AnsiConsole.Write(new Text($" (-{gold}cr)", Stylesheet.Styles["value-lost"]));
         }
         public void GainExperience(int experience) {
             CurrentExperience += experience;
-            AnsiConsole.Write(new Text($"{locale_main.YouGain} {experience} {locale_main.ExperienceGenitive}!\n",
+            AnsiConsole.Write(new Text($"{locale.YouGain} {experience} {locale.ExperienceGenitive}!\n",
                 Stylesheet.Styles["default"]));
             while (CurrentExperience >= RequiredExperience) {
                 if (Level < 50)
                 {
                     Level++;
-                    AnsiConsole.Write(new Text($"{locale_main.LevelUp} {Level}!\n", Stylesheet.Styles["level-up"]));
+                    AnsiConsole.Write(new Text($"{locale.LevelUp} {Level}!\n", Stylesheet.Styles["level-up"]));
                     CurrentHealth = MaximalHealth;
                 }
                 else
                 {
                     CurrentExperience = RequiredExperience;
-                    AnsiConsole.Write(new Text($"{locale_main.CurrentLevel}: {Level}[{CurrentExperience}", 
+                    AnsiConsole.Write(new Text($"{locale.CurrentLevel}: {Level}[{CurrentExperience}", 
                         Stylesheet.Styles["default"]));
                     AnsiConsole.Write(new Text($"(+{experience})", Stylesheet.Styles["value-gained"]));
                     AnsiConsole.Write(new Text($"/{RequiredExperience}]\n", Stylesheet.Styles["default"]));
                     return;
                 }
             }
-            AnsiConsole.Write(new Text($"{locale_main.CurrentLevel}: {Level}[{CurrentExperience}", 
+            AnsiConsole.Write(new Text($"{locale.CurrentLevel}: {Level}[{CurrentExperience}", 
                 Stylesheet.Styles["default"]));
             AnsiConsole.Write(new Text($"(+{experience})", Stylesheet.Styles["value-gained"]));
             AnsiConsole.Write(new Text($"/{RequiredExperience}]\n", Stylesheet.Styles["default"]));

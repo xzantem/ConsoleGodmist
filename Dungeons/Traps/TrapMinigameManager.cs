@@ -6,6 +6,7 @@ namespace ConsoleGodmist.Dungeons;
 
 public static class TrapMinigameManager
 {
+    public static readonly int MinigameCount = 5;
     public static bool StartMinigame(Difficulty difficulty, int TrapType)
     {
         switch (TrapType)

@@ -396,7 +396,91 @@
     <data name="ArmorGaldurite" xml:space="preserve">
     <value>Armor Galdurite</value>
   </data>
-  <data name="UnknownItem" xml:space="preserve">
+    <data name="UnknownItem" xml:space="preserve">
     <value>Unknown item</value>
+  </data>
+    <data name="PlantCollected" xml:space="preserve">
+    <value>Material collected</value>
+  </data>
+    <data name="TrapDisarmed" xml:space="preserve">
+    <value>Trap disarmed</value>
+  </data>
+    <data name="AnnoditeOre" xml:space="preserve">
+    <value>Annodite ore</value>
+  </data>
+    <data name="AdamantiteOre" xml:space="preserve">
+    <value>Adamantite ore</value>
+  </data>
+    <data name="CifilmOre" xml:space="preserve">
+    <value>Cifilm ore</value>
+  </data>
+    <data name="DesertGem" xml:space="preserve">
+    <value>Desert gem</value>
+  </data>
+    <data name="IronOre" xml:space="preserve">
+    <value>Iron ore</value>
+  </data>
+    <data name="SilverOre" xml:space="preserve">
+    <value>Silver ore</value>
+  </data>
+    <data name="NefoliteOre" xml:space="preserve">
+    <value>Nefolite ore</value>
+  </data>
+    <data name="Moondust" xml:space="preserve">
+    <value>Moon dust</value>
+  </data>
+    <data name="OrichalcumOre" xml:space="preserve">
+    <value>Orichalcum ore</value>
+  </data>
+    <data name="Sphalerite" xml:space="preserve">
+    <value>Sphalerite</value>
+  </data>
+    <data name="Chromium" xml:space="preserve">
+    <value>Chromium</value>
+  </data>
+    <data name="CopperOre" xml:space="preserve">
+    <value>Copper ore</value>
+  </data>
+    <data name="NickelOre" xml:space="preserve">
+    <value>Nickel ore</value>
+  </data>
+    <data name="TinOre" xml:space="preserve">
+    <value>Tin ore</value>
+  </data>
+    <data name="GoldOre" xml:space="preserve">
+    <value>Gold ore</value>
+  </data>
+    <data name="PieceOfZinc" xml:space="preserve">
+    <value>Piece of zinc</value>
+  </data>
+    <data name="CobaltOre" xml:space="preserve">
+    <value>Cobalt ore</value>
+  </data>
+    <data name="MeteoriteChunk" xml:space="preserve">
+    <value>Meteorite chunk</value>
+  </data>
+    <data name="Rutile" xml:space="preserve">
+    <value>Rutile</value>
+  </data>
+    <data name="Coal" xml:space="preserve">
+    <value>Coal</value>
+  </data>
+  <data name="TrapDisarmedFail" xml:space="preserve">
+    <value>Trap disarming failed</value>
+  </data>
+  <data name="TrapActivated" xml:space="preserve">
+    <value>You stepped on a trap</value>
+  </data>
+  <data name="TryDisarmTrap" xml:space="preserve">
+    <value>Try to disarm it or take damage</value>
+  </data>
+  <data name="YouTake" xml:space="preserve">
+    <value>You take</value>
+  </data>
+  <data name="DamageGenitive" xml:space="preserve">
+    <value>damage</value>
+  </data>
+  <data name="Takes" xml:space="preserve">
+    <value>takes</value>
   </data>
 </root>

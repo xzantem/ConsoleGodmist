@@ -1,6 +1,5 @@
 ﻿using Spectre.Console;
 using System.Windows.Input;
-using ConsoleGodmist.locale;
 
 namespace ConsoleGodmist
 {
@@ -169,7 +168,7 @@ namespace ConsoleGodmist
                     .AddChoice(true)
                     .AddChoice(false)
                     .DefaultValue(defaultValue)
-                    .WithConverter(choice => choice ? locale_main.Y : "N"));
+                    .WithConverter(choice => choice ? locale.Y : "N"));
         }
 
         public static void ClearConsole(int lines = 1)

@@ -2,7 +2,6 @@
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
-using ConsoleGodmist.locale;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town
@@ -17,9 +16,9 @@ namespace ConsoleGodmist.Town
                 AnsiConsole.Write(new FigletText("Arungard").Centered().Color(Color.Gold3_1));
                 string[] choices =
                 [
-                    locale_main.StartExpedition, locale_main.Blacksmith, locale_main.Alchemist,
-                    locale_main.Enchanter, "Druid", locale_main.QuestLog,
-                    locale_main.OpenInventory, locale_main.ShowCharacter, locale_main.ExitToMenu
+                    locale.StartExpedition, locale.Blacksmith, locale.Alchemist,
+                    locale.Enchanter, "Druid", locale.QuestLog,
+                    locale.OpenInventory, locale.ShowCharacter, locale.ExitToMenu
                 ];
                 var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .AddChoices(choices)
@@ -42,8 +41,8 @@ namespace ConsoleGodmist.Town
             }
         }
         private static Dungeon ChooseDungeon() {
-            AnsiConsole.WriteLine(locale_main.SelectDestination);
-            string[] dungeonChoices = [locale_main.Catacombs, locale_main.Forest, locale_main.ElvishRuins, locale_main.Cove, locale_main.Desert, locale_main.Temple, locale_main.Mountains, locale_main.Swamp
+            AnsiConsole.WriteLine(locale.SelectDestination);
+            string[] dungeonChoices = [locale.Catacombs, locale.Forest, locale.ElvishRuins, locale.Cove, locale.Desert, locale.Temple, locale.Mountains, locale.Swamp
             ];
             var dungeonChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(dungeonChoices)
@@ -61,11 +60,11 @@ namespace ConsoleGodmist.Town
                 _ => DungeonType.Catacombs,
             };
             var level = AnsiConsole.Prompt(
-                new TextPrompt<int>($"{locale_main.SelectDungeonLevel} [[1-50]] ")
+                new TextPrompt<int>($"{locale.SelectDungeonLevel} [[1-50]] ")
                     .DefaultValue(PlayerHandler.player.Level)
                     .Validate((n) => n switch
                         {
-                            <1 or >50 => ValidationResult.Error(locale_main.InvalidLevel),
+                            <1 or >50 => ValidationResult.Error(locale.InvalidLevel),
                             _ => ValidationResult.Success()
                         }
                         ));

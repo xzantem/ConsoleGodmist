@@ -1,7 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Linq;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.locale;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Dungeons
@@ -59,7 +58,7 @@ namespace ConsoleGodmist.Dungeons
                 _ => throw new ArgumentOutOfRangeException()
             };
             length = Math.Clamp(length, 1, 16);
-            Floors.Add(new DungeonFloor((int)length, Floors.Count));
+            Floors.Add(new DungeonFloor((int)length, Floors.Count, DungeonType));
         }
         public void Ascend()
         {
@@ -78,7 +77,7 @@ namespace ConsoleGodmist.Dungeons
         }
         public void ScoutFloor(DungeonFloor floor)
         {
-            AnsiConsole.Write(new Text(locale_main.LocationScouted + "\n"));
+            AnsiConsole.Write(new Text(locale.LocationScouted + "\n"));
             floor.StarterRoom.Reveal();
             floor.EndRoom.Reveal();
             foreach (var corridor in floor.Corridor)

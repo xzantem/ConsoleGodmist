@@ -5,21 +5,14 @@ namespace ConsoleGodmist.Characters
     public class Warrior : PlayerCharacter {
         public new double MaximalHealth
         {
-            get
-            {
-                return EngineMethods.ScaledStat(_maximalHealth, 12.5D, Level);
-            }
-            protected set { 
-                _maximalHealth = value;
-            }
+            get => _maximalHealth.Value;
+            protected set =>
+                _maximalHealth.BaseValue = EngineMethods.ScaledStat(value, 12.5D, Level);
         }
         public new double MinimalAttack {
-            get {
-                return EngineMethods.ScaledStat(_minimalAttack, 0.7D, Level);
-            }
-            protected set {
-                _minimalAttack = value;
-            }
+            get => _minimalAttack.Value;
+            protected set =>
+                _minimalAttack.BaseValue = EngineMethods.ScaledStat(value, 0.7D, Level);
         }
         public new double MaximalAttack {
             get {

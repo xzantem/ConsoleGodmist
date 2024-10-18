@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
+using System.Reflection.Metadata.Ecma335;
 using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.locale;
 using Microsoft.VisualBasic.FileIO;
 using Spectre.Console;
 
@@ -15,13 +15,14 @@ public static class DungeonMovementManager
     private static int LocationIndex { get; set; }
     private static int LastMovement { get; set; }
     
-    private static Action OnMove { get; set; }
+    private static List<Text> Log { get; set; }
 
     public static void EnterDungeon(Dungeon dungeon)
     {
         if (CurrentDungeon != null)
             throw new Exception("Attempted to enter new dungeon, but player is already in a dungeon!");
         CurrentDungeon = dungeon;
+        Log = [];
         CurrentLocation = CurrentDungeon.CurrentFloor.StarterRoom;
         LocationIndex = 0;
         LastMovement = 0;
@@ -33,15 +34,15 @@ public static class DungeonMovementManager
         AnsiConsole.Clear();
         var locationText = CurrentDungeon.DungeonType switch
         {
-            DungeonType.Catacombs => locale_main.Catacombs,
-            DungeonType.Forest => locale_main.Forest,
-            DungeonType.ElvishRuins => locale_main.ElvishRuins,
-            DungeonType.Cove => locale_main.Cove,
-            DungeonType.Desert => locale_main.Desert,
-            DungeonType.Temple => locale_main.Temple,
-            DungeonType.Mountains => locale_main.Mountains,
-            DungeonType.Swamp => locale_main.Swamp,
-            _ => locale_main.Catacombs,
+            DungeonType.Catacombs => locale.Catacombs,
+            DungeonType.Forest => locale.Forest,
+            DungeonType.ElvishRuins => locale.ElvishRuins,
+            DungeonType.Cove => locale.Cove,
+            DungeonType.Desert => locale.Desert,
+            DungeonType.Temple => locale.Temple,
+            DungeonType.Mountains => locale.Mountains,
+            DungeonType.Swamp => locale.Swamp,
+            _ => locale.Catacombs,
         };
         var color = CurrentDungeon.DungeonType switch
         {
@@ -56,15 +57,18 @@ public static class DungeonMovementManager
             _ => Color.White,
         };
         AnsiConsole.Write(new FigletText(locationText).Centered().Color(color));
+        foreach (var log in Log)
+            AnsiConsole.Write(log);
+        Log.Clear();
         string floor = CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0
             ? (CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor)).ToString()
             : ("-" + CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor));
         string visited = (CurrentDungeon.Floors.Count - 1) == 0
             ? (CurrentDungeon.Floors.Count - 1).ToString()
             : ("-" + (CurrentDungeon.Floors.Count - 1));
-        locationText = locale_main.Level + " " + CurrentDungeon.DungeonLevel + ", " + 
-                       locale_main.Floor + " " + floor + " [" +
-                        visited + "]\n" + locale_main.Map + ":";
+        locationText = locale.Level + " " + CurrentDungeon.DungeonLevel + ", " + 
+                       locale.Floor + " " + floor + " [" +
+                        visited + "]\n" + locale.Map + ":";
         AnsiConsole.WriteLine(locationText);
         if (CurrentDungeon.CurrentFloor.StarterRoom.Revealed)
         {
@@ -132,71 +136,46 @@ public static class DungeonMovementManager
             switch (ChooseAction())
             {
                 case 0:
-                    LocationIndex++;
-                    CurrentLocation = LocationIndex == CurrentDungeon.CurrentFloor.Corridor.Count + 1 ? 
-                        CurrentDungeon.CurrentFloor.EndRoom : CurrentDungeon.CurrentFloor.Corridor[LocationIndex - 1];
-                    if (!CurrentLocation.Revealed)
-                    {
-                        CurrentLocation.Reveal();
-                        if (Random.Shared.NextDouble() < 0.125)
-                            CurrentDungeon.ScoutFloor(CurrentDungeon.CurrentFloor);
-                    }
+                    MoveForward();
                     break;
                 case 1:
-                    LocationIndex--;
-                    CurrentLocation = LocationIndex == 0 ? 
-                        CurrentDungeon.CurrentFloor.StarterRoom : CurrentDungeon.CurrentFloor.Corridor[LocationIndex - 1];
+                    if (MoveBackwards())
+                        return;
                     break;
                 case 2:
-                    if (CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0)
-                    {
-                        CurrentDungeon = null;
-                        return;
-                    }
-                    CurrentDungeon.Ascend();
-                    CurrentLocation = CurrentDungeon.CurrentFloor.EndRoom;
-                    LocationIndex = CurrentDungeon.CurrentFloor.Corridor.Count + 1;
-                    break;
-                case 3:
-                    CurrentDungeon.Descend();
-                    CurrentLocation = CurrentDungeon.CurrentFloor.StarterRoom;
-                    LocationIndex = 0;
-                    CurrentLocation.Reveal();
-                    break;
-                case 4:
                     InventoryMenuHandler.OpenInventoryMenu();
                     break;
-                case 5:
+                case 3:
                     //Open Quest Log
                     break;
-                case 6:
+                case 4:
                     //Show Character Info
                     break;
-                case 7:
+                case 5:
                     //Rest at Campfire
                     break;
-                case 8:
+                case 6:
                     var plant = PlantDropManager.DropDatabase[CurrentDungeon.DungeonType]
                         .GetDrop(CurrentDungeon.DungeonLevel);
                     PlayerHandler.player.Inventory.AddItem(plant.Key, plant.Value);
+                    Log.Add(new Text($"{locale.PlantCollected}: {plant.Key.Name}\n"
+                        , Stylesheet.Styles["dungeon-collect-plant"]));
                     CurrentLocation.Clear();
                     break;
-                case 9:
+                case 7:
                     //Open Stash
                     break;
-                case 10:
-                    var trap = new Trap(Difficulty.Hard, 0);
+                case 8:
+                    var trap = CurrentDungeon.CurrentFloor.Traps
+                        .FirstOrDefault(x => x.Location == CurrentDungeon.CurrentFloor.Corridor[LocationIndex]);
                     if (trap.Activate())
                     {
-                        //Display congrats message
-                        AnsiConsole.Write("Congrats");
+                        trap.Disarm();
+                        CurrentDungeon.CurrentFloor.Traps.Remove(trap);
+                        Log.Add(new Text($"{locale.TrapDisarmed}!\n", Stylesheet.Styles["success"]));
                     }
                     else
-                    {
-                        //Display failure message
-                        AnsiConsole.Write("Fail");
-                        //Do not remove trap (Player can retry indefinitely as long as they do not walk on the trap)
-                    }
+                        Log.Add(new Text($"{locale.TrapDisarmedFail}!\n", Stylesheet.Styles["failure"]));
                     break;
                 default:
                     AnsiConsole.Write(new Text("Invalid action.\n", Stylesheet.Styles["error"]));
@@ -208,57 +187,54 @@ public static class DungeonMovementManager
     private static int ChooseAction()
     {
         Dictionary<string, int> choices = new();
-        switch (LastMovement)
+        if (LastMovement == 0)
         {
-            case 0 or 3:
-            {
-                if (LocationIndex < CurrentDungeon.CurrentFloor.Corridor.Count + 1)
-                    choices.Add(locale_main.GoForward, 0);
-                else if (LocationIndex == CurrentDungeon.CurrentFloor.Corridor.Count + 1)
-                    choices.Add(locale_main.GoDown, 3);
-                if (LocationIndex == 0)
-                    choices.Add(CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0 ? 
-                        locale_main.ExitDungeon : locale_main.GoUp, 2);
-                else if (LocationIndex > 0)
-                    choices.Add(locale_main.GoBack, 1);
-                break;
-            }
-            case 1 or 2:
-            {
-                if (LocationIndex == 0)
-                    choices.Add(CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0 ? 
-                        locale_main.ExitDungeon : locale_main.GoUp, 2);
-                else if (LocationIndex > 0)
-                    choices.Add(locale_main.GoBack, 1);
-                if (LocationIndex < CurrentDungeon.CurrentFloor.Corridor.Count + 1)
-                    choices.Add(locale_main.GoForward, 0);
-                else if (LocationIndex == CurrentDungeon.CurrentFloor.Corridor.Count + 1)
-                    choices.Add(locale_main.GoDown, 3);
-                break;
-            }
+            if (LocationIndex < CurrentDungeon.CurrentFloor.Corridor.Count + 1)
+                choices.Add(locale.GoForward, 0);
+            else if (LocationIndex == CurrentDungeon.CurrentFloor.Corridor.Count + 1)
+                choices.Add(locale.GoDown, 0);
+            
+            if (LocationIndex == 0)
+                choices.Add(CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0 ? 
+                    locale.ExitDungeon : locale.GoUp, 1);
+            else if (LocationIndex > 0)
+                choices.Add(locale.GoBack, 1);
+        }
+        else
+        {
+            if (LocationIndex == 0)
+                choices.Add(CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0 ? 
+                    locale.ExitDungeon : locale.GoUp, 1);
+            else if (LocationIndex > 0)
+                choices.Add(locale.GoBack, 1);
+            
+            if (LocationIndex < CurrentDungeon.CurrentFloor.Corridor.Count + 1)
+                choices.Add(locale.GoForward, 0);
+            else if (LocationIndex == CurrentDungeon.CurrentFloor.Corridor.Count + 1)
+                choices.Add(locale.GoDown, 0);
         }
         switch (CurrentLocation.FieldType)
         {
             case DungeonFieldType.Campfire:
-                choices.Add(locale_main.RestAtCampfire, 7);
+                choices.Add(locale.RestAtCampfire, 5);
                 break;
             case DungeonFieldType.Plant:
-                choices.Add(locale_main.CollectPlant, 8);
+                choices.Add(locale.CollectPlant, 6);
                 break;
             case DungeonFieldType.Stash:
-                choices.Add(locale_main.OpenStash, 9);
+                choices.Add(locale.OpenStash, 7);
                 break;
         }
         if (LocationIndex < CurrentDungeon.CurrentFloor.Corridor.Count)
         {
             if (CurrentDungeon.CurrentFloor.Corridor[LocationIndex].FieldType == DungeonFieldType.Trap && CurrentDungeon.CurrentFloor.Corridor[LocationIndex].Revealed)
             {
-                choices.Add(locale_main.DisarmTrap, 10);
+                choices.Add(locale.DisarmTrap, 8);
             }
         }
-        choices.Add(locale_main.OpenInventory, 4);
-        choices.Add(locale_main.QuestLog, 5);
-        choices.Add(locale_main.ShowCharacter, 6);
+        choices.Add(locale.OpenInventory, 2);
+        choices.Add(locale.QuestLog, 3);
+        choices.Add(locale.ShowCharacter, 4);
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices.Keys)
             .HighlightStyle(new Style(Color.MediumPurple3)));
@@ -269,10 +245,69 @@ public static class DungeonMovementManager
 
     private static void MoveForward()
     {
-        
+        if (LocationIndex < CurrentDungeon.CurrentFloor.Corridor.Count + 1)
+        { // Go Forward if not on last block
+            LocationIndex++;
+            CurrentLocation = LocationIndex == CurrentDungeon.CurrentFloor.Corridor.Count + 1 ? 
+                CurrentDungeon.CurrentFloor.EndRoom : CurrentDungeon.CurrentFloor.Corridor[LocationIndex - 1];
+            if (!CurrentLocation.Revealed)
+            {
+                CurrentLocation.Reveal();
+                if (Random.Shared.NextDouble() < 0.125)
+                    CurrentDungeon.ScoutFloor(CurrentDungeon.CurrentFloor);
+            }
+        }
+        else
+        { // Go Down if on last block
+            CurrentDungeon.Descend();
+            CurrentLocation = CurrentDungeon.CurrentFloor.StarterRoom;
+            LocationIndex = 0;
+            CurrentLocation.Reveal();
+        }
+        OnMove();
     }
-    private static void MoveBackwards()
+    private static bool MoveBackwards()
     {
-        
+        if (LocationIndex == 0)
+        { // Move Up if on first block
+            if (CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0)
+            {
+                CurrentDungeon = null;
+                return true; // Exited dungeon
+            }
+            CurrentDungeon.Ascend();
+            CurrentLocation = CurrentDungeon.CurrentFloor.EndRoom;
+            LocationIndex = CurrentDungeon.CurrentFloor.Corridor.Count + 1;
+        }
+        else
+        { // Move Back if not on first block
+            LocationIndex--;
+            CurrentLocation = LocationIndex == 0 ? 
+                CurrentDungeon.CurrentFloor.StarterRoom : CurrentDungeon.CurrentFloor.Corridor[LocationIndex - 1];
+        }
+        OnMove();
+        return false; // Didn't exit dungeon
+    }
+
+    private static void OnMove()
+    {
+        switch (CurrentLocation.FieldType)
+        {
+            case DungeonFieldType.Battle:
+                //CurrentDungeon.CurrentFloor.Battles.FirstOrDefault(x => x.Location == CurrentLocation).Activate();
+                break;
+            case DungeonFieldType.Trap:
+                var trap = CurrentDungeon.CurrentFloor.Traps.FirstOrDefault(x => x.Location == CurrentLocation);
+                AnsiConsole.Write(new Text($"{locale.TrapActivated}! {locale.TryDisarmTrap}\n"
+                    , Stylesheet.Styles["dungeon-icon-trap"]));
+                trap.Disarm();
+                CurrentDungeon.CurrentFloor.Traps.Remove(trap);
+                if (!trap.Activate())
+                    Log = Log.Concat(trap.Trigger()).ToList();
+                else
+                    Log.Add(new Text($"{locale.TrapDisarmed}!\n", Stylesheet.Styles["success"]));
+                break;
+                    
+        }
     }
 }

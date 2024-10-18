@@ -1,5 +1,4 @@
 ﻿using ConsoleGodmist.Enums;
-using ConsoleGodmist.locale;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Items;
@@ -15,8 +14,8 @@ public class Inventory
         if (item.Weight * quantity + PackWeight > MaxPackWeight)
         {
             AnsiConsole.WriteLine(item.Stackable
-                ? $"{locale_main.NotEnoughWeight}: {item.Name} + ({quantity})!"
-                : $"{locale_main.NotEnoughWeight}: {item.Name}!", Stylesheet.Styles["error"]);
+                ? $"{locale.NotEnoughWeight}: {item.Name} + ({quantity})!"
+                : $"{locale.NotEnoughWeight}: {item.Name}!", Stylesheet.Styles["error"]);
         }
         if (item.Stackable && Items.ContainsKey(item))
         {
@@ -48,12 +47,12 @@ public class Inventory
             }
             else
             {
-                AnsiConsole.WriteLine($"{locale_main.NotEnoughItem}: {item.Name}!", Stylesheet.Styles["error"]);
+                AnsiConsole.WriteLine($"{locale.NotEnoughItem}: {item.Name}!", Stylesheet.Styles["error"]);
             }
         }
         else
         {
-            AnsiConsole.WriteLine($"{locale_main.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
+            AnsiConsole.WriteLine($"{locale.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
         } 
     }*/
     public bool TryRemoveItem(IItem item, int amount = 1)
@@ -69,10 +68,10 @@ public class Inventory
                 }
                 return true;
             }
-            AnsiConsole.WriteLine($"{locale_main.NotEnoughItem}: {item.Name}!", Stylesheet.Styles["error"]);
+            AnsiConsole.WriteLine($"{locale.NotEnoughItem}: {item.Name}!", Stylesheet.Styles["error"]);
             return false;
         }
-        AnsiConsole.WriteLine($"{locale_main.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
+        AnsiConsole.WriteLine($"{locale.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
         return false;
     }
     public void RemoveJunk()
@@ -112,7 +111,7 @@ public class Inventory
         }
         else
         {
-            AnsiConsole.WriteLine($"{locale_main.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
+            AnsiConsole.WriteLine($"{locale.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
         }
     }
 }

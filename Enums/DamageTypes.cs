@@ -3,6 +3,9 @@ namespace ConsoleGodmist.Enums
     public enum DamageType {
         Physical,
         Magic,
-        True
+        True,
+        Bleed,
+        Poison,
+        Burn
     }
 }
