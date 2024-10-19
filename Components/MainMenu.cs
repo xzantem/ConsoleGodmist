@@ -98,9 +98,9 @@ namespace ConsoleGodmist.Components
             } while (name == "");
             PlayerHandler.player = characterClass switch {
                 CharacterClass.Warrior => new Warrior(name),
-                CharacterClass.Scout => new Scout(name),
-                CharacterClass.Sorcerer => new Sorcerer(name),
-                CharacterClass.Paladin => new Paladin(name),
+                CharacterClass.Scout => new Warrior(name),
+                CharacterClass.Sorcerer => new Warrior(name),
+                CharacterClass.Paladin => new Warrior(name),
                 _ => throw new NotImplementedException()
             };
         }

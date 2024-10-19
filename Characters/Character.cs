@@ -8,76 +8,90 @@ namespace ConsoleGodmist.Characters
 {
     public abstract class Character {
         public string Name { get; protected set; }
-        protected Stat _maximalHealth;
+        public Stat _maximalHealth;
         public double MaximalHealth
         {
-            get => _maximalHealth.Value;
-            protected set => _maximalHealth.BaseValue = value;
+            get => _maximalHealth.Value(Level);
+            set => _maximalHealth.BaseValue = value;
         }
         protected double _currentHealth;
         public double CurrentHealth {
             get => _currentHealth;
             protected set => _currentHealth = Math.Clamp(value, 0, MaximalHealth);
         }
-        protected Stat _minimalAttack;
+        public Stat _minimalAttack;
         public double MinimalAttack {
-            get => _minimalAttack.Value;
-            protected set => _minimalAttack.BaseValue = value;
+            get => _minimalAttack.Value(Level);
+            set => _minimalAttack.BaseValue = value;
         }
-        protected Stat _maximalAttack;
+        public Stat _maximalAttack;
         public double MaximalAttack { 
-            get  => _minimalAttack.Value;
-            protected set => _maximalAttack.BaseValue = Math.Min(_minimalAttack.BaseValue, value);
+            get  => _minimalAttack.Value(Level);
+            set => _maximalAttack.BaseValue = Math.Max(_minimalAttack.BaseValue, value);
         }
-        protected Stat _dodge;
+        public Stat _dodge;
         public double Dodge {
-            get => _dodge.Value;
-            protected set => _dodge.BaseValue = value;
+            get => _dodge.Value(Level);
+            set => _dodge.BaseValue = value;
         }
-        protected Stat _physicalDefense;
+        public Stat _physicalDefense;
         public double PhysicalDefense {
-            get => _physicalDefense.Value;
-            protected set => _physicalDefense.BaseValue = value;
+            get => _physicalDefense.Value(Level);
+            set => _physicalDefense.BaseValue = value;
         }
-        protected Stat _magicDefense;
+        public Stat _magicDefense;
         public double MagicDefense
         {
-            get => _magicDefense.Value;
-            protected set => _magicDefense.BaseValue = value;
+            get => _magicDefense.Value(Level);
+            set => _magicDefense.BaseValue = value;
         }
-        protected Stat _critChance;
+        public Stat _critChance;
+
         public double CritChance
         {
-            get => Math.Clamp(_critChance.Value, 0, 1);
-            protected set => _critChance.BaseValue = Math.Clamp(value, 0, 0.5D);
+            get => Math.Clamp(_critChance.Value(Level), 0, 1);
+            set => _critChance.BaseValue = Math.Clamp(value, 0, 0.5D);
         }
-        protected Stat _accuracy;
-        public double Accuracy
-        {
-            get => _accuracy.Value;
-            protected set => _accuracy.BaseValue = value;
-        }
-        protected Stat _speed;
+        public Stat _speed;
         public double Speed
         {
-            get => _speed.Value;
+            get => _speed.Value(Level);
             set => _speed.BaseValue = value;
         }
-        public int Level {get; protected set;}
-        protected Character(string name, double maxHealth, double minimalAttack, double maximalAttack, double critChance,
-                            double dodge, double physicalDefense, double magicDefense, double speed, int level) 
+        public Stat _accuracy; 
+        public double Accuracy
+        {
+            get => _accuracy.Value(Level);
+            set => _accuracy.BaseValue = value;
+        }
+        public Stat _critMod; 
+        public double CritMod
+        {
+            get => _critMod.Value(Level);
+            set => _critMod.BaseValue = value;
+        }
+        public List<StatusEffect> StatusEffects { get; set; }
+        public int Level {get; set;}
+        
+        protected Character() {}
+        protected Character(string name, Stat maxHealth, Stat minimalAttack, Stat maximalAttack, 
+            Stat critChance, Stat dodge, Stat physicalDefense, Stat magicDefense, Stat speed, Stat accuracy,
+            Stat critMod, int level = 1) 
         {
             Name = name ?? locale.Nameless;
-            MaximalHealth = Math.Max(0, maxHealth);
-            CurrentHealth = maxHealth;
-            MinimalAttack = minimalAttack;
-            MaximalAttack = maximalAttack;
-            CritChance = critChance;
-            Dodge = dodge;
-            PhysicalDefense = physicalDefense;
-            MagicDefense = magicDefense;
-            Speed = speed;
+            _maximalHealth = maxHealth;
+            CurrentHealth = maxHealth.BaseValue;
+            _minimalAttack = minimalAttack;
+            _maximalAttack = maximalAttack;
+            _critChance = critChance;
+            _dodge = dodge;
+            _physicalDefense = physicalDefense;
+            _magicDefense = magicDefense;
+            _speed = speed;
+            _accuracy = accuracy;
+            _critMod = critMod;
             Level = level;
+            StatusEffects = [];
         }
         public List<Text> TakeDamage(Dictionary<DamageType, double> damage)
         {
@@ -138,10 +152,75 @@ namespace ConsoleGodmist.Characters
             CurrentHealth += heal;
         }
 
-        public List<Stat> Stats() => new List<Stat>()
+        public void AddModifier(StatType stat, StatModifier modifier)
         {
-            _maximalHealth, _minimalAttack, _maximalAttack, _critChance,
-            _accuracy, _dodge, _physicalDefense, _magicDefense, _speed
-        };
+            switch (stat)
+            {
+                case StatType.MaximalHealth:
+                    _maximalHealth.AddModifier(modifier);
+                    break;
+                case StatType.MinimalAttack:
+                    _minimalAttack.AddModifier(modifier);
+                    break;
+                case StatType.MaximalAttack:
+                    _maximalAttack.AddModifier(modifier);
+                    break;
+                case StatType.Dodge:
+                    _dodge.AddModifier(modifier);
+                    break;
+                case StatType.PhysicalDefense:
+                    _physicalDefense.AddModifier(modifier);
+                    break;
+                case StatType.MagicDefense:
+                    _magicDefense.AddModifier(modifier);
+                    break;
+                case StatType.CritChance:
+                    _critChance.AddModifier(modifier);
+                    break;
+                case StatType.Speed:
+                    _speed.AddModifier(modifier);
+                    break;
+                case StatType.Accuracy:
+                    _accuracy.AddModifier(modifier);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
+            }
+        }
+
+        public void HandleStatusEffects()
+        {
+            var statusDict = StatusEffects
+                .ToDictionary(x => x.Type, x => StatusEffects
+                    .Where(s => s.Type == x.Type).Sum(s => s.Strength));
+            foreach (var status in statusDict)
+            {
+                var damageType = status.Key switch
+                {
+                    StatusEffectType.Bleed => DamageType.Bleed,
+                    StatusEffectType.Poison => DamageType.Poison,
+                    StatusEffectType.Burn => DamageType.Burn,
+                };
+                AnsiConsole.Write(new Text(string.Join("", TakeDamage(damageType, status.Value))));
+            }
+            foreach (var statusEffect in StatusEffects.ToList())
+            {
+                statusEffect.RemainingDuration--;
+                if (statusEffect.RemainingDuration == 0)
+                    StatusEffects.Remove(statusEffect);
+            }
+        }
+
+        public void HandleModifiers()
+        {
+            _maximalHealth.Decrement();
+            _minimalAttack.Decrement();
+            _maximalAttack.Decrement();
+            _dodge.Decrement();
+            _physicalDefense.Decrement();
+            _magicDefense.Decrement();
+            _accuracy.Decrement();
+            _speed.Decrement();
+        }
     }
 }

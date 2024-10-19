@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
@@ -12,8 +13,9 @@ namespace ConsoleGodmist.Town
         {
             while (true)
             {
-                AnsiConsole.Clear();
+                //AnsiConsole.Clear();
                 AnsiConsole.Write(new FigletText("Arungard").Centered().Color(Color.Gold3_1));
+                var enemy = EnemyFactory.CreateEnemy("SkeletonSwordsman", 5);
                 string[] choices =
                 [
                     locale.StartExpedition, locale.Blacksmith, locale.Alchemist,
@@ -30,6 +32,10 @@ namespace ConsoleGodmist.Town
                         DungeonMovementManager.TraverseDungeon();
                         break;
                     case 1:
+                        PlayerHandler.player.AddModifier(StatType.MaximalHealth, 
+                            new StatModifier(ModifierType.Multiplicative, 0.2, "Test"));
+                        break;
+                    case 2:
                         PlayerHandler.player.GainExperience(100);
                         break;
                     case 6:

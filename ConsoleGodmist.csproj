@@ -10,11 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Spectre.Console" Version="0.47.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Combat\Battles\" />
+    <Folder Include="Combat\Skills\" />
     <Folder Include="Items\Armors\" />
     <Folder Include="Items\Weapons\" />
     <Folder Include="locale\" />
@@ -33,6 +35,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>locale.resx</DependentUpon>
     </Compile>
+    <Compile Remove="Characters\Player\Paladin.cs" />
+    <Compile Remove="Characters\Player\Scout.cs" />
+    <Compile Remove="Characters\Player\Sorcerer.cs" />
   </ItemGroup>
 
 </Project>

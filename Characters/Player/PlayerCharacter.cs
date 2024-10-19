@@ -1,14 +1,29 @@
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Characters
 {
-    public abstract class PlayerCharacter : Character
+    public abstract class PlayerCharacter(
+        string name,
+        Stat maxHealth,
+        Stat minimalAttack,
+        Stat maximalAttack,
+        Stat critChance,
+        Stat dodge,
+        Stat physicalDefense,
+        Stat magicDefense,
+        Stat speed,
+        Stat accuracy,
+        Stat critMod,
+        CharacterClass characterClass)
+        : Character(name, maxHealth, minimalAttack, maximalAttack, critChance,
+            dodge, physicalDefense, magicDefense, speed, accuracy, critMod, 1)
     {
-        public CharacterClass CharacterClass { get; private set; }
-        public int Gold { get; private set;}
-        public int CurrentExperience { get; private set; }
+        public CharacterClass CharacterClass { get; private set; } = characterClass;
+        public int Gold { get; private set;} = 100;
+        public int CurrentExperience { get; private set; } = 0;
         public int RequiredExperience => CalculateExperience(Level);
 
         public int Honor {get; private set;}
@@ -31,16 +46,8 @@ namespace ConsoleGodmist.Characters
                 };
             }
         }
-        public Inventory Inventory { get; private set; }
-        protected PlayerCharacter(string name, double maxHealth, double minimalAttack, double maximalAttack, double critChance,
-                            double dodge, double physicalDefense, double magicDefense, double speed,
-                            CharacterClass characterClass) : base(name, maxHealth, minimalAttack, maximalAttack, critChance,
-                                                                  dodge, physicalDefense, magicDefense, speed, 1) {
-            CharacterClass = characterClass;
-            Gold = 100;
-            CurrentExperience = 0;
-            Inventory = new Inventory();
-        }
+        public Inventory Inventory { get; private set; } = new();
+
         public void GainGold(int gold) {
             Gold += gold;
             AnsiConsole.Write(new Text($"{locale.CurrentGold}: ", Stylesheet.Styles["default"]));

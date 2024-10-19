@@ -3,8 +3,15 @@
 public class DropPool
 {
     public Dictionary<string, ItemDrop> Pool { get; set; }
+    public double[] Chances { get; set; }
 
     public DropPool() { } // For JSON deserialization
+
+    public DropPool(DropPool other)
+    {
+        Pool = other.Pool;
+        Chances = other.Chances;
+    }
 
     public DropPool(Dictionary<string, ItemDrop> pool) { Pool = pool; }
 

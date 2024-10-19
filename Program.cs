@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Text;
 using ConsoleGodmist;
+using ConsoleGodmist.Characters;
 using ConsoleGodmist.Components;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Items;
@@ -10,6 +11,7 @@ using Spectre.Console;
 Console.OutputEncoding = Encoding.UTF8;
 Stylesheet.InitStyles();
 ItemManager.InitItems();
+EnemyFactory.InitializeEnemies();
 PlantDropManager.InitPlantDrops();
 
 while (true)

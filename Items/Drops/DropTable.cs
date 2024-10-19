@@ -2,18 +2,26 @@
 
 public class DropTable
 {
-    public Dictionary<DropPool, double> Table { get; private set; }
+    public List<DropPool> Table { get; set; }
     public DropTable() { } // For JSON deserialization
-    public DropTable(Dictionary<DropPool, double> table)
+    public DropTable(List<DropPool> table)
     {
         Table = table;
     }
     public Dictionary<IItem, int> GetDrops(int level)
     {
-        return (from pool in Table where 
-            Random.Shared.NextDouble() > pool.Value 
-            select pool.Key.Choice(level)).ToDictionary(
-            item => item.Key, 
-            item => Random.Shared.Next(item.Value.MinAmount, item.Value.MaxAmount + 1));
+        Dictionary<IItem, int> drops = new();
+        foreach (var pool in Table)
+        {
+            var poolCopy = new DropPool(pool);
+            foreach (var t in poolCopy.Chances)
+            {
+                if (!(Random.Shared.NextDouble() < t)) continue;
+                var pair = poolCopy.Choice(level);
+                drops.Add(pair.Key, Random.Shared.Next(pair.Value.MinAmount, pair.Value.MaxAmount + 1));
+                poolCopy.Pool.Remove(pair.Key.Alias);
+            }
+        }
+        return drops;
     }
 }

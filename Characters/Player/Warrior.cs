@@ -1,3 +1,4 @@
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 
 namespace ConsoleGodmist.Characters
@@ -5,66 +6,45 @@ namespace ConsoleGodmist.Characters
     public class Warrior : PlayerCharacter {
         public new double MaximalHealth
         {
-            get => _maximalHealth.Value;
+            get => _maximalHealth.Value(Level);
             protected set =>
-                _maximalHealth.BaseValue = EngineMethods.ScaledStat(value, 12.5D, Level);
+                _maximalHealth.BaseValue = value;
         }
         public new double MinimalAttack {
-            get => _minimalAttack.Value;
+            get => _minimalAttack.Value(Level);
             protected set =>
-                _minimalAttack.BaseValue = EngineMethods.ScaledStat(value, 0.7D, Level);
+                _minimalAttack.BaseValue = value;
         }
         public new double MaximalAttack {
-            get {
-                return EngineMethods.ScaledStat(_maximalAttack, 0.95D, Level);
-            }
-            protected set {
-                _maximalAttack = value;
-            }
+            get => _maximalAttack.Value(Level);
+            protected set =>
+                _maximalAttack.BaseValue = value;
         }
         public new double Dodge {
-            get {
-                return EngineMethods.ScaledStat(_dodge, 0.05D, Level);
-            }
-            private set {
-                _dodge = value; 
-            }
+            get => _dodge.Value(Level);
+            protected set =>
+                _dodge.BaseValue = value;
         }
         public new double PhysicalDefense {
-            get {
-                return EngineMethods.ScaledStat(_physicalDefense, 0.45D, Level);
-            }
-            set {
-                _physicalDefense = value;
-            }
+            get => _physicalDefense.Value(Level);
+            protected set =>
+                _physicalDefense.BaseValue = value;
         }
         public new double MagicDefense {
-            get {
-                return EngineMethods.ScaledStat(_magicDefense, 0.3D, Level);
-            }
-            set {
-                _magicDefense = value;
-            }
+            get => _magicDefense.Value(Level);
+            protected set =>
+                _magicDefense.BaseValue = value;
         }
-        private double _maximalFury;
+        private Stat _maximalFury;
         public double MaximalFury
         {
-            get
-            {
-                return _maximalFury;
-            }
-            protected set { 
-                _maximalFury = value;
-            }
+            get => _maximalFury.Value(Level);
+            protected set => _maximalFury.BaseValue = value;
         }
 
         public new double Accuracy {
-            get {
-                return _accuracy - CurrentFury / 5;
-            }
-            set {
-                _accuracy = value;
-            }
+            get => _accuracy.Value(Level) - CurrentFury / 5; // + Weapon.Accuracy
+            set => _accuracy.BaseValue = value;
         }
         // Fury
         // Maximal is capped at 50 by default
@@ -76,16 +56,67 @@ namespace ConsoleGodmist.Characters
         // Gain 1% damage for every 5 Fury (also lose if negative)
         private double _currentFury;
         public double CurrentFury {
-            get {
-                return _currentFury;
-            }
-            private set {
-                _currentFury = Math.Max(value, MaximalFury);
+            get => _currentFury;
+            private set => _currentFury = Math.Clamp(value, 0, MaximalFury);
+        }
+        public Warrior(string name) : base(name, new Stat(375, 12.5),
+            new Stat(20, 0.7), new Stat(28, 0.95),
+            new Stat(0, 0), new Stat(10, 0.05),
+            new Stat(12, 0.45), new Stat(8, 0.3),
+            new Stat(40, 0), new Stat(0, 0),
+            new Stat(1, 0), CharacterClass.Warrior) {
+            _maximalFury = new Stat(50, 0);
+            CurrentFury = 0;
+        }
+        public void AddModifier(StatType stat, StatModifier modifier)
+        {
+            switch (stat)
+            {
+                case StatType.MaximalHealth:
+                    _maximalHealth.AddModifier(modifier);
+                    break;
+                case StatType.MinimalAttack:
+                    _minimalAttack.AddModifier(modifier);
+                    break;
+                case StatType.MaximalAttack:
+                    _maximalAttack.AddModifier(modifier);
+                    break;
+                case StatType.Dodge:
+                    _dodge.AddModifier(modifier);
+                    break;
+                case StatType.PhysicalDefense:
+                    _physicalDefense.AddModifier(modifier);
+                    break;
+                case StatType.MagicDefense:
+                    _magicDefense.AddModifier(modifier);
+                    break;
+                case StatType.CritChance:
+                    _critChance.AddModifier(modifier);
+                    break;
+                case StatType.Speed:
+                    _speed.AddModifier(modifier);
+                    break;
+                case StatType.Accuracy:
+                    _accuracy.AddModifier(modifier);
+                    break;
+                case StatType.MaximalFury:
+                    _maximalFury.AddModifier(modifier);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
             }
         }
-        public Warrior(string name) : base(name, 375, 20, 28, 0.12D, 10, 12, 8, 40, CharacterClass.Warrior) {
-            MaximalFury = 50;
-            CurrentFury = 0;
+        public void HandleModifiers()
+        {
+            _maximalHealth.Decrement();
+            _minimalAttack.Decrement();
+            _maximalAttack.Decrement();
+            _dodge.Decrement();
+            _physicalDefense.Decrement();
+            _magicDefense.Decrement();
+            _accuracy.Decrement();
+            _speed.Decrement();
+            _maximalFury.Decrement();
         }
     }
 }
