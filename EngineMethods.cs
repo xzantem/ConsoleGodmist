@@ -3,12 +3,12 @@ using System.Windows.Input;
 
 namespace ConsoleGodmist
 {
-    static class EngineMethods
+    internal static class EngineMethods
     {
         public static Random Random = new();
-        public static float RandomFloat(float minValue, float maxValue)
+        public static double RandomDouble(double minValue, double maxValue)
         {
-            float number = (float)Random.NextDouble();
+            var number = Random.NextDouble();
             return number * (maxValue - minValue) + minValue;
         }
         public static float RandomFloat(float minValue, float maxValue, int round)

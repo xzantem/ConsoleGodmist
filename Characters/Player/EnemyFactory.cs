@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 
@@ -12,6 +13,16 @@ public static class EnemyFactory
     {
         var enemy = EnemiesList.FirstOrDefault(x => x.Alias == alias);
         enemy.Level = level;
+        enemy.Initialize();
+        return enemy;
+    }
+    public static EnemyCharacter CreateEnemy(DungeonType dungeonType, int level)
+    {
+        var enemy = EngineMethods.RandomChoice(EnemiesList
+            .Where(x => x.DefaultLocation == dungeonType)
+            .ToDictionary(s => s, enemy => 1));
+        enemy.Level = level;
+        enemy.Initialize();
         return enemy;
     }
 

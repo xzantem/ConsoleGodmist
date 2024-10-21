@@ -11,11 +11,11 @@ namespace ConsoleGodmist.Town
     {
         public static void EnterTown()
         {
+            var enemy = EnemyFactory.CreateEnemy("SkeletonSwordsman", 5);
             while (true)
             {
                 //AnsiConsole.Clear();
                 AnsiConsole.Write(new FigletText("Arungard").Centered().Color(Color.Gold3_1));
-                var enemy = EnemyFactory.CreateEnemy("SkeletonSwordsman", 5);
                 string[] choices =
                 [
                     locale.StartExpedition, locale.Blacksmith, locale.Alchemist,
@@ -32,11 +32,9 @@ namespace ConsoleGodmist.Town
                         DungeonMovementManager.TraverseDungeon();
                         break;
                     case 1:
-                        PlayerHandler.player.AddModifier(StatType.MaximalHealth, 
-                            new StatModifier(ModifierType.Multiplicative, 0.2, "Test"));
+                        PlayerHandler.player.ActiveSkills[0].Use(PlayerHandler.player, enemy);
                         break;
                     case 2:
-                        PlayerHandler.player.GainExperience(100);
                         break;
                     case 6:
                         InventoryMenuHandler.OpenInventoryMenu();

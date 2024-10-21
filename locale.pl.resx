@@ -476,4 +476,10 @@
   <data name="Takes" xml:space="preserve">
     <value>otrzymuje</value>
   </data>
+  <data name="Heals" xml:space="preserve">
+    <value>leczy</value>
+  </data>
+  <data name="HealthGenitive" xml:space="preserve">
+    <value>zdrowia</value>
+  </data>
 </root>

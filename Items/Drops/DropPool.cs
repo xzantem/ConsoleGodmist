@@ -13,7 +13,12 @@ public class DropPool
         Chances = other.Chances;
     }
 
-    public DropPool(Dictionary<string, ItemDrop> pool) { Pool = pool; }
+    public DropPool(Dictionary<string, ItemDrop> pool, double[] chances) { Pool = pool;
+        Chances = chances;
+    }
+    public DropPool(Dictionary<string, ItemDrop> pool) { Pool = pool;
+        Chances = [1.0];
+    }
 
     public KeyValuePair<IItem, ItemDrop> Choice(int level)
     {

@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Combat\Battles\" />
-    <Folder Include="Combat\Skills\" />
     <Folder Include="Items\Armors\" />
     <Folder Include="Items\Weapons\" />
     <Folder Include="locale\" />
@@ -30,14 +29,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Characters\Player\Paladin.cs" />
+    <Compile Remove="Characters\Player\Scout.cs" />
+    <Compile Remove="Characters\Player\Sorcerer.cs" />
     <Compile Update="locale.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>locale.resx</DependentUpon>
     </Compile>
-    <Compile Remove="Characters\Player\Paladin.cs" />
-    <Compile Remove="Characters\Player\Scout.cs" />
-    <Compile Remove="Characters\Player\Sorcerer.cs" />
   </ItemGroup>
 
 </Project>

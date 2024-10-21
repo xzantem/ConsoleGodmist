@@ -19,4 +19,9 @@ public class EnemyCharacter : Character
     {
         StatusEffects = [];
     } // For JSON Serialization
+
+    public void Initialize()
+    {
+        CurrentHealth = MaximalHealth;
+    }
 }

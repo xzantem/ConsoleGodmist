@@ -528,6 +528,24 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to heals.
+        /// </summary>
+        internal static string Heals {
+            get {
+                return ResourceManager.GetString("Heals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to health.
+        /// </summary>
+        internal static string HealthGenitive {
+            get {
+                return ResourceManager.GetString("HealthGenitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How many to delete?.
         /// </summary>
         internal static string HowManyToDelete {

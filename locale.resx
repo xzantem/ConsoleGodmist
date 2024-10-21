@@ -465,22 +465,28 @@
     <data name="Coal" xml:space="preserve">
     <value>Coal</value>
   </data>
-  <data name="TrapDisarmedFail" xml:space="preserve">
+    <data name="TrapDisarmedFail" xml:space="preserve">
     <value>Trap disarming failed</value>
   </data>
-  <data name="TrapActivated" xml:space="preserve">
+    <data name="TrapActivated" xml:space="preserve">
     <value>You stepped on a trap</value>
   </data>
-  <data name="TryDisarmTrap" xml:space="preserve">
+    <data name="TryDisarmTrap" xml:space="preserve">
     <value>Try to disarm it or take damage</value>
   </data>
-  <data name="YouTake" xml:space="preserve">
+    <data name="YouTake" xml:space="preserve">
     <value>You take</value>
   </data>
-  <data name="DamageGenitive" xml:space="preserve">
+    <data name="DamageGenitive" xml:space="preserve">
     <value>damage</value>
   </data>
-  <data name="Takes" xml:space="preserve">
+    <data name="Takes" xml:space="preserve">
     <value>takes</value>
+  </data>
+    <data name="Heals" xml:space="preserve">
+    <value>heals</value>
+  </data>
+    <data name="HealthGenitive" xml:space="preserve">
+    <value>health</value>
   </data>
 </root>

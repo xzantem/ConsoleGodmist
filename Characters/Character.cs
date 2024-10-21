@@ -1,5 +1,6 @@
 using System.Runtime;
 using ConsoleGodmist.Combat.Modifiers;
+using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Enums;
 using Spectre.Console;
 using Spectre.Console.Rendering;
@@ -70,10 +71,26 @@ namespace ConsoleGodmist.Characters
             get => _critMod.Value(Level);
             set => _critMod.BaseValue = value;
         }
+        public Stat _maximalResource; 
+        public double MaximalResource
+        {
+            get => _maximalResource.Value(Level);
+            set => _maximalResource.BaseValue = value;
+        }
+        protected double _currentResource;
+        public double CurrentResource {
+            get => _currentResource;
+            protected set => _currentResource = Math.Clamp(value, 0, MaximalHealth);
+        }
+        public ResourceType ResourceType { get; set; }
         public List<StatusEffect> StatusEffects { get; set; }
+        
+        public Dictionary<StatusEffectType, Stat> Resistances { get; set; }
         public int Level {get; set;}
         
-        protected Character() {}
+        public ActiveSkill[] ActiveSkills { get; set; }
+
+        protected Character() { }
         protected Character(string name, Stat maxHealth, Stat minimalAttack, Stat maximalAttack, 
             Stat critChance, Stat dodge, Stat physicalDefense, Stat magicDefense, Stat speed, Stat accuracy,
             Stat critMod, int level = 1) 
@@ -92,6 +109,7 @@ namespace ConsoleGodmist.Characters
             _critMod = critMod;
             Level = level;
             StatusEffects = [];
+            ActiveSkills = new ActiveSkill[5];
         }
         public List<Text> TakeDamage(Dictionary<DamageType, double> damage)
         {
@@ -111,7 +129,7 @@ namespace ConsoleGodmist.Characters
                     DamageType.True => Stylesheet.Styles["damage-true"],
                     _ => Stylesheet.Styles["default"]
                 };
-                damageSegments.Add(new Text($"{damageTaken}", style));
+                damageSegments.Add(new Text($"{(int)damageTaken}", style));
                 if (damageSegments.Count < damage.Count)
                     damageSegments.Add(new Text("+", Stylesheet.Styles["default"]));
             }
@@ -135,21 +153,35 @@ namespace ConsoleGodmist.Characters
                 DamageType.True => Stylesheet.Styles["damage-true"],
                 _ => Stylesheet.Styles["default"]
             };
-            segments.Add(new Text($"{damageTaken}", style));
+            segments.Add(new Text($"{(int)damageTaken}", style));
             segments.Add(new Text($" {locale.DamageGenitive}", Stylesheet.Styles["default"]));
             return segments;
         }
 
-        public int DamageMitigated(double damage, DamageType damageType)
+        public void UseResource(int amount)
         {
-            return (int)(damageType switch {
+            CurrentResource -= amount;
+            if (ResourceType != ResourceType.Fury)
+                CurrentResource = Math.Max(CurrentResource, 0);
+        }
+
+        public double DamageMitigated(double damage, DamageType damageType)
+        {
+            damage = damageType switch
+            {
                 DamageType.Physical => damage * damage / (damage + PhysicalDefense),
                 DamageType.Magic => damage * damage / (damage + MagicDefense),
                 _ => damage
-            });
+            };
+            var shields = StatusEffects
+                .Where(effect => effect.Type == StatusEffectType.Shield).Cast<Shield>().ToList();
+            if (shields.Count > 0)
+                damage = StatusEffectHandler.TakeShieldsDamage(shields, this, damage);
+            return damage;
         }
-        protected void Heal(double heal) {
+        public Text Heal(double heal) {
             CurrentHealth += heal;
+            return new Text($"{Name} {locale.Heals} {heal} {locale.HealthGenitive}\n", Stylesheet.Styles["default"]);
         }
 
         public void AddModifier(StatType stat, StatModifier modifier)
@@ -188,28 +220,11 @@ namespace ConsoleGodmist.Characters
             }
         }
 
-        public void HandleStatusEffects()
+        public void AddResistanceModifier(StatusEffectType stat, StatModifier modifier)
         {
-            var statusDict = StatusEffects
-                .ToDictionary(x => x.Type, x => StatusEffects
-                    .Where(s => s.Type == x.Type).Sum(s => s.Strength));
-            foreach (var status in statusDict)
-            {
-                var damageType = status.Key switch
-                {
-                    StatusEffectType.Bleed => DamageType.Bleed,
-                    StatusEffectType.Poison => DamageType.Poison,
-                    StatusEffectType.Burn => DamageType.Burn,
-                };
-                AnsiConsole.Write(new Text(string.Join("", TakeDamage(damageType, status.Value))));
-            }
-            foreach (var statusEffect in StatusEffects.ToList())
-            {
-                statusEffect.RemainingDuration--;
-                if (statusEffect.RemainingDuration == 0)
-                    StatusEffects.Remove(statusEffect);
-            }
+            Resistances[stat].AddModifier(modifier);
         }
+        
 
         public void HandleModifiers()
         {
