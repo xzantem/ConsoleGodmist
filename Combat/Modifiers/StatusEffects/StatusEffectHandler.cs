@@ -32,7 +32,7 @@ public static class StatusEffectHandler
                 StatusEffectType.Poison => DamageType.Poison,
                 StatusEffectType.Burn => DamageType.Burn,
             };
-            AnsiConsole.Write(new Text(string.Join("", target.TakeDamage(damageType, dot.Value))));
+            target.TakeDamage(damageType, dot.Value);
         }
     }
 
@@ -46,7 +46,8 @@ public static class StatusEffectHandler
     private static void HandleSleep(List<Sleep> sleeps, Character target)
     {
         var regen = sleeps.Sum(x => x.Strength);
-        AnsiConsole.Write(new Text(string.Join("", target.Heal(regen))));
+        if (regen > 0)
+            target.Heal(regen);
     }
     public static void AddStatusEffect(StatusEffect statusEffect, Character target)
     {

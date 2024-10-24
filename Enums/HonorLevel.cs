@@ -5,7 +5,7 @@ namespace ConsoleGodmist.Enums
         Useless,
         Shameful,
         Uncertain,
-        Citizen,
+        Recruit,
         Mercenary,
         Fighter,
         Knight,

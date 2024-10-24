@@ -482,4 +482,151 @@
   <data name="HealthGenitive" xml:space="preserve">
     <value>zdrowia</value>
   </data>
+  <data name="HealthC" xml:space="preserve">
+    <value>Zdrowie</value>
+  </data>
+  <data name="UseSkill" xml:space="preserve">
+    <value>Użyj umiejętności</value>
+  </data>
+  <data name="UsePotion" xml:space="preserve">
+    <value>Użyj miksturę</value>
+  </data>
+  <data name="Escape" xml:space="preserve">
+    <value>Ucieknij</value>
+  </data>
+  <data name="ShowStats" xml:space="preserve">
+    <value>Pokaż statystyki</value>
+  </data>
+  <data name="BattleStart" xml:space="preserve">
+    <value>Bitwa! Spotykasz</value>
+  </data>
+  <data name="Uses" xml:space="preserve">
+    <value>używa</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>na</value>
+  </data>
+  <data name="StrikesCritically" xml:space="preserve">
+    <value>trafia krytycznie</value>
+  </data>
+  <data name="Attack" xml:space="preserve">
+    <value>Atak</value>
+  </data>
+  <data name="Crit" xml:space="preserve">
+    <value>Krytyk</value>
+  </data>
+  <data name="Accuracy" xml:space="preserve">
+    <value>Celność</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Szybkość</value>
+  </data>
+  <data name="Defense" xml:space="preserve">
+    <value>Obrona</value>
+  </data>
+  <data name="Dodge" xml:space="preserve">
+    <value>Unik</value>
+  </data>
+  <data name="Resistances" xml:space="preserve">
+    <value>Odporności</value>
+  </data>
+  <data name="Bleed" xml:space="preserve">
+    <value>Krwawienie</value>
+  </data>
+  <data name="Burn" xml:space="preserve">
+    <value>Podpalenie</value>
+  </data>
+  <data name="Debuff" xml:space="preserve">
+    <value>Osłabienie</value>
+  </data>
+  <data name="Freeze" xml:space="preserve">
+    <value>Zamrożenie</value>
+  </data>
+  <data name="Frostbite" xml:space="preserve">
+    <value>Odmrożenie</value>
+  </data>
+  <data name="Paralysis" xml:space="preserve">
+    <value>Paraliż</value>
+  </data>
+  <data name="Poison" xml:space="preserve">
+    <value>Trucizna</value>
+  </data>
+  <data name="Provocation" xml:space="preserve">
+    <value>Prowokacja</value>
+  </data>
+  <data name="Stun" xml:space="preserve">
+    <value>Ogłuszenie</value>
+  </data>
+  <data name="Moving" xml:space="preserve">
+    <value>Rusza się</value>
+  </data>
+  <data name="TurnOrder" xml:space="preserve">
+    <value>Nowa kolejność</value>
+  </data>
+  <data name="Victory" xml:space="preserve">
+    <value>Wygrana</value>
+  </data>
+  <data name="Defeat" xml:space="preserve">
+    <value>Przegrana</value>
+  </data>
+  <data name="GameOver" xml:space="preserve">
+    <value>Koniec gry</value>
+  </data>
+  <data name="Dies" xml:space="preserve">
+    <value>pada na ziemię i umiera</value>
+  </data>
+  <data name="Exile" xml:space="preserve">
+    <value>Wygnaniec</value>
+  </data>
+  <data name="Useless" xml:space="preserve">
+    <value>Bezużyteczny</value>
+  </data>
+  <data name="Shameful" xml:space="preserve">
+    <value>Haniebny</value>
+  </data>
+  <data name="Uncertain" xml:space="preserve">
+    <value>Niepewny</value>
+  </data>
+  <data name="Recruit" xml:space="preserve">
+    <value>Rekrut</value>
+  </data>
+  <data name="Mercenary" xml:space="preserve">
+    <value>Najemnik</value>
+  </data>
+  <data name="Fighter" xml:space="preserve">
+    <value>Bojownik</value>
+  </data>
+  <data name="Knight" xml:space="preserve">
+    <value>Rycerz</value>
+  </data>
+  <data name="Leader" xml:space="preserve">
+    <value>Przywódca</value>
+  </data>
+  <data name="CurrentHonor" xml:space="preserve">
+    <value>Aktualny honor</value>
+  </data>
+  <data name="TryEscape" xml:space="preserve">
+    <value>Próbujesz uciec</value>
+  </data>
+  <data name="EscapeFail" xml:space="preserve">
+    <value>Ucieczka nieudana</value>
+  </data>
+  <data name="EscapeSuccess" xml:space="preserve">
+    <value>Ucieczka udana</value>
+  </data>
+  <data name="ShowStatus" xml:space="preserve">
+    <value>Pokaż efekty statusu</value>
+  </data>
+  <data name="Turns" xml:space="preserve">
+    <value>tur</value>
+  </data>
+  <data name="Sleep" xml:space="preserve">
+    <value>Uśpienie</value>
+  </data>
+  <data name="SkeletonSwordsman" xml:space="preserve">
+    <value>Szkielet Miecznik</value>
+  </data>
+  <data name="NoStatusEffects" xml:space="preserve">
+    <value>Brak efektów statusu</value>
+  </data>
 </root>

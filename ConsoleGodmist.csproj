@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Combat\Battles\" />
     <Folder Include="Items\Armors\" />
     <Folder Include="Items\Weapons\" />
     <Folder Include="locale\" />
@@ -37,6 +36,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>locale.resx</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net6.0\json\base-ingredients.json" />
+    <Content Include="bin\Debug\net6.0\json\craftable-ingredients.json" />
+    <Content Include="bin\Debug\net6.0\json\enemies.json" />
+    <Content Include="bin\Debug\net6.0\json\plant-drop-table.json" />
   </ItemGroup>
 
 </Project>

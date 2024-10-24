@@ -11,7 +11,7 @@ public static class PlantDropManager
 
     public static void InitPlantDrops()
     {
-        var path = "plant-drop-table.json";
+        var path = "json/plant-drop-table.json";
         if (File.Exists(path))
         {
             var json = File.ReadAllText(path);

@@ -1,5 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.TextService;
+using Spectre.Console;
 
 namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 
@@ -37,8 +39,9 @@ public class DealDamage : IActiveSkillEffect
             DamageBase.Maximal => caster.MaximalAttack
         };
         damage *= DamageMultiplier;
-        if ((CanCrit && Random.Shared.NextDouble() < caster.CritChance) || AlwaysCrits)
-            damage *= caster.CritMod;
+        if ((!CanCrit || !(Random.Shared.NextDouble() < caster.CritChance)) && !AlwaysCrits) return damage;
+        damage *= caster.CritMod;
+        ActiveSkillTextService.DisplayCritText(caster);
         return damage;
     }
 

@@ -1,37 +1,35 @@
-﻿using System.Globalization;
-using System.Reflection.Metadata.Ecma335;
-using ConsoleGodmist.Characters;
+﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Enums;
-using Microsoft.VisualBasic.FileIO;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Dungeons;
 
 public static class DungeonMovementManager
 {
-    private static Dungeon CurrentDungeon { get; set; }
-    private static DungeonRoom CurrentLocation { get; set; }
-
+    public static Dungeon CurrentDungeon { get; private set; }
+    private static DungeonRoom CurrentLocation { get; set; } = null!;
     private static int LocationIndex { get; set; }
     private static int LastMovement { get; set; }
-    
+    private static bool Exited { get; set; }
     private static List<Text> Log { get; set; }
 
     public static void EnterDungeon(Dungeon dungeon)
     {
         if (CurrentDungeon != null)
             throw new Exception("Attempted to enter new dungeon, but player is already in a dungeon!");
+        Exited = false;
         CurrentDungeon = dungeon;
         Log = [];
         CurrentLocation = CurrentDungeon.CurrentFloor.StarterRoom;
         LocationIndex = 0;
         LastMovement = 0;
         CurrentLocation.Reveal();
+        OnMove();
     }
     
     private static void DisplayCurrentFloorMap()
     {
-        AnsiConsole.Clear();
         var locationText = CurrentDungeon.DungeonType switch
         {
             DungeonType.Catacombs => locale.Catacombs,
@@ -130,7 +128,7 @@ public static class DungeonMovementManager
 
     public static void TraverseDungeon()
     {
-        while(true)
+        while(!Exited)
         {
             DisplayCurrentFloorMap();
             switch (ChooseAction())
@@ -139,8 +137,7 @@ public static class DungeonMovementManager
                     MoveForward();
                     break;
                 case 1:
-                    if (MoveBackwards())
-                        return;
+                    MoveBackwards();
                     break;
                 case 2:
                     InventoryMenuHandler.OpenInventoryMenu();
@@ -243,6 +240,12 @@ public static class DungeonMovementManager
         return choices[choice];
     }
 
+    public static void ExitDungeon()
+    {
+        Exited = true;
+        CurrentDungeon = null;
+    }
+
     private static void MoveForward()
     {
         if (LocationIndex < CurrentDungeon.CurrentFloor.Corridor.Count + 1)
@@ -266,14 +269,14 @@ public static class DungeonMovementManager
         }
         OnMove();
     }
-    private static bool MoveBackwards()
+    private static void MoveBackwards()
     {
         if (LocationIndex == 0)
         { // Move Up if on first block
             if (CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0)
             {
-                CurrentDungeon = null;
-                return true; // Exited dungeon
+                ExitDungeon();
+                return;
             }
             CurrentDungeon.Ascend();
             CurrentLocation = CurrentDungeon.CurrentFloor.EndRoom;
@@ -286,7 +289,6 @@ public static class DungeonMovementManager
                 CurrentDungeon.CurrentFloor.StarterRoom : CurrentDungeon.CurrentFloor.Corridor[LocationIndex - 1];
         }
         OnMove();
-        return false; // Didn't exit dungeon
     }
 
     private static void OnMove()
@@ -294,7 +296,15 @@ public static class DungeonMovementManager
         switch (CurrentLocation.FieldType)
         {
             case DungeonFieldType.Battle:
-                //CurrentDungeon.CurrentFloor.Battles.FirstOrDefault(x => x.Location == CurrentLocation).Activate();
+                BattleManager.StartNewBattle(new Dictionary<BattleUser, int>
+                {
+                    {new BattleUser(PlayerHandler.player), 0}, 
+                    {new BattleUser(EnemyFactory.CreateEnemy(CurrentDungeon.DungeonType, CurrentDungeon.DungeonLevel)), 1}
+                });
+                if (BattleManager.CurrentBattle.Escaped)
+                    MoveBackwards();
+                else
+                    CurrentLocation.Clear();
                 break;
             case DungeonFieldType.Trap:
                 var trap = CurrentDungeon.CurrentFloor.Traps.FirstOrDefault(x => x.Location == CurrentLocation);
@@ -303,7 +313,7 @@ public static class DungeonMovementManager
                 trap.Disarm();
                 CurrentDungeon.CurrentFloor.Traps.Remove(trap);
                 if (!trap.Activate())
-                    Log = Log.Concat(trap.Trigger()).ToList();
+                    trap.Trigger();
                 else
                     Log.Add(new Text($"{locale.TrapDisarmed}!\n", Stylesheet.Styles["success"]));
                 break;

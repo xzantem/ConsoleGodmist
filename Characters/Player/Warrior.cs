@@ -6,6 +6,8 @@ using ConsoleGodmist.Enums;
 namespace ConsoleGodmist.Characters
 {
     public class Warrior : PlayerCharacter {
+        public override string Name { get; protected set; }
+
         public new double MaximalHealth
         {
             get => _maximalHealth.Value(Level);
@@ -60,56 +62,14 @@ namespace ConsoleGodmist.Characters
             ResourceType = ResourceType.Fury;
             ActiveSkills[0] = new ActiveSkill("TestDamaging", 0, false, 80,
                 [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
-        }
-        public void AddModifier(StatType stat, StatModifier modifier)
-        {
-            switch (stat)
-            {
-                case StatType.MaximalHealth:
-                    _maximalHealth.AddModifier(modifier);
-                    break;
-                case StatType.MinimalAttack:
-                    _minimalAttack.AddModifier(modifier);
-                    break;
-                case StatType.MaximalAttack:
-                    _maximalAttack.AddModifier(modifier);
-                    break;
-                case StatType.Dodge:
-                    _dodge.AddModifier(modifier);
-                    break;
-                case StatType.PhysicalDefense:
-                    _physicalDefense.AddModifier(modifier);
-                    break;
-                case StatType.MagicDefense:
-                    _magicDefense.AddModifier(modifier);
-                    break;
-                case StatType.CritChance:
-                    _critChance.AddModifier(modifier);
-                    break;
-                case StatType.Speed:
-                    _speed.AddModifier(modifier);
-                    break;
-                case StatType.Accuracy:
-                    _accuracy.AddModifier(modifier);
-                    break;
-                case StatType.MaximalFury:
-                    _maximalResource.AddModifier(modifier);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
-            }
-        }
-        public void HandleModifiers()
-        {
-            _maximalHealth.Decrement();
-            _minimalAttack.Decrement();
-            _maximalAttack.Decrement();
-            _dodge.Decrement();
-            _physicalDefense.Decrement();
-            _magicDefense.Decrement();
-            _accuracy.Decrement();
-            _speed.Decrement();
-            _maximalResource.Decrement();
+            ActiveSkills[1] = new ActiveSkill("TestDamaging", 0, false, 80,
+                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
+            ActiveSkills[2] = new ActiveSkill("TestDamaging", 0, false, 80,
+                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
+            ActiveSkills[3] = new ActiveSkill("TestDamaging", 0, false, 80,
+                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
+            ActiveSkills[4] = new ActiveSkill("TestDamaging", 0, false, 80,
+                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
         }
     }
 }

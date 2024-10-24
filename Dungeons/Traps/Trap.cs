@@ -28,36 +28,42 @@ public class Trap(Difficulty difficulty, DungeonField location, int trapType, Du
         Location.Clear();
     }
 
-    public List<Text> Trigger()
+    public void Trigger()
     {
         switch (DungeonType)
         {
             case DungeonType.Catacombs:
-                return PlayerHandler.player.TakeDamage(new Dictionary<DamageType, double>
+                PlayerHandler.player.TakeDamage(new Dictionary<DamageType, double>
                 {
                     { DamageType.True, PlayerHandler.player.MaximalHealth / 10 },
                     { DamageType.Physical, PlayerHandler.player.MaximalHealth / 5 }
                 });
+                break;
             case DungeonType.Forest: // Add 20% Poison
-                return PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                break;
             case DungeonType.ElvishRuins:
-                return PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                break;
             case DungeonType.Cove: // Add 20% Burn
-                return PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                break;
             case DungeonType.Desert: // Add Dodge Debuff
-                return PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                break;
             case DungeonType.Temple:
-                return PlayerHandler.player.TakeDamage(new Dictionary<DamageType, double>
+                PlayerHandler.player.TakeDamage(new Dictionary<DamageType, double>
                 {
                     { DamageType.True, PlayerHandler.player.MaximalHealth / 10 },
                     { DamageType.Physical, PlayerHandler.player.MaximalHealth / 5 }
                 });
+                break;
             case DungeonType.Mountains: // Add 20% Bleed
-                return PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                break;
             case DungeonType.Swamp: // Add Slow
-                return PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                break;
         }
-
-        return [];
     }
 }

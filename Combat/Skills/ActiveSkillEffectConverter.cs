@@ -19,6 +19,8 @@ public class ActiveSkillEffectConverter : JsonConverter
         IActiveSkillEffect result = type switch
         {
             "DealDamage" => new DealDamage(),
+            "InflictStatusEffect" => new InflictGenericStatusEffect(),
+            "InflictDoTStatusEffect" => new InflictDoTStatusEffect(),
             _ => throw new NotSupportedException($"Unknown type: {type}")
         };
 

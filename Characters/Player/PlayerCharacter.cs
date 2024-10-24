@@ -1,3 +1,4 @@
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
@@ -5,23 +6,31 @@ using Spectre.Console;
 
 namespace ConsoleGodmist.Characters
 {
-    public abstract class PlayerCharacter(
-        string name,
-        Stat maxHealth,
-        Stat minimalAttack,
-        Stat maximalAttack,
-        Stat critChance,
-        Stat dodge,
-        Stat physicalDefense,
-        Stat magicDefense,
-        Stat speed,
-        Stat accuracy,
-        Stat critMod,
-        CharacterClass characterClass)
-        : Character(name, maxHealth, minimalAttack, maximalAttack, critChance,
-            dodge, physicalDefense, magicDefense, speed, accuracy, critMod, 1)
+    public abstract class PlayerCharacter : Character
     {
-        public CharacterClass CharacterClass { get; private set; } = characterClass;
+        protected PlayerCharacter(string name,
+            Stat maxHealth,
+            Stat minimalAttack,
+            Stat maximalAttack,
+            Stat critChance,
+            Stat dodge,
+            Stat physicalDefense,
+            Stat magicDefense,
+            Stat speed,
+            Stat accuracy,
+            Stat critMod,
+            CharacterClass characterClass) : base(name, maxHealth, minimalAttack, maximalAttack, critChance,
+            dodge, physicalDefense, magicDefense, speed, accuracy, critMod, 1)
+        {
+            CharacterClass = characterClass;
+            Resistances = new Dictionary<StatusEffectType, Stat>();
+            foreach (var statusType in Enum.GetValues(typeof(StatusEffectType)))
+            {
+                Resistances.Add((StatusEffectType)statusType, new Stat(0.5, 0));
+            }
+        }
+
+        public CharacterClass CharacterClass { get; private set; }
         public int Gold { get; private set;} = 100;
         public int CurrentExperience { get; private set; } = 0;
         public int RequiredExperience => CalculateExperience(Level);
@@ -38,7 +47,7 @@ namespace ConsoleGodmist.Characters
                     < -75 and >= -100 => HonorLevel.Useless,
                     < -50 and >= -75 => HonorLevel.Shameful,
                     < -20 and >= -50 => HonorLevel.Uncertain,
-                    < 40 and >= -20 => HonorLevel.Citizen,
+                    < 40 and >= -20 => HonorLevel.Recruit,
                     < 100 and >= 40 => HonorLevel.Mercenary,
                     < 150 and >= 100 => HonorLevel.Fighter,
                     < 200 and >= 150 => HonorLevel.Knight,
@@ -50,46 +59,47 @@ namespace ConsoleGodmist.Characters
 
         public void GainGold(int gold) {
             Gold += gold;
-            AnsiConsole.Write(new Text($"{locale.CurrentGold}: ", Stylesheet.Styles["default"]));
-            AnsiConsole.Write(new Text($"{gold}cr", Stylesheet.Styles["gold"]));
-            AnsiConsole.Write(new Text($" (+{gold}cr)\n", Stylesheet.Styles["value-gained"]));
+            CharacterEventTextService.DisplayGoldGainText(this, gold);
         }
         public void LoseGold(int gold) {
             Gold -= gold;
-            AnsiConsole.Write(new Text($"{locale.CurrentGold}: ", Stylesheet.Styles["default"]));
-            AnsiConsole.Write(new Text($"{gold}cr", Stylesheet.Styles["gold"]));
-            AnsiConsole.Write(new Text($" (-{gold}cr)", Stylesheet.Styles["value-lost"]));
+            CharacterEventTextService.DisplayGoldLossText(this, gold);
         }
-        public void GainExperience(int experience) {
-            CurrentExperience += experience;
-            AnsiConsole.Write(new Text($"{locale.YouGain} {experience} {locale.ExperienceGenitive}!\n",
-                Stylesheet.Styles["default"]));
+        public void GainExperience(int experience)
+        {
+            var experienceGained = HonorLevel switch
+            {
+                HonorLevel.Exile => experience,
+                HonorLevel.Useless => experience,
+                HonorLevel.Shameful => experience,
+                HonorLevel.Uncertain => experience,
+                HonorLevel.Recruit => experience,
+                HonorLevel.Mercenary => experience,
+                HonorLevel.Fighter => (int)(experience * 1.1),
+                HonorLevel.Knight => (int)(experience * 1.2),
+                HonorLevel.Leader => (int)(experience * 1.5),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            CurrentExperience += experienceGained;
+            CharacterEventTextService.DisplayExperienceGainText(experienceGained);
             while (CurrentExperience >= RequiredExperience) {
                 if (Level < 50)
                 {
                     Level++;
-                    AnsiConsole.Write(new Text($"{locale.LevelUp} {Level}!\n", Stylesheet.Styles["level-up"]));
+                    CharacterEventTextService.DisplayLevelUpText(Level);
                     CurrentHealth = MaximalHealth;
                 }
                 else
                 {
                     CurrentExperience = RequiredExperience;
-                    AnsiConsole.Write(new Text($"{locale.CurrentLevel}: {Level}[{CurrentExperience}", 
-                        Stylesheet.Styles["default"]));
-                    AnsiConsole.Write(new Text($"(+{experience})", Stylesheet.Styles["value-gained"]));
-                    AnsiConsole.Write(new Text($"/{RequiredExperience}]\n", Stylesheet.Styles["default"]));
+                    CharacterEventTextService.DisplayCurrentLevelText
+                        (this, experienceGained, CalculateExperience(Level - 1));
                     return;
                 }
             }
-            AnsiConsole.Write(new Text($"{locale.CurrentLevel}: {Level}[{CurrentExperience}", 
-                Stylesheet.Styles["default"]));
-            AnsiConsole.Write(new Text($"(+{experience})", Stylesheet.Styles["value-gained"]));
-            AnsiConsole.Write(new Text($"/{RequiredExperience}]\n", Stylesheet.Styles["default"]));
-            AnsiConsole.Write(new BreakdownChart().Width(40).HideTags()
-                .AddItem("", CurrentExperience - CalculateExperience(Level - 1), Color.Aqua)
-                .AddItem("", RequiredExperience - CurrentExperience, Color.DeepSkyBlue4));
+            CharacterEventTextService.DisplayCurrentLevelText
+                (this, experienceGained, CalculateExperience(Level - 1));
         }
-
         private int CalculateExperience(int level)
         {
             var value = 0;
@@ -99,11 +109,16 @@ namespace ConsoleGodmist.Characters
             }
             return value;
         }
-        public void GainHonor(int honor) {
-            Honor = Math.Min(Honor + honor, 200);
+        public void GainHonor(int honor)
+        {
+            var gain = Math.Min(Honor + honor, 200);
+            Honor = gain;
+            CharacterEventTextService.DisplayHonorGainText(this, gain);
         }
         public void LoseHonor(int honor) {
-            Honor = Math.Max(Honor - honor, -100);
+            var loss = Math.Max(Honor - honor, -100);
+            Honor = loss;
+            CharacterEventTextService.DisplayHonorLossText(this, loss);
         }
     }
 }

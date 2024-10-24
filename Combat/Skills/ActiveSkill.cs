@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.TextService;
 
 namespace ConsoleGodmist.Combat.Skills;
 
@@ -32,6 +34,7 @@ public class ActiveSkill
     public void Use(Character caster, Character enemy)
     {
         if (!(caster.CurrentResource >= ResourceCost) && caster.ResourceType != ResourceType.Fury) return;
+        ActiveSkillTextService.DisplayUseSkillText(caster, enemy, this);
         caster.UseResource(ResourceCost);
         foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Self))
             effect.Execute(caster, enemy, Alias);

@@ -489,4 +489,151 @@
     <data name="HealthGenitive" xml:space="preserve">
     <value>health</value>
   </data>
+    <data name="HealthC" xml:space="preserve">
+    <value>Health</value>
+  </data>
+    <data name="UseSkill" xml:space="preserve">
+    <value>Use skill</value>
+  </data>
+    <data name="UsePotion" xml:space="preserve">
+    <value>Use potion</value>
+  </data>
+    <data name="Escape" xml:space="preserve">
+    <value>Escape</value>
+  </data>
+    <data name="ShowStats" xml:space="preserve">
+    <value>Show stats</value>
+  </data>
+  <data name="BattleStart" xml:space="preserve">
+    <value>Battle! You meet</value>
+  </data>
+  <data name="Uses" xml:space="preserve">
+    <value>uses</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>on</value>
+  </data>
+  <data name="StrikesCritically" xml:space="preserve">
+    <value>strikes critically</value>
+  </data>
+  <data name="Attack" xml:space="preserve">
+    <value>Attack</value>
+  </data>
+  <data name="Crit" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="Accuracy" xml:space="preserve">
+    <value>Accuracy</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
+  <data name="Defense" xml:space="preserve">
+    <value>Defense</value>
+  </data>
+  <data name="Dodge" xml:space="preserve">
+    <value>Dodge</value>
+  </data>
+  <data name="Resistances" xml:space="preserve">
+    <value>Resistances</value>
+  </data>
+  <data name="Debuff" xml:space="preserve">
+    <value>Debuff</value>
+  </data>
+  <data name="Stun" xml:space="preserve">
+    <value>Stun</value>
+  </data>
+  <data name="Freeze" xml:space="preserve">
+    <value>Freeze</value>
+  </data>
+  <data name="Bleed" xml:space="preserve">
+    <value>Bleed</value>
+  </data>
+  <data name="Poison" xml:space="preserve">
+    <value>Poison</value>
+  </data>
+  <data name="Burn" xml:space="preserve">
+    <value>Burn</value>
+  </data>
+  <data name="Frostbite" xml:space="preserve">
+    <value>Frostbite</value>
+  </data>
+  <data name="Paralysis" xml:space="preserve">
+    <value>Paralysis</value>
+  </data>
+  <data name="Provocation" xml:space="preserve">
+    <value>Provocation</value>
+  </data>
+  <data name="Moving" xml:space="preserve">
+    <value>Moving now</value>
+  </data>
+  <data name="TurnOrder" xml:space="preserve">
+    <value>New turn order</value>
+  </data>
+  <data name="Victory" xml:space="preserve">
+    <value>Victory</value>
+  </data>
+  <data name="Defeat" xml:space="preserve">
+    <value>Defeat</value>
+  </data>
+  <data name="GameOver" xml:space="preserve">
+    <value>Game over</value>
+  </data>
+  <data name="Dies" xml:space="preserve">
+    <value>drops on the ground, dead</value>
+  </data>
+  <data name="Exile" xml:space="preserve">
+    <value>Exile</value>
+  </data>
+  <data name="Useless" xml:space="preserve">
+    <value>Useless</value>
+  </data>
+  <data name="Shameful" xml:space="preserve">
+    <value>Shameful</value>
+  </data>
+  <data name="Uncertain" xml:space="preserve">
+    <value>Uncertain</value>
+  </data>
+  <data name="Recruit" xml:space="preserve">
+    <value>Recruit</value>
+  </data>
+  <data name="Mercenary" xml:space="preserve">
+    <value>Mercenary</value>
+  </data>
+  <data name="Fighter" xml:space="preserve">
+    <value>Fighter</value>
+  </data>
+  <data name="Knight" xml:space="preserve">
+    <value>Knight</value>
+  </data>
+  <data name="Leader" xml:space="preserve">
+    <value>Leader</value>
+  </data>
+  <data name="CurrentHonor" xml:space="preserve">
+    <value>Current honor</value>
+  </data>
+  <data name="TryEscape" xml:space="preserve">
+    <value>Trying to escape</value>
+  </data>
+  <data name="EscapeFail" xml:space="preserve">
+    <value>Escape failed</value>
+  </data>
+  <data name="EscapeSuccess" xml:space="preserve">
+    <value>Escape successful</value>
+  </data>
+  <data name="ShowStatus" xml:space="preserve">
+    <value>Show status effects</value>
+  </data>
+  <data name="Turns" xml:space="preserve">
+    <value>turns</value>
+  </data>
+  <data name="Sleep" xml:space="preserve">
+    <value>Sleep</value>
+  </data>
+  <data name="SkeletonSwordsman" xml:space="preserve">
+    <value>Skeleton Swordsman</value>
+  </data>
+  <data name="NoStatusEffects" xml:space="preserve">
+    <value>No status effects</value>
+  </data>
 </root>

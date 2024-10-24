@@ -28,7 +28,7 @@ public static class EnemyFactory
 
     public static void InitializeEnemies()
     {
-        var path = "enemies.json";
+        var path = "json/enemies.json";
         if (File.Exists(path))
         {
             var json = File.ReadAllText(path);

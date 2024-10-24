@@ -8,9 +8,12 @@ public class EnemyCharacter : Character
 {
     public EnemyType EnemyType { get; set; }
     public string Alias { get; set; }
-    public string Name => locale.ResourceManager.GetString(Alias) == null ? Alias : 
-        locale.ResourceManager.GetString(Alias);
-    
+    public override string Name
+    {
+        get => locale.ResourceManager.GetString(Alias) == null ? Alias : locale.ResourceManager.GetString(Alias);
+        protected set {}
+    }
+
     public DungeonType DefaultLocation { get; set; }
     
     public DropTable DropTable { get; set; }

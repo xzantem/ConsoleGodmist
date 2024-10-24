@@ -21,7 +21,7 @@ public static class ItemManager
 
     public static void InitItems()
     {
-        var path = "base-ingredients.json";
+        var path = "json/base-ingredients.json";
         if (File.Exists(path))
         {
             var json = File.ReadAllText(path);
@@ -29,7 +29,7 @@ public static class ItemManager
         }
         else
             throw new FileNotFoundException($"JSON file not found in {path}");
-        path = "craftable-ingredients.json";
+        path = "json/craftable-ingredients.json";
         if (File.Exists(path))
         {
             var json = File.ReadAllText(path);

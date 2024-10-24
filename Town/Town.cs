@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
@@ -11,7 +12,6 @@ namespace ConsoleGodmist.Town
     {
         public static void EnterTown()
         {
-            var enemy = EnemyFactory.CreateEnemy("SkeletonSwordsman", 5);
             while (true)
             {
                 //AnsiConsole.Clear();
@@ -32,7 +32,6 @@ namespace ConsoleGodmist.Town
                         DungeonMovementManager.TraverseDungeon();
                         break;
                     case 1:
-                        PlayerHandler.player.ActiveSkills[0].Use(PlayerHandler.player, enemy);
                         break;
                     case 2:
                         break;

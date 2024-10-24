@@ -1,4 +1,5 @@
 using System.Runtime;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Enums;
@@ -8,7 +9,7 @@ using Spectre.Console.Rendering;
 namespace ConsoleGodmist.Characters
 {
     public abstract class Character {
-        public string Name { get; protected set; }
+        public abstract string Name { get; protected set; }
         public Stat _maximalHealth;
         public double MaximalHealth
         {
@@ -27,7 +28,7 @@ namespace ConsoleGodmist.Characters
         }
         public Stat _maximalAttack;
         public double MaximalAttack { 
-            get  => _minimalAttack.Value(Level);
+            get  => _maximalAttack.Value(Level);
             set => _maximalAttack.BaseValue = Math.Max(_minimalAttack.BaseValue, value);
         }
         public Stat _dodge;
@@ -111,51 +112,21 @@ namespace ConsoleGodmist.Characters
             StatusEffects = [];
             ActiveSkills = new ActiveSkill[5];
         }
-        public List<Text> TakeDamage(Dictionary<DamageType, double> damage)
+        public void TakeDamage(Dictionary<DamageType, double> damage)
         {
-            var segments = new List<Text> { new($"{Name} {locale.Takes} ", Stylesheet.Styles["default"]) };
-            var damageSegments = new List<Text>();
-            foreach (var damageType in damage)
-            {
-                var damageTaken = DamageMitigated(damageType.Value, damageType.Key);
-                CurrentHealth -= damageTaken;
-                var style = damageType.Key switch
-                {
-                    DamageType.Physical => Stylesheet.Styles["damage-physical"],
-                    DamageType.Magic => Stylesheet.Styles["damage-magic"],
-                    DamageType.Bleed => Stylesheet.Styles["damage-bleed"],
-                    DamageType.Poison => Stylesheet.Styles["damage-poison"],
-                    DamageType.Burn => Stylesheet.Styles["damage-burn"],
-                    DamageType.True => Stylesheet.Styles["damage-true"],
-                    _ => Stylesheet.Styles["default"]
-                };
-                damageSegments.Add(new Text($"{(int)damageTaken}", style));
-                if (damageSegments.Count < damage.Count)
-                    damageSegments.Add(new Text("+", Stylesheet.Styles["default"]));
-            }
-
-            segments = segments.Concat(damageSegments).ToList();
-            segments.Add(new Text($" {locale.DamageGenitive}\n", Stylesheet.Styles["default"]));
-            return segments;
+            var damageTaken = damage
+                .ToDictionary(damageType => damageType.Key, 
+                    damageType => DamageMitigated(damageType.Value, damageType.Key));
+            CurrentHealth -= damageTaken.Sum(x => x.Value);
+            CharacterEventTextService.DisplayTakeDamageText(this, damageTaken
+                .ToDictionary(x => x.Key, x => (int)x.Value));
         }
-        public List<Text> TakeDamage(DamageType damageType, double damage)
+        public void TakeDamage(DamageType damageType, double damage)
         {
-            var segments = new List<Text> { new($"{locale.YouTake} ", Stylesheet.Styles["default"]) };
             var damageTaken = DamageMitigated(damage, damageType);
             CurrentHealth -= damageTaken;
-            var style = damageType switch
-            {
-                DamageType.Physical => Stylesheet.Styles["damage-physical"],
-                DamageType.Magic => Stylesheet.Styles["damage-magic"],
-                DamageType.Bleed => Stylesheet.Styles["damage-bleed"],
-                DamageType.Poison => Stylesheet.Styles["damage-poison"],
-                DamageType.Burn => Stylesheet.Styles["damage-burn"],
-                DamageType.True => Stylesheet.Styles["damage-true"],
-                _ => Stylesheet.Styles["default"]
-            };
-            segments.Add(new Text($"{(int)damageTaken}", style));
-            segments.Add(new Text($" {locale.DamageGenitive}", Stylesheet.Styles["default"]));
-            return segments;
+            CharacterEventTextService.DisplayTakeDamageText
+                (this, new Dictionary<DamageType, int> { {damageType, (int)damageTaken}});
         }
 
         public void UseResource(int amount)
@@ -177,11 +148,11 @@ namespace ConsoleGodmist.Characters
                 .Where(effect => effect.Type == StatusEffectType.Shield).Cast<Shield>().ToList();
             if (shields.Count > 0)
                 damage = StatusEffectHandler.TakeShieldsDamage(shields, this, damage);
-            return damage;
+            return Math.Max(damage, 1);
         }
-        public Text Heal(double heal) {
+        public void Heal(double heal) {
             CurrentHealth += heal;
-            return new Text($"{Name} {locale.Heals} {heal} {locale.HealthGenitive}\n", Stylesheet.Styles["default"]);
+            CharacterEventTextService.DisplayHealText(this, (int)heal);
         }
 
         public void AddModifier(StatType stat, StatModifier modifier)
@@ -214,6 +185,9 @@ namespace ConsoleGodmist.Characters
                     break;
                 case StatType.Accuracy:
                     _accuracy.AddModifier(modifier);
+                    break;
+                case StatType.MaximalResource:
+                    _maximalResource.AddModifier(modifier);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
