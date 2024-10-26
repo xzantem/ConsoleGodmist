@@ -1,0 +1,12 @@
+﻿[
+  {
+    "Alias": "IronBar",
+    "ID": 20,
+    "Cost": 14,
+    "Rarity": 3,
+    "Description": "",
+    "ItemType": 2,
+    "CraftedAmount": 1,
+    "CraftingRecipe": { "0" : 2 }
+  }
+]

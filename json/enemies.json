@@ -1,0 +1,104 @@
+[
+  {
+    "Alias": "SkeletonSwordsman",
+    "EnemyType": 0,
+    "DefaultLocation": 0,
+    "_maximalHealth": { "BaseValue": 350, "ScalingFactor": 23 },
+    "_minimalAttack": { "BaseValue": 42, "ScalingFactor": 2.73 },
+    "_maximalAttack": { "BaseValue": 64, "ScalingFactor": 4.16 },
+    "_dodge": { "BaseValue": 15, "ScalingFactor": 0.1125 },
+    "_physicalDefense": { "BaseValue": 10, "ScalingFactor": 2 },
+    "_magicDefense": { "BaseValue": 4, "ScalingFactor": 0.8 },
+    "_critChance": { "BaseValue": 0.11, "ScalingFactor": 0.000275 },
+    "_speed": { "BaseValue": 44, "ScalingFactor": 0 },
+    "_accuracy": { "BaseValue": 80, "ScalingFactor": 0 },
+    "_critMod": { "BaseValue": 2, "ScalingFactor": 0 },
+    "Resistances": {
+      "Buff": { "BaseValue": 0.5, "ScalingFactor": 0 },
+      "Debuff": { "BaseValue": 0.35, "ScalingFactor": 0 },
+      "Bleed": { "BaseValue": 1, "ScalingFactor": 0 },
+      "Poison": { "BaseValue": 0.2, "ScalingFactor": 0 },
+      "Burn": { "BaseValue": 0.4, "ScalingFactor": 0 },
+      "Stun": { "BaseValue": 0.25, "ScalingFactor": 0 },
+      "Freeze": { "BaseValue": 0.25, "ScalingFactor": 0 },
+      "Frostbite": { "BaseValue": 0.25, "ScalingFactor": 0 },
+      "Sleep": { "BaseValue": 0.5, "ScalingFactor": 0 },
+      "Invisible": { "BaseValue": 0.5, "ScalingFactor": 0 },
+      "Paralysis": { "BaseValue": 0.5, "ScalingFactor": 0 },
+      "Provocation": { "BaseValue": 0.5, "ScalingFactor": 0 },
+      "Shield": { "BaseValue": 0.5, "ScalingFactor": 0 }
+    },
+    "ResourceType": "Fury",
+    "_maximalResource": { "BaseValue": 50, "ScalingFactor": 0},
+    "ActiveSkills": 
+    [
+      {
+      "Alias": "BoneSword",
+      "ResourceCost": 0,
+      "AlwaysHits": false,
+      "Accuracy": 79,
+      "Effects": [
+        {
+          "Type" : "DealDamage",
+          "Target": 1,
+          "DamageType": 0,
+          "DamageBase": 1,
+          "DamageMultiplier": 1,
+          "DamageInstances": 1,
+          "CanCrit": true,
+          "AlwaysCrits": false
+        }
+      ]
+      },
+      {
+        "Alias": "CrossStrike",
+        "ResourceCost": 30,
+        "AlwaysHits": false,
+        "Accuracy": 72,
+        "Effects": [
+          {
+            "Type" : "DealDamage",
+            "Target": 1,
+            "DamageType": 0,
+            "DamageBase": 1,
+            "DamageMultiplier": 0.6,
+            "DamageInstances": 2,
+            "CanCrit": true,
+            "AlwaysCrits": false
+          },
+          {
+            "Type" : "InflictDoTStatusEffect",
+            "Target": 1,
+            "Duration": 3,
+            "Strength": 0.6,
+            "Source": "CrossStrike",
+            "DoTType": "Bleed",
+            "Chance": 0.85
+          }
+        ]
+      }
+    ],
+    "DropTable": {
+      "Table": 
+          [{
+            "Pool": {
+              "Puffball": {
+                "MinAmount": 1,
+                "MaxAmount": 1,
+                "MinLevel": 1,
+                "MaxLevel": 50,
+                "Weight": 1
+              },
+              "DaddyLonglegs": {
+                "Weight": 1,
+                "MinAmount": 1,
+                "MaxAmount": 1,
+                "MinLevel": 1,
+                "MaxLevel": 50
+              }
+            },
+            "Chances": [1, 0.7, 0.3]
+          }]
+      }
+    }
+]
