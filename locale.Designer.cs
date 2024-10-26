@@ -1804,5 +1804,41 @@ namespace ConsoleGodmist {
                 return ResourceManager.GetString("NoStatusEffects", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No status effects.
+        /// </summary>
+        internal static string Misses {
+            get {
+                return ResourceManager.GetString("Misses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to starts bleeding.
+        /// </summary>
+        internal static string Bleeds {
+            get {
+                return ResourceManager.GetString("Bleeds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        internal static string And {
+            get {
+                return ResourceManager.GetString("And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to for the next.
+        /// </summary>
+        internal static string ForTheNext {
+            get {
+                return ResourceManager.GetString("ForTheNext", resourceCulture);
+            }
+        }
     }
 }

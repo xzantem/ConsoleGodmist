@@ -629,4 +629,16 @@
   <data name="NoStatusEffects" xml:space="preserve">
     <value>Brak efektów statusu</value>
   </data>
+  <data name="Misses" xml:space="preserve">
+    <value>nie trafia</value>
+  </data>
+  <data name="Bleeds" xml:space="preserve">
+    <value>zaczyna krwawić</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>i</value>
+  </data>
+  <data name="ForTheNext" xml:space="preserve">
+    <value>przez następne</value>
+  </data>
 </root>

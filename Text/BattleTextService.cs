@@ -129,30 +129,30 @@ public static class BattleTextService
         {
             if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Bleed))
                 AnsiConsole.Write(new Text($"{locale.Bleed} ({string.Join(", ",dotsList
-                    .Where(x => x.Type == StatusEffectType.Bleed).Select(s => s.Source))}): {dotsList
+                    .Where(x => x.Type == StatusEffectType.Bleed).Select(s => s.Source))}): {(int)dotsList
                     .Where(x => x.Type == StatusEffectType.Bleed).Sum(s => s.Strength)} [{dotsList
                     .Where(x => x.Type == StatusEffectType.Bleed).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-bleed"]));
             if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Poison))
                 AnsiConsole.Write(new Text($"{locale.Poison} ({string.Join(", ",dotsList
-                    .Where(x => x.Type == StatusEffectType.Poison).Select(s => s.Source))}): {dotsList
+                    .Where(x => x.Type == StatusEffectType.Poison).Select(s => s.Source))}): {(int)dotsList
                     .Where(x => x.Type == StatusEffectType.Poison).Sum(s => s.Strength)} [{dotsList
                     .Where(x => x.Type == StatusEffectType.Poison).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-poison"]));
             if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Sleep))
                 AnsiConsole.Write(new Text($"{locale.Burn} ({string.Join(", ",dotsList
-                    .Where(x => x.Type == StatusEffectType.Burn).Select(s => s.Source))}): {dotsList
+                    .Where(x => x.Type == StatusEffectType.Burn).Select(s => s.Source))}): {(int)dotsList
                     .Where(x => x.Type == StatusEffectType.Burn).Sum(s => s.Strength)} [{dotsList
                     .Where(x => x.Type == StatusEffectType.Burn).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-burn"]));
         }
         if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Sleep))
             AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", target.StatusEffects
                 .Where(x => x.Type == StatusEffectType.Sleep).Select(s => s.Source))}): +" +
-               $"{target.StatusEffects.Where(x => x.Type == StatusEffectType.Sleep)
+               $"{(int)target.StatusEffects.Where(x => x.Type == StatusEffectType.Sleep)
                .Cast<Sleep>().Sum(s => s.Strength)} [{target.StatusEffects
                .Where(x => x.Type == StatusEffectType.Sleep).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
         if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Shield))
             AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", target.StatusEffects
                 .Where(x => x.Type == StatusEffectType.Shield).Select(s => s.Source))}): +" +
-                                       $"{target.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
+                                       $"{(int)target.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
                                            .Cast<Sleep>().Sum(s => s.Strength)} [{target.StatusEffects
                                            .Where(x => x.Type == StatusEffectType.Shield).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
         var other = target.StatusEffects.Where(x => x.Type != StatusEffectType.Bleed && 

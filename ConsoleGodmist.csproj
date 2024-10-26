@@ -15,8 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Items\Armors\" />
-    <Folder Include="Items\Weapons\" />
     <Folder Include="locale\" />
   </ItemGroup>
 

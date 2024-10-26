@@ -2,6 +2,8 @@ using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using ConsoleGodmist.Items.Armors;
+using ConsoleGodmist.Items.Weapons;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Characters
@@ -32,7 +34,7 @@ namespace ConsoleGodmist.Characters
 
         public CharacterClass CharacterClass { get; private set; }
         public int Gold { get; private set;} = 100;
-        public int CurrentExperience { get; private set; } = 0;
+        public int CurrentExperience { get; private set; }
         public int RequiredExperience => CalculateExperience(Level);
 
         public int Honor {get; private set;}
@@ -56,6 +58,51 @@ namespace ConsoleGodmist.Characters
             }
         }
         public Inventory Inventory { get; private set; } = new();
+        public Weapon Weapon { get; private set; }
+        public Armor Armor { get; private set; }
+
+        public void SwitchWeapon(Weapon weapon)
+        {
+            if (Weapon != null)
+            {
+                var oldWeapon = Weapon;
+                Inventory.AddItem(oldWeapon);
+                MinimalAttack += weapon.MinimalAttack - oldWeapon.MinimalAttack;
+                MaximalAttack += weapon.MaximalAttack - oldWeapon.MaximalAttack;
+                CritChance += weapon.CritChance - oldWeapon.CritChance;
+                CritMod += weapon.CritMod - oldWeapon.CritMod;
+                Accuracy += weapon.Accuracy - oldWeapon.Accuracy;
+            }
+            else
+            {
+                MinimalAttack += Weapon.MinimalAttack;
+                MaximalAttack += Weapon.MaximalAttack;
+                CritChance += Weapon.CritChance;
+                CritMod += Weapon.CritMod;
+                Accuracy += Weapon.Accuracy;
+            }
+            Weapon = weapon;
+        }
+        public void SwitchArmor(Armor armor)
+        {
+            if (Armor != null)
+            {
+                var oldArmor = Armor;
+                Inventory.AddItem(oldArmor);
+                MaximalHealth += armor.MaximalHealth - oldArmor.MaximalHealth;
+                Dodge += armor.Dodge - oldArmor.Dodge;
+                PhysicalDefense += armor.PhysicalDefense - oldArmor.PhysicalDefense;
+                MagicDefense += armor.MagicDefense - oldArmor.MagicDefense;
+            }
+            else
+            {
+                MaximalHealth += Armor.MaximalHealth;
+                Dodge += Armor.Dodge;
+                PhysicalDefense += Armor.PhysicalDefense;
+                MagicDefense += Armor.MagicDefense;
+            }
+            Armor = armor;
+        }
 
         public void GainGold(int gold) {
             Gold += gold;

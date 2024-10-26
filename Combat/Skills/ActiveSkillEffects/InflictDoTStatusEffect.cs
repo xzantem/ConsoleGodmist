@@ -1,6 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.TextService;
 
 namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 
@@ -34,16 +35,19 @@ public class InflictDoTStatusEffect : IActiveSkillEffect
     public void Execute(Character caster, Character enemy, string source)
     {
         var strength = Strength * Random.Shared.Next((int)caster.MinimalAttack, (int)caster.MinimalAttack + 1);
+        var status = new DoTStatusEffect(strength, DoTType, Source, Duration);
         switch (Target)
         {
             case SkillTarget.Self:
-                if (Random.Shared.NextDouble() < Chance)
-                    StatusEffectHandler.AddStatusEffect(new DoTStatusEffect(strength, DoTType, Source, Duration), caster);
+                if (Random.Shared.NextDouble() >= Chance) return;
+                StatusEffectHandler.AddStatusEffect(status, caster);
+                ActiveSkillTextService.DisplayStatusEffectText(caster, status);
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() <
-                    EngineMethods.EffectChance(enemy.Resistances[DoTType].Value(), Chance))
-                    StatusEffectHandler.AddStatusEffect(new DoTStatusEffect(strength, DoTType, Source, Duration), enemy);
+                    EngineMethods.EffectChance(enemy.Resistances[DoTType].Value(), Chance)) return;
+                StatusEffectHandler.AddStatusEffect(status, enemy);
+                ActiveSkillTextService.DisplayStatusEffectText(caster, status);
                 break;
         }
     }
