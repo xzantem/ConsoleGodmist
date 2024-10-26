@@ -98,20 +98,20 @@ public static class BattleTextService
         AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)target.CurrentHealth}/{(int)target.MaximalHealth}" +
                                   $", {resourceType}: {(int)target.CurrentResource}/{(int)target.MaximalResource}\n" +
                                   $"{locale.Attack}: {target.MinimalAttack}-{target.MaximalAttack}, {locale.Crit}: " +
-                                  $"{target.CritChance * 100}% [{target.CritMod}x]\n" +
+                                  $"{target.CritChance:P2} [{target.CritMod:F2}x]\n" +
                                   $"{locale.Accuracy}: {(int)target.Accuracy}, {locale.Speed}: {target.Speed}\n" +
                                   $"{locale.Defense}: {target.PhysicalDefense} | {target.MagicDefense}, " +
                                   $"{locale.Dodge}: {target.Dodge}\n\n", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{locale.Resistances}\n", Stylesheet.Styles["default-bold"]));
-        AnsiConsole.Write(new Text($"{locale.Debuff}: {target.Resistances[StatusEffectType.Debuff].Value() * 100}%, " +
-                                   $"{locale.Stun}: {target.Resistances[StatusEffectType.Stun].Value() * 100}%, " +
-                                   $"{locale.Freeze}: {target.Resistances[StatusEffectType.Freeze].Value() * 100}%\n" +
-                                   $"{locale.Bleed}: {target.Resistances[StatusEffectType.Bleed].Value() * 100}%, " +
-                                   $"{locale.Poison}: {target.Resistances[StatusEffectType.Poison].Value() * 100}%, " +
-                                   $"{locale.Burn}: {target.Resistances[StatusEffectType.Burn].Value() * 100}%\n" +
-                                   $"{locale.Frostbite}: {target.Resistances[StatusEffectType.Frostbite].Value() * 100}%, " +
-                                   $"{locale.Paralysis}: {target.Resistances[StatusEffectType.Paralysis].Value() * 100}%, " +
-                                   $"{locale.Provocation}: {target.Resistances[StatusEffectType.Provocation].Value() * 100}%\n\n", 
+        AnsiConsole.Write(new Text($"{locale.Debuff}: {target.Resistances[StatusEffectType.Debuff].Value():P0}, " +
+                                   $"{locale.Stun}: {target.Resistances[StatusEffectType.Stun].Value():P0}, " +
+                                   $"{locale.Freeze}: {target.Resistances[StatusEffectType.Freeze].Value():P0}\n" +
+                                   $"{locale.Bleed}: {target.Resistances[StatusEffectType.Bleed].Value():P0}, " +
+                                   $"{locale.Poison}: {target.Resistances[StatusEffectType.Poison].Value():P0}, " +
+                                   $"{locale.Burn}: {target.Resistances[StatusEffectType.Burn].Value():P0}\n" +
+                                   $"{locale.Frostbite}: {target.Resistances[StatusEffectType.Frostbite].Value():P0}, " +
+                                   $"{locale.Paralysis}: {target.Resistances[StatusEffectType.Paralysis].Value():P0}, " +
+                                   $"{locale.Provocation}: {target.Resistances[StatusEffectType.Provocation].Value():P0}\n\n", 
             Stylesheet.Styles["default"]));
     }
 

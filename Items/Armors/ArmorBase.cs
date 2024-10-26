@@ -1,6 +1,10 @@
-﻿namespace ConsoleGodmist.Items.Armors;
+﻿using ConsoleGodmist.Combat.Skills;
+using Newtonsoft.Json;
 
-public class ArmorBase
+namespace ConsoleGodmist.Items.Armors;
+
+[JsonConverter(typeof(EquipmentPartConverter))]
+public class ArmorBase : IEquipmentPart
 {
     public double HealthBonus { get; set; }
     public int Dodge { get; set; }

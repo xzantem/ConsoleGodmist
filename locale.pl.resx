@@ -641,4 +641,28 @@
   <data name="ForTheNext" xml:space="preserve">
     <value>przez następne</value>
   </data>
+  <data name="Longsword" xml:space="preserve">
+    <value>Długi Miecz</value>
+  </data>
+  <data name="SwordAndDagger" xml:space="preserve">
+    <value>Miecz i Sztylet</value>
+  </data>
+  <data name="Wand" xml:space="preserve">
+    <value>Różdżka</value>
+  </data>
+  <data name="Hammer" xml:space="preserve">
+    <value>Młot</value>
+  </data>
+  <data name="Hauberk" xml:space="preserve">
+    <value>Kolczuga</value>
+  </data>
+  <data name="Tunic" xml:space="preserve">
+    <value>Tunika</value>
+  </data>
+  <data name="Robe" xml:space="preserve">
+    <value>Szata</value>
+  </data>
+  <data name="Cuirass" xml:space="preserve">
+    <value>Kirys</value>
+  </data>
 </root>

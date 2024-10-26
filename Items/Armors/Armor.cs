@@ -7,6 +7,7 @@ namespace ConsoleGodmist.Items.Armors;
 public class Armor : IEquippable
 {
     //Base IItem implementations
+    public string Name { get; }
     public string Alias { get; }
     public int Weight { get; }
     public int ID { get; }
@@ -21,25 +22,6 @@ public class Armor : IEquippable
     public CharacterClass RequiredClass { get; }
     public Quality Quality { get; }
     public double UpgradeModifier { get; set; }
-    public double RarityModifier
-    {
-        get
-        {
-            return Rarity switch
-            {
-                ItemRarity.Destroyed => 0.7f,
-                ItemRarity.Damaged => 0.85f,
-                ItemRarity.Uncommon => 1.05f,
-                ItemRarity.Rare => 1.1f,
-                ItemRarity.Ancient => 1.2f,
-                ItemRarity.Legendary => 1.3f,
-                ItemRarity.Mythical => 1.5f,
-                ItemRarity.Godly => 1.75f,
-                _ => 1f,
-            };
-        }
-    }
-    
     //Weapon implementations
     public ArmorPlate Plate { get; private set; }
     public ArmorBinder Binder { get; private set; }
@@ -65,7 +47,7 @@ public class Armor : IEquippable
                 _ => 0
             };
             value += multiplier * (Binder.Tier * 10 - 5);
-            value *= RarityModifier * (Plate.HealthBonus + Base.HealthBonus + 1);
+            value *= EquippableItemService.RarityModifier(Rarity) * (Plate.HealthBonus + Base.HealthBonus + 1);
             return (int)value;
         }
     }
@@ -84,7 +66,7 @@ public class Armor : IEquippable
                 _ => 0
             };
             value += multiplier;
-            value *= RarityModifier * (Plate.DodgeBonus + Binder.DodgeBonus + 1);
+            value *= EquippableItemService.RarityModifier(Rarity) * (Plate.DodgeBonus + Binder.DodgeBonus + 1);
             return (int)value;
         }
     }
@@ -137,6 +119,39 @@ public class Armor : IEquippable
             value *= UpgradeModifier * (Binder.MagicDefenseBonus + Base.MagicDefenseBonus + 1);
             return (int)value;
         }
+    }
+    
+    public Armor(ArmorPlate plate, ArmorBinder binder, ArmorBase armBase, CharacterClass requiredClass, Quality quality, int requiredLevel = 0)
+    {
+        Plate = plate;
+        Binder = binder;
+        Base = armBase;
+        Name = Plate.Adjective + requiredClass switch
+        {
+            CharacterClass.Warrior => locale.Hauberk,
+            CharacterClass.Scout => locale.Tunic,
+            CharacterClass.Sorcerer => locale.Robe,
+            _ => locale.Cuirass
+        };
+        Alias = $"{plate.Alias}.{binder.Alias}.{armBase.Alias}";
+        Weight = 8;
+        ID = 560;
+        Cost = plate.Cost + binder.Cost + armBase.Cost;
+        Rarity = EquippableItemService.GetRandomRarity();
+        Stackable = false;
+        RequiredLevel = requiredLevel == 0
+            ? Math.Max(Math.Max(plate.Tier, binder.Tier), armBase.Tier) * 10 - 5 + Quality switch
+            {
+                Quality.Weak => -3,
+                Quality.Normal => 0,
+                Quality.Excellent => 3,
+                Quality.Masterpiece => 5,
+                _ => 0
+            }
+            : requiredLevel;
+        RequiredClass = requiredClass;
+        Quality = quality;
+        UpgradeModifier = 1;
     }
 
     public bool Use()

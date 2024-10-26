@@ -11,6 +11,7 @@ using Spectre.Console;
 Console.OutputEncoding = Encoding.UTF8;
 Stylesheet.InitStyles();
 ItemManager.InitItems();
+EquipmentPartManager.InitItems();
 EnemyFactory.InitializeEnemies();
 PlantDropManager.InitPlantDrops();
 

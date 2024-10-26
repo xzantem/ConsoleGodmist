@@ -6,6 +6,7 @@ namespace ConsoleGodmist.Items.Weapons;
 public class Weapon : IEquippable
 {
     //Base IItem implementations
+    public string Name { get; }
     public string Alias { get; }
     public int Weight { get; }
     public int ID { get; }
@@ -20,24 +21,6 @@ public class Weapon : IEquippable
     public CharacterClass RequiredClass { get; }
     public Quality Quality { get; }
     public double UpgradeModifier { get; set; }
-    public double RarityModifier
-    {
-        get
-        {
-            return Rarity switch
-            {
-                ItemRarity.Destroyed => 0.7f,
-                ItemRarity.Damaged => 0.85f,
-                ItemRarity.Uncommon => 1.05f,
-                ItemRarity.Rare => 1.1f,
-                ItemRarity.Ancient => 1.2f,
-                ItemRarity.Legendary => 1.3f,
-                ItemRarity.Mythical => 1.5f,
-                ItemRarity.Godly => 1.75f,
-                _ => 1f,
-            };
-        }
-    }
     
     //Weapon implementations
     public WeaponHead Head { get; private set; }
@@ -116,7 +99,7 @@ public class Weapon : IEquippable
             if (RequiredClass == CharacterClass.Sorcerer)
                 multiplier *= Binder.Tier * 10 - 5;
             value += multiplier;
-            value *= RarityModifier * (Head.CritChanceBonus + Handle.CritChanceBonus + 1);
+            value *= EquippableItemService.RarityModifier(Rarity) * (Head.CritChanceBonus + Handle.CritChanceBonus + 1);
             return value;
         }
     }
@@ -141,7 +124,7 @@ public class Weapon : IEquippable
                 _ => 0
             };
             value += multiplier * (Head.Tier * 10 - 5);
-            value *= RarityModifier * (Binder.CritModBonus + Handle.CritModBonus + 1);
+            value *= EquippableItemService.RarityModifier(Rarity) * (Binder.CritModBonus + Handle.CritModBonus + 1);
             return value;
         }
     }
@@ -168,9 +151,40 @@ public class Weapon : IEquippable
             if (RequiredClass == CharacterClass.Sorcerer)
                 multiplier *= Handle.Tier * 10 - 5;
             value += (int)multiplier;
-            value *= RarityModifier * (Head.AccuracyBonus + Binder.AccuracyBonus + 1);
+            value *= EquippableItemService.RarityModifier(Rarity) * (Head.AccuracyBonus + Binder.AccuracyBonus + 1);
             return (int)value;
         }
+    }
+
+    public Weapon(WeaponHead head, WeaponBinder binder, WeaponHandle handle, CharacterClass requiredClass, Quality quality)
+    {
+        Head = head;
+        Binder = binder;
+        Handle = handle;
+        Name = locale.ResourceManager.GetString(Head.Adjective) + requiredClass switch
+        {
+            CharacterClass.Warrior => locale.Longsword,
+            CharacterClass.Scout => locale.SwordAndDagger,
+            CharacterClass.Sorcerer => locale.Wand,
+            _ => locale.Hammer
+        };
+        Alias = $"{head.Alias}.{binder.Alias}.{handle.Alias}";
+        Weight = 8;
+        ID = 559;
+        Cost = head.Cost + binder.Cost + handle.Cost;
+        Rarity = EquippableItemService.GetRandomRarity();
+        Stackable = false;
+        RequiredLevel = Math.Max(Math.Max(head.Tier, binder.Tier), handle.Tier) * 10 - 5 + Quality switch
+        {
+            Quality.Weak => -3,
+            Quality.Normal => 0,
+            Quality.Excellent => 3,
+            Quality.Masterpiece => 5,
+            _ => 0
+        };
+        RequiredClass = requiredClass;
+        Quality = quality;
+        UpgradeModifier = 1;
     }
 
     public bool Use()

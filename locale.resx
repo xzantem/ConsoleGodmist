@@ -42,9 +42,8 @@
     <value>Exit game</value>
         <comment />
   </data>
-    <data name="Hard" xml:space="preserve">
+  <data name="Hard" xml:space="preserve">
     <value>Hard</value>
-        <comment />
   </data>
     <data name="LoadGame" xml:space="preserve">
     <value>Load game</value>
@@ -647,5 +646,29 @@
   </data>
   <data name="ForTheNext" xml:space="preserve">
     <value>for the next</value>
+  </data>
+  <data name="Longsword" xml:space="preserve">
+    <value>Longsword</value>
+  </data>
+  <data name="SwordAndDagger" xml:space="preserve">
+    <value>Sword &amp; Dagger</value>
+  </data>
+  <data name="Wand" xml:space="preserve">
+    <value>Wand</value>
+  </data>
+  <data name="Hammer" xml:space="preserve">
+    <value>Hammer</value>
+  </data>
+  <data name="Hauberk" xml:space="preserve">
+    <value>Hauberk</value>
+  </data>
+  <data name="Tunic" xml:space="preserve">
+    <value>Tunic</value>
+  </data>
+  <data name="Robe" xml:space="preserve">
+    <value>Robe</value>
+  </data>
+  <data name="Cuirass" xml:space="preserve">
+    <value>Cuirass</value>
   </data>
 </root>

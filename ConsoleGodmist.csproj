@@ -40,6 +40,7 @@
     <Content Include="bin\Debug\net6.0\json\base-ingredients.json" />
     <Content Include="bin\Debug\net6.0\json\craftable-ingredients.json" />
     <Content Include="bin\Debug\net6.0\json\enemies.json" />
+    <Content Include="bin\Debug\net6.0\json\equipment-parts.json" />
     <Content Include="bin\Debug\net6.0\json\plant-drop-table.json" />
   </ItemGroup>
 

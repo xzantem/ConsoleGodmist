@@ -4,6 +4,7 @@ using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using ConsoleGodmist.Items.Weapons;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town
@@ -15,6 +16,7 @@ namespace ConsoleGodmist.Town
             while (true)
             {
                 //AnsiConsole.Clear();
+                var testPart = EquipmentPartManager.GetPart<WeaponHead>("BrokenHead");
                 AnsiConsole.Write(new FigletText("Arungard").Centered().Color(Color.Gold3_1));
                 string[] choices =
                 [

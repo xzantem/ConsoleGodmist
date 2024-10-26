@@ -1,6 +1,10 @@
-﻿namespace ConsoleGodmist.Items.Weapons;
+﻿using ConsoleGodmist.Combat.Skills;
+using Newtonsoft.Json;
 
-public class WeaponBinder
+namespace ConsoleGodmist.Items.Weapons;
+
+[JsonConverter(typeof(EquipmentPartConverter))]
+public class WeaponBinder : IEquipmentPart
 {
     public double AttackBonus { get; set; }
     public double CritChance { get; set; }

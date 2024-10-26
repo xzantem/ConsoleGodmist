@@ -1,0 +1,37 @@
+﻿[
+  {
+    "Type": "WeaponHead",
+    "MinimalAttack": 4,
+    "MaximalAttack": 8,
+    "CritMod": 1.5,
+    "CritChanceBonus": 0,
+    "AccuracyBonus": 0,
+    "Alias": "BrokenHead",
+    "Adjective": "Broken",
+    "Tier": 1,
+    "Material": "None",
+    "Cost": 5
+  },
+  {
+    "Type": "WeaponBinder",
+    "AttackBonus": 0,
+    "CritChance": 0.03,
+    "CritModBonus": 0,
+    "AccuracyBonus": 0,
+    "Alias": "BrokenBinder",
+    "Tier": 1,
+    "Material": "None",
+    "Cost": 5
+  },
+  {
+    "Type": "WeaponHandle",
+    "AttackBonus": 0,
+    "CritChanceBonus": 0,
+    "CritMod": 0.5,
+    "AccuracyBonus": 0,
+    "Alias": "BrokenHandle",
+    "Tier": 1,
+    "Material": "None",
+    "Cost": 5
+  }
+]

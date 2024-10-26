@@ -1840,5 +1840,77 @@ namespace ConsoleGodmist {
                 return ResourceManager.GetString("ForTheNext", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Longsword.
+        /// </summary>
+        internal static string Longsword {
+            get {
+                return ResourceManager.GetString("Longsword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sword & Dagger.
+        /// </summary>
+        internal static string SwordAndDagger {
+            get {
+                return ResourceManager.GetString("SwordAndDagger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wand.
+        /// </summary>
+        internal static string Wand {
+            get {
+                return ResourceManager.GetString("Wand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hammer.
+        /// </summary>
+        internal static string Hammer {
+            get {
+                return ResourceManager.GetString("Hammer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hauberk.
+        /// </summary>
+        internal static string Hauberk {
+            get {
+                return ResourceManager.GetString("Hauberk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tunic.
+        /// </summary>
+        internal static string Tunic {
+            get {
+                return ResourceManager.GetString("Tunic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Robe.
+        /// </summary>
+        internal static string Robe {
+            get {
+                return ResourceManager.GetString("Robe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cuirass.
+        /// </summary>
+        internal static string Cuirass {
+            get {
+                return ResourceManager.GetString("Cuirass", resourceCulture);
+            }
+        }
     }
 }
