@@ -1,5 +1,6 @@
 ﻿using System.Data.Common;
 using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using Spectre.Console;
 
@@ -39,30 +40,38 @@ public class Trap(Difficulty difficulty, DungeonField location, int trapType, Du
                     { DamageType.Physical, PlayerHandler.player.MaximalHealth / 5 }
                 });
                 break;
-            case DungeonType.Forest: // Add 20% Poison
+            case DungeonType.Forest:
                 PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                StatusEffectHandler.AddStatusEffect(new DoTStatusEffect(PlayerHandler.player.MaximalHealth / 25, 
+                    StatusEffectType.Poison, "Trap", 5), PlayerHandler.player);
                 break;
             case DungeonType.ElvishRuins:
                 PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
                 break;
-            case DungeonType.Cove: // Add 20% Burn
+            case DungeonType.Cove:
                 PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                StatusEffectHandler.AddStatusEffect(new DoTStatusEffect(PlayerHandler.player.MaximalHealth / 25, 
+                    StatusEffectType.Burn, "Trap", 5), PlayerHandler.player);
                 break;
-            case DungeonType.Desert: // Add Dodge Debuff
+            case DungeonType.Desert:
                 PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.AddModifier(StatType.Dodge, new StatModifier(ModifierType.Additive, 15, "Trap", 5));
                 break;
             case DungeonType.Temple:
                 PlayerHandler.player.TakeDamage(new Dictionary<DamageType, double>
                 {
                     { DamageType.True, PlayerHandler.player.MaximalHealth / 10 },
-                    { DamageType.Physical, PlayerHandler.player.MaximalHealth / 5 }
+                    { DamageType.Magic, PlayerHandler.player.MaximalHealth / 5 }
                 });
                 break;
-            case DungeonType.Mountains: // Add 20% Bleed
+            case DungeonType.Mountains:
                 PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                StatusEffectHandler.AddStatusEffect(new DoTStatusEffect(PlayerHandler.player.MaximalHealth / 25, 
+                    StatusEffectType.Bleed, "Trap", 5), PlayerHandler.player);
                 break;
-            case DungeonType.Swamp: // Add Slow
+            case DungeonType.Swamp:
                 PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.AddModifier(StatType.Speed, new StatModifier(ModifierType.Additive, 10, "Trap", 5));
                 break;
         }
     }

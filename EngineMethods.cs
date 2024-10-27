@@ -159,8 +159,6 @@ namespace ConsoleGodmist
         {
             var result = Random.Next(0, choices.Count);
             return choices[result];
-
-            throw new NullReferenceException();
         }
 
         public static Dictionary<string, int> ChoiceSelector()

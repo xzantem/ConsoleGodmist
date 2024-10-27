@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.TextService;
@@ -28,13 +29,13 @@ public class InflictGenericStatusEffect : IActiveSkillEffect
             case SkillTarget.Self:
                 if (Random.Shared.NextDouble() >= Chance) return;
                 StatusEffectHandler.AddStatusEffect(StatusEffect, caster);
-                ActiveSkillTextService.DisplayStatusEffectText(caster, StatusEffect);
+                CharacterEventTextService.DisplayStatusEffectText(caster, StatusEffect);
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() >=
                     EngineMethods.EffectChance(enemy.Resistances[StatusEffect.Type].Value(), Chance)) return;
                 StatusEffectHandler.AddStatusEffect(StatusEffect, enemy);
-                ActiveSkillTextService.DisplayStatusEffectText(enemy, StatusEffect);
+                CharacterEventTextService.DisplayStatusEffectText(enemy, StatusEffect);
                 break;
         }
     }

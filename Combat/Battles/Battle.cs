@@ -75,9 +75,11 @@ public class Battle
 
     public bool ChooseSkill(PlayerCharacter player, Character target)
     {
-        var choices = player.ActiveSkills.Select(x => x.Name).ToArray();
+        var skills = player.ActiveSkills.Select(x => x.Name).ToArray();
+        var choices = skills.Append(locale.GoBack).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
+        if (choice == locale.GoBack) return false;
         player.ActiveSkills[Array.IndexOf(choices, choice)].Use(player, target);
         return true;
     }

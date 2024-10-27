@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Enums;
 using Spectre.Console;
 
@@ -51,6 +52,7 @@ public static class StatusEffectHandler
     }
     public static void AddStatusEffect(StatusEffect statusEffect, Character target)
     {
+        CharacterEventTextService.DisplayStatusEffectText(target, statusEffect);
         switch (statusEffect.Type)
         {
             case StatusEffectType.Stun:

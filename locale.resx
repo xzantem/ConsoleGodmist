@@ -677,4 +677,10 @@
   <data name="ChooseNameForSave" xml:space="preserve">
     <value>Choose a name for the save file</value>
   </data>
+  <data name="Burns" xml:space="preserve">
+    <value>burns</value>
+  </data>
+  <data name="IsPoisoned" xml:space="preserve">
+    <value>is poisoned</value>
+  </data>
 </root>

@@ -1930,5 +1930,23 @@ namespace ConsoleGodmist {
                 return ResourceManager.GetString("ChooseNameForSave", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is poisoned.
+        /// </summary>
+        internal static string IsPoisoned {
+            get {
+                return ResourceManager.GetString("IsPoisoned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to burns.
+        /// </summary>
+        internal static string Burns {
+            get {
+                return ResourceManager.GetString("Burns", resourceCulture);
+            }
+        }
     }
 }

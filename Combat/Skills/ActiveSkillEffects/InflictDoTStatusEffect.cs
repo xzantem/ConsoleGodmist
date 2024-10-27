@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.TextService;
@@ -41,13 +42,13 @@ public class InflictDoTStatusEffect : IActiveSkillEffect
             case SkillTarget.Self:
                 if (Random.Shared.NextDouble() >= Chance) return;
                 StatusEffectHandler.AddStatusEffect(status, caster);
-                ActiveSkillTextService.DisplayStatusEffectText(caster, status);
+                CharacterEventTextService.DisplayStatusEffectText(caster, status);
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() <
                     EngineMethods.EffectChance(enemy.Resistances[DoTType].Value(), Chance)) return;
                 StatusEffectHandler.AddStatusEffect(status, enemy);
-                ActiveSkillTextService.DisplayStatusEffectText(enemy, status);
+                CharacterEventTextService.DisplayStatusEffectText(enemy, status);
                 break;
         }
     }
