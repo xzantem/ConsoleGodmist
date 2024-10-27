@@ -2,9 +2,14 @@ using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Items;
+using ConsoleGodmist.Items.Armors;
+using ConsoleGodmist.Items.Weapons;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Characters
 {
+    [JsonConverter(typeof(PlayerJsonConverter))]
     public class Warrior : PlayerCharacter {
         public override string Name { get; protected set; }
 
@@ -40,13 +45,13 @@ namespace ConsoleGodmist.Characters
                 _magicDefense.BaseValue = value;
         }
         public new double Accuracy {
-            get => _accuracy.Value(Level) - CurrentResource / 5; // + Weapon.Accuracy
+            get => _accuracy.Value(Level);
             set => _accuracy.BaseValue = value;
         }
         // Fury
         // Maximal is capped at 50 by default
         // Using Chop (Base Attack) grants 5 Fury
-        // Every 5 points reduces accuracy by 1 
+        // Every point reduces accuracy by 1/3
         // As with all classes, used for casting skills
         // If a skill requires more than your maximum of Fury, you can cast it at maximum Fury, 
         // but you do not gain Fury until the deficit is compensated for (effectively in negative or debt)
@@ -60,6 +65,8 @@ namespace ConsoleGodmist.Characters
             _maximalResource = new Stat(50, 0);
             CurrentResource = 0;
             ResourceType = ResourceType.Fury;
+            SwitchWeapon(new Weapon(CharacterClass.Warrior));
+            SwitchArmor(new Armor(CharacterClass.Warrior));
             ActiveSkills[0] = new ActiveSkill("TestDamaging", 0, false, 80,
                 [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
             ActiveSkills[1] = new ActiveSkill("TestDamaging", 0, false, 80,
@@ -71,5 +78,6 @@ namespace ConsoleGodmist.Characters
             ActiveSkills[4] = new ActiveSkill("TestDamaging", 0, false, 80,
                 [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
         }
+        public Warrior() {}
     }
 }

@@ -4,10 +4,12 @@ using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using ConsoleGodmist.Items.Armors;
 using ConsoleGodmist.Items.Weapons;
+using Newtonsoft.Json;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Characters
 {
+    [JsonConverter(typeof(PlayerJsonConverter))]
     public abstract class PlayerCharacter : Character
     {
         protected PlayerCharacter(string name,
@@ -31,6 +33,7 @@ namespace ConsoleGodmist.Characters
                 Resistances.Add((StatusEffectType)statusType, new Stat(0.5, 0));
             }
         }
+        public PlayerCharacter() {}
 
         public CharacterClass CharacterClass { get; private set; }
         public int Gold { get; private set;} = 100;
@@ -75,11 +78,11 @@ namespace ConsoleGodmist.Characters
             }
             else
             {
-                MinimalAttack += Weapon.MinimalAttack;
-                MaximalAttack += Weapon.MaximalAttack;
-                CritChance += Weapon.CritChance;
-                CritMod += Weapon.CritMod;
-                Accuracy += Weapon.Accuracy;
+                MinimalAttack += weapon.MinimalAttack;
+                MaximalAttack += weapon.MaximalAttack;
+                CritChance += weapon.CritChance;
+                CritMod += weapon.CritMod;
+                Accuracy += weapon.Accuracy;
             }
             Weapon = weapon;
         }
@@ -90,17 +93,20 @@ namespace ConsoleGodmist.Characters
                 var oldArmor = Armor;
                 Inventory.AddItem(oldArmor);
                 MaximalHealth += armor.MaximalHealth - oldArmor.MaximalHealth;
+                CurrentHealth += armor.MaximalHealth - oldArmor.MaximalHealth;
                 Dodge += armor.Dodge - oldArmor.Dodge;
                 PhysicalDefense += armor.PhysicalDefense - oldArmor.PhysicalDefense;
                 MagicDefense += armor.MagicDefense - oldArmor.MagicDefense;
             }
             else
             {
-                MaximalHealth += Armor.MaximalHealth;
-                Dodge += Armor.Dodge;
-                PhysicalDefense += Armor.PhysicalDefense;
-                MagicDefense += Armor.MagicDefense;
+                MaximalHealth += armor.MaximalHealth;
+                CurrentHealth += armor.MaximalHealth;
+                Dodge += armor.Dodge;
+                PhysicalDefense += armor.PhysicalDefense;
+                MagicDefense += armor.MagicDefense;
             }
+            
             Armor = armor;
         }
 

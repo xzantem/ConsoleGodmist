@@ -51,6 +51,6 @@ public class ActiveSkill
     {
         var accuracy = (caster.Accuracy + Accuracy) / 2;
         var hitChance = accuracy * accuracy / (accuracy + target.Dodge);
-        return Random.Shared.NextDouble() < hitChance;
+        return Random.Shared.NextDouble() * 100 < hitChance;
     }
 }

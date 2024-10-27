@@ -40,20 +40,37 @@ public static class EquipmentPartManager
             throw new FileNotFoundException($"JSON file not found in {path}");
     }
 
-    public static IEquipmentPart GetPart<T>(string alias)
+    public static T GetPart<T>(string alias) where T : IEquipmentPart
     {
         if (typeof(T) == typeof(WeaponHead))
-            return WeaponHeads.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)WeaponHeads.FirstOrDefault(x => x.Alias == alias)!;
         if (typeof(T) == typeof(WeaponBinder))
-            return WeaponBinders.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)WeaponBinders.FirstOrDefault(x => x.Alias == alias)!;
         if (typeof(T) == typeof(WeaponHandle))
-            return WeaponHandles.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)WeaponHandles.FirstOrDefault(x => x.Alias == alias)!;
         if (typeof(T) == typeof(ArmorPlate))
-            return ArmorPlates.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)ArmorPlates.FirstOrDefault(x => x.Alias == alias)!;
         if (typeof(T) == typeof(ArmorBinder))
-            return ArmorBinders.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)ArmorBinders.FirstOrDefault(x => x.Alias == alias)!;
         if (typeof(T) == typeof(ArmorBase))
-            return ArmorBases.FirstOrDefault(x => x.Alias == alias)!;
-        return null!;
+            return (T)(object)ArmorBases.FirstOrDefault(x => x.Alias == alias)!;
+        throw new NotSupportedException();
+    }
+
+    public static T GetRandomPart<T>(int tier) where T : IEquipmentPart
+    {
+        if (typeof(T) == typeof(WeaponHead))
+            return (T)(object)EngineMethods.RandomChoice(WeaponHeads.Where(x => x.Tier == tier).ToList());
+        if (typeof(T) == typeof(WeaponBinder))
+            return (T)(object)EngineMethods.RandomChoice(WeaponBinders.Where(x => x.Tier == tier).ToList());
+        if (typeof(T) == typeof(WeaponHandle))
+            return (T)(object)EngineMethods.RandomChoice(WeaponHandles.Where(x => x.Tier == tier).ToList());
+        if (typeof(T) == typeof(ArmorPlate))
+            return (T)(object)EngineMethods.RandomChoice(ArmorPlates.Where(x => x.Tier == tier).ToList());
+        if (typeof(T) == typeof(ArmorBinder))
+            return (T)(object)EngineMethods.RandomChoice(ArmorBinders.Where(x => x.Tier == tier).ToList());
+        if (typeof(T) == typeof(ArmorBase))
+            return (T)(object)EngineMethods.RandomChoice(ArmorBases.Where(x => x.Tier == tier).ToList());
+        throw new NotSupportedException();
     }
 }

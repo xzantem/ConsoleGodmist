@@ -1912,5 +1912,23 @@ namespace ConsoleGodmist {
                 return ResourceManager.GetString("Cuirass", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name is too long.
+        /// </summary>
+        internal static string NameTooLong {
+            get {
+                return ResourceManager.GetString("NameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a name for the save file.
+        /// </summary>
+        internal static string ChooseNameForSave {
+            get {
+                return ResourceManager.GetString("ChooseNameForSave", resourceCulture);
+            }
+        }
     }
 }

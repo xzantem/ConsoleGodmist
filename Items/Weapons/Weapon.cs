@@ -169,9 +169,9 @@ public class Weapon : IEquippable
             _ => locale.Hammer
         };
         Alias = $"{head.Alias}.{binder.Alias}.{handle.Alias}";
-        Weight = 8;
+        Weight = 5;
         ID = 559;
-        Cost = head.Cost + binder.Cost + handle.Cost;
+        Cost = head.GoldCost + binder.GoldCost + handle.GoldCost;
         Rarity = EquippableItemService.GetRandomRarity();
         Stackable = false;
         RequiredLevel = Math.Max(Math.Max(head.Tier, binder.Tier), handle.Tier) * 10 - 5 + Quality switch
@@ -184,6 +184,40 @@ public class Weapon : IEquippable
         };
         RequiredClass = requiredClass;
         Quality = quality;
+        UpgradeModifier = 1;
+    }
+    /// <summary>
+    /// Gets Starter weapon for the specified class
+    /// </summary>
+    /// <param name="requiredClass"></param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public Weapon(CharacterClass requiredClass)
+    {
+        switch (requiredClass)
+        {
+            case CharacterClass.Warrior:
+                Head = EquipmentPartManager.GetPart<WeaponHead>("BrokenHead");
+                Binder = EquipmentPartManager.GetPart<WeaponBinder>("BrokenBinder");
+                Handle = EquipmentPartManager.GetPart<WeaponHandle>("BrokenHandle");
+                Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.Longsword;
+                break;
+            case CharacterClass.Scout:
+            case CharacterClass.Sorcerer:
+                break;
+            case CharacterClass.Paladin:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(requiredClass), requiredClass, null);
+        }
+        Alias = $"StarterWeapon.{requiredClass.ToString()}";
+        Weight = 5;
+        ID = 559;
+        Cost = 15;
+        Rarity = ItemRarity.Junk;
+        Stackable = false;
+        RequiredLevel = 1;
+        RequiredClass = requiredClass;
+        Quality = Quality.Normal;
         UpgradeModifier = 1;
     }
 

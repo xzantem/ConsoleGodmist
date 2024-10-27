@@ -14,7 +14,8 @@ public class ArmorBase : IEquipmentPart
     public string Alias { get; set; }
     public int Tier { get; set; }
     public string Material { get; set; }
-    public int Cost { get; set; }
+    public int GoldCost { get; set; }
+    public int MaterialCost { get; set; }
     
     public ArmorBase() {}
 }

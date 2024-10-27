@@ -22,8 +22,8 @@ namespace ConsoleGodmist.Components
                 switch (Array.IndexOf(choices, choice))
                 {
                     case 0: NewGame(); return;
-                    case 1: AnsiConsole.WriteException(new NotImplementedException()); return;
-                    case 2: AnsiConsole.WriteException(new NotImplementedException()); break;
+                    case 1: DataPersistanceManager.LoadGame(); return;
+                    case 2: DataPersistanceManager.DeleteSaveFile(); break;
                     case 3: ChooseLanguage(); break;
                     case 4: Environment.Exit(0); break;
                 }
@@ -44,7 +44,7 @@ namespace ConsoleGodmist.Components
                 1 => CultureInfo.GetCultureInfo("pl-PL"),
                 _ => Thread.CurrentThread.CurrentUICulture
             };
-            System.Globalization.CultureInfo.CurrentCulture = Array.IndexOf(choices, choice) switch
+            CultureInfo.CurrentCulture = Array.IndexOf(choices, choice) switch
             {
                 0 => CultureInfo.GetCultureInfo("en-US"),
                 1 => CultureInfo.GetCultureInfo("pl-PL"),
@@ -90,12 +90,13 @@ namespace ConsoleGodmist.Components
                 _ => CharacterClass.Warrior
             };
             Console.WriteLine($"\n...: {locale.Iam} {choice1}");
-            var name = "";
-            do
+            var prompt = new TextPrompt<string>($"...: {locale.MyNameIs} ").Validate(n => n.Length switch
             {
-                Console.Write($"...: {locale.MyNameIs} ");
-                name = Console.ReadLine();
-            } while (name == "");
+                > 20 => ValidationResult.Error(locale.NameTooLong),
+                <= 20 => ValidationResult.Success(),
+            });
+            prompt.AllowEmpty = false;
+            var name = AnsiConsole.Prompt(prompt);
             PlayerHandler.player = characterClass switch {
                 CharacterClass.Warrior => new Warrior(name),
                 CharacterClass.Scout => new Warrior(name),

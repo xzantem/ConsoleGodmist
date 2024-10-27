@@ -134,9 +134,9 @@ public class Armor : IEquippable
             _ => locale.Cuirass
         };
         Alias = $"{plate.Alias}.{binder.Alias}.{armBase.Alias}";
-        Weight = 8;
+        Weight = 5;
         ID = 560;
-        Cost = plate.Cost + binder.Cost + armBase.Cost;
+        Cost = plate.GoldCost + binder.GoldCost + armBase.GoldCost;
         Rarity = EquippableItemService.GetRandomRarity();
         Stackable = false;
         RequiredLevel = requiredLevel == 0
@@ -151,6 +151,41 @@ public class Armor : IEquippable
             : requiredLevel;
         RequiredClass = requiredClass;
         Quality = quality;
+        UpgradeModifier = 1;
+    }
+    
+    /// <summary>
+    /// Gets Starter weapon for the specified class
+    /// </summary>
+    /// <param name="requiredClass"></param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public Armor(CharacterClass requiredClass)
+    {
+        switch (requiredClass)
+        {
+            case CharacterClass.Warrior:
+                Plate = EquipmentPartManager.GetPart<ArmorPlate>("ScratchedPlate");
+                Binder = EquipmentPartManager.GetPart<ArmorBinder>("ScratchedBinder");
+                Base = EquipmentPartManager.GetPart<ArmorBase>("ScratchedBase");
+                Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Hauberk;
+                break;
+            case CharacterClass.Scout:
+            case CharacterClass.Sorcerer:
+                break;
+            case CharacterClass.Paladin:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(requiredClass), requiredClass, null);
+        }
+        Alias = $"StarterWeapon.{requiredClass.ToString()}";
+        Weight = 5;
+        ID = 560;
+        Cost = 15;
+        Rarity = ItemRarity.Junk;
+        Stackable = false;
+        RequiredLevel = 1;
+        RequiredClass = requiredClass;
+        Quality = Quality.Normal;
         UpgradeModifier = 1;
     }
 

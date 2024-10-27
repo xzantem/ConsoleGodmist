@@ -665,4 +665,10 @@
   <data name="Cuirass" xml:space="preserve">
     <value>Kirys</value>
   </data>
+  <data name="NameTooLong" xml:space="preserve">
+    <value>Nazwa jest zbyt długa</value>
+  </data>
+  <data name="ChooseNameForSave" xml:space="preserve">
+    <value>Wybierz nazwę dla pliku zapisu</value>
+  </data>
 </root>

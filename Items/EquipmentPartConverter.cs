@@ -35,8 +35,23 @@ public class EquipmentPartConverter : JsonConverter
 
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        var obj = JToken.FromObject(value);
-        obj["Type"] = value.GetType().Name;
-        obj.WriteTo(writer);
+        var jsonObject = new JObject
+        {
+            ["Type"] = value.GetType().Name
+        };
+
+        // Serialize the object's properties directly to the JObject.
+        foreach (var property in value.GetType().GetProperties())
+        {
+            // Add each property to the JObject.
+            if (property.CanRead)
+            {
+                var propertyValue = property.GetValue(value);
+                jsonObject[property.Name] = propertyValue != null ? JToken.FromObject(propertyValue, serializer) : JValue.CreateNull();
+            }
+        }
+
+        // Write the resulting JObject to the writer.
+        jsonObject.WriteTo(writer);
     }
 }

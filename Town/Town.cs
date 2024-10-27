@@ -1,6 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
+using ConsoleGodmist.Components;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
@@ -22,7 +23,7 @@ namespace ConsoleGodmist.Town
                 [
                     locale.StartExpedition, locale.Blacksmith, locale.Alchemist,
                     locale.Enchanter, "Druid", locale.QuestLog,
-                    locale.OpenInventory, locale.ShowCharacter, locale.ExitToMenu
+                    locale.OpenInventory, locale.ShowCharacter, locale.SaveGame, locale.ExitToMenu
                 ];
                 var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .AddChoices(choices)
@@ -40,8 +41,10 @@ namespace ConsoleGodmist.Town
                     case 6:
                         InventoryMenuHandler.OpenInventoryMenu();
                         break;
+                    
                     case 7: AnsiConsole.Write(PlayerHandler.player.Name + ", Poziom " + PlayerHandler.player.Level + " " + PlayerHandler.player.CharacterClass); break;
-                    case 8: return;
+                    case 8: DataPersistanceManager.SaveGame(); break;
+                    case 9: return;
                 }
             }
         }

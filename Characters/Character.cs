@@ -63,7 +63,7 @@ namespace ConsoleGodmist.Characters
         public Stat _accuracy; 
         public double Accuracy
         {
-            get => _accuracy.Value(Level);
+            get => _accuracy.Value(Level) - (ResourceType == ResourceType.Fury ? CurrentResource / 3 : 0);
             set => _accuracy.BaseValue = value;
         }
         public Stat _critMod; 

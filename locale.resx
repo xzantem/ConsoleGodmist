@@ -671,4 +671,10 @@
   <data name="Cuirass" xml:space="preserve">
     <value>Cuirass</value>
   </data>
+  <data name="NameTooLong" xml:space="preserve">
+    <value>The name is too long</value>
+  </data>
+  <data name="ChooseNameForSave" xml:space="preserve">
+    <value>Choose a name for the save file</value>
+  </data>
 </root>
