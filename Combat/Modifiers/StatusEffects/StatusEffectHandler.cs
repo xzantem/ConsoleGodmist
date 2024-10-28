@@ -1,6 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.TextService;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Combat.Modifiers;
@@ -39,8 +40,12 @@ public static class StatusEffectHandler
 
     public static double TakeShieldsDamage(List<Shield> shields, Character target, double damage)
     {
-        foreach (var shield in shields.Where(shield => damage > 0))
+        foreach (var shield in shields.Where(x => damage > 0).ToList())
+        {
             damage = shield.TakeDamage(damage);
+            if (damage > 0)
+                target.StatusEffects.Remove(shield);
+        }
         return damage;
     }
 
@@ -63,6 +68,7 @@ public static class StatusEffectHandler
             case StatusEffectType.Provocation:
                 if (target.StatusEffects.Any(x => x.Type == statusEffect.Type))
                     target.StatusEffects.FirstOrDefault(x => x.Type == statusEffect.Type).Extend(statusEffect.Duration);
+                else target.StatusEffects.Add(statusEffect);
                 break;
             default:
                 target.StatusEffects.Add(statusEffect);

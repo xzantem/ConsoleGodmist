@@ -202,9 +202,22 @@ public class Weapon : IEquippable
                 Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.Longsword;
                 break;
             case CharacterClass.Scout:
+                Head = EquipmentPartManager.GetPart<WeaponHead>("RustyHead");
+                Binder = EquipmentPartManager.GetPart<WeaponBinder>("RustyBinder");
+                Handle = EquipmentPartManager.GetPart<WeaponHandle>("RustyHandle");
+                Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.SwordAndDagger;
+                break;
             case CharacterClass.Sorcerer:
+                Head = EquipmentPartManager.GetPart<WeaponHead>("SplinteryHead");
+                Binder = EquipmentPartManager.GetPart<WeaponBinder>("SplinteryBinder");
+                Handle = EquipmentPartManager.GetPart<WeaponHandle>("SplinteryHandle");
+                Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.Wand;
                 break;
             case CharacterClass.Paladin:
+                Head = EquipmentPartManager.GetPart<WeaponHead>("MisshapenHead");
+                Binder = EquipmentPartManager.GetPart<WeaponBinder>("MisshapenBinder");
+                Handle = EquipmentPartManager.GetPart<WeaponHandle>("MisshapenHandle");
+                Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.Hammer;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(requiredClass), requiredClass, null);

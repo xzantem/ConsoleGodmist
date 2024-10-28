@@ -3,7 +3,7 @@ using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using Spectre.Console;
 
-namespace ConsoleGodmist.Combat.Battles;
+namespace ConsoleGodmist.TextService;
 
 public static class CharacterEventTextService
 {
@@ -33,6 +33,17 @@ public static class CharacterEventTextService
     public static void DisplayHealText(Character character, int heal)
     {
         AnsiConsole.Write(new Text($"{character.Name} {locale.Heals} {heal} {locale.HealthGenitive}\n", 
+            Stylesheet.Styles["default"]));
+    }
+    public static void DisplayResourceRegenText(Character character, int regen)
+    {
+        var resource = character.ResourceType switch
+        {
+            ResourceType.Fury => locale.FuryGenitive,
+            ResourceType.Mana => locale.ManaGenitive,
+            ResourceType.Momentum => locale.MomentumGenitive
+        };
+        AnsiConsole.Write(new Text($"{character.Name} {locale.Regenerates} {regen} {resource}\n", 
             Stylesheet.Styles["default"]));
     }
     public static void DisplayGoldGainText(PlayerCharacter character, int gold)
@@ -129,6 +140,8 @@ public static class CharacterEventTextService
                                            $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
                 break;
             case StatusEffectType.Stun:
+                AnsiConsole.Write(new Text($"{target.Name} is stunned {locale.And} cannot move {locale.ForTheNext} " +
+                                           $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
                 break;
             case StatusEffectType.Freeze:
                 break;

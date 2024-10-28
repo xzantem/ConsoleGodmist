@@ -22,13 +22,22 @@ public class HealTarget : IActiveSkillEffect
         }
     }
 
+    public HealTarget(SkillTarget target, double healAmount, DamageBase healBase)
+    {
+        Target = target;
+        HealAmount = healAmount;
+        HealBase = healBase;
+    }
+    public HealTarget() {}
+
     public double CalculateHeal(Character caster, Character enemy)
     {
         return HealBase switch
         {
-            DamageBase.Minimal => HealAmount,
-            DamageBase.Random => HealAmount,
-            DamageBase.Maximal => HealAmount,
+            DamageBase.Flat => HealAmount,
+            DamageBase.Minimal => HealAmount * caster.MinimalAttack,
+            DamageBase.Random => HealAmount * Random.Shared.Next((int)caster.MinimalAttack, (int)caster.MaximalAttack + 1),
+            DamageBase.Maximal => HealAmount * caster.MaximalHealth,
             DamageBase.CasterMaxHealth => HealAmount * caster.MaximalHealth,
             DamageBase.TargetMaxHealth => HealAmount * enemy.MaximalHealth,
             DamageBase.CasterCurrentHealth => HealAmount * caster.CurrentHealth,

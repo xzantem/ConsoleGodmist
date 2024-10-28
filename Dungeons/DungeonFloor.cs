@@ -22,7 +22,7 @@ public class DungeonFloor
             {DungeonFieldType.Empty, 9},
             {DungeonFieldType.Plant, 4},
             {DungeonFieldType.Battle, difficulty},
-            {DungeonFieldType.Campfire, 4},
+            {DungeonFieldType.Bonfire, 4},
             {DungeonFieldType.Trap, 1 + difficulty},
         };
         for (var i = 0; i < length; i++)

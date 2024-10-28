@@ -21,20 +21,35 @@ public static class DataPersistanceManager
         File.WriteAllText(dir + $"{prompt}.json", json);
     }
 
-    public static void LoadGame()
+    public static bool LoadGame()
     {
-        var saves = Directory.GetFiles(dir).Select(save => save[dir.Length..^5]);
+        var saves = Directory.GetFiles(dir).Select(save => save[dir.Length..^5]).ToArray();
+        if (saves.Length == 0)
+        {
+            AnsiConsole.WriteLine(locale.NoSavesFound);
+            return false;
+        }
+        var choices = saves.Append(locale.Return).ToArray();
         AnsiConsole.Write("\n");
-        var prompt = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(saves).HighlightStyle(new Style(Color.Gold3_1)));
+        var prompt = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices).HighlightStyle(new Style(Color.Gold3_1)));
+        if (prompt == locale.Return) return false;
         var json = File.ReadAllText(dir + "/" + prompt + ".json");
         PlayerHandler.player  = JsonConvert.DeserializeObject<PlayerCharacter>(json);
+        return true;
     }
     
     public static void DeleteSaveFile()
     {
-        var saves = Directory.GetFiles(dir).Select(save => save[dir.Length..^5]);
+        var saves = Directory.GetFiles(dir).Select(save => save[dir.Length..^5]).ToArray();
+        if (saves.Length == 0)
+        {
+            AnsiConsole.WriteLine(locale.NoSavesFound);
+            return;
+        }
+        var choices = saves.Append(locale.Return).ToArray();
         AnsiConsole.Write("\n");
-        var prompt = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(saves).HighlightStyle(new Style(Color.Gold3_1)));
+        var prompt = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices).HighlightStyle(new Style(Color.Gold3_1)));
+        if (prompt == locale.Return) return;
         File.Delete(dir + "/" + prompt + ".json");
     }
 }

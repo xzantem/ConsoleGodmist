@@ -31,9 +31,11 @@ public class ActiveSkill
         Effects = effects;
     }
 
-    public void Use(Character caster, Character enemy)
+    public bool Use(Character caster, Character enemy)
     {
-        if (!(caster.CurrentResource >= ResourceCost) && caster.ResourceType != ResourceType.Fury) return;
+        if (!(caster.CurrentResource >= ResourceCost) && 
+            (caster.ResourceType != ResourceType.Fury || 
+             !(Math.Abs(caster.MaximalResource - caster.CurrentResource) < 0.001)) && ResourceCost != -1) return false;
         ActiveSkillTextService.DisplayUseSkillText(caster, enemy, this);
         caster.UseResource(ResourceCost);
         foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Self))
@@ -41,10 +43,13 @@ public class ActiveSkill
         if (!CheckHit(caster, enemy) && !AlwaysHits)
         {
             ActiveSkillTextService.DisplayMissText(caster);
-            return;
+            return true;
         }
+
         foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Enemy))
             effect.Execute(caster, enemy, Alias);
+        return true;
+
     }
 
     private bool CheckHit(Character caster, Character target)

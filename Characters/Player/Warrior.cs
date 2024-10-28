@@ -11,43 +11,7 @@ namespace ConsoleGodmist.Characters
 {
     [JsonConverter(typeof(PlayerJsonConverter))]
     public class Warrior : PlayerCharacter {
-        public override string Name { get; protected set; }
-
-        public new double MaximalHealth
-        {
-            get => _maximalHealth.Value(Level);
-            protected set =>
-                _maximalHealth.BaseValue = value;
-        }
-        public new double MinimalAttack {
-            get => _minimalAttack.Value(Level);
-            protected set =>
-                _minimalAttack.BaseValue = value;
-        }
-        public new double MaximalAttack {
-            get => _maximalAttack.Value(Level);
-            protected set =>
-                _maximalAttack.BaseValue = value;
-        }
-        public new double Dodge {
-            get => _dodge.Value(Level);
-            protected set =>
-                _dodge.BaseValue = value;
-        }
-        public new double PhysicalDefense {
-            get => _physicalDefense.Value(Level);
-            protected set =>
-                _physicalDefense.BaseValue = value;
-        }
-        public new double MagicDefense {
-            get => _magicDefense.Value(Level);
-            protected set =>
-                _magicDefense.BaseValue = value;
-        }
-        public new double Accuracy {
-            get => _accuracy.Value(Level);
-            set => _accuracy.BaseValue = value;
-        }
+        public override string Name { get; set; }
         // Fury
         // Maximal is capped at 50 by default
         // Using Chop (Base Attack) grants 5 Fury
@@ -67,16 +31,20 @@ namespace ConsoleGodmist.Characters
             ResourceType = ResourceType.Fury;
             SwitchWeapon(new Weapon(CharacterClass.Warrior));
             SwitchArmor(new Armor(CharacterClass.Warrior));
-            ActiveSkills[0] = new ActiveSkill("TestDamaging", 0, false, 80,
-                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
-            ActiveSkills[1] = new ActiveSkill("TestDamaging", 0, false, 80,
-                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
-            ActiveSkills[2] = new ActiveSkill("TestDamaging", 0, false, 80,
-                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
-            ActiveSkills[3] = new ActiveSkill("TestDamaging", 0, false, 80,
-                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
-            ActiveSkills[4] = new ActiveSkill("TestDamaging", 0, false, 80,
-                [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false)]);
+            ActiveSkills[0] = new ActiveSkill("Chop", 0, false, 80,
+            [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0),
+                new RegenResource(SkillTarget.Self, 10, DamageBase.Random)]);
+            ActiveSkills[1] = new ActiveSkill("Kick", 20, false, 73,
+                [new DebuffStat(SkillTarget.Enemy, StatType.Dodge, ModifierType.Additive, 15, 0.8, 3)]);
+            ActiveSkills[2] = new ActiveSkill("WarCry", 30, true, 100,
+                [new BuffStat(SkillTarget.Self, StatType.MinimalAttack, ModifierType.Multiplicative, 0.2, 1, 3),
+                    new BuffStat(SkillTarget.Self, StatType.MaximalAttack, ModifierType.Multiplicative, 0.2, 1, 3)]);
+            ActiveSkills[3] = new ActiveSkill("RightHook", 35, false, 72,
+            [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0),
+                new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Stun, "RightHook", 3), 0.8)]);
+            ActiveSkills[4] = new ActiveSkill("FieldBandage", 40, true, 100,
+                [new HealTarget(SkillTarget.Self, 0.08, DamageBase.CasterMissingHealth),
+                new ClearStatusEffect(SkillTarget.Self, StatusEffectType.Bleed)]);
         }
         public Warrior() {}
     }

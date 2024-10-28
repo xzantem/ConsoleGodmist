@@ -200,10 +200,7 @@
     <data name="GoUp" xml:space="preserve">
     <value>Idź w górę</value>
   </data>
-    <data name="RestAtCampfire" xml:space="preserve">
-    <value>Odpocznij przy ognisku</value>
-  </data>
-    <data name="CollectPlant" xml:space="preserve">
+  <data name="CollectPlant" xml:space="preserve">
     <value>Zbierz roślinę</value>
   </data>
     <data name="OpenStash" xml:space="preserve">
@@ -676,5 +673,47 @@
   </data>
   <data name="IsPoisoned" xml:space="preserve">
     <value>jest zatruty</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Powrót</value>
+  </data>
+  <data name="NoSavesFound" xml:space="preserve">
+    <value>Nie znaleziono żadnych zapisów gry</value>
+  </data>
+  <data name="RestAtBonfire" xml:space="preserve">
+    <value>Odpocznij przy ognisku</value>
+  </data>
+  <data name="RestedAtBonfire" xml:space="preserve">
+    <value>Odpoczywasz przy ognisku do momentu aż gaśnie</value>
+  </data>
+  <data name="Ambushed" xml:space="preserve">
+    <value>Zasadzka! Przeciwnicy zaskoczyli cię podczas odpoczynku</value>
+  </data>
+  <data name="Ambush" xml:space="preserve">
+    <value>Zasadzka</value>
+  </data>
+  <data name="Regenerates" xml:space="preserve">
+    <value>regeneruje</value>
+  </data>
+  <data name="FuryGenitive" xml:space="preserve">
+    <value>wściekłości</value>
+  </data>
+  <data name="ManaGenitive" xml:space="preserve">
+    <value>many</value>
+  </data>
+  <data name="MomentumGenitive" xml:space="preserve">
+    <value>pędu</value>
+  </data>
+  <data name="ManaShort" xml:space="preserve">
+    <value>PM</value>
+  </data>
+  <data name="MomentumShort" xml:space="preserve">
+    <value>PP</value>
+  </data>
+  <data name="FuryShort" xml:space="preserve">
+    <value>WP</value>
+  </data>
+  <data name="HealthShort" xml:space="preserve">
+    <value>PZ</value>
   </data>
 </root>

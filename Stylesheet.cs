@@ -34,7 +34,7 @@ public static class Stylesheet
             { "dungeon-icon-stash", new Style(Color.Tan) },
             { "dungeon-icon-trap", new Style(Color.Purple) },
             { "dungeon-icon-unrevealed", new Style(Color.Grey) },
-            { "dungeon-icon-campfire", new Style(Color.DarkRed) },
+            { "dungeon-icon-campfire", new Style(Color.OrangeRed1) },
             { "dungeon-icon-exit", new Style(Color.Aqua) },
             { "error", new Style(Color.DarkRed) },
             { "rarity-destroyed", new Style(Color.Maroon)},

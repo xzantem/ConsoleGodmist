@@ -1,96 +1,43 @@
+using ConsoleGodmist.Combat.Modifiers;
+using ConsoleGodmist.Combat.Skills;
+using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Items.Armors;
+using ConsoleGodmist.Items.Weapons;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Characters
 {
     public class Paladin : PlayerCharacter {
-        public new double MaximalHealth
-        {
-            get
-            {
-                return EngineMethods.ScaledStat(_maximalHealth, 20D, Level);
-            }
-            protected set { 
-                _maximalHealth = value;
-            }
-        }
-        public new double MinimalAttack {
-            get {
-                return EngineMethods.ScaledStat(_minimalAttack, 0.6D, Level);
-            }
-            protected set {
-                _minimalAttack = value;
-            }
-        }
-        public new double MaximalAttack {
-            get {
-                return EngineMethods.ScaledStat(_maximalAttack, 0.8D, Level);
-            }
-            protected set {
-                _maximalAttack = value;
-            }
-        }
-        public new double Dodge {
-            get {
-                return EngineMethods.ScaledStat(_dodge, 0.04D, Level);
-            }
-            private set {
-                _dodge = value; 
-            }
-        }
-        public new double PhysicalDefense {
-            get {
-                return EngineMethods.ScaledStat(_physicalDefense, 0.6D, Level);
-            }
-            set {
-                _physicalDefense = value;
-            }
-        }
-        public new double MagicDefense {
-            get {
-                return EngineMethods.ScaledStat(_magicDefense, 0.6D, Level);
-            }
-            set {
-                _magicDefense = value;
-            }
-        }
+        public override string Name { get; set; }
         // Mana
         // Capped at 120, cannot be increased
         // Start battle with full Mana, regenerates passively each turn by 20
-        private double _maximalMana;
-        public double MaximalMana
-        {
-            get
-            {
-                return _maximalMana;
-            }
-            protected set { 
-                _maximalMana = value;
-            }
+        public Paladin(string name) : base(name, new Stat(450, 20),
+            new Stat(21, 0.6), new Stat(30, 0.95),
+            new Stat(0, 0), new Stat(8, 0.04),
+            new Stat(16, 0.6), new Stat(16, 0.6),
+            new Stat(35, 0), new Stat(0, 0),
+            new Stat(1, 0), CharacterClass.Paladin) {
+            _maximalResource = new Stat(120, 0);
+            _resourceRegen = new Stat(20, 0);
+            CurrentResource = MaximalResource;
+            ResourceType = ResourceType.Mana;
+            SwitchWeapon(new Weapon(CharacterClass.Paladin));
+            SwitchArmor(new Armor(CharacterClass.Paladin));
+            ActiveSkills[0] = new ActiveSkill("Judgement", 0, false, 83,
+            [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0)]);
+            ActiveSkills[1] = new ActiveSkill("CrushingStrike", 30, false, 75,
+                [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0),
+                    new DebuffResistance(SkillTarget.Enemy, StatusEffectType.Stun, ModifierType.Additive, 0.3, 0.9, 3),
+                    new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Stun, "CrushingStrike", 3), 0.5)]);
+            ActiveSkills[2] = new ActiveSkill("Cure", 30, true, 100,
+            [new HealTarget(SkillTarget.Self, 0.5, DamageBase.Random)]);
+            ActiveSkills[3] = new ActiveSkill("HolyTransfusion", 60, true, 100,
+            [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 1)]);
+            ActiveSkills[4] = new ActiveSkill("ShieldOfReflection", 40, true, 100,
+            [new BuffStat(SkillTarget.Self, StatType.Dodge, ModifierType.Multiplicative, 0.4, 1, 5)]);
         }
-        private double _currentMana;
-        public double CurrentMana {
-            get {
-                return _currentMana;
-            }
-            private set {
-                _currentMana = Math.Clamp(value, 0, MaximalMana);
-            }
-        }
-        private double _manaRegen;
-        public double ManaRegen
-        {
-            get
-            {
-                return _manaRegen;
-            }
-            protected set { 
-                _manaRegen = value;
-            }
-        }
-        public Paladin(string name) : base(name, 450, 21, 30, 0.08D, 8, 16, 16, 35, CharacterClass.Paladin) {
-            MaximalMana = 120;
-            CurrentMana = MaximalMana;
-            ManaRegen = 20;
-        }
+        public Paladin() {}
     }
 }

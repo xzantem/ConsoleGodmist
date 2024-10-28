@@ -2,6 +2,7 @@
 
 public enum DamageBase
 {
+    Flat,
     Minimal,
     Random,
     Maximal,

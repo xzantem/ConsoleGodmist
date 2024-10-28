@@ -15,11 +15,12 @@ public class DealDamage : IActiveSkillEffect
     public int DamageInstances { get; set; }
     public bool CanCrit { get; set; }
     public bool AlwaysCrits { get; set; }
+    public double LifeSteal { get; set; }
     
     public DealDamage() {}
 
     public DealDamage(DamageType damageType, DamageBase damageBase, double damageMultiplier, bool canCrit,
-        bool alwaysCrits, int damageInstances = 1)
+        bool alwaysCrits, double lifeSteal, int damageInstances = 1)
     {
         Target = SkillTarget.Enemy;
         DamageType = damageType;
@@ -28,6 +29,7 @@ public class DealDamage : IActiveSkillEffect
         CanCrit = canCrit;
         AlwaysCrits = alwaysCrits;
         DamageInstances = damageInstances;
+        LifeSteal = lifeSteal;
     }
 
     private double CalculateDamage(Character caster, Character enemy)
@@ -46,16 +48,27 @@ public class DealDamage : IActiveSkillEffect
     }
 
     public void Execute(Character caster, Character enemy, string source)
-    {    
+    {
+        var damage = 0.0;
         for (var i = 0; i < DamageInstances; i++)
-            switch (Target)
+        {
+            damage = Target switch
             {
-                case SkillTarget.Self:
-                    caster.TakeDamage(DamageType, CalculateDamage(caster, enemy));
-                    break;
-                case SkillTarget.Enemy:
-                    enemy.TakeDamage(DamageType, CalculateDamage(caster, enemy));
-                    break;
-            }
+                SkillTarget.Self => caster.TakeDamage(DamageType, CalculateDamage(caster, enemy)),
+                SkillTarget.Enemy => enemy.TakeDamage(DamageType, CalculateDamage(caster, enemy)),
+                _ => damage
+            };
+            if (LifeSteal > 0 && damage > 0)
+                switch (Target)
+                {
+                    case SkillTarget.Self:
+                        enemy.Heal(damage * LifeSteal);
+                        break;
+                    case SkillTarget.Enemy:
+                        caster.Heal(damage * LifeSteal);
+                        break;
+                }
+        }
+        
     }
 }

@@ -13,6 +13,18 @@ public class DebuffResistance : IActiveSkillEffect
     public double DebuffChance { get; set; }
     public int DebuffDuration { get; set; }
 
+    public DebuffResistance(SkillTarget target, StatusEffectType resistanceToDebuff,
+        ModifierType modifier, double debuffStrength, double debuffChance, int debuffDuration)
+    {
+        Target = target;
+        ResistanceToDebuff = resistanceToDebuff;
+        ModifierType = modifier;
+        DebuffStrength = debuffStrength;
+        DebuffChance = debuffChance;
+        DebuffDuration = debuffDuration;
+    }
+    public DebuffResistance() {}
+
     public void Execute(Character caster, Character enemy, string source)
     {
         switch (Target)

@@ -1,86 +1,44 @@
+using ConsoleGodmist.Combat.Modifiers;
+using ConsoleGodmist.Combat.Skills;
+using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Items.Armors;
+using ConsoleGodmist.Items.Weapons;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Characters
 {
     public class Scout : PlayerCharacter {
-        public new double MaximalHealth
-        {
-            get
-            {
-                return EngineMethods.ScaledStat(_maximalHealth, 10D, Level);
-            }
-            protected set { 
-                _maximalHealth = value;
-            }
-        }
-        public new double MinimalAttack {
-            get {
-                return EngineMethods.ScaledStat(_minimalAttack, 0.8D, Level);
-            }
-            protected set {
-                _minimalAttack = value;
-            }
-        }
-        public new double MaximalAttack {
-            get {
-                return EngineMethods.ScaledStat(_maximalAttack, 1.1D, Level);
-            }
-            protected set {
-                _maximalAttack = value;
-            }
-        }
-        public new double Dodge {
-            get {
-                return EngineMethods.ScaledStat(_dodge, 0.08D, Level);
-            }
-            private set {
-                _dodge = value; 
-            }
-        }
-        public new double PhysicalDefense {
-            get {
-                return EngineMethods.ScaledStat(_physicalDefense, 0.33D, Level);
-            }
-            set {
-                _physicalDefense = value;
-            }
-        }
-        public new double MagicDefense {
-            get {
-                return EngineMethods.ScaledStat(_magicDefense, 0.2D, Level);
-            }
-            set {
-                _magicDefense = value;
-            }
-        }
+        public override string Name { get; set; }
         // Momentum
         // Maximal is capped at 200
         // Each turn gain momentum equal to 20% of your speed, 10% if at 100 or above
         // Gain 1 speed for every 10 Momentum (up to 20)
         // As with all classes, used for casting skills, downside to using is losing bonus speed
-        private double _maximalMomentum;
-        public double MaximalMomentum
-        {
-            get
-            {
-                return _maximalMomentum;
-            }
-            protected set { 
-                _maximalMomentum = value;
-            }
+        public Scout(string name) : base(name, new Stat(300, 10),
+            new Stat(18, 0.8), new Stat(36, 1.1),
+            new Stat(0, 0), new Stat(17, 0.08),
+            new Stat(8, 0.33), new Stat(4, 0.2),
+            new Stat(55, 0), new Stat(0, 0),
+            new Stat(1, 0), CharacterClass.Scout) {
+            _maximalResource = new Stat(200, 0);
+            CurrentResource = 0;
+            ResourceType = ResourceType.Momentum;
+            Speed = _speed.BaseValue;
+            SwitchWeapon(new Weapon(CharacterClass.Scout));
+            SwitchArmor(new Armor(CharacterClass.Scout));
+            ActiveSkills[0] = new ActiveSkill("DaggerThrow", 0, false, 82,
+            [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0)]);
+            ActiveSkills[1] = new ActiveSkill("Exchange", 40, false, 74,
+                [new DebuffStat(SkillTarget.Enemy, StatType.Dodge, ModifierType.Additive, 15, 0.8, 3)]);
+            ActiveSkills[2] = new ActiveSkill("CloudOfSmoke", 50, false, 70,
+                [new DebuffStat(SkillTarget.Enemy, StatType.Accuracy, ModifierType.Additive, 20, 0.8, 3)]);
+            ActiveSkills[3] = new ActiveSkill("Hookshot", 25, false, 80,
+            [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0),
+                new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Stun, "Hookshot", 3), 0.75)]);
+            ActiveSkills[4] = new ActiveSkill("AccurateThrow", 50, true, 85,
+            [new DealDamage(DamageType.Physical, DamageBase.Maximal, 1, true, true, 0)]);
         }
-        private double _currentMomentum;
-        public double CurrentMomentum {
-            get {
-                return _currentMomentum;
-            }
-            private set {
-                _currentMomentum = Math.Clamp(value, 0, MaximalMomentum);
-            }
-        }
-        public Scout(string name) : base(name, 300, 18, 36, 0.24D, 17, 8, 4, 55, CharacterClass.Scout) {
-            MaximalMomentum = 200;
-            CurrentMomentum = 0;
-        }
+        public Scout() {}
     }
 }

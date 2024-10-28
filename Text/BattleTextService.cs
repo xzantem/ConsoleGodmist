@@ -11,34 +11,32 @@ public static class BattleTextService
 {
     public static void DisplayStatusText(PlayerCharacter player, EnemyCharacter enemy)
     {
-        var playerResource = player.ResourceType switch
-        {
-            ResourceType.Fury => "RP",
-            ResourceType.Mana => "MP",
-            ResourceType.Momentum => "SP"
-        };
-        var enemyResource = enemy.ResourceType switch
-        {
-            ResourceType.Fury => "RP",
-            ResourceType.Mana => "MP",
-            ResourceType.Momentum => "SP"
-        };
         var playerShields = player.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
             ? $"(+{player.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
-                .Cast<Shield>().Sum(s => s.Strength)})"
+                .Cast<Shield>().Sum(s => s.Strength):F0})"
             : "";
-        var enemyShields = player.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
+        var enemyShields = enemy.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
             ? $"(+{player.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
-                .Cast<Shield>().Sum(s => s.Strength)})"
+                .Cast<Shield>().Sum(s => s.Strength):F0})"
             : "";
         AnsiConsole.Write(new Text($"\n{player.Name}, {locale.Level} {player.Level}", Stylesheet.Styles["success"]));
         AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)player.CurrentHealth}{playerShields}/{(int)player.MaximalHealth}" +
-                                   $", {playerResource}: {(int)player.CurrentResource}/{(int)player.MaximalResource}\n"
+                                   $", {ResourceShortText(player)}: {(int)player.CurrentResource}/{(int)player.MaximalResource}\n"
             , Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{enemy.Name}, {locale.Level} {enemy.Level}", Stylesheet.Styles["failure"]));
         AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)enemy.CurrentHealth}{enemyShields}/{(int)enemy.MaximalHealth}" +
-                                   $", {enemyResource}: {(int)enemy.CurrentResource}/{(int)enemy.MaximalResource}\n\n"
+                                   $", {ResourceShortText(enemy)}: {(int)enemy.CurrentResource}/{(int)enemy.MaximalResource}\n\n"
             , Stylesheet.Styles["default"]));
+    }
+
+    public static string ResourceShortText(Character character)
+    {
+        return character.ResourceType switch
+        {
+            ResourceType.Fury => locale.FuryShort,
+            ResourceType.Mana => locale.ManaShort,
+            ResourceType.Momentum => locale.MomentumShort
+        };
     }
 
     public static void DisplayMovementText(Character moving)
@@ -95,13 +93,13 @@ public static class BattleTextService
             ResourceType.Momentum => "SP"
         };
         AnsiConsole.Write(new Text($"\n{target.Name}, {locale.Level} {target.Level} ", Stylesheet.Styles["highlight-good"]));
-        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)target.CurrentHealth}/{(int)target.MaximalHealth}" +
-                                  $", {resourceType}: {(int)target.CurrentResource}/{(int)target.MaximalResource}\n" +
-                                  $"{locale.Attack}: {target.MinimalAttack}-{target.MaximalAttack}, {locale.Crit}: " +
+        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {target.CurrentHealth:F0}/{target.MaximalHealth:F0}" +
+                                  $", {resourceType}: {target.CurrentResource:F0}/{target.MaximalResource:F0}\n" +
+                                  $"{locale.Attack}: {target.MinimalAttack:F0}-{target.MaximalAttack:F0}, {locale.Crit}: " +
                                   $"{target.CritChance:P2} [{target.CritMod:F2}x]\n" +
-                                  $"{locale.Accuracy}: {(int)target.Accuracy}, {locale.Speed}: {target.Speed}\n" +
-                                  $"{locale.Defense}: {target.PhysicalDefense} | {target.MagicDefense}, " +
-                                  $"{locale.Dodge}: {target.Dodge}\n\n", Stylesheet.Styles["default"]));
+                                  $"{locale.Accuracy}: {(int)target.Accuracy:F0}, {locale.Speed}: {target.Speed:F0}\n" +
+                                  $"{locale.Defense}: {target.PhysicalDefense:F0} | {target.MagicDefense:F0}, " +
+                                  $"{locale.Dodge}: {target.Dodge:F0}\n\n", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{locale.Resistances}\n", Stylesheet.Styles["default-bold"]));
         AnsiConsole.Write(new Text($"{locale.Debuff}: {target.Resistances[StatusEffectType.Debuff].Value():P0}, " +
                                    $"{locale.Stun}: {target.Resistances[StatusEffectType.Stun].Value():P0}, " +

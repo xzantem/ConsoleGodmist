@@ -206,8 +206,8 @@
     <data name="GoDown" xml:space="preserve">
     <value>Go down</value>
   </data>
-    <data name="RestAtCampfire" xml:space="preserve">
-    <value>Rest at campfire</value>
+    <data name="RestAtBonfire" xml:space="preserve">
+    <value>Rest at bonfire</value>
   </data>
     <data name="CollectPlant" xml:space="preserve">
     <value>Collect plant</value>
@@ -682,5 +682,44 @@
   </data>
   <data name="IsPoisoned" xml:space="preserve">
     <value>is poisoned</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="NoSavesFound" xml:space="preserve">
+    <value>No saves found</value>
+  </data>
+  <data name="RestedAtBonfire" xml:space="preserve">
+    <value>You rest at the bonfire until it goes out</value>
+  </data>
+  <data name="Ambushed" xml:space="preserve">
+    <value>Ambush! You were interrupted by enemy ambush while resting</value>
+  </data>
+  <data name="Ambush" xml:space="preserve">
+    <value>Ambush</value>
+  </data>
+  <data name="Regenerates" xml:space="preserve">
+    <value>regenerates</value>
+  </data>
+  <data name="FuryGenitive" xml:space="preserve">
+    <value>fury</value>
+  </data>
+  <data name="FuryShort" xml:space="preserve">
+    <value>FP</value>
+  </data>
+  <data name="ManaShort" xml:space="preserve">
+    <value>MP</value>
+  </data>
+  <data name="MomentumShort" xml:space="preserve">
+    <value>SP</value>
+  </data>
+  <data name="HealthShort" xml:space="preserve">
+    <value>HP</value>
+  </data>
+  <data name="ManaGenitive" xml:space="preserve">
+    <value>mana</value>
+  </data>
+  <data name="MomentumGenitive" xml:space="preserve">
+    <value>momentum</value>
   </data>
 </root>

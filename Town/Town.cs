@@ -6,6 +6,7 @@ using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using ConsoleGodmist.Items.Weapons;
+using ConsoleGodmist.TextService;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town

@@ -13,6 +13,18 @@ public class DebuffStat : IActiveSkillEffect
     public double DebuffChance { get; set; }
     public int DebuffDuration { get; set; }
 
+    public DebuffStat(SkillTarget target, StatType statToDebuff, ModifierType modifierType, double debuffStrength,
+        double debuffChance, int debuffDuration)
+    {
+        Target = target;
+        StatToDebuff = statToDebuff;
+        ModifierType = modifierType;
+        DebuffStrength = debuffStrength;
+        DebuffChance = debuffChance;
+        DebuffDuration = debuffDuration;
+    }
+    public DebuffStat() {}
+
     public void Execute(Character caster, Character enemy, string source)
     {
         switch (Target)

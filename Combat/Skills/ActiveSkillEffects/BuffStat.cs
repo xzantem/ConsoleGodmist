@@ -13,6 +13,18 @@ public class BuffStat : IActiveSkillEffect
     public double BuffChance { get; set; }
     public int BuffDuration { get; set; }
 
+    public BuffStat(SkillTarget target, StatType statToBuff, ModifierType modifierType, double buffStrength,
+        double buffChance, int buffDuration)
+    {
+        Target = target;
+        StatToBuff = statToBuff;
+        ModifierType = modifierType;
+        BuffStrength = buffStrength;
+        BuffChance = buffChance;
+        BuffDuration = buffDuration;
+    }
+    public BuffStat() {}
+
     public void Execute(Character caster, Character enemy, string source)
     {
         switch (Target)

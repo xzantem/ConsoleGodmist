@@ -1,96 +1,65 @@
+using ConsoleGodmist.Combat.Modifiers;
+using ConsoleGodmist.Combat.Skills;
+using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Items.Armors;
+using ConsoleGodmist.Items.Weapons;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Characters
 {
     public class Sorcerer : PlayerCharacter {
-        public new double MaximalHealth
-        {
-            get
-            {
-                return EngineMethods.ScaledStat(_maximalHealth, 7.5D, Level);
-            }
-            protected set { 
-                _maximalHealth = value;
-            }
-        }
-        public new double MinimalAttack {
-            get {
-                return EngineMethods.ScaledStat(_minimalAttack, 1D, Level);
-            }
-            protected set {
-                _minimalAttack = value;
-            }
-        }
-        public new double MaximalAttack {
-            get {
-                return EngineMethods.ScaledStat(_maximalAttack, 1.3D, Level);
-            }
-            protected set {
-                _maximalAttack = value;
-            }
-        }
-        public new double Dodge {
-            get {
-                return EngineMethods.ScaledStat(_dodge, 0.04D, Level);
-            }
-            private set {
-                _dodge = value; 
-            }
-        }
-        public new double PhysicalDefense {
-            get {
-                return EngineMethods.ScaledStat(_physicalDefense, 0.25D, Level);
-            }
-            set {
-                _physicalDefense = value;
-            }
-        }
-        public new double MagicDefense {
-            get {
-                return EngineMethods.ScaledStat(_magicDefense, 0.5D, Level);
-            }
-            set {
-                _magicDefense = value;
-            }
-        }
+        public override string Name { get; set; }
         // Mana
         // Capped at 120, increased through various means, such as weapons or galdurites or potions
         // Start battle with full Mana, regenerates passively each turn by 15 (also can be increased)
-        private double _maximalMana;
-        public double MaximalMana
+        public Sorcerer(string name) : base(name, new Stat(250, 7.5),
+            new Stat(27, 1), new Stat(36, 1.3),
+            new Stat(0, 0), new Stat(6, 0.04),
+            new Stat(6, 0.25), new Stat(12, 0.5),
+            new Stat(45, 0), new Stat(100, 0),
+            new Stat(1, 0), CharacterClass.Sorcerer) {
+            _maximalResource = new Stat(120, 0);
+            _resourceRegen = new Stat(15, 0);
+            CurrentResource = MaximalResource;
+            ResourceType = ResourceType.Mana;
+            SwitchWeapon(new Weapon(CharacterClass.Sorcerer));
+            SwitchArmor(new Armor(CharacterClass.Sorcerer));
+            ActiveSkills[0] = new ActiveSkill("EnergyOrb", 5, true, 100,
+            [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 0)]);
+            ActiveSkills[1] = new ActiveSkill("Fireball", 60, true, 100,
+                [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 0),
+                new InflictDoTStatusEffect(SkillTarget.Enemy, 3, 0.8, "Fireball", StatusEffectType.Burn, 0.75)]);
+            ActiveSkills[2] = new ActiveSkill("Focus", 0, true, 100,
+            [new TradeHealthForResource(SkillTarget.Self, 0.1, 2)]);
+            ActiveSkills[3] = new ActiveSkill("MagicShield", 80, true, 100,
+            [new GainShield(SkillTarget.Self, "MagicShield", DamageBase.Random, 2, 1, -1)]);
+            ActiveSkills[4] = new ActiveSkill("ExhaustingSpells", -1, true, 100,
+            [new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Buff, "ExhaustingSpells", -1, "Halts mana regen, but attacks have a 70% chance to slow by 12 for 3 turns"), 1, SkillTarget.Self)]);
+        }
+        public Sorcerer() {}
+
+        public void SwitchWeapon(Weapon weapon)
         {
-            get
+            if (Weapon != null)
             {
-                return _maximalMana;
+                var oldWeapon = Weapon;
+                Inventory.AddItem(oldWeapon);
+                MinimalAttack += weapon.MinimalAttack - oldWeapon.MinimalAttack;
+                MaximalAttack += weapon.MaximalAttack - oldWeapon.MaximalAttack;
+                ResourceRegen += weapon.CritChance - oldWeapon.CritChance;
+                CritMod += weapon.CritMod - oldWeapon.CritMod;
+                MaximalResource += weapon.Accuracy - oldWeapon.Accuracy;
             }
-            protected set { 
-                _maximalMana = value;
-            }
-        }
-        private double _currentMana;
-        public double CurrentMana {
-            get {
-                return _currentMana;
-            }
-            private set {
-                _currentMana = Math.Clamp(value, 0, MaximalMana);
-            }
-        }
-        private double _manaRegen;
-        public double ManaRegen
-        {
-            get
+            else
             {
-                return _manaRegen;
+                MinimalAttack += weapon.MinimalAttack;
+                MaximalAttack += weapon.MaximalAttack;
+                ResourceRegen += weapon.CritChance;
+                CritMod += weapon.CritMod;
+                MaximalResource += weapon.Accuracy;
             }
-            protected set { 
-                _manaRegen = value;
-            }
-        }
-        public Sorcerer(string name) : base(name, 250, 27, 36, 0, 6, 6, 12, 45, CharacterClass.Sorcerer) {
-            MaximalMana = 120;
-            CurrentMana = MaximalMana;
-            ManaRegen = 15;
+            Weapon = weapon;
         }
     }
 }

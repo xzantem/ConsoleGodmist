@@ -48,7 +48,7 @@ public class Battle
                                      .FirstOrDefault(x => x.Key != user).Key.User as EnemyCharacter);
                         break;
                     case 1:
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1000);
                         AIMove(user.User as EnemyCharacter, EngineMethods
                             .RandomChoice(Users
                                 .Where(x => x.Key != user)
@@ -70,18 +70,19 @@ public class Battle
     {
         StatusEffectHandler.HandleEffects(user.StatusEffects, user);
         user.HandleModifiers();
+        user.RegenResource((int)user.ResourceRegen);
         //Handle Potion Effects
     }
 
     public bool ChooseSkill(PlayerCharacter player, Character target)
     {
-        var skills = player.ActiveSkills.Select(x => x.Name).ToArray();
-        var choices = skills.Append(locale.GoBack).ToArray();
+        var skills = player.ActiveSkills
+            .Select(x => x.Name + $" ({x.ResourceCost} {BattleTextService.ResourceShortText(player)})").ToArray();
+        var choices = skills.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
-        if (choice == locale.GoBack) return false;
-        player.ActiveSkills[Array.IndexOf(choices, choice)].Use(player, target);
-        return true;
+        if (choice == locale.Return) return false;
+        return player.ActiveSkills[Array.IndexOf(choices, choice)].Use(player, target);;
     }
     public bool PlayerMove(PlayerCharacter player, EnemyCharacter target)
     {
@@ -142,12 +143,12 @@ public class Battle
     public void AIMove(EnemyCharacter enemy, Character target)
     {
         var possibleSkills = enemy.ActiveSkills
-            .Where(x => x.ResourceCost >= enemy.CurrentResource || 
+            .Where(x => x.ResourceCost <= enemy.CurrentResource || 
                         Math.Abs(enemy.MaximalResource - enemy.CurrentResource) < 0.01)
             .ToDictionary(x => x, x => 1);
         var usedSkill = EngineMethods.RandomChoice(possibleSkills);
         usedSkill.Use(enemy, target);
-        Thread.Sleep(2000);
+        Thread.Sleep(1000);
     }
 
     public int CheckForResult()

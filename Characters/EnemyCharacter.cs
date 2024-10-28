@@ -11,7 +11,7 @@ public class EnemyCharacter : Character
     public override string Name
     {
         get => locale.ResourceManager.GetString(Alias) == null ? Alias : locale.ResourceManager.GetString(Alias);
-        protected set {}
+        set {}
     }
 
     public DungeonType DefaultLocation { get; set; }

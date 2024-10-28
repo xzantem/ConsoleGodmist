@@ -1,8 +1,9 @@
-﻿using ConsoleGodmist.Enums;
+﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using Spectre.Console;
 
-namespace ConsoleGodmist.Characters;
+namespace ConsoleGodmist.TextService;
 
 public static class InventoryMenuHandler
 {
@@ -24,7 +25,7 @@ public static class InventoryMenuHandler
                         $"{1 + tempIndex++}. {item.Key.Name} - {item.Value}x" : 
                         $"{1 + tempIndex++}. {item.Key.Name}", item.Key.NameStyle())).ToList();
             AnsiConsole.Write(new Rows(rows.GetRange(index, Math.Min(pageSize, rows.Count - index))));
-            AnsiConsole.Write($"\n\n");
+            AnsiConsole.Write("\n\n");
             Dictionary<string, int> choices = [];
             if (index < rows.Count - scrollAmount)
                 choices.Add(locale.GoDown, 0);
@@ -35,7 +36,7 @@ public static class InventoryMenuHandler
             choices.Add(locale.DeleteJunk, 4);
             choices.Add(locale.SortInventory, 5);
             choices.Add(locale.UseItem, 6);
-            choices.Add(locale.GoBack, 7);
+            choices.Add(locale.Return, 7);
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices.Keys)
                 .HighlightStyle(new Style(Color.Gold3_1)));

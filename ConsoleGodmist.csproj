@@ -26,9 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Characters\Player\Paladin.cs" />
-    <Compile Remove="Characters\Player\Scout.cs" />
-    <Compile Remove="Characters\Player\Sorcerer.cs" />
     <Compile Update="locale.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -42,6 +39,7 @@
     <Content Include="bin\Debug\net6.0\json\enemies.json" />
     <Content Include="bin\Debug\net6.0\json\equipment-parts.json" />
     <Content Include="bin\Debug\net6.0\json\plant-drop-table.json" />
+    <Content Include="bin\Debug\net6.0\json\lootbag-drop-tables.json" />
   </ItemGroup>
 
 </Project>

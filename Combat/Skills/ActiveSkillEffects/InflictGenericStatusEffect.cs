@@ -35,7 +35,6 @@ public class InflictGenericStatusEffect : IActiveSkillEffect
                 if (Random.Shared.NextDouble() >=
                     EngineMethods.EffectChance(enemy.Resistances[StatusEffect.Type].Value(), Chance)) return;
                 StatusEffectHandler.AddStatusEffect(StatusEffect, enemy);
-                CharacterEventTextService.DisplayStatusEffectText(enemy, StatusEffect);
                 break;
         }
     }

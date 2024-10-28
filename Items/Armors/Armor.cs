@@ -170,9 +170,22 @@ public class Armor : IEquippable
                 Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Hauberk;
                 break;
             case CharacterClass.Scout:
+                Plate = EquipmentPartManager.GetPart<ArmorPlate>("HoleyPlate");
+                Binder = EquipmentPartManager.GetPart<ArmorBinder>("HoleyBinder");
+                Base = EquipmentPartManager.GetPart<ArmorBase>("HoleyBase");
+                Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Tunic;
+                break;
             case CharacterClass.Sorcerer:
+                Plate = EquipmentPartManager.GetPart<ArmorPlate>("TornPlate");
+                Binder = EquipmentPartManager.GetPart<ArmorBinder>("TornBinder");
+                Base = EquipmentPartManager.GetPart<ArmorBase>("TornBase");
+                Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Robe;
                 break;
             case CharacterClass.Paladin:
+                Plate = EquipmentPartManager.GetPart<ArmorPlate>("PiercedPlate");
+                Binder = EquipmentPartManager.GetPart<ArmorBinder>("PiercedBinder");
+                Base = EquipmentPartManager.GetPart<ArmorBase>("PiercedBase");
+                Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Cuirass;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(requiredClass), requiredClass, null);

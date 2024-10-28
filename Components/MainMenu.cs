@@ -22,7 +22,7 @@ namespace ConsoleGodmist.Components
                 switch (Array.IndexOf(choices, choice))
                 {
                     case 0: NewGame(); return;
-                    case 1: DataPersistanceManager.LoadGame(); return;
+                    case 1: if (DataPersistanceManager.LoadGame()) return; break;
                     case 2: DataPersistanceManager.DeleteSaveFile(); break;
                     case 3: ChooseLanguage(); break;
                     case 4: Environment.Exit(0); break;
@@ -99,9 +99,9 @@ namespace ConsoleGodmist.Components
             var name = AnsiConsole.Prompt(prompt);
             PlayerHandler.player = characterClass switch {
                 CharacterClass.Warrior => new Warrior(name),
-                CharacterClass.Scout => new Warrior(name),
-                CharacterClass.Sorcerer => new Warrior(name),
-                CharacterClass.Paladin => new Warrior(name),
+                CharacterClass.Scout => new Scout(name),
+                CharacterClass.Sorcerer => new Sorcerer(name),
+                CharacterClass.Paladin => new Paladin(name),
                 _ => throw new NotImplementedException()
             };
         }

@@ -4,6 +4,7 @@ using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using ConsoleGodmist.Items.Armors;
 using ConsoleGodmist.Items.Weapons;
+using ConsoleGodmist.TextService;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -61,8 +62,8 @@ namespace ConsoleGodmist.Characters
             }
         }
         public Inventory Inventory { get; private set; } = new();
-        public Weapon Weapon { get; private set; }
-        public Armor Armor { get; private set; }
+        public Weapon Weapon { get; protected set; }
+        public Armor Armor { get; protected set; }
 
         public void SwitchWeapon(Weapon weapon)
         {

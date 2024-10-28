@@ -20,7 +20,7 @@ public class InflictDoTStatusEffect : IActiveSkillEffect
     public InflictDoTStatusEffect(SkillTarget target, int duration, double strength, string source,
         StatusEffectType doTType, double chance)
     {
-        if (DoTType != StatusEffectType.Bleed && DoTType != StatusEffectType.Poison && DoTType != StatusEffectType.Burn)
+        if (doTType != StatusEffectType.Bleed && doTType != StatusEffectType.Poison && doTType != StatusEffectType.Burn)
         {
             throw new ArgumentException("Invalid DoT type. Must be Bleed, Poison, or Burn.");
         }

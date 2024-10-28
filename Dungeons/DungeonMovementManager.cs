@@ -1,6 +1,9 @@
-﻿using ConsoleGodmist.Characters;
+﻿using System.Runtime.CompilerServices;
+using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Battles;
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.TextService;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Dungeons;
@@ -12,7 +15,6 @@ public static class DungeonMovementManager
     private static int LocationIndex { get; set; }
     private static int LastMovement { get; set; }
     private static bool Exited { get; set; }
-    private static List<Text> Log { get; set; }
 
     public static void EnterDungeon(Dungeon dungeon)
     {
@@ -20,7 +22,6 @@ public static class DungeonMovementManager
             throw new Exception("Attempted to enter new dungeon, but player is already in a dungeon!");
         Exited = false;
         CurrentDungeon = dungeon;
-        Log = [];
         CurrentLocation = CurrentDungeon.CurrentFloor.StarterRoom;
         LocationIndex = 0;
         LastMovement = 0;
@@ -30,100 +31,8 @@ public static class DungeonMovementManager
     
     private static void DisplayCurrentFloorMap()
     {
-        var locationText = CurrentDungeon.DungeonType switch
-        {
-            DungeonType.Catacombs => locale.Catacombs,
-            DungeonType.Forest => locale.Forest,
-            DungeonType.ElvishRuins => locale.ElvishRuins,
-            DungeonType.Cove => locale.Cove,
-            DungeonType.Desert => locale.Desert,
-            DungeonType.Temple => locale.Temple,
-            DungeonType.Mountains => locale.Mountains,
-            DungeonType.Swamp => locale.Swamp,
-            _ => locale.Catacombs,
-        };
-        var color = CurrentDungeon.DungeonType switch
-        {
-            DungeonType.Catacombs => Color.Grey37,
-            DungeonType.Forest => Color.DarkSeaGreen4_1,
-            DungeonType.ElvishRuins => Color.Orange4_1,
-            DungeonType.Cove => Color.DeepSkyBlue3,
-            DungeonType.Desert => Color.Tan,
-            DungeonType.Temple => Color.Gold1,
-            DungeonType.Mountains => Color.Grey70,
-            DungeonType.Swamp => Color.DarkGreen,
-            _ => Color.White,
-        };
-        AnsiConsole.Write(new FigletText(locationText).Centered().Color(color));
-        foreach (var log in Log)
-            AnsiConsole.Write(log);
-        Log.Clear();
-        string floor = CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor) == 0
-            ? (CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor)).ToString()
-            : ("-" + CurrentDungeon.Floors.IndexOf(CurrentDungeon.CurrentFloor));
-        string visited = (CurrentDungeon.Floors.Count - 1) == 0
-            ? (CurrentDungeon.Floors.Count - 1).ToString()
-            : ("-" + (CurrentDungeon.Floors.Count - 1));
-        locationText = locale.Level + " " + CurrentDungeon.DungeonLevel + ", " + 
-                       locale.Floor + " " + floor + " [" +
-                        visited + "]\n" + locale.Map + ":";
-        AnsiConsole.WriteLine(locationText);
-        if (CurrentDungeon.CurrentFloor.StarterRoom.Revealed)
-        {
-            switch (CurrentDungeon.CurrentFloor.StarterRoom.FieldType)
-            {
-                case DungeonFieldType.Battle:
-                    AnsiConsole.Write(new Text("[W]", Stylesheet.Styles["dungeon-icon-battle"]));
-                    break;
-                case DungeonFieldType.Empty:
-                    AnsiConsole.Write(new Text("[Z]", Stylesheet.Styles["dungeon-icon-exit"]));
-                    break;
-            }
-        }
-        else
-        {
-            AnsiConsole.Write(new Text("[?]", Stylesheet.Styles["dungeon-default"]));
-        }
-        Console.Write("--");
-        foreach (var corridor in CurrentDungeon.CurrentFloor.Corridor)
-        {
-            if (corridor.Revealed)
-            {
-                switch (corridor.FieldType)
-                {
-                    case DungeonFieldType.Battle:
-                        AnsiConsole.Write(new Text("[W]", Stylesheet.Styles["dungeon-icon-battle"]));
-                        break;
-                    case DungeonFieldType.Stash:
-                        AnsiConsole.Write(new Text("[S]", Stylesheet.Styles["dungeon-icon-stash"]));
-                        break;
-                    case DungeonFieldType.Campfire:
-                        AnsiConsole.Write(new Text("[O]", Stylesheet.Styles["dungeon-icon-campfire"]));
-                        break;
-                    case DungeonFieldType.Trap:
-                        AnsiConsole.Write(new Text("[P]", Stylesheet.Styles["dungeon-icon-trap"]));
-                        break;
-                    case DungeonFieldType.Empty:
-                        AnsiConsole.Write(new Text("[X]", Stylesheet.Styles["dungeon-default"]));
-                        break;
-                    case DungeonFieldType.Plant:
-                        AnsiConsole.Write(new Text("[R]", Stylesheet.Styles["dungeon-icon-plant"]));
-                        break;
-                }
-            }
-            else
-            {
-                AnsiConsole.Write(new Text("[?]", Stylesheet.Styles["dungeon-icon-unrevealed"]));
-            }
-            AnsiConsole.Write("-");
-        }
-        AnsiConsole.Write("-");
-        AnsiConsole.Write(new Text("[Z]\n", Stylesheet.Styles["dungeon-icon-exit"]));
-        var pos = " ";
-        if (LocationIndex > 0)
-            pos += new String(' ', LocationIndex * 4 + 1);
-        if (CurrentLocation == CurrentDungeon.CurrentFloor.EndRoom) pos += " ";
-        AnsiConsole.Write(pos + "^\n");
+        DungeonTextService.DisplayDungeonHeader(CurrentDungeon);
+        DungeonTextService.DisplayDungeonMap(CurrentDungeon, LocationIndex, CurrentLocation);
     }
 
     public static void TraverseDungeon()
@@ -149,14 +58,26 @@ public static class DungeonMovementManager
                     //Show Character Info
                     break;
                 case 5:
-                    //Rest at Campfire
+                    PlayerHandler.player.Heal(PlayerHandler.player.MaximalHealth / 4);
+                    var ambushed = Random.Shared.NextDouble() < 0.2;
+                    DungeonTextService.DisplayRestAtBonfire(ambushed);
+                    if (ambushed)
+                    {
+                        PlayerHandler.player.AddModifier(StatType.Dodge, new StatModifier(ModifierType.Absolute, -20, locale.Ambush, 5));
+                        PlayerHandler.player.AddModifier(StatType.Accuracy, new StatModifier(ModifierType.Absolute, -10, locale.Ambush, 5));
+                        BattleManager.StartNewBattle(new Dictionary<BattleUser, int>
+                        {
+                            { new BattleUser(PlayerHandler.player), 0 },
+                            { new BattleUser(EnemyFactory.CreateEnemy(CurrentDungeon.DungeonType, CurrentDungeon.DungeonLevel)), 1 }
+                        });
+                    }
+                    CurrentLocation.Clear();
                     break;
                 case 6:
                     var plant = PlantDropManager.DropDatabase[CurrentDungeon.DungeonType]
                         .GetDrop(CurrentDungeon.DungeonLevel);
+                    DungeonTextService.DisplayCollectPlantText(plant.Key);
                     PlayerHandler.player.Inventory.AddItem(plant.Key, plant.Value);
-                    Log.Add(new Text($"{locale.PlantCollected}: {plant.Key.Name}\n"
-                        , Stylesheet.Styles["dungeon-collect-plant"]));
                     CurrentLocation.Clear();
                     break;
                 case 7:
@@ -165,14 +86,13 @@ public static class DungeonMovementManager
                 case 8:
                     var trap = CurrentDungeon.CurrentFloor.Traps
                         .FirstOrDefault(x => x.Location == CurrentDungeon.CurrentFloor.Corridor[LocationIndex]);
-                    if (trap.Activate())
+                    var disarmed = trap.Activate();
+                    if (disarmed)
                     {
                         trap.Disarm();
                         CurrentDungeon.CurrentFloor.Traps.Remove(trap);
-                        Log.Add(new Text($"{locale.TrapDisarmed}!\n", Stylesheet.Styles["success"]));
                     }
-                    else
-                        Log.Add(new Text($"{locale.TrapDisarmedFail}!\n", Stylesheet.Styles["failure"]));
+                    DungeonTextService.DisplayTrapDisarmText(disarmed);
                     break;
                 default:
                     AnsiConsole.Write(new Text("Invalid action.\n", Stylesheet.Styles["error"]));
@@ -212,8 +132,8 @@ public static class DungeonMovementManager
         }
         switch (CurrentLocation.FieldType)
         {
-            case DungeonFieldType.Campfire:
-                choices.Add(locale.RestAtCampfire, 5);
+            case DungeonFieldType.Bonfire:
+                choices.Add(locale.RestAtBonfire, 5);
                 break;
             case DungeonFieldType.Plant:
                 choices.Add(locale.CollectPlant, 6);
@@ -315,9 +235,8 @@ public static class DungeonMovementManager
                 if (!trap.Activate())
                     trap.Trigger();
                 else
-                    Log.Add(new Text($"{locale.TrapDisarmed}!\n", Stylesheet.Styles["success"]));
+                    DungeonTextService.DisplayTrapDisarmText(true);
                 break;
-                    
         }
     }
 }
