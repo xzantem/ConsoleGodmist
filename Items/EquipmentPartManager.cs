@@ -2,8 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using ConsoleGodmist.Combat.Skills;
-using ConsoleGodmist.Items.Armors;
-using ConsoleGodmist.Items.Weapons;
 using Newtonsoft.Json;
 using Spectre.Console;
 

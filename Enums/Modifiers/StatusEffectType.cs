@@ -14,5 +14,6 @@ public enum StatusEffectType
     Invisible, // User cannot be targeted by skills
     Paralysis, // User is unable to act, and cannot be targeted by skills
     Provocation, // User's skill target must be the person who caused the provocation
-    Shield // Blocks a certain amount of damage in place of health
+    Shield, // Blocks a certain amount of damage in place of health
+    Regeneration, // Regens a certain amount of health/resource per turn
 }

@@ -34,7 +34,7 @@ public static class DataPersistanceManager
         var prompt = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices).HighlightStyle(new Style(Color.Gold3_1)));
         if (prompt == locale.Return) return false;
         var json = File.ReadAllText(dir + "/" + prompt + ".json");
-        PlayerHandler.player  = JsonConvert.DeserializeObject<PlayerCharacter>(json);
+        PlayerHandler.player = JsonConvert.DeserializeObject<PlayerCharacter>(json);
         return true;
     }
     

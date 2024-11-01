@@ -9,23 +9,23 @@ namespace ConsoleGodmist.TextService;
 
 public static class BattleTextService
 {
-    public static void DisplayStatusText(PlayerCharacter player, EnemyCharacter enemy)
+    public static void DisplayStatusText(BattleUser player, BattleUser enemy)
     {
-        var playerShields = player.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
-            ? $"(+{player.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
+        var playerShields = player.User.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
+            ? $"(+{player.User.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
                 .Cast<Shield>().Sum(s => s.Strength):F0})"
             : "";
-        var enemyShields = enemy.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
-            ? $"(+{player.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
+        var enemyShields = enemy.User.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
+            ? $"(+{player.User.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
                 .Cast<Shield>().Sum(s => s.Strength):F0})"
             : "";
-        AnsiConsole.Write(new Text($"\n{player.Name}, {locale.Level} {player.Level}", Stylesheet.Styles["success"]));
-        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)player.CurrentHealth}{playerShields}/{(int)player.MaximalHealth}" +
-                                   $", {ResourceShortText(player)}: {(int)player.CurrentResource}/{(int)player.MaximalResource}\n"
+        AnsiConsole.Write(new Text($"\n{player.User.Name}, {locale.Level} {player.User.Level} ({player.ActionValue})", Stylesheet.Styles["success"]));
+        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)player.User.CurrentHealth}{playerShields}/{(int)player.User.MaximalHealth}" +
+                                   $", {ResourceShortText(player.User)}: {(int)player.User.CurrentResource}/{(int)player.User.MaximalResource}\n"
             , Stylesheet.Styles["default"]));
-        AnsiConsole.Write(new Text($"{enemy.Name}, {locale.Level} {enemy.Level}", Stylesheet.Styles["failure"]));
-        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)enemy.CurrentHealth}{enemyShields}/{(int)enemy.MaximalHealth}" +
-                                   $", {ResourceShortText(enemy)}: {(int)enemy.CurrentResource}/{(int)enemy.MaximalResource}\n\n"
+        AnsiConsole.Write(new Text($"{enemy.User.Name}, {locale.Level} {enemy.User.Level} ({enemy.ActionValue})", Stylesheet.Styles["failure"]));
+        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)enemy.User.CurrentHealth}{enemyShields}/{(int)enemy.User.MaximalHealth}" +
+                                   $", {ResourceShortText(enemy.User)}: {(int)enemy.User.CurrentResource}/{(int)enemy.User.MaximalResource}\n\n"
             , Stylesheet.Styles["default"]));
     }
 
@@ -62,7 +62,7 @@ public static class BattleTextService
         var segments = battleUsers
             .Select(battleUser => $"{battleUser.Key.User.Name} ({battleUser.Key.ActionValue})")
             .ToList();
-        AnsiConsole.Write(new Text($"{locale.TurnOrder}: [{string.Join(" -> ", segments)}]\n", Stylesheet.Styles["dungeon-icon-exit"]));
+        AnsiConsole.Write(new Text($"{locale.TurnOrder}: [{string.Join(" -> ", segments)}]\n", Stylesheet.Styles["default"]));
     }
 
     public static void DisplayBattleStartText(EnemyCharacter enemy)
@@ -82,6 +82,10 @@ public static class BattleTextService
     public static void DisplayEscapeSuccessText()
     {
         AnsiConsole.Write(new Text($"{locale.EscapeSuccess}!\n\n", Stylesheet.Styles["success"]));
+    }
+    public static void DisplayCannotMoveText(Character target)
+    {
+        AnsiConsole.Write(new Text($"{target.Name} {locale.CannotMove}\n", Stylesheet.Styles["highlight-bad"]));
     }
 
     public static void DisplayBattleStatsText(Character target)
@@ -108,12 +112,13 @@ public static class BattleTextService
                                    $"{locale.Poison}: {target.Resistances[StatusEffectType.Poison].Value():P0}, " +
                                    $"{locale.Burn}: {target.Resistances[StatusEffectType.Burn].Value():P0}\n" +
                                    $"{locale.Frostbite}: {target.Resistances[StatusEffectType.Frostbite].Value():P0}, " +
+                                   $"{locale.Sleep}: {target.Resistances[StatusEffectType.Sleep].Value():P0}, " +
                                    $"{locale.Paralysis}: {target.Resistances[StatusEffectType.Paralysis].Value():P0}, " +
                                    $"{locale.Provocation}: {target.Resistances[StatusEffectType.Provocation].Value():P0}\n\n", 
             Stylesheet.Styles["default"]));
     }
 
-    public static void DisplayBattleStatusText(Character target)
+    public static void DisplayStatusEffectText(Character target)
     {
         AnsiConsole.Write(new Text($"\n{target.Name}, {locale.Level} {target.Level}\n", Stylesheet.Styles["highlight-good"]));
         if (target.StatusEffects.Count == 0)
@@ -135,27 +140,50 @@ public static class BattleTextService
                     .Where(x => x.Type == StatusEffectType.Poison).Select(s => s.Source))}): {(int)dotsList
                     .Where(x => x.Type == StatusEffectType.Poison).Sum(s => s.Strength)} [{dotsList
                     .Where(x => x.Type == StatusEffectType.Poison).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-poison"]));
-            if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Sleep))
+            if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Burn))
                 AnsiConsole.Write(new Text($"{locale.Burn} ({string.Join(", ",dotsList
                     .Where(x => x.Type == StatusEffectType.Burn).Select(s => s.Source))}): {(int)dotsList
                     .Where(x => x.Type == StatusEffectType.Burn).Sum(s => s.Strength)} [{dotsList
                     .Where(x => x.Type == StatusEffectType.Burn).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-burn"]));
         }
+
         if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Sleep))
-            AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", target.StatusEffects
-                .Where(x => x.Type == StatusEffectType.Sleep).Select(s => s.Source))}): +" +
-               $"{(int)target.StatusEffects.Where(x => x.Type == StatusEffectType.Sleep)
-               .Cast<Sleep>().Sum(s => s.Strength)} [{target.StatusEffects
-               .Where(x => x.Type == StatusEffectType.Sleep).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+        {
+            var sleeps = target.StatusEffects
+                .Where(x => x.Type == StatusEffectType.Sleep).Cast<Sleep>().ToList();
+            AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", sleeps
+                .Select(s => s.Source))}): +{(int)sleeps.Sum(s => s.Strength)} [{sleeps
+                .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+        }
         if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Shield))
-            AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", target.StatusEffects
-                .Where(x => x.Type == StatusEffectType.Shield).Select(s => s.Source))}): +" +
-                                       $"{(int)target.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
-                                           .Cast<Sleep>().Sum(s => s.Strength)} [{target.StatusEffects
-                                           .Where(x => x.Type == StatusEffectType.Shield).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+        {
+            var shields = target.StatusEffects
+                .Where(x => x.Type == StatusEffectType.Shield).Cast<Shield>().ToList();
+            AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", shields
+                .Select(s => s.Source))}): +{(int)shields.Sum(s => s.Strength)} [{shields
+                .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+        }
+        if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Regeneration))
+        {
+            var regens = target.StatusEffects
+                .Where(x => x.Type == StatusEffectType.Regeneration).Cast<Regeneration>().ToList();
+            var regensHealth = regens.Where(x => x.RegenType == "Health").ToList();
+            var regensResource = regens.Where(x => x.RegenType == "Resource").ToList();
+            if (regensHealth.Count > 0)
+                AnsiConsole.Write(new Text($"{locale.Regeneration} ({string.Join(", ", regensHealth
+                    .Select(s => s.Source))}): +{(int)regensHealth
+                    .Sum(s => s.Strength)} {locale.HealthShort} [{regensHealth
+                    .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+            if (regensResource.Count > 0)
+                AnsiConsole.Write(new Text($"{locale.Regeneration} ({string.Join(", ", regensResource
+                    .Select(s => s.Source))}): +{(int)regensResource
+                    .Sum(s => s.Strength)} {ResourceShortText(target)} [{regensResource
+                    .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+        }
         var other = target.StatusEffects.Where(x => x.Type != StatusEffectType.Bleed && 
                                     x.Type != StatusEffectType.Poison && x.Type != StatusEffectType.Burn &&
-                                    x.Type != StatusEffectType.Sleep && x.Type != StatusEffectType.Shield).ToList();
+                                    x.Type != StatusEffectType.Sleep && x.Type != StatusEffectType.Shield && 
+                                    x.Type != StatusEffectType.Regeneration).ToList();
         foreach (var status in other.OrderByDescending(x => x.RemainingDuration).OrderBy(x => x.Type))
         {
             AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(status.Type.ToString())} " +

@@ -5,20 +5,23 @@ using ConsoleGodmist.Components;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
-using ConsoleGodmist.Items.Weapons;
 using ConsoleGodmist.TextService;
+using ConsoleGodmist.Town.NPCs;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town
 {
-    internal static class Town
+    internal class Town
     {
-        public static void EnterTown()
+        public Alchemist Alchemist { get; private set; } = new();
+        public Blacksmith Blacksmith { get; private set; } = new();
+        public Enchanter Enchanter { get; private set; } = new();
+
+        public void EnterTown()
         {
             while (true)
             {
                 //AnsiConsole.Clear();
-                var testPart = EquipmentPartManager.GetPart<WeaponHead>("BrokenHead");
                 AnsiConsole.Write(new FigletText("Arungard").Centered().Color(Color.Gold3_1));
                 string[] choices =
                 [
@@ -36,20 +39,24 @@ namespace ConsoleGodmist.Town
                         DungeonMovementManager.TraverseDungeon();
                         break;
                     case 1:
+                        Blacksmith.OpenMenu();
                         break;
                     case 2:
+                        Alchemist.OpenMenu();
+                        break;
+                    case 3:
+                        Enchanter.OpenMenu();
                         break;
                     case 6:
                         InventoryMenuHandler.OpenInventoryMenu();
                         break;
-                    
                     case 7: AnsiConsole.Write(PlayerHandler.player.Name + ", Poziom " + PlayerHandler.player.Level + " " + PlayerHandler.player.CharacterClass); break;
                     case 8: DataPersistanceManager.SaveGame(); break;
                     case 9: return;
                 }
             }
         }
-        private static Dungeon ChooseDungeon() {
+        private Dungeon ChooseDungeon() {
             AnsiConsole.WriteLine(locale.SelectDestination);
             string[] dungeonChoices = [locale.Catacombs, locale.Forest, locale.ElvishRuins, locale.Cove, locale.Desert, locale.Temple, locale.Mountains, locale.Swamp
             ];

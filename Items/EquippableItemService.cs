@@ -8,15 +8,15 @@ public static class EquippableItemService
     {
         return rarity switch
         {
-            ItemRarity.Destroyed => 0.7f,
-            ItemRarity.Damaged => 0.85f,
-            ItemRarity.Uncommon => 1.15f,
-            ItemRarity.Rare => 1.25f,
-            ItemRarity.Ancient => 1.5f,
-            ItemRarity.Legendary => 1.75f,
-            ItemRarity.Mythical => 2f,
-            ItemRarity.Godly => 2.5f,
-            _ => 1f,
+            ItemRarity.Destroyed => 0.7,
+            ItemRarity.Damaged => 0.85,
+            ItemRarity.Uncommon => 1.15,
+            ItemRarity.Rare => 1.25,
+            ItemRarity.Ancient => 1.5,
+            ItemRarity.Legendary => 1.75,
+            ItemRarity.Mythical => 2,
+            ItemRarity.Godly => 2.5,
+            _ => 1
         };
     }
 
@@ -32,8 +32,27 @@ public static class EquippableItemService
             {ItemRarity.Ancient, 10 },
             {ItemRarity.Legendary, 5 },
             {ItemRarity.Mythical, 2 },
-            {ItemRarity.Godly, 1 },
+            {ItemRarity.Godly, 1 }
         };
         return EngineMethods.RandomChoice(rarities);
+    }
+
+    public static Weapon GetRandomWeapon(int tier)
+    {
+        return new Weapon(EquipmentPartManager.GetRandomPart<WeaponHead>(tier),
+            EquipmentPartManager.GetRandomPart<WeaponBinder>(tier),
+            EquipmentPartManager.GetRandomPart<WeaponHandle>(tier),
+            EngineMethods.RandomChoice(Enum.GetValues<CharacterClass>().ToList()),
+            EngineMethods.RandomChoice(Enum.GetValues<Quality>()
+                .Where(x => x != Quality.Masterpiece).ToList()));
+    }
+    public static Armor GetRandomArmor(int tier)
+    {
+        return new Armor(EquipmentPartManager.GetRandomPart<ArmorPlate>(tier),
+            EquipmentPartManager.GetRandomPart<ArmorBinder>(tier),
+            EquipmentPartManager.GetRandomPart<ArmorBase>(tier),
+            EngineMethods.RandomChoice(Enum.GetValues<CharacterClass>().ToList()),
+            EngineMethods.RandomChoice(Enum.GetValues<Quality>()
+                .Where(x => x != Quality.Masterpiece).ToList()));
     }
 }

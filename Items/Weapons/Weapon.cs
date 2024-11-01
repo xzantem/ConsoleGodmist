@@ -1,31 +1,38 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
+using Newtonsoft.Json;
+using Spectre.Console;
 
-namespace ConsoleGodmist.Items.Weapons;
+namespace ConsoleGodmist.Items;
 
-public class Weapon : IEquippable
+public class Weapon : BaseItem, IEquippable
 {
     //Base IItem implementations
-    public string Name { get; }
-    public string Alias { get; }
-    public int Weight { get; }
-    public int ID { get; }
-    public int Cost { get; }
-    public ItemRarity Rarity { get; }
-    public bool Stackable { get; }
-    public string Description { get; }
-    public ItemType ItemType => ItemType.Weapon;
+    public override string Name { get; set; }
+    [JsonIgnore]
+    public override int Weight => 5;
+    [JsonIgnore]
+    public override int ID => 559;
+    public int BaseCost { get; set; }
+    [JsonIgnore]
+    public override int Cost => (int)(BaseCost * EquippableItemService.RarityModifier(Rarity));
+    [JsonIgnore]
+    public override bool Stackable => false;
+    [JsonIgnore]
+    public override ItemType ItemType => ItemType.Weapon;
     
     //Base IEquippable implementations
-    public int RequiredLevel { get; }
-    public CharacterClass RequiredClass { get; }
-    public Quality Quality { get; }
+    public int RequiredLevel { get; set; }
+    public CharacterClass RequiredClass { get; set;  }
+    public Quality Quality { get; set; }
     public double UpgradeModifier { get; set; }
-    
+
     //Weapon implementations
-    public WeaponHead Head { get; private set; }
-    public WeaponBinder Binder { get; private set; }
-    public WeaponHandle Handle { get; private set; }
+    
+    public WeaponHead Head { get; set; }
+    public WeaponBinder Binder { get; set; }
+    public WeaponHandle Handle { get; set; }
+    [JsonIgnore]
     public int MinimalAttack
     {
         get
@@ -51,6 +58,7 @@ public class Weapon : IEquippable
             return (int)value;
         }
     }
+    [JsonIgnore]
     public int MaximalAttack
     {
         get
@@ -76,6 +84,7 @@ public class Weapon : IEquippable
             return (int)value;
         }
     }
+    [JsonIgnore]
     public double CritChance // Mage gains Mana regen instead of CritChance
     {
         get
@@ -103,6 +112,7 @@ public class Weapon : IEquippable
             return value;
         }
     }
+    [JsonIgnore]
     public double CritMod
     {
         get
@@ -128,6 +138,7 @@ public class Weapon : IEquippable
             return value;
         }
     }
+    [JsonIgnore]
     public int Accuracy // Mage gains Maximal Mana instead of Accuracy
     {
         get
@@ -167,13 +178,15 @@ public class Weapon : IEquippable
             CharacterClass.Scout => locale.SwordAndDagger,
             CharacterClass.Sorcerer => locale.Wand,
             _ => locale.Hammer
+        } + quality switch
+        {
+            Quality.Weak => $" ({locale.Weak})",
+            Quality.Excellent => $" ({locale.Excellent})",
+            _ => ""
         };
         Alias = $"{head.Alias}.{binder.Alias}.{handle.Alias}";
-        Weight = 5;
-        ID = 559;
-        Cost = head.GoldCost + binder.GoldCost + handle.GoldCost;
+        BaseCost = head.GoldCost + binder.GoldCost + handle.GoldCost;
         Rarity = EquippableItemService.GetRandomRarity();
-        Stackable = false;
         RequiredLevel = Math.Max(Math.Max(head.Tier, binder.Tier), handle.Tier) * 10 - 5 + Quality switch
         {
             Quality.Weak => -3,
@@ -223,16 +236,14 @@ public class Weapon : IEquippable
                 throw new ArgumentOutOfRangeException(nameof(requiredClass), requiredClass, null);
         }
         Alias = $"StarterWeapon.{requiredClass.ToString()}";
-        Weight = 5;
-        ID = 559;
-        Cost = 15;
+        BaseCost = 15;
         Rarity = ItemRarity.Junk;
-        Stackable = false;
         RequiredLevel = 1;
         RequiredClass = requiredClass;
         Quality = Quality.Normal;
         UpgradeModifier = 1;
     }
+    public Weapon() {}
 
     public bool Use()
     {
@@ -248,5 +259,45 @@ public class Weapon : IEquippable
         }
         PlayerHandler.player.SwitchWeapon(this);
         return true;
+    }
+
+    public override void Inspect(int amount = 1)
+    {
+        base.Inspect(amount);
+        var playerWeapon = PlayerHandler.player.Weapon;
+        var averagePlayerDamage = (playerWeapon.MinimalAttack + playerWeapon.MaximalAttack) / 2;
+        var averageDamage = (MinimalAttack + MaximalAttack) / 2;
+        AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, +{UpgradeModifier-1:P0}\n", Stylesheet.Styles["default"]));
+        AnsiConsole.Write(new Text($"{locale.Attack}: {MinimalAttack}-{MaximalAttack}", Stylesheet.Styles["default"]));
+        WriteComparator(averageDamage, averagePlayerDamage);
+        if (RequiredClass == CharacterClass.Sorcerer)
+        {
+            AnsiConsole.Write(new Text($"\n{locale.ManaShort}: {Accuracy:F0}"));
+            WriteComparator(Accuracy, playerWeapon.Accuracy);
+            AnsiConsole.Write(new Text($" ({CritChance:F0}/t)"));
+            WriteComparator(CritChance, playerWeapon.CritChance);
+            AnsiConsole.Write(new Text($"\n{locale.Crit}: {CritMod:P2}"));
+            WriteComparator(CritMod, playerWeapon.CritMod);
+        }
+        else
+        {
+            AnsiConsole.Write(new Text($"\n{locale.Crit}: {CritChance:P2}"));
+            WriteComparator(CritChance, playerWeapon.CritChance);
+            AnsiConsole.Write(new Text($" ({CritMod:F2}x)"));
+            WriteComparator(CritMod, playerWeapon.CritMod);
+            AnsiConsole.Write(new Text($"\n{locale.Accuracy}: {Accuracy}"));
+            WriteComparator(Accuracy, playerWeapon.Accuracy);
+        }
+        AnsiConsole.Write(new Text("\n"));
+        return;
+        void WriteComparator(double value1, double value2)
+        {
+            if (value1 > value2)
+                AnsiConsole.Write(new Text(" ( ^ )", Stylesheet.Styles["success"]));
+            else if (value1 == value2)
+                AnsiConsole.Write(new Text(" ( ~ )", Stylesheet.Styles["default"]));
+            else
+                AnsiConsole.Write(new Text(" ( v )", Stylesheet.Styles["failure"]));
+        }
     }
 }

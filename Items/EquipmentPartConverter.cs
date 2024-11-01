@@ -1,6 +1,6 @@
 ﻿using ConsoleGodmist.Items;
-using ConsoleGodmist.Items.Armors;
-using ConsoleGodmist.Items.Weapons;
+using ConsoleGodmist.Items;
+using ConsoleGodmist.Items;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

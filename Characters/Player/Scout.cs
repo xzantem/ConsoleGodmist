@@ -2,8 +2,7 @@ using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items.Armors;
-using ConsoleGodmist.Items.Weapons;
+using ConsoleGodmist.Items;
 using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Characters
@@ -21,6 +20,16 @@ namespace ConsoleGodmist.Characters
             new Stat(8, 0.33), new Stat(4, 0.2),
             new Stat(55, 0), new Stat(0, 0),
             new Stat(1, 0), CharacterClass.Scout) {
+            Resistances.Add(StatusEffectType.Debuff, new Stat(0.5, 0));
+            Resistances.Add(StatusEffectType.Bleed, new Stat(0.5, 0));
+            Resistances.Add(StatusEffectType.Poison, new Stat(0.7, 0));
+            Resistances.Add(StatusEffectType.Burn, new Stat(0.4, 0));
+            Resistances.Add(StatusEffectType.Stun, new Stat(0.35, 0));
+            Resistances.Add(StatusEffectType.Freeze, new Stat(0.35, 0));
+            Resistances.Add(StatusEffectType.Frostbite, new Stat(0.35, 0));
+            Resistances.Add(StatusEffectType.Sleep, new Stat(0.35, 0));
+            Resistances.Add(StatusEffectType.Paralysis, new Stat(0.35, 0));
+            Resistances.Add(StatusEffectType.Provocation, new Stat(0.5, 0));
             _maximalResource = new Stat(200, 0);
             CurrentResource = 0;
             ResourceType = ResourceType.Momentum;

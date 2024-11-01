@@ -8,11 +8,9 @@ namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 public class DealDamage : IActiveSkillEffect
 {
     public SkillTarget Target { get; set; }
-
     public DamageType DamageType { get; set; }
     public DamageBase DamageBase { get; set; }
     public double DamageMultiplier { get; set; }
-    public int DamageInstances { get; set; }
     public bool CanCrit { get; set; }
     public bool AlwaysCrits { get; set; }
     public double LifeSteal { get; set; }
@@ -20,7 +18,7 @@ public class DealDamage : IActiveSkillEffect
     public DealDamage() {}
 
     public DealDamage(DamageType damageType, DamageBase damageBase, double damageMultiplier, bool canCrit,
-        bool alwaysCrits, double lifeSteal, int damageInstances = 1)
+        bool alwaysCrits, double lifeSteal)
     {
         Target = SkillTarget.Enemy;
         DamageType = damageType;
@@ -28,7 +26,6 @@ public class DealDamage : IActiveSkillEffect
         DamageMultiplier = damageMultiplier;
         CanCrit = canCrit;
         AlwaysCrits = alwaysCrits;
-        DamageInstances = damageInstances;
         LifeSteal = lifeSteal;
     }
 
@@ -50,25 +47,21 @@ public class DealDamage : IActiveSkillEffect
     public void Execute(Character caster, Character enemy, string source)
     {
         var damage = 0.0;
-        for (var i = 0; i < DamageInstances; i++)
+        damage = Target switch
         {
-            damage = Target switch
-            {
-                SkillTarget.Self => caster.TakeDamage(DamageType, CalculateDamage(caster, enemy)),
-                SkillTarget.Enemy => enemy.TakeDamage(DamageType, CalculateDamage(caster, enemy)),
-                _ => damage
-            };
-            if (LifeSteal > 0 && damage > 0)
-                switch (Target)
-                {
-                    case SkillTarget.Self:
-                        enemy.Heal(damage * LifeSteal);
-                        break;
-                    case SkillTarget.Enemy:
-                        caster.Heal(damage * LifeSteal);
-                        break;
-                }
+            SkillTarget.Self => caster.TakeDamage(DamageType, CalculateDamage(caster, enemy)),
+            SkillTarget.Enemy => enemy.TakeDamage(DamageType, CalculateDamage(caster, enemy)),
+            _ => damage
+        };
+        if (!(LifeSteal > 0) || !(damage > 0)) return;
+        switch (Target)
+        {
+            case SkillTarget.Self:
+                enemy.Heal(damage * LifeSteal);
+                break;
+            case SkillTarget.Enemy:
+                caster.Heal(damage * LifeSteal);
+                break;
         }
-        
     }
 }

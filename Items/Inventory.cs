@@ -1,13 +1,18 @@
-﻿using ConsoleGodmist.Enums;
+﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Enums;
+using Newtonsoft.Json;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Items;
 
 public class Inventory
 {
-    public Dictionary<IItem, int> Items { get; private set; } = new();
-    private int PackWeight { get {return Items.Sum(item => item.Key.Weight * item.Value); } }
+    [JsonConverter(typeof(ItemConverter))]
+    public Dictionary<IItem, int> Items { get; set; } = new();
+    private int PackWeight => Items.Sum(item => item.Key.Weight * item.Value);
     private int MaxPackWeight { get; set; } = 60;
+    
+    public Inventory() {}
 
     public void AddItem(IItem item, int quantity = 1)
     {
@@ -26,35 +31,6 @@ public class Inventory
             Items.Add(item, quantity);
         }
     }
-
-    /*public int GetItemCount(int id)
-    {
-        return Items.ContainsKey(ItemManager.GetItemById(id)) ? Items[ItemManager.GetItemById(id)] : 0;
-    }*/
-
-    /*public void RemoveItemById(int id, int amount = 1)
-    {
-        var item = ItemManager.GetItemById(id);
-        if (Items.ContainsKey(item))
-        {
-            if (Items[item] >= amount)
-            {
-                Items[item] -= amount;
-                if (Items[item] == 0)
-                {
-                    Items.Remove(item);
-                }
-            }
-            else
-            {
-                AnsiConsole.WriteLine($"{locale.NotEnoughItem}: {item.Name}!", Stylesheet.Styles["error"]);
-            }
-        }
-        else
-        {
-            AnsiConsole.WriteLine($"{locale.ItemNotFound}: {item.Name}!", Stylesheet.Styles["error"]);
-        } 
-    }*/
     public bool TryRemoveItem(IItem item, int amount = 1)
     {
         if (Items.ContainsKey(item))
@@ -78,11 +54,9 @@ public class Inventory
     {
         foreach (var item in Items)
         {
-            if (item.Key.ItemType is ItemType.Weapon or ItemType.Armor)
-            {
-                //if (item.Key.RequiredClass != PlayerHandler.player.characterClass)
-                    //RemoveItem(item.Key, item.Value);
-            }
+            if (item.Key.ItemType is not (ItemType.Weapon or ItemType.Armor)) continue;
+            if ((item.Key as IEquippable).RequiredClass != PlayerHandler.player.CharacterClass)
+                TryRemoveItem(item.Key, item.Value);
         }
     }
     public void SortInventory(SortType sortType)

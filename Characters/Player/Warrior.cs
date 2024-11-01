@@ -3,8 +3,7 @@ using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
-using ConsoleGodmist.Items.Armors;
-using ConsoleGodmist.Items.Weapons;
+using ConsoleGodmist.Items;
 using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Characters
@@ -26,6 +25,16 @@ namespace ConsoleGodmist.Characters
             new Stat(12, 0.45), new Stat(8, 0.3),
             new Stat(40, 0), new Stat(0, 0),
             new Stat(1, 0), CharacterClass.Warrior) {
+            Resistances.Add(StatusEffectType.Debuff, new Stat(0.6, 0));
+            Resistances.Add(StatusEffectType.Bleed, new Stat(0.7, 0));
+            Resistances.Add(StatusEffectType.Poison, new Stat(0.5, 0));
+            Resistances.Add(StatusEffectType.Burn, new Stat(0.4, 0));
+            Resistances.Add(StatusEffectType.Stun, new Stat(0.4, 0));
+            Resistances.Add(StatusEffectType.Freeze, new Stat(0.6, 0));
+            Resistances.Add(StatusEffectType.Frostbite, new Stat(0.6, 0));
+            Resistances.Add(StatusEffectType.Sleep, new Stat(0.6, 0));
+            Resistances.Add(StatusEffectType.Paralysis, new Stat(0.6, 0));
+            Resistances.Add(StatusEffectType.Provocation, new Stat(0.6, 0));
             _maximalResource = new Stat(50, 0);
             CurrentResource = 0;
             ResourceType = ResourceType.Fury;
@@ -33,7 +42,7 @@ namespace ConsoleGodmist.Characters
             SwitchArmor(new Armor(CharacterClass.Warrior));
             ActiveSkills[0] = new ActiveSkill("Chop", 0, false, 80,
             [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0),
-                new RegenResource(SkillTarget.Self, 10, DamageBase.Random)]);
+                new RegenResource(SkillTarget.Self, 10, DamageBase.Flat)]);
             ActiveSkills[1] = new ActiveSkill("Kick", 20, false, 73,
                 [new DebuffStat(SkillTarget.Enemy, StatType.Dodge, ModifierType.Additive, 15, 0.8, 3)]);
             ActiveSkills[2] = new ActiveSkill("WarCry", 30, true, 100,

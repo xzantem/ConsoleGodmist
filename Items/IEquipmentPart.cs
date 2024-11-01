@@ -1,8 +1,10 @@
-﻿namespace ConsoleGodmist.Items;
+﻿using ConsoleGodmist.Utilities;
+
+namespace ConsoleGodmist.Items;
 
 public interface IEquipmentPart
 {
-    public string Name => locale.ResourceManager.GetString(Alias) == null ? Alias : locale.ResourceManager.GetString(Alias);
+    public string Name => NameAliasHelper.GetName(Alias);
     public string Alias { get; set; }
     public int Tier { get; set; }
     public string Material { get; set; }

@@ -19,13 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="locale.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>locale_new.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="locale.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -40,6 +33,13 @@
     <Content Include="bin\Debug\net6.0\json\equipment-parts.json" />
     <Content Include="bin\Debug\net6.0\json\plant-drop-table.json" />
     <Content Include="bin\Debug\net6.0\json\lootbag-drop-tables.json" />
+    <Content Include="bin\Debug\net6.0\json\potion-components.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="locale.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

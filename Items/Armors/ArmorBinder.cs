@@ -1,7 +1,8 @@
 ﻿using ConsoleGodmist.Combat.Skills;
+using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
 
-namespace ConsoleGodmist.Items.Armors;
+namespace ConsoleGodmist.Items;
 
 [JsonConverter(typeof(EquipmentPartConverter))]
 public class ArmorBinder : IEquipmentPart
@@ -10,7 +11,7 @@ public class ArmorBinder : IEquipmentPart
     public double DodgeBonus { get; set; }
     public double PhysicalDefenseBonus { get; set; }
     public double MagicDefenseBonus { get; set; }
-    public string Name => locale.ResourceManager.GetString(Alias) == null ? Alias : locale.ResourceManager.GetString(Alias);
+    public string Name => NameAliasHelper.GetName(Alias);
     public string Alias { get; set; }
     public int Tier { get; set; }
     public string Material { get; set; }

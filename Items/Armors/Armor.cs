@@ -1,31 +1,31 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items.Weapons;
+using Newtonsoft.Json;
+using Spectre.Console;
 
-namespace ConsoleGodmist.Items.Armors;
+namespace ConsoleGodmist.Items;
 
-public class Armor : IEquippable
+public class Armor : BaseItem, IEquippable
 {
-    //Base IItem implementations
-    public string Name { get; }
-    public string Alias { get; }
-    public int Weight { get; }
-    public int ID { get; }
-    public int Cost { get; }
-    public ItemRarity Rarity { get; }
-    public bool Stackable { get; }
-    public string Description { get; }
-    public ItemType ItemType => ItemType.Armor;
+    //BaseItem implementations
+    public override string Name { get; set; }
+    public override int Weight => 5;
+    public override int ID => 560;
+    public int BaseCost { get; set; }
+    public override int Cost => (int)(BaseCost * EquippableItemService.RarityModifier(Rarity));
+    public override bool Stackable => false;
+    public override ItemType ItemType => ItemType.Armor;
     
     //Base IEquippable implementations
-    public int RequiredLevel { get; }
+    public int RequiredLevel { get; set; }
     public CharacterClass RequiredClass { get; }
-    public Quality Quality { get; }
+    public Quality Quality { get; set; }
     public double UpgradeModifier { get; set; }
-    //Weapon implementations
-    public ArmorPlate Plate { get; private set; }
-    public ArmorBinder Binder { get; private set; }
-    public ArmorBase Base { get; private set; }
+    
+    //Armor implementations
+    public ArmorPlate Plate { get; set; }
+    public ArmorBinder Binder { get; set; }
+    public ArmorBase Base { get; set; }
     public int MaximalHealth
     {
         get
@@ -132,13 +132,15 @@ public class Armor : IEquippable
             CharacterClass.Scout => locale.Tunic,
             CharacterClass.Sorcerer => locale.Robe,
             _ => locale.Cuirass
+        } + quality switch
+        {
+            Quality.Weak => $" ({locale.Weak})",
+            Quality.Excellent => $" ({locale.Excellent})",
+            _ => ""
         };
         Alias = $"{plate.Alias}.{binder.Alias}.{armBase.Alias}";
-        Weight = 5;
-        ID = 560;
-        Cost = plate.GoldCost + binder.GoldCost + armBase.GoldCost;
+        BaseCost = plate.GoldCost + binder.GoldCost + armBase.GoldCost;
         Rarity = EquippableItemService.GetRandomRarity();
-        Stackable = false;
         RequiredLevel = requiredLevel == 0
             ? Math.Max(Math.Max(plate.Tier, binder.Tier), armBase.Tier) * 10 - 5 + Quality switch
             {
@@ -191,16 +193,14 @@ public class Armor : IEquippable
                 throw new ArgumentOutOfRangeException(nameof(requiredClass), requiredClass, null);
         }
         Alias = $"StarterWeapon.{requiredClass.ToString()}";
-        Weight = 5;
-        ID = 560;
-        Cost = 15;
+        BaseCost = 15;
         Rarity = ItemRarity.Junk;
-        Stackable = false;
         RequiredLevel = 1;
         RequiredClass = requiredClass;
         Quality = Quality.Normal;
         UpgradeModifier = 1;
     }
+    public Armor() {}
 
     public bool Use()
     {
@@ -216,5 +216,31 @@ public class Armor : IEquippable
         }
         PlayerHandler.player.SwitchArmor(this);
         return true;
+    }
+    
+    public override void Inspect(int amount = 1)
+    {
+        base.Inspect(amount);
+        var playerArmor = PlayerHandler.player.Armor;
+        AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, + {UpgradeModifier:P0}\n", Stylesheet.Styles["default"]));
+        AnsiConsole.Write(new Text($"{locale.Defense}: {PhysicalDefense}", Stylesheet.Styles["default"]));
+        WriteComparator(PhysicalDefense, playerArmor.PhysicalDefense);
+        AnsiConsole.Write(new Text($" | {MagicDefense}", Stylesheet.Styles["default"]));
+        WriteComparator(MagicDefense, playerArmor.MagicDefense);
+        AnsiConsole.Write(new Text($"\n{locale.Dodge}: {Dodge}", Stylesheet.Styles["default"]));
+        WriteComparator(Dodge, playerArmor.Dodge);
+        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {MaximalHealth}", Stylesheet.Styles["default"]));
+        WriteComparator(MaximalHealth, playerArmor.MaximalHealth);
+        AnsiConsole.Write(new Text("\n"));
+        return;
+        void WriteComparator(double value1, double value2)
+        {
+            if (value1 > value2)
+                AnsiConsole.Write(new Text(" ( ^ )", Stylesheet.Styles["success"]));
+            else if (value1 == value2)
+                AnsiConsole.Write(new Text(" ( ~ )", Stylesheet.Styles["default"]));
+            else
+                AnsiConsole.Write(new Text(" ( v )", Stylesheet.Styles["failure"]));
+        }
     }
 }

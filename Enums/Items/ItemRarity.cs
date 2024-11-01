@@ -2,9 +2,9 @@
 
 public enum ItemRarity
 {
+    Junk,
     Destroyed,
     Damaged,
-    Junk,
     Common,
     Uncommon,
     Rare,

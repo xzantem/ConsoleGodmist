@@ -2,19 +2,9 @@
 
 namespace ConsoleGodmist.Items;
 
-public class CraftableIngredient : ICraftable, IItem
+public class CraftableIngredient : BaseItem, ICraftable
 {
-    public string Alias { get; set; }
-    public int Weight { get; set; }
-    public int ID { get; set; }
-    public int Cost { get; set; }
-    public ItemRarity Rarity { get; set; }
-    public bool Stackable { get; set; }
-    public string Description { get; set; }
-    public ItemType ItemType { get; set; }
-    
     public Dictionary<string, int> CraftingRecipe { get; set; }
-    
     public int CraftedAmount { get; set; }
 
     public CraftableIngredient() // For JSON deserialization

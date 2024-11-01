@@ -2,8 +2,7 @@ using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
-using ConsoleGodmist.Items.Armors;
-using ConsoleGodmist.Items.Weapons;
+using ConsoleGodmist.Items;
 using ConsoleGodmist.TextService;
 using Newtonsoft.Json;
 using Spectre.Console;
@@ -29,19 +28,15 @@ namespace ConsoleGodmist.Characters
         {
             CharacterClass = characterClass;
             Resistances = new Dictionary<StatusEffectType, Stat>();
-            foreach (var statusType in Enum.GetValues(typeof(StatusEffectType)))
-            {
-                Resistances.Add((StatusEffectType)statusType, new Stat(0.5, 0));
-            }
         }
         public PlayerCharacter() {}
 
-        public CharacterClass CharacterClass { get; private set; }
-        public int Gold { get; private set;} = 100;
-        public int CurrentExperience { get; private set; }
+        public CharacterClass CharacterClass { get; set; }
+        public int Gold { get; set;} = 100;
+        public int CurrentExperience { get; set; }
         public int RequiredExperience => CalculateExperience(Level);
 
-        public int Honor {get; private set;}
+        public int Honor {get; set;}
 
         public HonorLevel HonorLevel
         {
@@ -61,9 +56,9 @@ namespace ConsoleGodmist.Characters
                 };
             }
         }
-        public Inventory Inventory { get; private set; } = new();
-        public Weapon Weapon { get; protected set; }
-        public Armor Armor { get; protected set; }
+        public Inventory Inventory { get; set; } = new();
+        public Weapon Weapon { get; set; }
+        public Armor Armor { get; set; }
 
         public void SwitchWeapon(Weapon weapon)
         {
@@ -121,19 +116,7 @@ namespace ConsoleGodmist.Characters
         }
         public void GainExperience(int experience)
         {
-            var experienceGained = HonorLevel switch
-            {
-                HonorLevel.Exile => experience,
-                HonorLevel.Useless => experience,
-                HonorLevel.Shameful => experience,
-                HonorLevel.Uncertain => experience,
-                HonorLevel.Recruit => experience,
-                HonorLevel.Mercenary => experience,
-                HonorLevel.Fighter => (int)(experience * 1.1),
-                HonorLevel.Knight => (int)(experience * 1.2),
-                HonorLevel.Leader => (int)(experience * 1.5),
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            var experienceGained = (int)(experience * PlayerHandler.HonorExperienceModifier);
             CurrentExperience += experienceGained;
             CharacterEventTextService.DisplayExperienceGainText(experienceGained);
             while (CurrentExperience >= RequiredExperience) {
@@ -165,14 +148,20 @@ namespace ConsoleGodmist.Characters
         }
         public void GainHonor(int honor)
         {
-            var gain = Math.Min(Honor + honor, 200);
-            Honor = gain;
+            var gain = Math.Min(200 - Honor, honor);
+            Honor += gain;
             CharacterEventTextService.DisplayHonorGainText(this, gain);
         }
         public void LoseHonor(int honor) {
-            var loss = Math.Max(Honor - honor, -100);
-            Honor = loss;
+            var loss = Math.Max(Honor + 100, honor);
+            Honor -= loss;
             CharacterEventTextService.DisplayHonorLossText(this, loss);
+        }
+
+        public void Say(string message)
+        {
+            AnsiConsole.Write(new Text($"{Name}: ", Stylesheet.Styles["npc-player"]));
+            AnsiConsole.Write(new Text($"{message}\n", Stylesheet.Styles["dialogue"]));
         }
     }
 }

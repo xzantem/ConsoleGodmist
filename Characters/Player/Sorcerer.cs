@@ -2,8 +2,7 @@ using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items.Armors;
-using ConsoleGodmist.Items.Weapons;
+using ConsoleGodmist.Items;
 using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Characters
@@ -19,6 +18,16 @@ namespace ConsoleGodmist.Characters
             new Stat(6, 0.25), new Stat(12, 0.5),
             new Stat(45, 0), new Stat(100, 0),
             new Stat(1, 0), CharacterClass.Sorcerer) {
+            Resistances.Add(StatusEffectType.Debuff, new Stat(0.7, 0));
+            Resistances.Add(StatusEffectType.Bleed, new Stat(0.25, 0));
+            Resistances.Add(StatusEffectType.Poison, new Stat(0.25, 0));
+            Resistances.Add(StatusEffectType.Burn, new Stat(0.8, 0));
+            Resistances.Add(StatusEffectType.Stun, new Stat(0.3, 0));
+            Resistances.Add(StatusEffectType.Freeze, new Stat(0.3, 0));
+            Resistances.Add(StatusEffectType.Frostbite, new Stat(0.3, 0));
+            Resistances.Add(StatusEffectType.Sleep, new Stat(0.3, 0));
+            Resistances.Add(StatusEffectType.Paralysis, new Stat(0.3, 0));
+            Resistances.Add(StatusEffectType.Provocation, new Stat(0.7, 0));
             _maximalResource = new Stat(120, 0);
             _resourceRegen = new Stat(15, 0);
             CurrentResource = MaximalResource;

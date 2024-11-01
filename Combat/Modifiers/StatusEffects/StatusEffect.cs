@@ -13,7 +13,7 @@ public class StatusEffect(StatusEffectType type, string source, int duration, st
 
     public void Handle(Character target)
     {
-        if (RemainingDuration != -1)
+        if (RemainingDuration != -1 && RemainingDuration != 0)
             RemainingDuration--;
         if (RemainingDuration != 0) return;
         target.StatusEffects.Remove(this);

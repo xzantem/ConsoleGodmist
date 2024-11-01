@@ -118,7 +118,7 @@ public static class CharacterEventTextService
         switch (statusEffect.Type)
         {
             case StatusEffectType.Bleed:
-                AnsiConsole.Write(new Text($"{target.Name} {locale.Bleeds} {locale.And} {locale.Takes}", Stylesheet.Styles["default"]));
+                AnsiConsole.Write(new Text($"{target.Name} {locale.Bleeds} {locale.And1} {locale.Takes}", Stylesheet.Styles["default"]));
                 AnsiConsole.Write(new Text($" {(int)((DoTStatusEffect)statusEffect).Strength}", Stylesheet.Styles["damage-bleed"]));
                 AnsiConsole.Write(new Text($" {locale.DamageGenitive} {locale.ForTheNext} " +
                                            $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
@@ -128,19 +128,19 @@ public static class CharacterEventTextService
             case StatusEffectType.Debuff:
                 break;
             case StatusEffectType.Poison:
-                AnsiConsole.Write(new Text($"{target.Name} {locale.IsPoisoned} {locale.And} {locale.Takes}", Stylesheet.Styles["default"]));
+                AnsiConsole.Write(new Text($"{target.Name} {locale.IsPoisoned} {locale.And1} {locale.Takes}", Stylesheet.Styles["default"]));
                 AnsiConsole.Write(new Text($" {(int)((DoTStatusEffect)statusEffect).Strength}", Stylesheet.Styles["damage-poison"]));
                 AnsiConsole.Write(new Text($" {locale.DamageGenitive} {locale.ForTheNext} " +
                                            $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
                 break;
             case StatusEffectType.Burn:
-                AnsiConsole.Write(new Text($"{target.Name} {locale.Burns} {locale.And} {locale.Takes}", Stylesheet.Styles["default"]));
+                AnsiConsole.Write(new Text($"{target.Name} {locale.Burns} {locale.And1} {locale.Takes}", Stylesheet.Styles["default"]));
                 AnsiConsole.Write(new Text($" {(int)((DoTStatusEffect)statusEffect).Strength}", Stylesheet.Styles["damage-burn"]));
                 AnsiConsole.Write(new Text($" {locale.DamageGenitive} {locale.ForTheNext} " +
                                            $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
                 break;
             case StatusEffectType.Stun:
-                AnsiConsole.Write(new Text($"{target.Name} is stunned {locale.And} cannot move {locale.ForTheNext} " +
+                AnsiConsole.Write(new Text($"{target.Name} is stunned {locale.And1} cannot move {locale.ForTheNext} " +
                                            $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
                 break;
             case StatusEffectType.Freeze:
@@ -156,6 +156,8 @@ public static class CharacterEventTextService
             case StatusEffectType.Provocation:
                 break;
             case StatusEffectType.Shield:
+                break;
+            case StatusEffectType.Regeneration:
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

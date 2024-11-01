@@ -42,13 +42,11 @@ public class InflictDoTStatusEffect : IActiveSkillEffect
             case SkillTarget.Self:
                 if (Random.Shared.NextDouble() >= Chance) return;
                 StatusEffectHandler.AddStatusEffect(status, caster);
-                CharacterEventTextService.DisplayStatusEffectText(caster, status);
                 break;
             case SkillTarget.Enemy:
-                if (Random.Shared.NextDouble() <
+                if (Random.Shared.NextDouble() >=
                     EngineMethods.EffectChance(enemy.Resistances[DoTType].Value(), Chance)) return;
                 StatusEffectHandler.AddStatusEffect(status, enemy);
-                CharacterEventTextService.DisplayStatusEffectText(enemy, status);
                 break;
         }
     }

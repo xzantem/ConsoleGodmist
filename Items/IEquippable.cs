@@ -8,6 +8,7 @@ public interface IEquippable : IItem
     public CharacterClass RequiredClass { get; }
     public Quality Quality { get; }
     public double UpgradeModifier { get; set; }
+    public int BaseCost { get; }
 
     public double RarityModifier
     {
@@ -29,7 +30,6 @@ public interface IEquippable : IItem
             };
         }
     }
-
     public int GalduriteSlots => (int)Math.Floor((UpgradeModifier - 1) / 0.2);
 
 }

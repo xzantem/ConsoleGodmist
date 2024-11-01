@@ -1,7 +1,8 @@
 ﻿using ConsoleGodmist.Combat.Skills;
+using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
 
-namespace ConsoleGodmist.Items.Weapons;
+namespace ConsoleGodmist.Items;
 
 [JsonConverter(typeof(EquipmentPartConverter))]
 public class WeaponHead : IEquipmentPart
@@ -11,7 +12,7 @@ public class WeaponHead : IEquipmentPart
     public double CritMod { get; set; }
     public double CritChanceBonus { get; set; }
     public double AccuracyBonus { get; set; }
-    public string Name => locale.ResourceManager.GetString(Alias) == null ? Alias : locale.ResourceManager.GetString(Alias);
+    public string Name => NameAliasHelper.GetName(Alias);
     public string Alias { get; set; }
     
     public string Adjective { get; set; }

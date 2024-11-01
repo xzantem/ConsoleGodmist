@@ -2,8 +2,6 @@
 using System.Text.Json;
 using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items.Armors;
-using ConsoleGodmist.Items.Weapons;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Items;
@@ -42,42 +40,9 @@ public static class ItemManager
         else
             throw new FileNotFoundException($"JSON file not found in {path}");
     }
-
-    public static IItem GetItem(int id)
-    {
-        return Items.FirstOrDefault(i => i.ID == id);
-    }
+    
     public static IItem GetItem(string alias)
     {
         return Items.FirstOrDefault(i => i.Alias == alias);
-    }
-
-    public static Weapon GetRandomWeapon(int tier, bool randomClass)
-    {
-        var requiredClass =
-            randomClass ? EngineMethods.RandomChoice(Enum
-                .GetValues(typeof(CharacterClass)).OfType<CharacterClass>().ToList()) 
-                : PlayerHandler.player.CharacterClass;
-        return new Weapon(
-            EquipmentPartManager.GetRandomPart<WeaponHead>(tier),
-            EquipmentPartManager.GetRandomPart<WeaponBinder>(tier),
-            EquipmentPartManager.GetRandomPart<WeaponHandle>(tier),
-            requiredClass, EngineMethods.RandomChoice(Enum
-                .GetValues(typeof(Quality)).OfType<Quality>().ToList())
-        );
-    }
-    public static Armor GetRandomArmor(int tier, bool randomClass)
-    {
-        var requiredClass =
-            randomClass ? EngineMethods.RandomChoice(Enum
-                    .GetValues(typeof(CharacterClass)).OfType<CharacterClass>().ToList()) 
-                : PlayerHandler.player.CharacterClass;
-        return new Armor(
-            EquipmentPartManager.GetRandomPart<ArmorPlate>(tier),
-            EquipmentPartManager.GetRandomPart<ArmorBinder>(tier),
-            EquipmentPartManager.GetRandomPart<ArmorBase>(tier),
-            requiredClass, EngineMethods.RandomChoice(Enum
-                .GetValues(typeof(Quality)).OfType<Quality>().ToList())
-        );
     }
 }

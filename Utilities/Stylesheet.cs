@@ -8,11 +8,17 @@ public static class Stylesheet
 
     public static void InitStyles()
     {
-        Styles = new Dictionary<string, Style>()
+        Styles = new Dictionary<string, Style>
         {
             { "default", new Style(Color.White) },
             { "default-cursive", new Style(Color.White, Color.Black, Decoration.Italic) },
             { "default-bold", new Style(Color.White, Color.Black, Decoration.Italic) },
+            { "default-strikethrough", new Style(Color.White, Color.Black, Decoration.Strikethrough) },
+            { "npc-player" , new Style(Color.MediumPurple3)},
+            { "npc-blacksmith" , new Style(Color.LightSalmon3_1)},
+            { "npc-alchemist" , new Style(Color.MediumSpringGreen)},
+            { "npc-enchanter" , new Style(Color.SkyBlue2)},
+            { "dialogue", new Style(Color.Silver, Color.Black, Decoration.Italic)},
             { "gold", new Style(Color.Gold3_1) },
             { "damage-true", new Style(Color.White) },
             { "damage-physical", new Style(Color.Gold1) },

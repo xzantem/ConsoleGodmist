@@ -1,458 +1,459 @@
-﻿<root>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>1.3</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <data name="ChooseDifficulty" xml:space="preserve">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChooseDifficulty" xml:space="preserve">
     <value>Wybierz poziom trudności</value>
         <comment />
   </data>
-    <data name="ChooseLanguage" xml:space="preserve">
+  <data name="ChooseLanguage" xml:space="preserve">
     <value>Wybierz język</value>
         <comment />
   </data>
-    <data name="DeleteSaveFile" xml:space="preserve">
+  <data name="DeleteSaveFile" xml:space="preserve">
     <value>Usuń zapis gry</value>
         <comment />
   </data>
-    <data name="English (Language)" xml:space="preserve">
+  <data name="English (Language)" xml:space="preserve">
     <value>Angielski</value>
         <comment />
   </data>
-    <data name="ExitGame" xml:space="preserve">
+  <data name="ExitGame" xml:space="preserve">
     <value>Wyjdź z gry</value>
         <comment />
   </data>
-    <data name="LoadGame" xml:space="preserve">
+  <data name="LoadGame" xml:space="preserve">
     <value>Wczytaj grę</value>
         <comment />
   </data>
-    <data name="NewGame" xml:space="preserve">
+  <data name="NewGame" xml:space="preserve">
     <value>Nowa gra</value>
         <comment />
   </data>
-    <data name="Polish (Language)" xml:space="preserve">
+  <data name="Polish (Language)" xml:space="preserve">
     <value>Polski</value>
         <comment />
   </data>
-    <data name="Easy" xml:space="preserve">
+  <data name="Easy" xml:space="preserve">
     <value>Łatwy</value>
         <comment />
   </data>
-    <data name="Hard" xml:space="preserve">
+  <data name="Hard" xml:space="preserve">
     <value>Trudny</value>
         <comment />
   </data>
-    <data name="Nightmare" xml:space="preserve">
+  <data name="Nightmare" xml:space="preserve">
     <value>Koszmar</value>
         <comment />
   </data>
-    <data name="Normal" xml:space="preserve">
+  <data name="Normal" xml:space="preserve">
     <value>Normalny</value>
         <comment />
   </data>
-    <data name="Opening_1" xml:space="preserve">
+  <data name="Opening_1" xml:space="preserve">
     <value>Jesteś w drodze do miasta Arungard. Podobno od dwudziestu lat żaden z mieszkańców tego miasta nie ujrzał światła dziennego.</value>
         <comment />
   </data>
-    <data name="Opening_2" xml:space="preserve">
+  <data name="Opening_2" xml:space="preserve">
     <value>Słyszałeś legendy o tym, że niejaki Ghorn wypowiedział zaklęcie i miasto spowiła Ciemność.</value>
         <comment />
   </data>
-    <data name="Opening_3" xml:space="preserve">
+  <data name="Opening_3" xml:space="preserve">
     <value>Nic więcej Ci nie wiadomo.</value>
         <comment />
   </data>
-    <data name="Opening_4" xml:space="preserve">
+  <data name="Opening_4" xml:space="preserve">
     <value>Dojechałeś już do miasta. Jego stare, elfickie mury i wieże od razu wywołały wielkie wrażenie.</value>
         <comment />
   </data>
-    <data name="Opening_5" xml:space="preserve">
+  <data name="Opening_5" xml:space="preserve">
     <value>Podchodzisz do strażnika przy bramie.</value>
         <comment />
   </data>
-    <data name="TownGuard_Name" xml:space="preserve">
+  <data name="TownGuard_Name" xml:space="preserve">
     <value>Strażnik miasta Arungard</value>
         <comment />
   </data>
-    <data name="TownGuard_Line" xml:space="preserve">
+  <data name="TownGuard_Line" xml:space="preserve">
     <value>Kim jesteś i po co przybywasz?</value>
         <comment />
   </data>
-    <data name="Iam" xml:space="preserve">
+  <data name="Iam" xml:space="preserve">
     <value>Jestem</value>
         <comment />
   </data>
-    <data name="WarriorLocative" xml:space="preserve">
+  <data name="WarriorLocative" xml:space="preserve">
     <value>wojownikiem</value>
         <comment />
   </data>
-    <data name="ScoutLocative" xml:space="preserve">
+  <data name="ScoutLocative" xml:space="preserve">
     <value>zwiadowcą</value>
         <comment />
   </data>
-    <data name="SorcererLocative" xml:space="preserve">
+  <data name="SorcererLocative" xml:space="preserve">
     <value>czarodziejem</value>
         <comment />
   </data>
-    <data name="PaladinLocative" xml:space="preserve">
+  <data name="PaladinLocative" xml:space="preserve">
     <value>paladynem</value>
         <comment />
   </data>
-    <data name="MyNameIs" xml:space="preserve">
+  <data name="MyNameIs" xml:space="preserve">
     <value>Nazywam się</value>
         <comment />
   </data>
-    <data name="WarriorNominativeC" xml:space="preserve">
+  <data name="WarriorNominativeC" xml:space="preserve">
     <value>Wojownik</value>
         <comment />
   </data>
-    <data name="ScoutNominativeC" xml:space="preserve">
+  <data name="ScoutNominativeC" xml:space="preserve">
     <value>Zwiadowca</value>
         <comment />
   </data>
-    <data name="SorcererNominativeC" xml:space="preserve">
+  <data name="SorcererNominativeC" xml:space="preserve">
     <value>Czarodziej</value>
         <comment />
   </data>
-    <data name="PaladinNominativeC" xml:space="preserve">
+  <data name="PaladinNominativeC" xml:space="preserve">
     <value>Paladyn</value>
         <comment />
   </data>
-    <data name="StartExpedition" xml:space="preserve">
+  <data name="StartExpedition" xml:space="preserve">
     <value>Wyrusz na wyprawę</value>
         <comment />
   </data>
-    <data name="Blacksmith" xml:space="preserve">
+  <data name="Blacksmith" xml:space="preserve">
     <value>Kowal</value>
         <comment />
   </data>
-    <data name="Alchemist" xml:space="preserve">
+  <data name="Alchemist" xml:space="preserve">
     <value>Alchemik</value>
         <comment />
   </data>
-    <data name="Enchanter" xml:space="preserve">
+  <data name="Enchanter" xml:space="preserve">
     <value>Zaklinacz</value>
         <comment />
   </data>
-    <data name="QuestLog" xml:space="preserve">
+  <data name="QuestLog" xml:space="preserve">
     <value>Dziennik zadań</value>
         <comment />
   </data>
-    <data name="OpenInventory" xml:space="preserve">
+  <data name="OpenInventory" xml:space="preserve">
     <value>Otwórz ekwipunek</value>
         <comment />
   </data>
-    <data name="SaveGame" xml:space="preserve">
+  <data name="SaveGame" xml:space="preserve">
     <value>Zapisz grę</value>
         <comment />
   </data>
-    <data name="Nameless" xml:space="preserve">
+  <data name="Nameless" xml:space="preserve">
     <value>Bezimienny</value>
   </data>
-    <data name="Catacombs" xml:space="preserve">
+  <data name="Catacombs" xml:space="preserve">
     <value>Katakumby</value>
   </data>
-    <data name="Forest" xml:space="preserve">
+  <data name="Forest" xml:space="preserve">
     <value>Las</value>
   </data>
-    <data name="ElvishRuins" xml:space="preserve">
+  <data name="ElvishRuins" xml:space="preserve">
     <value>Elfickie Ruiny</value>
   </data>
-    <data name="Cove" xml:space="preserve">
+  <data name="Cove" xml:space="preserve">
     <value>Zatoka</value>
   </data>
-    <data name="Desert" xml:space="preserve">
+  <data name="Desert" xml:space="preserve">
     <value>Pustynia</value>
   </data>
-    <data name="Temple" xml:space="preserve">
+  <data name="Temple" xml:space="preserve">
     <value>Świątynia</value>
   </data>
-    <data name="Mountains" xml:space="preserve">
+  <data name="Mountains" xml:space="preserve">
     <value>Góry</value>
   </data>
-    <data name="Swamp" xml:space="preserve">
+  <data name="Swamp" xml:space="preserve">
     <value>Bagno</value>
   </data>
-    <data name="SelectDestination" xml:space="preserve">
+  <data name="SelectDestination" xml:space="preserve">
     <value>Wybierz cel podróży:</value>
   </data>
-    <data name="GoBack" xml:space="preserve">
+  <data name="GoBack" xml:space="preserve">
     <value>Idź do tyłu</value>
   </data>
-    <data name="GoForward" xml:space="preserve">
+  <data name="GoForward" xml:space="preserve">
     <value>Idź do przodu</value>
   </data>
-    <data name="ShowCharacter" xml:space="preserve">
+  <data name="ShowCharacter" xml:space="preserve">
     <value>Pokaż postać</value>
   </data>
-    <data name="GoDown" xml:space="preserve">
+  <data name="GoDown" xml:space="preserve">
     <value>Idź w dół</value>
   </data>
-    <data name="GoUp" xml:space="preserve">
+  <data name="GoUp" xml:space="preserve">
     <value>Idź w górę</value>
   </data>
   <data name="CollectPlant" xml:space="preserve">
     <value>Zbierz roślinę</value>
   </data>
-    <data name="OpenStash" xml:space="preserve">
+  <data name="OpenStash" xml:space="preserve">
     <value>Zbierz skarb</value>
   </data>
-    <data name="ExitDungeon" xml:space="preserve">
+  <data name="ExitDungeon" xml:space="preserve">
     <value>Wyjdź z lochu</value>
   </data>
-    <data name="Level" xml:space="preserve">
+  <data name="Level" xml:space="preserve">
     <value>Poziom</value>
   </data>
-    <data name="Floor" xml:space="preserve">
+  <data name="Floor" xml:space="preserve">
     <value>Piętro</value>
   </data>
-    <data name="Map" xml:space="preserve">
+  <data name="Map" xml:space="preserve">
     <value>Mapa</value>
   </data>
-    <data name="DisarmTrap" xml:space="preserve">
+  <data name="DisarmTrap" xml:space="preserve">
     <value>Rozbrój pułapkę</value>
   </data>
-    <data name="LocationScouted" xml:space="preserve">
+  <data name="LocationScouted" xml:space="preserve">
     <value>Odkryto mapę aktualnego piętra!</value>
   </data>
-    <data name="NotEnoughWeight" xml:space="preserve">
+  <data name="NotEnoughWeight" xml:space="preserve">
     <value>Za mało miejsca w plecaku, by podnieść</value>
   </data>
-    <data name="NotEnoughItem" xml:space="preserve">
-    <value>Posiadasz za mało przedmiotu</value>
+  <data name="NotEnoughItem" xml:space="preserve">
+    <value>Masz za mało przedmiotu</value>
   </data>
-    <data name="ItemNotFound" xml:space="preserve">
+  <data name="ItemNotFound" xml:space="preserve">
     <value>Nie znaleziono przedmiotu</value>
   </data>
-    <data name="Inventory" xml:space="preserve">
+  <data name="Inventory" xml:space="preserve">
     <value>Ekwipunek</value>
   </data>
-    <data name="Settings" xml:space="preserve">
+  <data name="Settings" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
-    <data name="ExitToMenu" xml:space="preserve">
+  <data name="ExitToMenu" xml:space="preserve">
     <value>Wyjdź do menu</value>
   </data>
-    <data name="CurrentGold" xml:space="preserve">
+  <data name="CurrentGold" xml:space="preserve">
     <value>Aktualne złoto</value>
   </data>
-    <data name="YouGain" xml:space="preserve">
+  <data name="YouGain" xml:space="preserve">
     <value>Otrzymujesz</value>
   </data>
-    <data name="ExperienceGenitive" xml:space="preserve">
+  <data name="ExperienceGenitive" xml:space="preserve">
     <value>doświadczenia</value>
   </data>
-    <data name="LevelUp" xml:space="preserve">
+  <data name="LevelUp" xml:space="preserve">
     <value>Awansujesz na poziom</value>
   </data>
-    <data name="CurrentLevel" xml:space="preserve">
+  <data name="CurrentLevel" xml:space="preserve">
     <value>Aktualny poziom</value>
   </data>
-    <data name="DeleteItem" xml:space="preserve">
+  <data name="DeleteItem" xml:space="preserve">
     <value>Wyrzuć przedmiot</value>
   </data>
-    <data name="DeleteJunk" xml:space="preserve">
+  <data name="DeleteJunk" xml:space="preserve">
     <value>Wyrzuć wyposażenie na inne klasy</value>
   </data>
-    <data name="InspectItem" xml:space="preserve">
+  <data name="InspectItem" xml:space="preserve">
     <value>Zbadaj przedmiot</value>
   </data>
-    <data name="SortInventory" xml:space="preserve">
+  <data name="SortInventory" xml:space="preserve">
     <value>Sortuj ekwipunek</value>
   </data>
-    <data name="Y" xml:space="preserve">
+  <data name="Y" xml:space="preserve">
     <value>T</value>
   </data>
-    <data name="DeleteJunkConfirmation" xml:space="preserve">
+  <data name="DeleteJunkConfirmation" xml:space="preserve">
     <value>Czy na pewno chcesz wyrzucić całe wyposażenia na inne klasy?</value>
   </data>
-    <data name="ChooseSortingMethod" xml:space="preserve">
+  <data name="ChooseSortingMethod" xml:space="preserve">
     <value>Wybierz metodę sortowania</value>
   </data>
-    <data name="ToInspect" xml:space="preserve">
+  <data name="ToInspect" xml:space="preserve">
     <value>do zbadania</value>
   </data>
-    <data name="ToRemove" xml:space="preserve">
+  <data name="ToRemove" xml:space="preserve">
     <value>do wyrzucenia</value>
   </data>
-    <data name="ChooseItem" xml:space="preserve">
+  <data name="ChooseItem" xml:space="preserve">
     <value>Wybierz przedmiot</value>
   </data>
-    <data name="UseItem" xml:space="preserve">
+  <data name="UseItem" xml:space="preserve">
     <value>Użyj przedmiot</value>
   </data>
-    <data name="ToUse" xml:space="preserve">
+  <data name="ToUse" xml:space="preserve">
     <value>do użycia</value>
   </data>
-    <data name="HowManyToDelete" xml:space="preserve">
+  <data name="HowManyToDelete" xml:space="preserve">
     <value>Ile sztuk usunąć?</value>
   </data>
-    <data name="ChoseTooMany" xml:space="preserve">
+  <data name="ChoseTooMany" xml:space="preserve">
     <value>Wpisana ilość jest za duża!</value>
   </data>
-    <data name="IntBelowZero" xml:space="preserve">
+  <data name="IntBelowZero" xml:space="preserve">
     <value>Ilość nie może być ujemna!</value>
   </data>
-    <data name="DeleteItemConfirmation" xml:space="preserve">
+  <data name="DeleteItemConfirmation" xml:space="preserve">
     <value>Czy na pewno chcesz wyrzucić</value>
   </data>
-    <data name="SelectDungeonLevel" xml:space="preserve">
+  <data name="SelectDungeonLevel" xml:space="preserve">
     <value>Wybierz poziom lochu</value>
   </data>
-    <data name="InvalidLevel" xml:space="preserve">
+  <data name="InvalidLevel" xml:space="preserve">
     <value>Wybrany poziom jest nieprawidłowy</value>
   </data>
-    <data name="PressAnyKey" xml:space="preserve">
+  <data name="PressAnyKey" xml:space="preserve">
     <value>Naciśnij dowolny przycisk, aby kontynuować</value>
   </data>
-    <data name="Name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Nazwa</value>
   </data>
-    <data name="LootBag" xml:space="preserve">
+  <data name="LootBag" xml:space="preserve">
     <value>Torba</value>
   </data>
-    <data name="Uncommon" xml:space="preserve">
+  <data name="Uncommon" xml:space="preserve">
     <value>Niepospolity</value>
   </data>
-    <data name="Weapon" xml:space="preserve">
+  <data name="Weapon" xml:space="preserve">
     <value>Broń</value>
   </data>
-    <data name="Weight" xml:space="preserve">
+  <data name="Weight" xml:space="preserve">
     <value>Waga</value>
   </data>
-    <data name="Smithing" xml:space="preserve">
+  <data name="Smithing" xml:space="preserve">
     <value>Rzemieślnicze</value>
   </data>
-    <data name="Armor" xml:space="preserve">
+  <data name="Armor" xml:space="preserve">
     <value>Zbroja</value>
   </data>
-    <data name="Ancient" xml:space="preserve">
+  <data name="Ancient" xml:space="preserve">
     <value>Starożytny</value>
   </data>
-    <data name="Common" xml:space="preserve">
+  <data name="Common" xml:space="preserve">
     <value>Pospolity</value>
   </data>
-    <data name="Alchemy" xml:space="preserve">
+  <data name="Alchemy" xml:space="preserve">
     <value>Alchemiczne</value>
   </data>
-    <data name="Damaged" xml:space="preserve">
+  <data name="Damaged" xml:space="preserve">
     <value>Uszkodzony</value>
   </data>
-    <data name="Destroyed" xml:space="preserve">
+  <data name="Destroyed" xml:space="preserve">
     <value>Zniszczony</value>
   </data>
-    <data name="Junk" xml:space="preserve">
+  <data name="Junk" xml:space="preserve">
     <value>Śmieć</value>
   </data>
-    <data name="Legendary" xml:space="preserve">
+  <data name="Legendary" xml:space="preserve">
     <value>Legendarny</value>
   </data>
-    <data name="Mythical" xml:space="preserve">
+  <data name="Mythical" xml:space="preserve">
     <value>Mityczny</value>
   </data>
-    <data name="Type" xml:space="preserve">
+  <data name="Type" xml:space="preserve">
     <value>Typ</value>
   </data>
-    <data name="WeaponGaldurite" xml:space="preserve">
+  <data name="WeaponGaldurite" xml:space="preserve">
     <value>Galduryt do Broni</value>
   </data>
-    <data name="Runeforging" xml:space="preserve">
+  <data name="Runeforging" xml:space="preserve">
     <value>Runotwórcze</value>
   </data>
-    <data name="Rarity" xml:space="preserve">
+  <data name="Rarity" xml:space="preserve">
     <value>Rzadkość</value>
   </data>
-    <data name="Rare" xml:space="preserve">
+  <data name="Rare" xml:space="preserve">
     <value>Rzadki</value>
   </data>
-    <data name="Price" xml:space="preserve">
+  <data name="Price" xml:space="preserve">
     <value>Cena</value>
   </data>
-    <data name="Potion" xml:space="preserve">
+  <data name="Potion" xml:space="preserve">
     <value>Mikstura</value>
   </data>
-    <data name="Godly" xml:space="preserve">
+  <data name="Godly" xml:space="preserve">
     <value>Boski</value>
   </data>
-    <data name="ArmorGaldurite" xml:space="preserve">
+  <data name="ArmorGaldurite" xml:space="preserve">
     <value>Galduryt do Zbroi</value>
   </data>
-    <data name="UnknownItem" xml:space="preserve">
+  <data name="UnknownItem" xml:space="preserve">
     <value>Nieznany przedmiot</value>
   </data>
-    <data name="PlantCollected" xml:space="preserve">
+  <data name="PlantCollected" xml:space="preserve">
     <value>Zebrano składnik</value>
   </data>
-    <data name="TrapDisarmed" xml:space="preserve">
+  <data name="TrapDisarmed" xml:space="preserve">
     <value>Pułapka rozbrojona</value>
   </data>
-    <data name="AnnoditeOre" xml:space="preserve">
+  <data name="AnnoditeOre" xml:space="preserve">
     <value>Ruda annodytu</value>
   </data>
-    <data name="AdamantiteOre" xml:space="preserve">
+  <data name="AdamantiteOre" xml:space="preserve">
     <value>Ruda adamantium</value>
   </data>
-    <data name="CifilmOre" xml:space="preserve">
+  <data name="CifilmOre" xml:space="preserve">
     <value>Ruda cifilmu</value>
   </data>
-    <data name="DesertGem" xml:space="preserve">
+  <data name="DesertGem" xml:space="preserve">
     <value>Klejnot pustyni</value>
   </data>
-    <data name="IronOre" xml:space="preserve">
+  <data name="IronOre" xml:space="preserve">
     <value>Ruda żelaza</value>
   </data>
-    <data name="SilverOre" xml:space="preserve">
+  <data name="SilverOre" xml:space="preserve">
     <value>Ruda srebra</value>
   </data>
-    <data name="NefoliteOre" xml:space="preserve">
+  <data name="NefoliteOre" xml:space="preserve">
     <value>Ruda nefolitu</value>
   </data>
-    <data name="Moondust" xml:space="preserve">
+  <data name="Moondust" xml:space="preserve">
     <value>Księżycowy pył</value>
   </data>
-    <data name="OrichalcumOre" xml:space="preserve">
+  <data name="OrichalcumOre" xml:space="preserve">
     <value>Ruda orichalcum</value>
   </data>
-    <data name="Sphalerite" xml:space="preserve">
+  <data name="Sphalerite" xml:space="preserve">
     <value>Sfaleryt</value>
   </data>
-    <data name="Chromium" xml:space="preserve">
+  <data name="Chromium" xml:space="preserve">
     <value>Chrom</value>
   </data>
-    <data name="CopperOre" xml:space="preserve">
+  <data name="CopperOre" xml:space="preserve">
     <value>Ruda miedzi</value>
   </data>
-    <data name="NickelOre" xml:space="preserve">
+  <data name="NickelOre" xml:space="preserve">
     <value>Ruda niklu</value>
   </data>
-    <data name="TinOre" xml:space="preserve">
+  <data name="TinOre" xml:space="preserve">
     <value>Ruda cyny</value>
   </data>
-    <data name="GoldOre" xml:space="preserve">
+  <data name="GoldOre" xml:space="preserve">
     <value>Ruda złota</value>
   </data>
-    <data name="PieceOfZinc" xml:space="preserve">
+  <data name="PieceOfZinc" xml:space="preserve">
     <value>Kawałek cynku</value>
   </data>
-    <data name="CobaltOre" xml:space="preserve">
+  <data name="CobaltOre" xml:space="preserve">
     <value>Ruda kobaltu</value>
   </data>
-    <data name="MeteoriteChunk" xml:space="preserve">
+  <data name="MeteoriteChunk" xml:space="preserve">
     <value>Odłamek meteorytu</value>
   </data>
-    <data name="Rutile" xml:space="preserve">
+  <data name="Rutile" xml:space="preserve">
     <value>Rutyl</value>
   </data>
-    <data name="Coal" xml:space="preserve">
+  <data name="Coal" xml:space="preserve">
     <value>Węgiel</value>
   </data>
   <data name="TrapDisarmedFail" xml:space="preserve">
@@ -632,7 +633,7 @@
   <data name="Bleeds" xml:space="preserve">
     <value>zaczyna krwawić</value>
   </data>
-  <data name="And" xml:space="preserve">
+  <data name="And1" xml:space="preserve">
     <value>i</value>
   </data>
   <data name="ForTheNext" xml:space="preserve">
@@ -715,5 +716,245 @@
   </data>
   <data name="HealthShort" xml:space="preserve">
     <value>PZ</value>
+  </data>
+  <data name="ICanTreat" xml:space="preserve">
+    <value>Mogę opatrzeć te rany za</value>
+  </data>
+  <data name="IDontHaveEnough" xml:space="preserve">
+    <value>Niestety nie mam tyle</value>
+  </data>
+  <data name="WantTreatment" xml:space="preserve">
+    <value>Czy nadal chcesz abym cię wyleczył?</value>
+  </data>
+  <data name="WantTreatmentThird" xml:space="preserve">
+    <value>Czy na pewno chcesz wyleczyć rany?</value>
+  </data>
+  <data name="CrownsGenitive" xml:space="preserve">
+    <value>koron</value>
+  </data>
+  <data name="AlchemistGreeting1" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="AlchemistGreeting2" xml:space="preserve">
+    <value>Chcesz próbkę moich najnowszych mikstur?</value>
+  </data>
+  <data name="ICanGiveYou" xml:space="preserve">
+    <value>Mogę ci za to dać</value>
+  </data>
+  <data name="WantSellThird" xml:space="preserve">
+    <value>Czy na pewno chcesz to sprzedać?</value>
+  </data>
+  <data name="NoSorry" xml:space="preserve">
+    <value>Nie, dzięki</value>
+  </data>
+  <data name="Sold" xml:space="preserve">
+    <value>Sprzedano</value>
+  </data>
+  <data name="Bought" xml:space="preserve">
+    <value>Zakupiono</value>
+  </data>
+  <data name="HowManyToBuy" xml:space="preserve">
+    <value>Ile sztuk chcesz kupić?</value>
+  </data>
+  <data name="HowManyToSell" xml:space="preserve">
+    <value>Ile sztuk chcesz sprzedać?</value>
+  </data>
+  <data name="NotEnoughGold" xml:space="preserve">
+    <value>Masz za mało złota</value>
+  </data>
+  <data name="CureWounds" xml:space="preserve">
+    <value>Wylecz rany</value>
+  </data>
+  <data name="OpenShop" xml:space="preserve">
+    <value>Otwórz sklep</value>
+  </data>
+  <data name="CreateAlchemy" xml:space="preserve">
+    <value>Stwórz składnik alchemiczny</value>
+  </data>
+  <data name="CreatePotion" xml:space="preserve">
+    <value>Stwórz miksturę</value>
+  </data>
+  <data name="RefillPotion" xml:space="preserve">
+    <value>Napełnij miksturę</value>
+  </data>
+  <data name="BuyItem" xml:space="preserve">
+    <value>Kup przedmiot</value>
+  </data>
+  <data name="SellItem" xml:space="preserve">
+    <value>Sprzedaj przedmiot</value>
+  </data>
+  <data name="WantBuyThird" xml:space="preserve">
+    <value>Czy na pewno chcesz to kupić?</value>
+  </data>
+  <data name="InventoryEmpty" xml:space="preserve">
+    <value>Twój ekwipunek jest pusty</value>
+  </data>
+  <data name="LoyaltyLevel" xml:space="preserve">
+    <value>Poziom lojalności</value>
+  </data>
+  <data name="CreateSmithing" xml:space="preserve">
+    <value>Stwórz materiał rzemieślniczy</value>
+  </data>
+  <data name="CreateWeapon" xml:space="preserve">
+    <value>Stwórz broń</value>
+  </data>
+  <data name="CreateArmor" xml:space="preserve">
+    <value>Stwórz pancerz</value>
+  </data>
+  <data name="UpgradeWeapon" xml:space="preserve">
+    <value>Ulepsz broń</value>
+  </data>
+  <data name="UpgradeArmor" xml:space="preserve">
+    <value>Ulepsz pancerz</value>
+  </data>
+  <data name="ReforgeWeapon" xml:space="preserve">
+    <value>Przekuj broń</value>
+  </data>
+  <data name="ReforgeArmor" xml:space="preserve">
+    <value>Przekuj pancerz</value>
+  </data>
+  <data name="BlacksmithGreeting1" xml:space="preserve">
+    <value>Witaj</value>
+  </data>
+  <data name="BlacksmithGreeting2" xml:space="preserve">
+    <value>Czego potrebujesz?</value>
+  </data>
+  <data name="EnchanterGreeting" xml:space="preserve">
+    <value>W jakim celu przybywasz</value>
+  </data>
+  <data name="CreateEnchanting" xml:space="preserve">
+    <value>Stwórz materiał galdurytu</value>
+  </data>
+  <data name="CreateGaldurite" xml:space="preserve">
+    <value>Stwórz galduryt</value>
+  </data>
+  <data name="RevealGaldurite" xml:space="preserve">
+    <value>Odkryj galduryt</value>
+  </data>
+  <data name="ApplyArmorGaldurite" xml:space="preserve">
+    <value>Nałóż galduryt na pancerz</value>
+  </data>
+  <data name="ApplyWeaponGaldurite" xml:space="preserve">
+    <value>Nałóż galduryt na broń</value>
+  </data>
+  <data name="RemoveWeaponGaldurite" xml:space="preserve">
+    <value>Usuń galduryt z broni</value>
+  </data>
+  <data name="RemoveArmorGaldurite" xml:space="preserve">
+    <value>Usuń galduryt z pancerza</value>
+  </data>
+  <data name="ChooseUpgradeChance" xml:space="preserve">
+    <value>Wybierz szansę na ulepszenie (między 1% a 100%)</value>
+  </data>
+  <data name="ChooseModifier" xml:space="preserve">
+    <value>Choose modifier (między</value>
+  </data>
+  <data name="And2" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="CurrentChosenModifier" xml:space="preserve">
+    <value>Modyfikator (Aktualny -&gt; Wybrany)</value>
+  </data>
+  <data name="MaxUpgradeAlready" xml:space="preserve">
+    <value>Wątpię, że to cudeńko mogłoby być lepsze. Zniszczyłbym je tylko próbując!</value>
+  </data>
+  <data name="ChosenUpgradeChance" xml:space="preserve">
+    <value>Wybrana szansa na ulepszenie</value>
+  </data>
+  <data name="ToolsTooWeak" xml:space="preserve">
+    <value>Moje narzędzia są za słabe, żeby ulepszyć to bardziej</value>
+  </data>
+  <data name="ServiceCost" xml:space="preserve">
+    <value>Koszt usługi</value>
+  </data>
+  <data name="ChangeModifier" xml:space="preserve">
+    <value>Zmień modyfikator</value>
+  </data>
+  <data name="ChangeUpgradeChance" xml:space="preserve">
+    <value>Zmień szansę na ulepszenie</value>
+  </data>
+  <data name="WantUpgrade" xml:space="preserve">
+    <value>Na pewno chcesz, żebym to ulepszył?</value>
+  </data>
+  <data name="WantUpgradeThird" xml:space="preserve">
+    <value>Czy na pewno chcesz ulepszyć?</value>
+  </data>
+  <data name="SuccessC" xml:space="preserve">
+    <value>Sukces</value>
+  </data>
+  <data name="CurrentWeaponModifier" xml:space="preserve">
+    <value>Modyfikator twojej broni to</value>
+  </data>
+  <data name="FailureC" xml:space="preserve">
+    <value>Niepowodzenie</value>
+  </data>
+  <data name="CurrentArmorModifier" xml:space="preserve">
+    <value>Modyfikator twojego pancerza to</value>
+  </data>
+  <data name="TryReforgeJunk" xml:space="preserve">
+    <value>Sory, ale to się nadaje co najwyżej na śmietnik</value>
+  </data>
+  <data name="ICanReforge" xml:space="preserve">
+    <value>Mogę przekuć to za</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>niepowodzenie</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>sukces</value>
+  </data>
+  <data name="CriticalM" xml:space="preserve">
+    <value>Krytyczny</value>
+  </data>
+  <data name="WeaponDestroyed" xml:space="preserve">
+    <value>Broń zniszczona</value>
+  </data>
+  <data name="ReforgeNoChange" xml:space="preserve">
+    <value>Unikalność broni nie zmieniła się</value>
+  </data>
+  <data name="CurrentRarity" xml:space="preserve">
+    <value>Aktualna unikalność</value>
+  </data>
+  <data name="WantReforge" xml:space="preserve">
+    <value>Na pewno chcesz, żebym to przekuł?</value>
+  </data>
+  <data name="WantReforgeThird" xml:space="preserve">
+    <value>Czy na pewno chcesz przekuć?</value>
+  </data>
+  <data name="ArmorDestroyed" xml:space="preserve">
+    <value>Pancerz zniszczony</value>
+  </data>
+  <data name="CannotMove" xml:space="preserve">
+    <value>nie może się ruszyć w tej turze</value>
+  </data>
+  <data name="Regeneration" xml:space="preserve">
+    <value>Regeneracja</value>
+  </data>
+  <data name="Weak" xml:space="preserve">
+    <value>Słaby</value>
+  </data>
+  <data name="Excellent" xml:space="preserve">
+    <value>Doskonały</value>
+  </data>
+  <data name="CritChance" xml:space="preserve">
+    <value>Szansa na krytyk</value>
+  </data>
+  <data name="ChooseRefillPotion" xml:space="preserve">
+    <value>Którą miksturę mam napełnić?</value>
+  </data>
+  <data name="NoPotions" xml:space="preserve">
+    <value>Wygląda na to, że nie masz żadnych mikstur, które mógłbym napełnić</value>
+  </data>
+  <data name="ChooseRefillAmount" xml:space="preserve">
+    <value>Wybierz ilość ładunków mikstury do napełnienia</value>
+  </data>
+  <data name="ICanRefill" xml:space="preserve">
+    <value>Mogę napełnić tę miksturę za</value>
+  </data>
+  <data name="WantRefill" xml:space="preserve">
+    <value>Czy na pewno chcesz abym napełnił te miksturę?</value>
+  </data>
+  <data name="WantRefillThird" xml:space="preserve">
+    <value>Czy na pewno chcesz napełnić tę miksturę?</value>
   </data>
 </root>

@@ -17,7 +17,6 @@ public static class InventoryMenuHandler
         while (true)
         {
             var tempIndex = 0;
-            AnsiConsole.Clear();
             AnsiConsole.Write(new FigletText(locale.Inventory).Centered().Color(Color.Gold3_1));
             var rows = Inventory.Items.Select(item => 
                 new Text(
@@ -69,7 +68,7 @@ public static class InventoryMenuHandler
                 case 6:
                     AnsiConsole.Write(new Text($"{locale.ChooseItem} {locale.ToUse}:\n\n", 
                         Stylesheet.Styles["default"]));
-                    Inventory.UseItem(Inventory.Items.ElementAt(ChooseItem()).Key);
+                    Inventory.UseItem(Inventory.Items.ElementAt(ChooseItem(false)).Key);
                     break;
                 case 7:
                     return;
@@ -77,16 +76,19 @@ public static class InventoryMenuHandler
         }
     }
 
-    private static int ChooseItem()
+    public static int ChooseItem(bool showPrices)
     {
-        
         var tempIndex = 0;
         var choices = Inventory.Items.Select(item =>
-            (item.Key.Stackable
+            (showPrices ? item.Key.Stackable
                 ? $"{1 + tempIndex++}. {item.Key.Name} - {item.Value}x"
-                : $"{1 + tempIndex++}. {item.Key.Name}").ToString()).ToArray();
-        if (choices.Length <= 1)
-            return 0;
+                : $"{1 + tempIndex++}. {item.Key.Name}" 
+                : item.Key.Stackable ? 
+                    $"{1 + tempIndex++}. {item.Key.Name} - {item.Value}x " +
+                    $"[[{item.Key.Cost} ({item.Key.Cost * item.Value}) cr]]" : 
+                    $"{1 + tempIndex++}. {item.Key.Name} [[{item.Key.Cost} cr]]" ).ToString()).ToArray();
+        if (choices.Length < 1)
+            return -1;
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
@@ -94,7 +96,7 @@ public static class InventoryMenuHandler
     }
     private static void DeleteItem()
     {
-        var item = Inventory.Items.ElementAt(ChooseItem());
+        var item = Inventory.Items.ElementAt(ChooseItem(false));
         if (item.Key.Stackable && item.Value > 1)
         {
             var number = AnsiConsole.Prompt(
@@ -133,7 +135,7 @@ public static class InventoryMenuHandler
 
     private static void InspectItem()
     {
-        var item = Inventory.Items.ElementAt(ChooseItem());
+        var item = Inventory.Items.ElementAt(ChooseItem(false));
         item.Key.Inspect(item.Value);
         var cont = AnsiConsole.Prompt(
             new TextPrompt<string>(locale.PressAnyKey)

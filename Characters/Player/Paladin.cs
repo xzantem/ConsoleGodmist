@@ -2,8 +2,7 @@ using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items.Armors;
-using ConsoleGodmist.Items.Weapons;
+using ConsoleGodmist.Items;
 using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Characters
@@ -19,6 +18,16 @@ namespace ConsoleGodmist.Characters
             new Stat(16, 0.6), new Stat(16, 0.6),
             new Stat(35, 0), new Stat(0, 0),
             new Stat(1, 0), CharacterClass.Paladin) {
+            Resistances.Add(StatusEffectType.Debuff, new Stat(0.25, 0));
+            Resistances.Add(StatusEffectType.Bleed, new Stat(0.3, 0));
+            Resistances.Add(StatusEffectType.Poison, new Stat(0.4, 0));
+            Resistances.Add(StatusEffectType.Burn, new Stat(0.5, 0));
+            Resistances.Add(StatusEffectType.Stun, new Stat(0.75, 0));
+            Resistances.Add(StatusEffectType.Freeze, new Stat(0.75, 0));
+            Resistances.Add(StatusEffectType.Frostbite, new Stat(0.75, 0));
+            Resistances.Add(StatusEffectType.Sleep, new Stat(0.75, 0));
+            Resistances.Add(StatusEffectType.Paralysis, new Stat(0.75, 0));
+            Resistances.Add(StatusEffectType.Provocation, new Stat(0.25, 0));
             _maximalResource = new Stat(120, 0);
             _resourceRegen = new Stat(20, 0);
             CurrentResource = MaximalResource;

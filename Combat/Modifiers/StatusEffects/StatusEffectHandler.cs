@@ -15,6 +15,8 @@ public static class StatusEffectHandler
             .Cast<DoTStatusEffect>().ToList(), target);
         HandleSleep(effects
             .Where(effect => effect.Type == StatusEffectType.Sleep).Cast<Sleep>().ToList(), target);
+        HandleRegens(effects
+            .Where(effect => effect.Type == StatusEffectType.Regeneration).Cast<Regeneration>().ToList(), target);
         foreach (var effect in effects.ToList())
         {
             effect.Handle(target);
@@ -23,9 +25,14 @@ public static class StatusEffectHandler
 
     private static void HandleDoTs(List<DoTStatusEffect> dots, Character target)
     {
-        var dotsDict = dots
-            .ToDictionary(x => x.Type, x => dots
-                .Where(s => s.Type == x.Type).Sum(s => s.Strength));
+        var dotsDict = new Dictionary<StatusEffectType, double>();
+        foreach (var effect in dots)
+        {
+            if (dotsDict.ContainsKey(effect.Type))
+                dotsDict[effect.Type] += effect.Strength;
+            else
+                dotsDict.Add(effect.Type, effect.Strength);
+        }
         foreach (var dot in dotsDict)
         {
             var damageType = dot.Key switch
@@ -54,6 +61,18 @@ public static class StatusEffectHandler
         var regen = sleeps.Sum(x => x.Strength);
         if (regen > 0)
             target.Heal(regen);
+    }
+
+    private static void HandleRegens(List<Regeneration> regens, Character target)
+    {
+        var healthRegen = regens.Where(x => x.RegenType == "Health")
+            .Sum(r => r.Strength);
+        if (healthRegen > 0)
+            target.Heal(healthRegen);
+        var resourceRegen = regens.Where(x => x.RegenType == "Resource")
+            .Sum(r => r.Strength);
+        if ((int)resourceRegen > 0)
+            target.RegenResource((int)resourceRegen);
     }
     public static void AddStatusEffect(StatusEffect statusEffect, Character target)
     {

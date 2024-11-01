@@ -2,6 +2,7 @@
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Items;
 using ConsoleGodmist.TextService;
 using Spectre.Console;
 
@@ -13,7 +14,6 @@ public class Battle
     public int TurnCount { get; private set; }
     public bool Escaped { get; private set; }
     private int EscapeAttempts { get; set; }
-    public List<Text> Log { get; set; }
     
     public Battle(Dictionary<BattleUser, int> usersTeams)
     {
@@ -27,32 +27,36 @@ public class Battle
         {
             user.StartNewTurn();
         }
-        BattleTextService.DisplayTurnOrder(Users);
+        //BattleTextService.DisplayTurnOrder(Users);
         while (Users.Keys.Any(x => !x.MovedThisTurn) && !Escaped)
         {
             foreach (var user in Users.Keys.Where(user => user.TryMove()))
             {
                 BattleTextService.DisplayMovementText(user.User);
-                BattleTextService.DisplayTurnOrder(Users);
+                //BattleTextService.DisplayTurnOrder(Users);
                 if (user.User.StatusEffects
                     .Any(x => x.Type is StatusEffectType.Stun or
                         StatusEffectType.Freeze or StatusEffectType.Sleep))
+                {
+                    BattleTextService.DisplayCannotMoveText(user.User);
+                    HandleEffects(user.User);
                     continue;
+                }
                 HandleEffects(user.User);
                 switch (Users[user])
                 {
                     case 0:
                         var hasMoved = false;
                         while (!hasMoved) 
-                            hasMoved = PlayerMove(user.User as PlayerCharacter, Users
-                                     .FirstOrDefault(x => x.Key != user).Key.User as EnemyCharacter);
+                            hasMoved = PlayerMove(user, Users
+                                     .FirstOrDefault(x => x.Key != user).Key);
                         break;
                     case 1:
                         Thread.Sleep(1000);
-                        AIMove(user.User as EnemyCharacter, EngineMethods
+                        AIMove(user, EngineMethods
                             .RandomChoice(Users
                                 .Where(x => x.Key != user)
-                                .ToDictionary(x => x.Key, x => 1)).User);
+                                .ToDictionary(x => x.Key, x => 1)));
                         break;
                 }
                 var dead = Users
@@ -71,7 +75,6 @@ public class Battle
         StatusEffectHandler.HandleEffects(user.StatusEffects, user);
         user.HandleModifiers();
         user.RegenResource((int)user.ResourceRegen);
-        //Handle Potion Effects
     }
 
     public bool ChooseSkill(PlayerCharacter player, Character target)
@@ -81,10 +84,10 @@ public class Battle
         var choices = skills.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
-        if (choice == locale.Return) return false;
-        return player.ActiveSkills[Array.IndexOf(choices, choice)].Use(player, target);;
+        return choice != locale.Return && player.ActiveSkills[Array.IndexOf(choices, choice)].Use(player, target);
+        ;
     }
-    public bool PlayerMove(PlayerCharacter player, EnemyCharacter target)
+    public bool PlayerMove(BattleUser player, BattleUser target)
     {
         BattleTextService.DisplayStatusText(player, target);
         string[] choices =
@@ -96,9 +99,11 @@ public class Battle
         switch (Array.IndexOf(choices, choice))
         {
             case 0:
-                return ChooseSkill(player, target);
+                return ChooseSkill(player.User as PlayerCharacter, target.User);
             case 1:
-                // use potion
+                PotionManager.ChoosePotion((player.User as PlayerCharacter).Inventory.Items
+                    .Where(x => x.Key.ItemType == ItemType.Potion)
+                    .Select(x => x.Key).Cast<Potion>().ToList()).Use();
                 return false;
             case 2:
                 var charactersStats = new string[Users.Keys.Count];
@@ -121,7 +126,7 @@ public class Battle
                 var characterStatusChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .AddChoices(charactersStatus)
                     .HighlightStyle(new Style(Color.Gold3_1)));
-                BattleTextService.DisplayBattleStatusText(Users
+                BattleTextService.DisplayStatusEffectText(Users
                     .ElementAt(Array.IndexOf(charactersStatus, characterStatusChoice)).Key.User);
                 return false;
             case 4:
@@ -133,21 +138,22 @@ public class Battle
                     return true;
                 }
                 BattleTextService.DisplayEscapeSuccessText();
-                player.LoseHonor((int)Users.Where(x => x.Value == 1)
+                (player.User as PlayerCharacter).LoseHonor((int)Users.Where(x => x.Value == 1)
                     .Average(x => x.Key.User.Level) / 3 + 4);
                 Escaped = true;
                 return true;
         }
         return false;
     }
-    public void AIMove(EnemyCharacter enemy, Character target)
+    public void AIMove(BattleUser enemy, BattleUser target)
     {
-        var possibleSkills = enemy.ActiveSkills
-            .Where(x => x.ResourceCost <= enemy.CurrentResource || 
-                        Math.Abs(enemy.MaximalResource - enemy.CurrentResource) < 0.01)
+        BattleTextService.DisplayStatusText(target, enemy);
+        var possibleSkills = enemy.User.ActiveSkills
+            .Where(x => x.ResourceCost <= enemy.User.CurrentResource || 
+                        Math.Abs(enemy.User.MaximalResource - enemy.User.CurrentResource) < 0.01)
             .ToDictionary(x => x, x => 1);
         var usedSkill = EngineMethods.RandomChoice(possibleSkills);
-        usedSkill.Use(enemy, target);
+        usedSkill.Use(enemy.User, target.User);
         Thread.Sleep(1000);
     }
 
