@@ -16,7 +16,7 @@ namespace ConsoleGodmist.Characters
         // As with all classes, used for casting skills, downside to using is losing bonus speed
         public Scout(string name) : base(name, new Stat(300, 10),
             new Stat(18, 0.8), new Stat(36, 1.1),
-            new Stat(0, 0), new Stat(17, 0.08),
+            new Stat(0.08, 0), new Stat(17, 0.08),
             new Stat(8, 0.33), new Stat(4, 0.2),
             new Stat(55, 0), new Stat(0, 0),
             new Stat(1, 0), CharacterClass.Scout) {
@@ -44,7 +44,7 @@ namespace ConsoleGodmist.Characters
                 [new DebuffStat(SkillTarget.Enemy, StatType.Accuracy, ModifierType.Additive, 20, 0.8, 3)]);
             ActiveSkills[3] = new ActiveSkill("Hookshot", 25, false, 80,
             [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0),
-                new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Stun, "Hookshot", 3), 0.75)]);
+                new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Stun, "Hookshot", 2), 0.75)]);
             ActiveSkills[4] = new ActiveSkill("AccurateThrow", 50, true, 85,
             [new DealDamage(DamageType.Physical, DamageBase.Maximal, 1, true, true, 0)]);
         }

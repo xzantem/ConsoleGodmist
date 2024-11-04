@@ -153,7 +153,7 @@ namespace ConsoleGodmist.Characters
             CharacterEventTextService.DisplayHonorGainText(this, gain);
         }
         public void LoseHonor(int honor) {
-            var loss = Math.Max(Honor + 100, honor);
+            var loss = Math.Min(Honor + 100, honor);
             Honor -= loss;
             CharacterEventTextService.DisplayHonorLossText(this, loss);
         }

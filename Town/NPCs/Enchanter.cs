@@ -35,7 +35,7 @@ public class Enchanter : NPC
                 case 0: DisplayShop(); break;
                 case 1: CraftItem(); break;
                 case 2: CraftGaldurite(); break;
-                case 3: InspectGaldurite(); break;
+                case 3: ExamineGaldurite(); break;
                 case 4: InsertWeaponGaldurite(); break;
                 case 5: InsertArmorGaldurite(); break;
                 case 6: RemoveWeaponGaldurite(); break;
@@ -50,7 +50,7 @@ public class Enchanter : NPC
     {
         throw new NotImplementedException();
     }
-    public void InspectGaldurite()
+    public void ExamineGaldurite()
     {
         throw new NotImplementedException();
     }

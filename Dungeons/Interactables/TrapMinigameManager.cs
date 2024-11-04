@@ -288,8 +288,9 @@ public static class TrapMinigameManager
             "B1", "B2", "B3",
             "C1", "C2", "C3"
         };
+        var tries = 3;
         var bombPosition = Random.Shared.Next(0, 9);
-        AnsiConsole.Write(new Text($"Gamba grid challenge: Try to guess which squares don't contain the bomb! (You must select exactly {size} fields\n"));
+        AnsiConsole.Write(new Text($"Gamba grid challenge: Try to guess which squares don't contain the bomb! (You must select exactly {size} fields)\n"));
         var table = new Grid();
         table.AddColumn();
         table.AddColumn();
@@ -298,19 +299,35 @@ public static class TrapMinigameManager
         {
             table.AddRow(items[i], items[i + 1], items[i + 2]);
         }
-        AnsiConsole.Write(table);
-        var choices = new List<string>();
-        while (choices.Count != size)
+        while (true)
         {
-            choices = AnsiConsole.Prompt(
-                new MultiSelectionPrompt<string>()
-                    .Title("Feeling lucky? Choose a tile, any tile")
-                    .PageSize(9)
-                    .InstructionsText(
-                        "Space: Select, " + 
-                        "Enter: Accept")
-                    .AddChoices(items).Required());
+            AnsiConsole.Write(table);
+            var choices = new List<string>();
+            while (choices.Count != size)
+            {
+                choices = AnsiConsole.Prompt(
+                    new MultiSelectionPrompt<string>()
+                        .Title("Feeling lucky? Choose a tile, any tile")
+                        .PageSize(9)
+                        .InstructionsText(
+                            "Space: Select, " + 
+                            "Enter: Accept")
+                        .AddChoices(items).Required());
+            }
+
+            if (choices.Any(choice => Array.IndexOf(choices.ToArray(), choice) == bombPosition))
+            {
+                tries--;
+                AnsiConsole.Write(new Text("Bomb was triggered on one of the chosen squares! ", Stylesheet.Styles["failure"]));
+                if (tries > 0)
+                    AnsiConsole.Write(new Text($"Tries left: {tries}", Stylesheet.Styles["default"]));
+                else
+                {
+                    AnsiConsole.Write(new Text("The bomb explodes!", Stylesheet.Styles["failure"]));
+                    return false;
+                }
+            }
+            else return true;
         }
-        return choices.All(choice => Array.IndexOf(choices.ToArray(), choice) != bombPosition);
     }
 }

@@ -2,6 +2,7 @@
 using System.Text.Json;
 using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Items.Lootbags;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Items;

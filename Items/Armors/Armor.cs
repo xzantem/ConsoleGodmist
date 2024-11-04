@@ -1,5 +1,6 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -21,6 +22,7 @@ public class Armor : BaseItem, IEquippable
     public CharacterClass RequiredClass { get; }
     public Quality Quality { get; set; }
     public double UpgradeModifier { get; set; }
+    public List<Galdurite> Galdurites { get; set; }
     
     //Armor implementations
     public ArmorPlate Plate { get; set; }
@@ -126,7 +128,7 @@ public class Armor : BaseItem, IEquippable
         Plate = plate;
         Binder = binder;
         Base = armBase;
-        Name = Plate.Adjective + requiredClass switch
+        Name = NameAliasHelper.GetName(Plate.Adjective) + " " + requiredClass switch
         {
             CharacterClass.Warrior => locale.Hauberk,
             CharacterClass.Scout => locale.Tunic,
@@ -139,7 +141,9 @@ public class Armor : BaseItem, IEquippable
             _ => ""
         };
         Alias = $"{plate.Alias}.{binder.Alias}.{armBase.Alias}";
-        BaseCost = plate.GoldCost + binder.GoldCost + armBase.GoldCost;
+        BaseCost = plate.MaterialCost * ItemManager.GetItem(plate.Material).Cost + 
+                   binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
+                   armBase.MaterialCost * ItemManager.GetItem(armBase.Material).Cost;
         Rarity = EquippableItemService.GetRandomRarity();
         RequiredLevel = requiredLevel == 0
             ? Math.Max(Math.Max(plate.Tier, binder.Tier), armBase.Tier) * 10 - 5 + Quality switch
@@ -154,6 +158,7 @@ public class Armor : BaseItem, IEquippable
         RequiredClass = requiredClass;
         Quality = quality;
         UpgradeModifier = 1;
+        Galdurites = new List<Galdurite>();
     }
     
     /// <summary>
@@ -169,25 +174,25 @@ public class Armor : BaseItem, IEquippable
                 Plate = EquipmentPartManager.GetPart<ArmorPlate>("ScratchedPlate");
                 Binder = EquipmentPartManager.GetPart<ArmorBinder>("ScratchedBinder");
                 Base = EquipmentPartManager.GetPart<ArmorBase>("ScratchedBase");
-                Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Hauberk;
+                Name = NameAliasHelper.GetName(Plate.Adjective) + " " + locale.Hauberk;
                 break;
             case CharacterClass.Scout:
                 Plate = EquipmentPartManager.GetPart<ArmorPlate>("HoleyPlate");
                 Binder = EquipmentPartManager.GetPart<ArmorBinder>("HoleyBinder");
                 Base = EquipmentPartManager.GetPart<ArmorBase>("HoleyBase");
-                Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Tunic;
+                Name = NameAliasHelper.GetName(Plate.Adjective) + " " + locale.Tunic;
                 break;
             case CharacterClass.Sorcerer:
                 Plate = EquipmentPartManager.GetPart<ArmorPlate>("TornPlate");
                 Binder = EquipmentPartManager.GetPart<ArmorBinder>("TornBinder");
                 Base = EquipmentPartManager.GetPart<ArmorBase>("TornBase");
-                Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Robe;
+                Name = NameAliasHelper.GetName(Plate.Adjective) + " " + locale.Robe;
                 break;
             case CharacterClass.Paladin:
                 Plate = EquipmentPartManager.GetPart<ArmorPlate>("PiercedPlate");
                 Binder = EquipmentPartManager.GetPart<ArmorBinder>("PiercedBinder");
                 Base = EquipmentPartManager.GetPart<ArmorBase>("PiercedBase");
-                Name = locale.ResourceManager.GetString(Plate.Adjective) + " " + locale.Cuirass;
+                Name = NameAliasHelper.GetName(Plate.Adjective) + " " + locale.Cuirass;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(requiredClass), requiredClass, null);
@@ -199,6 +204,7 @@ public class Armor : BaseItem, IEquippable
         RequiredClass = requiredClass;
         Quality = Quality.Normal;
         UpgradeModifier = 1;
+        Galdurites = new List<Galdurite>();
     }
     public Armor() {}
 
@@ -206,12 +212,13 @@ public class Armor : BaseItem, IEquippable
     {
         if (RequiredClass != PlayerHandler.player.CharacterClass)
         {
-            //Maybe display some text
+            AnsiConsole.Write(new Text($"{locale.WrongClass} ({NameAliasHelper.GetName(RequiredClass.ToString())})", 
+                Stylesheet.Styles["error"]));
             return false;
         }
         if (RequiredLevel > PlayerHandler.player.Level)
         {
-            //Maybe display some text
+            AnsiConsole.Write(new Text($"{locale.LevelTooLow} ({RequiredLevel})", Stylesheet.Styles["error"]));
             return false;
         }
         PlayerHandler.player.SwitchArmor(this);
@@ -222,7 +229,7 @@ public class Armor : BaseItem, IEquippable
     {
         base.Inspect(amount);
         var playerArmor = PlayerHandler.player.Armor;
-        AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, + {UpgradeModifier:P0}\n", Stylesheet.Styles["default"]));
+        AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, +{UpgradeModifier-1:P0}\n", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{locale.Defense}: {PhysicalDefense}", Stylesheet.Styles["default"]));
         WriteComparator(PhysicalDefense, playerArmor.PhysicalDefense);
         AnsiConsole.Write(new Text($" | {MagicDefense}", Stylesheet.Styles["default"]));

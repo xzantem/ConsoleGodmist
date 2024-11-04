@@ -124,70 +124,85 @@ public static class BattleTextService
         if (target.StatusEffects.Count == 0)
         {
             AnsiConsole.Write(new Text($"{locale.NoStatusEffects}\n\n", Stylesheet.Styles["default"]));
-            return;
         }
-        var dotsList = target.StatusEffects.Where(s => s.Type is StatusEffectType.Bleed
+        else
+        {
+            var dotsList = target.StatusEffects.Where(s => s.Type is StatusEffectType.Bleed
                 or StatusEffectType.Poison or StatusEffectType.Burn).Cast<DoTStatusEffect>().ToList();
-        if (dotsList.Count > 0)
-        {
-            if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Bleed))
-                AnsiConsole.Write(new Text($"{locale.Bleed} ({string.Join(", ",dotsList
-                    .Where(x => x.Type == StatusEffectType.Bleed).Select(s => s.Source))}): {(int)dotsList
-                    .Where(x => x.Type == StatusEffectType.Bleed).Sum(s => s.Strength)} [{dotsList
-                    .Where(x => x.Type == StatusEffectType.Bleed).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-bleed"]));
-            if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Poison))
-                AnsiConsole.Write(new Text($"{locale.Poison} ({string.Join(", ",dotsList
-                    .Where(x => x.Type == StatusEffectType.Poison).Select(s => s.Source))}): {(int)dotsList
-                    .Where(x => x.Type == StatusEffectType.Poison).Sum(s => s.Strength)} [{dotsList
-                    .Where(x => x.Type == StatusEffectType.Poison).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-poison"]));
-            if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Burn))
-                AnsiConsole.Write(new Text($"{locale.Burn} ({string.Join(", ",dotsList
-                    .Where(x => x.Type == StatusEffectType.Burn).Select(s => s.Source))}): {(int)dotsList
-                    .Where(x => x.Type == StatusEffectType.Burn).Sum(s => s.Strength)} [{dotsList
-                    .Where(x => x.Type == StatusEffectType.Burn).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-burn"]));
-        }
+            if (dotsList.Count > 0)
+            {
+                if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Bleed))
+                    AnsiConsole.Write(new Text($"{locale.Bleed} ({string.Join(", ",dotsList
+                        .Where(x => x.Type == StatusEffectType.Bleed).Select(s => s.Source))}): {(int)dotsList
+                        .Where(x => x.Type == StatusEffectType.Bleed).Sum(s => s.Strength)} [{dotsList
+                        .Where(x => x.Type == StatusEffectType.Bleed).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-bleed"]));
+                if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Poison))
+                    AnsiConsole.Write(new Text($"{locale.Poison} ({string.Join(", ",dotsList
+                        .Where(x => x.Type == StatusEffectType.Poison).Select(s => s.Source))}): {(int)dotsList
+                        .Where(x => x.Type == StatusEffectType.Poison).Sum(s => s.Strength)} [{dotsList
+                        .Where(x => x.Type == StatusEffectType.Poison).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-poison"]));
+                if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Burn))
+                    AnsiConsole.Write(new Text($"{locale.Burn} ({string.Join(", ",dotsList
+                        .Where(x => x.Type == StatusEffectType.Burn).Select(s => s.Source))}): {(int)dotsList
+                        .Where(x => x.Type == StatusEffectType.Burn).Sum(s => s.Strength)} [{dotsList
+                        .Where(x => x.Type == StatusEffectType.Burn).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-burn"]));
+            }
 
-        if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Sleep))
-        {
-            var sleeps = target.StatusEffects
-                .Where(x => x.Type == StatusEffectType.Sleep).Cast<Sleep>().ToList();
-            AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", sleeps
-                .Select(s => s.Source))}): +{(int)sleeps.Sum(s => s.Strength)} [{sleeps
-                .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
-        }
-        if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Shield))
-        {
-            var shields = target.StatusEffects
-                .Where(x => x.Type == StatusEffectType.Shield).Cast<Shield>().ToList();
-            AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", shields
-                .Select(s => s.Source))}): +{(int)shields.Sum(s => s.Strength)} [{shields
-                .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
-        }
-        if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Regeneration))
-        {
-            var regens = target.StatusEffects
-                .Where(x => x.Type == StatusEffectType.Regeneration).Cast<Regeneration>().ToList();
-            var regensHealth = regens.Where(x => x.RegenType == "Health").ToList();
-            var regensResource = regens.Where(x => x.RegenType == "Resource").ToList();
-            if (regensHealth.Count > 0)
-                AnsiConsole.Write(new Text($"{locale.Regeneration} ({string.Join(", ", regensHealth
-                    .Select(s => s.Source))}): +{(int)regensHealth
-                    .Sum(s => s.Strength)} {locale.HealthShort} [{regensHealth
+            if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Sleep))
+            {
+                var sleeps = target.StatusEffects
+                    .Where(x => x.Type == StatusEffectType.Sleep).Cast<Sleep>().ToList();
+                AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", sleeps
+                    .Select(s => s.Source))}): +{(int)sleeps.Sum(s => s.Strength)} [{sleeps
                     .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
-            if (regensResource.Count > 0)
-                AnsiConsole.Write(new Text($"{locale.Regeneration} ({string.Join(", ", regensResource
-                    .Select(s => s.Source))}): +{(int)regensResource
-                    .Sum(s => s.Strength)} {ResourceShortText(target)} [{regensResource
+            }
+            if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Shield))
+            {
+                var shields = target.StatusEffects
+                    .Where(x => x.Type == StatusEffectType.Shield).Cast<Shield>().ToList();
+                AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", shields
+                    .Select(s => s.Source))}): +{(int)shields.Sum(s => s.Strength)} [{shields
                     .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+            }
+            if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Regeneration))
+            {
+                var regens = target.StatusEffects
+                    .Where(x => x.Type == StatusEffectType.Regeneration).Cast<Regeneration>().ToList();
+                var regensHealth = regens.Where(x => x.RegenType == "Health").ToList();
+                var regensResource = regens.Where(x => x.RegenType == "Resource").ToList();
+                if (regensHealth.Count > 0)
+                    AnsiConsole.Write(new Text($"{locale.Regeneration} ({string.Join(", ", regensHealth
+                        .Select(s => s.Source))}): +{(int)regensHealth
+                        .Sum(s => s.Strength)} {locale.HealthShort} [{regensHealth
+                        .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+                if (regensResource.Count > 0)
+                    AnsiConsole.Write(new Text($"{locale.Regeneration} ({string.Join(", ", regensResource
+                        .Select(s => s.Source))}): +{(int)regensResource
+                        .Sum(s => s.Strength)} {ResourceShortText(target)} [{regensResource
+                        .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+            }
+            var other = target.StatusEffects.Where(x => x.Type != StatusEffectType.Bleed && 
+                                        x.Type != StatusEffectType.Poison && x.Type != StatusEffectType.Burn &&
+                                        x.Type != StatusEffectType.Sleep && x.Type != StatusEffectType.Shield && 
+                                        x.Type != StatusEffectType.Regeneration).ToList();
+            foreach (var status in other.OrderByDescending(x => x.RemainingDuration).OrderBy(x => x.Type))
+            {
+                AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(status.Type.ToString())} " +
+                                           $"({status.Source}): {status.Effect} [{status.RemainingDuration}]\n"));
+            }
+
         }
-        var other = target.StatusEffects.Where(x => x.Type != StatusEffectType.Bleed && 
-                                    x.Type != StatusEffectType.Poison && x.Type != StatusEffectType.Burn &&
-                                    x.Type != StatusEffectType.Sleep && x.Type != StatusEffectType.Shield && 
-                                    x.Type != StatusEffectType.Regeneration).ToList();
-        foreach (var status in other.OrderByDescending(x => x.RemainingDuration).OrderBy(x => x.Type))
+        foreach (var modifier in target.GetModifiers())
         {
-            AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(status.Type.ToString())} " +
-                                       $"({status.Source}): {status.Effect} [{status.RemainingDuration}]\n"));
+            var mod = modifier.Value.Type switch
+            {
+                ModifierType.Multiplicative => modifier.Value.Mod.ToString("+#%;-#%;0%"),
+                ModifierType.Relative => modifier.Value.Mod.ToString("+#%;-#%;0%"),
+                ModifierType.Absolute => modifier.Value.Mod.ToString("+#;-#;0"),
+                ModifierType.Additive => modifier.Value.Mod.ToString("+#;-#;0")
+            };
+            AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(modifier.Key.ToString())} " +
+                                       $"({modifier.Value.Source}): {mod} [{modifier.Value.RemainingDuration}]\n"));
         }
     }
 }

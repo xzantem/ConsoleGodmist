@@ -12,13 +12,17 @@ public class Battle
 {
     public Dictionary<BattleUser, int> Users { get; private set; }
     public int TurnCount { get; private set; }
-    public bool Escaped { get; private set; }
+    public bool Escaped { get; set; }
+    public bool CanEscape { get; private set; }
     private int EscapeAttempts { get; set; }
+    public DungeonField Location { get; private set; }
     
-    public Battle(Dictionary<BattleUser, int> usersTeams)
+    public Battle(Dictionary<BattleUser, int> usersTeams, DungeonField location, bool canEscape = true)
     {
         Users = usersTeams;
         TurnCount = 1;
+        Location = location;
+        CanEscape = canEscape;
     }
 
     public void NewTurn()
@@ -90,13 +94,15 @@ public class Battle
     public bool PlayerMove(BattleUser player, BattleUser target)
     {
         BattleTextService.DisplayStatusText(player, target);
-        string[] choices =
+        List<string> choices =
         [
-            locale.UseSkill, locale.UsePotion, locale.ShowStats, locale.ShowStatus, locale.Escape
+            locale.UseSkill, locale.UsePotion, locale.ShowStats, locale.ShowStatus, 
         ];
+        if (CanEscape)
+            choices.Add(locale.Escape);
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
-        switch (Array.IndexOf(choices, choice))
+        switch (Array.IndexOf(choices.ToArray(), choice))
         {
             case 0:
                 return ChooseSkill(player.User as PlayerCharacter, target.User);

@@ -24,7 +24,13 @@ public static class InventoryMenuHandler
                         $"{1 + tempIndex++}. {item.Key.Name} - {item.Value}x" : 
                         $"{1 + tempIndex++}. {item.Key.Name}", item.Key.NameStyle())).ToList();
             AnsiConsole.Write(new Rows(rows.GetRange(index, Math.Min(pageSize, rows.Count - index))));
-            AnsiConsole.Write("\n\n");
+            AnsiConsole.Write(new Text($"\n{locale.Weight}: {Inventory.PackWeight}/{Inventory.MaxPackWeight}" +
+                                       $" | ----- | {locale.Crowns}: {PlayerHandler.player.Gold} cr\n"));
+            if (Inventory.Items.Count == 0)
+            {
+                AnsiConsole.Write(new Text(locale.InventoryEmpty + "\n"));
+                return;
+            }
             Dictionary<string, int> choices = [];
             if (index < rows.Count - scrollAmount)
                 choices.Add(locale.GoDown, 0);
@@ -80,7 +86,7 @@ public static class InventoryMenuHandler
     {
         var tempIndex = 0;
         var choices = Inventory.Items.Select(item =>
-            (showPrices ? item.Key.Stackable
+            (!showPrices ? item.Key.Stackable
                 ? $"{1 + tempIndex++}. {item.Key.Name} - {item.Value}x"
                 : $"{1 + tempIndex++}. {item.Key.Name}" 
                 : item.Key.Stackable ? 

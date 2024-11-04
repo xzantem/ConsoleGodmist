@@ -6,6 +6,9 @@ public class CraftableIngredient : BaseItem, ICraftable
 {
     public Dictionary<string, int> CraftingRecipe { get; set; }
     public int CraftedAmount { get; set; }
+    
+    public override int Cost => (int)Math.Floor((double)CraftingRecipe
+        .Sum(x => x.Value * ItemManager.GetItem(x.Key).Cost) / CraftedAmount);
 
     public CraftableIngredient() // For JSON deserialization
     {

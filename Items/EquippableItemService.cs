@@ -37,20 +37,40 @@ public static class EquippableItemService
         return EngineMethods.RandomChoice(rarities);
     }
 
+    public static Weapon GetRandomWeapon(int tier, CharacterClass requiredClass)
+    {
+        return new Weapon(EquipmentPartManager.GetRandomPart<WeaponHead>(tier, requiredClass),
+            EquipmentPartManager.GetRandomPart<WeaponBinder>(tier, requiredClass),
+            EquipmentPartManager.GetRandomPart<WeaponHandle>(tier, requiredClass),
+            EngineMethods.RandomChoice(Enum.GetValues<CharacterClass>().ToList()),
+            EngineMethods.RandomChoice(Enum.GetValues<Quality>()
+                .Where(x => x != Quality.Masterpiece).ToList()));
+    }
     public static Weapon GetRandomWeapon(int tier)
     {
-        return new Weapon(EquipmentPartManager.GetRandomPart<WeaponHead>(tier),
-            EquipmentPartManager.GetRandomPart<WeaponBinder>(tier),
-            EquipmentPartManager.GetRandomPart<WeaponHandle>(tier),
+        var requiredClass = EngineMethods.RandomChoice(Enum.GetValues<CharacterClass>().ToList());
+        return new Weapon(EquipmentPartManager.GetRandomPart<WeaponHead>(tier, requiredClass),
+            EquipmentPartManager.GetRandomPart<WeaponBinder>(tier, requiredClass),
+            EquipmentPartManager.GetRandomPart<WeaponHandle>(tier, requiredClass),
+            EngineMethods.RandomChoice(Enum.GetValues<CharacterClass>().ToList()),
+            EngineMethods.RandomChoice(Enum.GetValues<Quality>()
+                .Where(x => x != Quality.Masterpiece).ToList()));
+    }
+    public static Armor GetRandomArmor(int tier, CharacterClass requiredClass)
+    {
+        return new Armor(EquipmentPartManager.GetRandomPart<ArmorPlate>(tier, requiredClass),
+            EquipmentPartManager.GetRandomPart<ArmorBinder>(tier, requiredClass),
+            EquipmentPartManager.GetRandomPart<ArmorBase>(tier, requiredClass),
             EngineMethods.RandomChoice(Enum.GetValues<CharacterClass>().ToList()),
             EngineMethods.RandomChoice(Enum.GetValues<Quality>()
                 .Where(x => x != Quality.Masterpiece).ToList()));
     }
     public static Armor GetRandomArmor(int tier)
     {
-        return new Armor(EquipmentPartManager.GetRandomPart<ArmorPlate>(tier),
-            EquipmentPartManager.GetRandomPart<ArmorBinder>(tier),
-            EquipmentPartManager.GetRandomPart<ArmorBase>(tier),
+        var requiredClass = EngineMethods.RandomChoice(Enum.GetValues<CharacterClass>().ToList());
+        return new Armor(EquipmentPartManager.GetRandomPart<ArmorPlate>(tier, requiredClass),
+            EquipmentPartManager.GetRandomPart<ArmorBinder>(tier, requiredClass),
+            EquipmentPartManager.GetRandomPart<ArmorBase>(tier, requiredClass),
             EngineMethods.RandomChoice(Enum.GetValues<CharacterClass>().ToList()),
             EngineMethods.RandomChoice(Enum.GetValues<Quality>()
                 .Where(x => x != Quality.Masterpiece).ToList()));

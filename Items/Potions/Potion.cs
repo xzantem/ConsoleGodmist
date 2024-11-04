@@ -53,7 +53,7 @@ public class Potion : BaseItem
     public override void Inspect(int amount = 1)
     {
         base.Inspect(amount);
-        AnsiConsole.Write($"Charges: {CurrentCharges}/{MaximalCharges}\n");
+        AnsiConsole.Write($"{locale.Charges}: {CurrentCharges}/{MaximalCharges}\n");
         foreach (var effect in Components)
         {
             var duration = 10 + (int)(Catalyst.Effect == PotionCatalystEffect.Duration ? Catalyst.Strength : 0);
@@ -85,31 +85,31 @@ public class Potion : BaseItem
                                                $"{duration} turns \n", Stylesheet.Styles["default"]));
                     break;
                 case PotionEffect.DamageDealtIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.DamageGenitive} Dealt Increase: +{strength:P0} {locale.DamageGenitive} " +
+                    AnsiConsole.Write(new Text($"- {locale.DamageDealt}: +{strength:P0} {locale.DamageGenitive} " +
                                                $"for {duration} turns \n", Stylesheet.Styles["default"]));
                     break;
                 case PotionEffect.DamageTakenDecrease:
-                    AnsiConsole.Write(new Text($"- {locale.DamageGenitive} Taken Decrease: -{strength:P0} {locale.DamageGenitive} " +
+                    AnsiConsole.Write(new Text($"- {locale.DamageTaken}: -{strength:P0} {locale.DamageGenitive} " +
                                                $"for {duration} turns \n", Stylesheet.Styles["default"]));
                     break;
                 case PotionEffect.ResistanceIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.Resistances} Increase: +{strength:P0} {locale.Resistances} " +
+                    AnsiConsole.Write(new Text($"- {locale.Resistances}: +{strength:P0} {locale.Resistances} " +
                                                $"for {duration} turns \n", Stylesheet.Styles["default"]));
                     break;
                 case PotionEffect.SpeedIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.Speed} Increase: +{strength:P0} {locale.Speed} " +
+                    AnsiConsole.Write(new Text($"- {locale.Speed}: +{strength:P0} {locale.Speed} " +
                                                $"for {duration} turns \n", Stylesheet.Styles["default"]));
                     break;
                 case PotionEffect.CritChanceIncrese:
-                    AnsiConsole.Write(new Text($"- {locale.CritChance} Increase: +{strength:P0} {locale.CritChance} " +
+                    AnsiConsole.Write(new Text($"- {locale.CritChance}: +{strength:P0} {locale.CritChance} " +
                                                $"for {duration} turns \n", Stylesheet.Styles["default"]));
                     break;
                 case PotionEffect.DodgeIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.Dodge} Increase: +{strength:F0} {locale.Dodge} " +
+                    AnsiConsole.Write(new Text($"- {locale.Dodge}: +{strength:F0} {locale.Dodge} " +
                                                $"for {duration} turns \n", Stylesheet.Styles["default"]));
                     break;
                 case PotionEffect.AccuracyIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.Accuracy} Increase: +{strength:P0} {locale.Accuracy} " +
+                    AnsiConsole.Write(new Text($"- {locale.Accuracy}: +{strength:P0} {locale.Accuracy} " +
                                                $"for {duration} turns \n", Stylesheet.Styles["default"]));
                     break;
                 default:

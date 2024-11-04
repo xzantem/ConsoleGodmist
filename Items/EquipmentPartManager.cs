@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using ConsoleGodmist.Combat.Skills;
+using ConsoleGodmist.Enums;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -55,20 +56,26 @@ public static class EquipmentPartManager
         throw new NotSupportedException();
     }
 
-    public static T GetRandomPart<T>(int tier) where T : IEquipmentPart
+    public static T GetRandomPart<T>(int tier, CharacterClass intendedClass) where T : IEquipmentPart
     {
         if (typeof(T) == typeof(WeaponHead))
-            return (T)(object)EngineMethods.RandomChoice(WeaponHeads.Where(x => x.Tier == tier).ToList());
+            return (T)(object)EngineMethods.RandomChoice(WeaponHeads
+                .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(WeaponBinder))
-            return (T)(object)EngineMethods.RandomChoice(WeaponBinders.Where(x => x.Tier == tier).ToList());
+            return (T)(object)EngineMethods.RandomChoice(WeaponBinders
+                .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(WeaponHandle))
-            return (T)(object)EngineMethods.RandomChoice(WeaponHandles.Where(x => x.Tier == tier).ToList());
+            return (T)(object)EngineMethods.RandomChoice(WeaponHandles
+                .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(ArmorPlate))
-            return (T)(object)EngineMethods.RandomChoice(ArmorPlates.Where(x => x.Tier == tier).ToList());
+            return (T)(object)EngineMethods.RandomChoice(ArmorPlates
+                .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(ArmorBinder))
-            return (T)(object)EngineMethods.RandomChoice(ArmorBinders.Where(x => x.Tier == tier).ToList());
+            return (T)(object)EngineMethods.RandomChoice(ArmorBinders
+                .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(ArmorBase))
-            return (T)(object)EngineMethods.RandomChoice(ArmorBases.Where(x => x.Tier == tier).ToList());
+            return (T)(object)EngineMethods.RandomChoice(ArmorBases
+                .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         throw new NotSupportedException();
     }
 }

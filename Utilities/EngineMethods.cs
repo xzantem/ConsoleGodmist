@@ -153,7 +153,7 @@ namespace ConsoleGodmist
                     return choice.Key;
             }
 
-            throw new NullReferenceException();
+            return default;
         }
         public static T RandomChoice<T>(List<T> choices)
         {

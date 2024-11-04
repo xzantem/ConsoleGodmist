@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Enums;
+using ConsoleGodmist.Items;
 
 namespace ConsoleGodmist.Items;
 
@@ -9,6 +10,7 @@ public interface IEquippable : IItem
     public Quality Quality { get; }
     public double UpgradeModifier { get; set; }
     public int BaseCost { get; }
+    public List<Galdurite> Galdurites { get; set; }
 
     public double RarityModifier
     {

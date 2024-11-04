@@ -40,8 +40,8 @@ public class ActiveSkill
              !(Math.Abs(caster.MaximalResource - caster.CurrentResource) < 0.001)) && ResourceCost != -1) return false;
         ActiveSkillTextService.DisplayUseSkillText(caster, enemy, this);
         caster.UseResource(ResourceCost);
-        foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Self))
-            for (var i = 0; i < Hits; i++) effect.Execute(caster, enemy, Alias);
+        foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Self)) 
+            effect.Execute(caster, enemy, Alias);
         for (var i = 0; i < Hits; i++)
         {
             {

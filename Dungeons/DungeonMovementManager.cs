@@ -65,11 +65,11 @@ public static class DungeonMovementManager
                     {
                         PlayerHandler.player.AddModifier(StatType.Dodge, new StatModifier(ModifierType.Absolute, -20, locale.Ambush, 5));
                         PlayerHandler.player.AddModifier(StatType.Accuracy, new StatModifier(ModifierType.Absolute, -10, locale.Ambush, 5));
-                        BattleManager.StartNewBattle(new Dictionary<BattleUser, int>
+                        BattleManager.StartNewBattle(new Battle(new Dictionary<BattleUser, int>
                         {
                             { new BattleUser(PlayerHandler.player), 0 },
                             { new BattleUser(EnemyFactory.CreateEnemy(CurrentDungeon.DungeonType, CurrentDungeon.DungeonLevel)), 1 }
-                        });
+                        }, CurrentLocation, false));
                     }
                     CurrentLocation.Clear();
                     break;
@@ -213,14 +213,13 @@ public static class DungeonMovementManager
 
     private static void OnMove()
     {
+        StatusEffectHandler.HandleEffects(PlayerHandler.player.StatusEffects, PlayerHandler.player);
+        PlayerHandler.player.HandleModifiers();
         switch (CurrentLocation.FieldType)
         {
             case DungeonFieldType.Battle:
-                BattleManager.StartNewBattle(new Dictionary<BattleUser, int>
-                {
-                    {new BattleUser(PlayerHandler.player), 0}, 
-                    {new BattleUser(EnemyFactory.CreateEnemy(CurrentDungeon.DungeonType, CurrentDungeon.DungeonLevel)), 1}
-                });
+                var battle = CurrentDungeon.CurrentFloor.Battles.FirstOrDefault(x => x.Location == CurrentLocation);
+                BattleManager.StartNewBattle(battle);
                 if (BattleManager.CurrentBattle.Escaped)
                     MoveBackwards();
                 else

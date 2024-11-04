@@ -1,4 +1,6 @@
-﻿using ConsoleGodmist.Components;
+﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
+using ConsoleGodmist.Components;
 
 namespace ConsoleGodmist.Dungeons;
 using Enums;
@@ -10,11 +12,20 @@ public class DungeonFloor
     public List<DungeonCorridor> Corridor { get; private set; }
     
     public List<Trap> Traps { get; private set; }
-    public DungeonFloor(int length, int difficulty, DungeonType dungeonType)
+    public List<Battle> Battles { get; private set; }
+    public DungeonFloor(int length, int difficulty, DungeonType dungeonType, int level)
     {
         Traps = [];
-        StarterRoom = new DungeonRoom(EngineMethods.RandomChoice<DungeonFieldType>(new 
-            Dictionary<DungeonFieldType, double> { { DungeonFieldType.Empty, 0.5 }, { DungeonFieldType.Battle, 0.5 } }));
+        Battles = [];
+        var starterRoomField = EngineMethods.RandomChoice(new
+            Dictionary<DungeonFieldType, double> { { DungeonFieldType.Empty, 0.5 }, { DungeonFieldType.Battle, 0.5 } });
+        StarterRoom = new DungeonRoom(starterRoomField);
+        if (starterRoomField == DungeonFieldType.Battle)
+            Battles.Add(new Battle(new Dictionary<BattleUser, int>
+            {
+                {new BattleUser(PlayerHandler.player), 0}, 
+                {new BattleUser(EnemyFactory.CreateEnemy(dungeonType, level)), 1}
+            }, StarterRoom));
         EndRoom = new DungeonRoom(DungeonFieldType.Empty);
         Corridor = new List<DungeonCorridor>();
         Dictionary<DungeonFieldType, int> weights = new()
@@ -29,8 +40,19 @@ public class DungeonFloor
         {
             var fieldType = EngineMethods.RandomChoice(weights);
             Corridor.Add(new DungeonCorridor(fieldType));
-            if (fieldType == DungeonFieldType.Trap)
-                Traps.Add(new Trap(GameSettings.Difficulty, Corridor[^1], dungeonType));
+            switch (fieldType)
+            {
+                case DungeonFieldType.Trap:
+                    Traps.Add(new Trap(GameSettings.Difficulty, Corridor[^1], 0 ,dungeonType));
+                    break;
+                case DungeonFieldType.Battle:
+                    Battles.Add(new Battle(new Dictionary<BattleUser, int>
+                    {
+                        {new BattleUser(PlayerHandler.player), 0}, 
+                        {new BattleUser(EnemyFactory.CreateEnemy(dungeonType, level)), 1}
+                    }, Corridor[^1]));
+                    break;
+            }
         }
     }
 }

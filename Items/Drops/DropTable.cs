@@ -16,6 +16,7 @@ public class DropTable
             var poolCopy = new DropPool(pool);
             foreach (var t in poolCopy.Chances)
             {
+                if (!poolCopy.Pool.Any(x => x.Value.MinLevel <= level && x.Value.MaxLevel >= level)) break;
                 if (!(Random.Shared.NextDouble() < t)) continue;
                 var pair = poolCopy.Choice(level);
                 drops.Add(pair.Key, Random.Shared.Next(pair.Value.MinAmount, pair.Value.MaxAmount + 1));

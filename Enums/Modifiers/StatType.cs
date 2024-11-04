@@ -11,5 +11,7 @@ public enum StatType
     CritChance,
     Speed,
     Accuracy,
-    MaximalResource
+    MaximalResource,
+    DamageDealt,
+    DamageTaken
 }

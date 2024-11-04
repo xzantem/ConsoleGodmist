@@ -957,4 +957,28 @@
   <data name="WantRefillThird" xml:space="preserve">
     <value>Czy na pewno chcesz napełnić tę miksturę?</value>
   </data>
+  <data name="DamageDealt" xml:space="preserve">
+    <value>Zadawane obrażenia</value>
+  </data>
+  <data name="DamageTaken" xml:space="preserve">
+    <value>Przyjmowane obrażenia</value>
+  </data>
+  <data name="Charges" xml:space="preserve">
+    <value>Ładunki</value>
+  </data>
+  <data name="Crowns" xml:space="preserve">
+    <value>Korony</value>
+  </data>
+  <data name="SelectItem" xml:space="preserve">
+    <value>Wybierz przedmiot</value>
+  </data>
+  <data name="WrongClass" xml:space="preserve">
+    <value>Twoja klasa postaci nie może tego wyposażyć!</value>
+  </data>
+  <data name="LevelTooLow" xml:space="preserve">
+    <value>Twój poziom nie jest wystarczająco wysoki, by to wyposażyć</value>
+  </data>
+  <data name="NewItem" xml:space="preserve">
+    <value>Nowy przedmiot</value>
+  </data>
 </root>

@@ -9,8 +9,8 @@ public class Inventory
 {
     [JsonConverter(typeof(ItemConverter))]
     public Dictionary<IItem, int> Items { get; set; } = new();
-    private int PackWeight => Items.Sum(item => item.Key.Weight * item.Value);
-    private int MaxPackWeight { get; set; } = 60;
+    public int PackWeight => Items.Sum(item => item.Key.Weight * item.Value);
+    public int MaxPackWeight { get; set; } = 60;
     
     public Inventory() {}
 
@@ -25,10 +25,12 @@ public class Inventory
         if (item.Stackable && Items.ContainsKey(item))
         {
             Items[item] += quantity;
+            AnsiConsole.Write(new Text($"{locale.YouGain}: {quantity}x {item.Name} ({Items[item]})\n", item.NameStyle()));
         }
         else
         {
             Items.Add(item, quantity);
+            AnsiConsole.Write(new Text($"{locale.NewItem}! {locale.YouGain}: {quantity}x {item.Name}\n", item.NameStyle()));
         }
     }
     public bool TryRemoveItem(IItem item, int amount = 1)

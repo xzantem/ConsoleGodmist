@@ -12,7 +12,7 @@ public abstract class BaseItem : IItem
         set => Alias = value;
     }
 
-    public string Alias { get; set; }
+    public virtual string Alias { get; set; }
     public virtual int Weight { get; set; }
     public virtual int ID { get; set; }
     public virtual int Cost { get; set; }
@@ -55,6 +55,11 @@ public abstract class BaseItem : IItem
             ItemRarity.Godly => Stylesheet.Styles["rarity-godly"],
             _ => throw new ArgumentOutOfRangeException()
         };
+    }
+
+    public virtual bool Use()
+    {
+        return false;
     }
 
     public void WriteItemType()

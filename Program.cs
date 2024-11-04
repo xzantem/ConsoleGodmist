@@ -6,6 +6,7 @@ using ConsoleGodmist.Characters;
 using ConsoleGodmist.Components;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Items;
+using ConsoleGodmist.Items.Lootbags;
 using ConsoleGodmist.Town;
 using Spectre.Console;
 
@@ -26,6 +27,7 @@ class Program
         //ShowWindow(handle, SW_MAXIMIZE);
         Stylesheet.InitStyles();
         ItemManager.InitItems();
+        LootbagManager.InitItems();
         EquipmentPartManager.InitItems();
         EnemyFactory.InitializeEnemies();
         PlantDropManager.InitPlantDrops();

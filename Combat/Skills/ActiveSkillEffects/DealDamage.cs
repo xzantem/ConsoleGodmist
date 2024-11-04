@@ -31,7 +31,7 @@ public class DealDamage : IActiveSkillEffect
 
     private double CalculateDamage(Character caster, Character enemy)
     {
-        var damage = DamageBase switch
+        var damage = caster.DamageDealt * DamageBase switch
         {
             DamageBase.Minimal => caster.MinimalAttack,
             DamageBase.Random => EngineMethods.RandomDouble(caster.MinimalAttack, caster.MaximalAttack + 1),

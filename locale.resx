@@ -959,4 +959,28 @@
   <data name="WantRefillThird" xml:space="preserve">
     <value>Are you sure you want to refill this potion?</value>
   </data>
+  <data name="DamageDealt" xml:space="preserve">
+    <value>Damage dealt</value>
+  </data>
+  <data name="DamageTaken" xml:space="preserve">
+    <value>Damage taken</value>
+  </data>
+  <data name="Charges" xml:space="preserve">
+    <value>Charges</value>
+  </data>
+  <data name="Crowns" xml:space="preserve">
+    <value>Crowns</value>
+  </data>
+  <data name="SelectItem" xml:space="preserve">
+    <value>Select item</value>
+  </data>
+  <data name="WrongClass" xml:space="preserve">
+    <value>This cannot be equipped by your character class!</value>
+  </data>
+  <data name="LevelTooLow" xml:space="preserve">
+    <value>Your level is not high enough to equip this</value>
+  </data>
+  <data name="NewItem" xml:space="preserve">
+    <value>New item</value>
+  </data>
 </root>

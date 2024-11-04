@@ -348,6 +348,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Charges.
+        /// </summary>
+        internal static string Charges {
+            get {
+                return ResourceManager.GetString("Charges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose difficulty.
         /// </summary>
         internal static string ChooseDifficulty {
@@ -609,6 +618,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crowns.
+        /// </summary>
+        internal static string Crowns {
+            get {
+                return ResourceManager.GetString("Crowns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to crowns.
         /// </summary>
         internal static string CrownsGenitive {
@@ -708,11 +726,29 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Damage dealt.
+        /// </summary>
+        internal static string DamageDealt {
+            get {
+                return ResourceManager.GetString("DamageDealt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to damage.
         /// </summary>
         internal static string DamageGenitive {
             get {
                 return ResourceManager.GetString("DamageGenitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Damage taken.
+        /// </summary>
+        internal static string DamageTaken {
+            get {
+                return ResourceManager.GetString("DamageTaken", resourceCulture);
             }
         }
         
@@ -1383,6 +1419,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your level is not high enough to equip this.
+        /// </summary>
+        internal static string LevelTooLow {
+            get {
+                return ResourceManager.GetString("LevelTooLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Level up! You are now level.
         /// </summary>
         internal static string LevelUp {
@@ -1604,6 +1649,15 @@ namespace ConsoleGodmist {
         internal static string NewGame {
             get {
                 return ResourceManager.GetString("NewGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New item.
+        /// </summary>
+        internal static string NewItem {
+            get {
+                return ResourceManager.GetString("NewItem", resourceCulture);
             }
         }
         
@@ -2108,6 +2162,15 @@ namespace ConsoleGodmist {
         internal static string SelectDungeonLevel {
             get {
                 return ResourceManager.GetString("SelectDungeonLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select item.
+        /// </summary>
+        internal static string SelectItem {
+            get {
+                return ResourceManager.GetString("SelectItem", resourceCulture);
             }
         }
         
@@ -2756,6 +2819,15 @@ namespace ConsoleGodmist {
         internal static string Weight {
             get {
                 return ResourceManager.GetString("Weight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This cannot be equipped by your character class!.
+        /// </summary>
+        internal static string WrongClass {
+            get {
+                return ResourceManager.GetString("WrongClass", resourceCulture);
             }
         }
         

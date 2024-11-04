@@ -48,8 +48,8 @@ public class NPCInventory
                     var items = ItemManager.Items
                         .Where(x => x.ItemType == type &&
                                     (int)x.Rarity == tier + 2 && !RotatingShop.ContainsKey(x)).ToList(); 
-                    while (RotatingShop.Count - initial < 10 && RotatingShop.Count - initial < items.Count)
-                        RotatingShop.TryAdd(EngineMethods.RandomChoice(items), Random.Shared.Next(2, 5));
+                    while (RotatingShop.Count - initial < 15 && RotatingShop.Count - initial < items.Count)
+                        RotatingShop.TryAdd(EngineMethods.RandomChoice(items), Random.Shared.Next(10, 21));
                     break;
                 case ItemType.Potion:
                     while (RotatingShop.Count - initial < 5)

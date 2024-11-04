@@ -1,7 +1,9 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
 using Spectre.Console;
+using Spectre.Console.Rendering;
 
 namespace ConsoleGodmist.Items;
 
@@ -14,6 +16,7 @@ public class Weapon : BaseItem, IEquippable
     [JsonIgnore]
     public override int ID => 559;
     public int BaseCost { get; set; }
+
     [JsonIgnore]
     public override int Cost => (int)(BaseCost * EquippableItemService.RarityModifier(Rarity));
     [JsonIgnore]
@@ -26,6 +29,7 @@ public class Weapon : BaseItem, IEquippable
     public CharacterClass RequiredClass { get; set;  }
     public Quality Quality { get; set; }
     public double UpgradeModifier { get; set; }
+    public List<Galdurite> Galdurites { get; set; }
 
     //Weapon implementations
     
@@ -172,7 +176,7 @@ public class Weapon : BaseItem, IEquippable
         Head = head;
         Binder = binder;
         Handle = handle;
-        Name = locale.ResourceManager.GetString(Head.Adjective) + requiredClass switch
+        Name = NameAliasHelper.GetName(Head.Adjective) + " " + requiredClass switch
         {
             CharacterClass.Warrior => locale.Longsword,
             CharacterClass.Scout => locale.SwordAndDagger,
@@ -185,7 +189,9 @@ public class Weapon : BaseItem, IEquippable
             _ => ""
         };
         Alias = $"{head.Alias}.{binder.Alias}.{handle.Alias}";
-        BaseCost = head.GoldCost + binder.GoldCost + handle.GoldCost;
+        BaseCost = head.MaterialCost * ItemManager.GetItem(head.Material).Cost + 
+                   binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
+                   handle.MaterialCost * ItemManager.GetItem(handle.Material).Cost;
         Rarity = EquippableItemService.GetRandomRarity();
         RequiredLevel = Math.Max(Math.Max(head.Tier, binder.Tier), handle.Tier) * 10 - 5 + Quality switch
         {
@@ -198,6 +204,7 @@ public class Weapon : BaseItem, IEquippable
         RequiredClass = requiredClass;
         Quality = quality;
         UpgradeModifier = 1;
+        Galdurites = new List<Galdurite>();
     }
     /// <summary>
     /// Gets Starter weapon for the specified class
@@ -212,25 +219,25 @@ public class Weapon : BaseItem, IEquippable
                 Head = EquipmentPartManager.GetPart<WeaponHead>("BrokenHead");
                 Binder = EquipmentPartManager.GetPart<WeaponBinder>("BrokenBinder");
                 Handle = EquipmentPartManager.GetPart<WeaponHandle>("BrokenHandle");
-                Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.Longsword;
+                Name = NameAliasHelper.GetName(Head.Adjective) + " " + locale.Longsword;
                 break;
             case CharacterClass.Scout:
                 Head = EquipmentPartManager.GetPart<WeaponHead>("RustyHead");
                 Binder = EquipmentPartManager.GetPart<WeaponBinder>("RustyBinder");
                 Handle = EquipmentPartManager.GetPart<WeaponHandle>("RustyHandle");
-                Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.SwordAndDagger;
+                Name = NameAliasHelper.GetName(Head.Adjective) + " " + locale.SwordAndDagger;
                 break;
             case CharacterClass.Sorcerer:
                 Head = EquipmentPartManager.GetPart<WeaponHead>("SplinteryHead");
                 Binder = EquipmentPartManager.GetPart<WeaponBinder>("SplinteryBinder");
                 Handle = EquipmentPartManager.GetPart<WeaponHandle>("SplinteryHandle");
-                Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.Wand;
+                Name = NameAliasHelper.GetName(Head.Adjective) + " " + locale.Wand;
                 break;
             case CharacterClass.Paladin:
                 Head = EquipmentPartManager.GetPart<WeaponHead>("MisshapenHead");
                 Binder = EquipmentPartManager.GetPart<WeaponBinder>("MisshapenBinder");
                 Handle = EquipmentPartManager.GetPart<WeaponHandle>("MisshapenHandle");
-                Name = locale.ResourceManager.GetString(Head.Adjective) + " " + locale.Hammer;
+                Name = NameAliasHelper.GetName(Head.Adjective) + " " + locale.Hammer;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(requiredClass), requiredClass, null);
@@ -242,6 +249,7 @@ public class Weapon : BaseItem, IEquippable
         RequiredClass = requiredClass;
         Quality = Quality.Normal;
         UpgradeModifier = 1;
+        Galdurites = new List<Galdurite>();
     }
     public Weapon() {}
 
@@ -249,12 +257,13 @@ public class Weapon : BaseItem, IEquippable
     {
         if (RequiredClass != PlayerHandler.player.CharacterClass)
         {
-            //Maybe display some text
+            AnsiConsole.Write(new Text($"{locale.WrongClass} ({NameAliasHelper.GetName(RequiredClass.ToString())})", 
+                Stylesheet.Styles["error"]));
             return false;
         }
         if (RequiredLevel > PlayerHandler.player.Level)
         {
-            //Maybe display some text
+            AnsiConsole.Write(new Text($"{locale.LevelTooLow} ({RequiredLevel})", Stylesheet.Styles["error"]));
             return false;
         }
         PlayerHandler.player.SwitchWeapon(this);

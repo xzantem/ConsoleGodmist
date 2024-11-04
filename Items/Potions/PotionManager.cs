@@ -58,16 +58,12 @@ public static class PotionManager
                     strength, component.Material, duration));
                 break;
             case PotionEffect.DamageDealtIncrease:
-                PlayerHandler.player.AddModifier(StatType.MinimalAttack, new StatModifier(ModifierType.Multiplicative, 
-                    strength, component.Material, duration));
-                PlayerHandler.player.AddModifier(StatType.MaximalAttack, new StatModifier(ModifierType.Multiplicative, 
+                PlayerHandler.player.AddModifier(StatType.DamageDealt, new StatModifier(ModifierType.Multiplicative, 
                     strength, component.Material, duration));
                 break;
             case PotionEffect.DamageTakenDecrease:
-                PlayerHandler.player.AddModifier(StatType.PhysicalDefense, new StatModifier(ModifierType.Multiplicative, 
-                    strength, component.Material, duration));
-                PlayerHandler.player.AddModifier(StatType.MagicDefense, new StatModifier(ModifierType.Multiplicative, 
-                    strength, component.Material, duration));
+                PlayerHandler.player.AddModifier(StatType.DamageTaken, new StatModifier(ModifierType.Multiplicative, 
+                    -strength, component.Material, duration));
                 break;
             case PotionEffect.ResistanceIncrease:
                 foreach (var resistance in PlayerHandler.player.Resistances)

@@ -100,6 +100,7 @@ namespace ConsoleGodmist.Characters
             
         }
         public Stat _resourceRegen;
+        [JsonIgnore]
         public double ResourceRegen
         {
             get
@@ -107,7 +108,21 @@ namespace ConsoleGodmist.Characters
                 if (ResourceType == ResourceType.Momentum) return Speed >= 100 ? Speed / 10 : Speed / 5;
                 return _resourceRegen.Value(Level);
             }
-            protected set => _resourceRegen.BaseValue = value;
+            set => _resourceRegen.BaseValue = value;
+        }
+        public Stat _damageDealt;
+        [JsonIgnore]
+        public double DamageDealt
+        {
+            get => _damageDealt.Value(Level);
+            set => _damageDealt.BaseValue = value;
+        }
+        public Stat _damageTaken;
+        [JsonIgnore]
+        public double DamageTaken
+        {
+            get => _damageTaken.Value(Level);
+            set => _damageTaken.BaseValue = value;
         }
 
         public ResourceType ResourceType { get; set; }
@@ -133,6 +148,8 @@ namespace ConsoleGodmist.Characters
             _physicalDefense = physicalDefense;
             _magicDefense = magicDefense;
             _resourceRegen = new Stat(0, 0);
+            _damageDealt = new Stat(1, 0);
+            _damageTaken = new Stat(1, 0);
             _speed = speed;
             _accuracy = accuracy;
             _critMod = critMod;
@@ -188,7 +205,7 @@ namespace ConsoleGodmist.Characters
                 DamageType.Magic => damage * damage / (damage + MagicDefense),
                 _ => damage
             };
-            return Math.Max(damage, 1);
+            return Math.Max(DamageTaken * damage, 1);
         }
         public void Heal(double heal) {
             CurrentHealth += heal;
@@ -229,6 +246,12 @@ namespace ConsoleGodmist.Characters
                 case StatType.MaximalResource:
                     _maximalResource.AddModifier(modifier);
                     break;
+                case StatType.DamageDealt:
+                    _damageDealt.AddModifier(modifier);
+                    break;
+                case StatType.DamageTaken:
+                    _damageTaken.AddModifier(modifier);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
             }
@@ -250,6 +273,36 @@ namespace ConsoleGodmist.Characters
             _magicDefense.Decrement();
             _accuracy.Decrement();
             _speed.Decrement();
+            _maximalResource.Decrement();
+            _damageDealt.Decrement();
+            _damageTaken.Decrement();
+        }
+
+        public Dictionary<StatType, StatModifier> GetModifiers()
+        {
+            var mods = _maximalHealth.Modifiers
+                .ToDictionary(mod => StatType.MaximalHealth, mod => mod);
+            foreach (var mod in _minimalAttack.Modifiers)
+                mods.Add(StatType.MinimalAttack, mod);
+            foreach (var mod in _maximalAttack.Modifiers)
+                mods.Add(StatType.MaximalAttack, mod);
+            foreach (var mod in _dodge.Modifiers)
+                mods.Add(StatType.Dodge, mod);
+            foreach (var mod in _physicalDefense.Modifiers)
+                mods.Add(StatType.PhysicalDefense, mod);
+            foreach (var mod in _magicDefense.Modifiers)
+                mods.Add(StatType.MagicDefense, mod);
+            foreach (var mod in _accuracy.Modifiers)
+                mods.Add(StatType.Accuracy, mod);
+            foreach (var mod in _speed.Modifiers)
+                mods.Add(StatType.Speed, mod);
+            foreach (var mod in _maximalResource.Modifiers)
+                mods.Add(StatType.MaximalResource, mod);
+            foreach (var mod in _damageDealt.Modifiers)
+                mods.Add(StatType.DamageDealt, mod);
+            foreach (var mod in _damageTaken.Modifiers)
+                mods.Add(StatType.DamageTaken, mod);
+            return mods;
         }
     }
 }

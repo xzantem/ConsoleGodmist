@@ -58,7 +58,7 @@ namespace ConsoleGodmist.Dungeons
                 _ => throw new ArgumentOutOfRangeException()
             };
             length = Math.Clamp(length, 1, 16);
-            Floors.Add(new DungeonFloor((int)length, Floors.Count, DungeonType));
+            Floors.Add(new DungeonFloor((int)length, Floors.Count, DungeonType, DungeonLevel));
         }
         public void Ascend()
         {
