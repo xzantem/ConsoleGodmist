@@ -8,12 +8,7 @@ public static class CraftingManager
 {
     private static readonly Inventory Inventory = PlayerHandler.player.Inventory;
 
-    public static void CraftItem(List<ICraftable> possibleItems)
-    {
-        ChooseItem(possibleItems);
-    }
-
-    public static int ChooseItem(List<ICraftable> possibleItems)
+    public static void OpenCraftingMenu(List<ICraftable> possibleItems)
     {
         const int scrollAmount = 10;
         const int pageSize = 10;
@@ -22,29 +17,9 @@ public static class CraftingManager
         while (true)
         {
             var tempIndex = 0;
-            /*var grid = new Grid();
-            while (grid.Columns.Count < 2 * possibleItems.Max(x => x.CraftingRecipe.Count) + 1)
-                grid.AddColumn();
-            foreach (var possibleItem in possibleItems)
+            for (var i = index; i < Math.Min(pageSize + index, possibleItems.Count); i++)
             {
-                while (grid.Columns.Count < 2 * possibleItem.CraftingRecipe.Count + 1)
-                    grid.AddColumn();
-                var row = new IRenderable[2 * possibleItem.CraftingRecipe.Count + 1];
-                row[0] = new Text($"{tempIndex++}. {possibleItem.Name}");
-                for (var i = 0; i < possibleItem.CraftingRecipe.Count; i++)
-                {
-                    var item = ItemManager.GetItem(possibleItem.CraftingRecipe.ElementAt(i).Key);
-                    var itemCount = Inventory.Items.GetValueOrDefault(item, 0);
-                    row[2 * i + 1] = new Text($"{item.Name}");
-                    row[2 * i + 2] = new Text($"({itemCount}/{possibleItem.CraftingRecipe.ElementAt(i).Value})x", 
-                        itemCount >= possibleItem.CraftingRecipe.ElementAt(i).Value ? 
-                            Stylesheet.Styles["success"] : Stylesheet.Styles["failure"]);
-                }
-                grid.AddRow(row);
-            }*/
-            for (var i = index; i < Math.Min(pageSize, possibleItems.Count - index); i++)
-            {
-                AnsiConsole.Write(new Text($"\n{1 + tempIndex++}. {possibleItems[i].CraftedAmount}x {possibleItems[i].Name}: ", 
+                AnsiConsole.Write(new Text($"\n{1 + i}. {possibleItems[i].CraftedAmount}x {possibleItems[i].Name}: ", 
                     possibleItems[i].NameStyle()));
                 for (var j = 0; j < possibleItems[i].CraftingRecipe.Count; j++)
                 {
@@ -75,9 +50,67 @@ public static class CraftingManager
                 case 1:
                     index -= scrollAmount;
                     break;
+                case 2:
+                    var item = ChooseItem(possibleItems.Where(x => x.CraftingRecipe
+                        .All(s => s.Value <= Inventory.Items
+                            .GetValueOrDefault(ItemManager.GetItem(s.Key)))).ToList());
+                    if (item != null)
+                        CraftItem(item);
+                    break;
                 default:
-                    return choices[choice];
+                    return;
             }
+        }
+    }
+
+    public static ICraftable? ChooseItem(List<ICraftable> possibleItems)
+    {
+        var list = new List<string>();
+        foreach (var item in possibleItems)
+        {
+            var mainStr = $"{item.CraftedAmount}x {item.Name}: ";
+            var ingredientStr = new List<string>();
+            foreach (var ingredient in item.CraftingRecipe)
+            {
+                var ingredientItem = new KeyValuePair<IItem, int>(ItemManager.GetItem(ingredient.Key), ingredient.Value);
+                var itemCount = Inventory.Items.GetValueOrDefault(ingredientItem.Key, 0);
+                ingredientStr.Add($"{ingredientItem.Key.Name} " + $"({itemCount}/{ingredientItem.Value})");
+            }
+            list.Add(mainStr + string.Join(", ", ingredientStr));
+        }
+        var choices = list.ToArray();
+        if (choices.Length <= 1)
+            return null;
+        var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .AddChoices(choices)
+            .HighlightStyle(new Style(Color.Gold3_1)));
+        var chosenItem = possibleItems[Array.IndexOf(choices, choice)];
+        return chosenItem;
+    }
+
+    public static void CraftItem(ICraftable item)
+    {
+        var maxAmount = item.CraftingRecipe.Min(x => Inventory.Items
+            .GetValueOrDefault(ItemManager.GetItem(x.Key)) / x.Value);
+        var amount = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToCraft + $" (x{item.CraftedAmount}) Up to {maxAmount}: ")
+            .Validate(Validator));
+        if (!EngineMethods.Confirmation(locale.WantCraftThird, true))
+        {
+            PlayerHandler.player.Say(locale.NoSorry);
+            return;
+        }
+        foreach (var ingredient in item.CraftingRecipe)
+            Inventory.TryRemoveItem(ItemManager.GetItem(ingredient.Key), ingredient.Value * amount);
+        Inventory.AddItem(item, item.CraftedAmount * amount);
+        AnsiConsole.Write(new Text($"{locale.Crafted}: ", Stylesheet.Styles["value-gained"]));
+        item.WriteName();
+        AnsiConsole.Write(new Text($" ({amount})", Stylesheet.Styles["default"]));
+        AnsiConsole.Write("\n\n");
+        return;
+        
+        ValidationResult Validator(int n) {
+            if (n > maxAmount) return ValidationResult.Error(locale.ChoseTooMany);
+            return n < 0 ? ValidationResult.Error(locale.IntBelowZero) : ValidationResult.Success();
         }
     }
 }

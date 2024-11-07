@@ -141,12 +141,17 @@ public class Armor : BaseItem, IEquippable
             _ => ""
         };
         Alias = $"{plate.Alias}.{binder.Alias}.{armBase.Alias}";
-        BaseCost = plate.MaterialCost * ItemManager.GetItem(plate.Material).Cost + 
-                   binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
-                   armBase.MaterialCost * ItemManager.GetItem(armBase.Material).Cost;
         Rarity = EquippableItemService.GetRandomRarity();
+        BaseCost = (int)((plate.MaterialCost * ItemManager.GetItem(plate.Material).Cost + 
+                   binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
+                   armBase.MaterialCost * ItemManager.GetItem(armBase.Material).Cost) * quality switch {
+            Quality.Weak => 0.5,
+            Quality.Normal => 1,
+            Quality.Excellent => 2,
+            Quality.Masterpiece => 4,
+            _ => 1 });
         RequiredLevel = requiredLevel == 0
-            ? Math.Max(Math.Max(plate.Tier, binder.Tier), armBase.Tier) * 10 - 5 + Quality switch
+            ? Math.Max(Math.Max(plate.Tier, binder.Tier), armBase.Tier) * 10 - 5 + quality switch
             {
                 Quality.Weak => -3,
                 Quality.Normal => 0,

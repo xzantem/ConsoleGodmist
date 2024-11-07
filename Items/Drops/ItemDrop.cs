@@ -9,7 +9,7 @@ public class ItemDrop
     
     public int Weight { get; set; }
     public ItemDrop() { } // For JSON deserialization
-    public ItemDrop(string itemAlias, int minLevel, int maxLevel, int weight, int minAmount = 1, int maxAmount = 1)
+    public ItemDrop(int minLevel, int maxLevel, int weight, int minAmount = 1, int maxAmount = 1)
     {
         MinLevel = minLevel;
         MaxLevel = maxLevel;

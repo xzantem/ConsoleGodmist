@@ -189,10 +189,15 @@ public class Weapon : BaseItem, IEquippable
             _ => ""
         };
         Alias = $"{head.Alias}.{binder.Alias}.{handle.Alias}";
-        BaseCost = head.MaterialCost * ItemManager.GetItem(head.Material).Cost + 
-                   binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
-                   handle.MaterialCost * ItemManager.GetItem(handle.Material).Cost;
         Rarity = EquippableItemService.GetRandomRarity();
+        BaseCost = (int)((head.MaterialCost * ItemManager.GetItem(head.Material).Cost + 
+                   binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
+                   handle.MaterialCost * ItemManager.GetItem(handle.Material).Cost) * Quality switch {
+            Quality.Weak => 0.5,
+            Quality.Normal => 1,
+            Quality.Excellent => 2,
+            Quality.Masterpiece => 4,
+            _ => 1 });
         RequiredLevel = Math.Max(Math.Max(head.Tier, binder.Tier), handle.Tier) * 10 - 5 + Quality switch
         {
             Quality.Weak => -3,

@@ -9,15 +9,9 @@ public class DropPool
 
     public DropPool(DropPool other)
     {
-        Pool = other.Pool;
-        Chances = other.Chances;
-    }
-
-    public DropPool(Dictionary<string, ItemDrop> pool, double[] chances) { Pool = pool;
-        Chances = chances;
-    }
-    public DropPool(Dictionary<string, ItemDrop> pool) { Pool = pool;
-        Chances = [1.0];
+        Pool = other.Pool.ToDictionary(x => x.Key, x => 
+            new ItemDrop(x.Value.MinLevel, x.Value.MaxLevel, x.Value.Weight, x.Value.MinAmount, x.Value.MaxAmount));
+        Chances = (double[])other.Chances.Clone();
     }
 
     public KeyValuePair<IItem, ItemDrop> Choice(int level)

@@ -14,7 +14,7 @@ public abstract class NPC
     public string Name => NameAliasHelper.GetName(Alias);
     
     public NPCInventory Inventory { get; set; }
-    public List<ICraftable> CraftableItems { get; set; }
+    public List<ICraftable?> CraftableItems { get; set; }
      
     public int LoyaltyLevel { get; set; }
     public int GoldSpent { get; set; }
@@ -198,6 +198,6 @@ public abstract class NPC
     }
     public void CraftItem()
     {
-        CraftingManager.CraftItem(CraftableItems);
+        CraftingManager.OpenCraftingMenu(CraftableItems);
     }
 }

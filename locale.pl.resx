@@ -295,7 +295,7 @@
     <value>do użycia</value>
   </data>
   <data name="HowManyToDelete" xml:space="preserve">
-    <value>Ile sztuk usunąć?</value>
+    <value>Ile sztuk chcesz usunąć?</value>
   </data>
   <data name="ChoseTooMany" xml:space="preserve">
     <value>Wpisana ilość jest za duża!</value>
@@ -980,5 +980,17 @@
   </data>
   <data name="NewItem" xml:space="preserve">
     <value>Nowy przedmiot</value>
+  </data>
+  <data name="HowManyToCraft" xml:space="preserve">
+    <value>Ile sztuk chcesz stworzyć?</value>
+  </data>
+  <data name="WantCraftThird" xml:space="preserve">
+    <value>Czy na pewno chcesz to stworzyć?</value>
+  </data>
+  <data name="Crafted" xml:space="preserve">
+    <value>Stworzono</value>
+  </data>
+  <data name="HowManyToOpen" xml:space="preserve">
+    <value>Ile sztuk chcesz otworzyć?</value>
   </data>
 </root>

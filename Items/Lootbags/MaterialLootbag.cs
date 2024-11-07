@@ -1,6 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
+using Spectre.Console;
 
-namespace ConsoleGodmist.Items.Lootbags;
+namespace ConsoleGodmist.Items;
 
 public class MaterialLootbag : Lootbag
 {
@@ -25,9 +26,22 @@ public class MaterialLootbag : Lootbag
 
     public override bool Use()
     {
-        var drops = DropTable.GetDrops(Level);
-        foreach (var drop in drops)
-            PlayerHandler.player.Inventory.AddItem(drop.Key, drop.Value);
-        return true;
+        var inInventory = PlayerHandler.player.Inventory.Items.FirstOrDefault(x => x.Key.Alias == Alias).Value;
+        var toOpen = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToOpen + $" Up to {inInventory}: ")
+            .DefaultValue(inInventory)
+            .Validate(Validator));
+        for (var i = 0; i < toOpen; i++)
+        {
+            var drops = DropTable.GetDrops(Level);
+            foreach (var drop in drops)
+                PlayerHandler.player.Inventory.AddItem(drop.Key, drop.Value);
+        }
+        PlayerHandler.player.Inventory.TryRemoveItem(this, toOpen);
+        return false;
+        
+        ValidationResult Validator(int n) {
+            if (n > inInventory) return ValidationResult.Error(locale.ChoseTooMany);
+            return n < 0 ? ValidationResult.Error(locale.IntBelowZero) : ValidationResult.Success();
+        }
     }
 }

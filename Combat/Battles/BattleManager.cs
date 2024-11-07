@@ -2,7 +2,6 @@
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
-using ConsoleGodmist.Items.Lootbags;
 using ConsoleGodmist.TextService;
 
 namespace ConsoleGodmist.Combat.Battles;
@@ -64,16 +63,19 @@ public static class BattleManager
                            (dungeon.Floors.IndexOf(dungeon.CurrentFloor) + 16);
             if (enemy.Key.User.Level >= usersTeams.Keys.Average(x => x.User.Level))
                 honorReward++;
-            experienceReward += (int)Math.Max(0.1, (1 - 0.15 * Math.Abs(player.Level - dungeon.DungeonLevel)) 
+            experienceReward += (int)Math.Max(0.1, (1 - 0.15 * Math.Abs(player!.Level - dungeon.DungeonLevel)) 
                                                    * (Math.Pow(dungeon.DungeonLevel, 1.1) + 3));
             if (Random.Shared.NextDouble() < lootBagChance)
-                player.Inventory.AddItem(LootbagManager.GetLootbag(dungeon.DungeonType, enemy.Key.User.Level));
+                player.Inventory.AddItem(LootbagManager.GetLootbag(dungeon.DungeonType, enemy.Key.User.Level), 10);
             if (Random.Shared.NextDouble() < weaponBagChance)
                 player.Inventory.AddItem(new WeaponLootbag(enemy.Key.User.Level));
             if (Random.Shared.NextDouble() < armorBagChance)
                 player.Inventory.AddItem(new ArmorLootbag(enemy.Key.User.Level));
+            foreach (var item in (enemy.Key.User as EnemyCharacter)?
+                     .DropTable.GetDrops(enemy.Key.User.Level)!)
+                player.Inventory.AddItem(item.Key, item.Value);
         }
-        player.GainGold(moneyReward);
+        player!.GainGold(moneyReward);
         player.GainHonor(honorReward);
         player.GainExperience(experienceReward);
     }

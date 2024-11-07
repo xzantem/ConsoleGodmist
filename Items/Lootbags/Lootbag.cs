@@ -1,7 +1,7 @@
 ﻿using ConsoleGodmist.Enums;
 using ConsoleGodmist.Utilities;
 
-namespace ConsoleGodmist.Items.Lootbags;
+namespace ConsoleGodmist.Items;
 
 public abstract class Lootbag : BaseItem
 {

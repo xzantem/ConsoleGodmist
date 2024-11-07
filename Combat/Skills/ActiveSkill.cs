@@ -42,16 +42,19 @@ public class ActiveSkill
         caster.UseResource(ResourceCost);
         foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Self)) 
             effect.Execute(caster, enemy, Alias);
-        for (var i = 0; i < Hits; i++)
+        if (Effects.All(x => x.Target != SkillTarget.Enemy)) return true;
         {
+            for (var i = 0; i < Hits; i++)
             {
-                if (!CheckHit(caster, enemy) && !AlwaysHits)
                 {
-                    ActiveSkillTextService.DisplayMissText(caster);
-                    continue;
+                    if (!CheckHit(caster, enemy) && !AlwaysHits)
+                    {
+                        ActiveSkillTextService.DisplayMissText(caster);
+                        continue;
+                    }
+                    foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Enemy))
+                        effect.Execute(caster, enemy, Alias);
                 }
-                foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Enemy))
-                    effect.Execute(caster, enemy, Alias);
             }
         }
         return true;

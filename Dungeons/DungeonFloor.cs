@@ -43,7 +43,7 @@ public class DungeonFloor
             switch (fieldType)
             {
                 case DungeonFieldType.Trap:
-                    Traps.Add(new Trap(GameSettings.Difficulty, Corridor[^1], 0 ,dungeonType));
+                    Traps.Add(new Trap(GameSettings.Difficulty, Corridor[^1], dungeonType));
                     break;
                 case DungeonFieldType.Battle:
                     Battles.Add(new Battle(new Dictionary<BattleUser, int>

@@ -300,7 +300,7 @@
     <value>to use</value>
   </data>
   <data name="HowManyToDelete" xml:space="preserve">
-    <value>How many to delete?</value>
+    <value>How many pieces do you want to delete?</value>
   </data>
   <data name="ChoseTooMany" xml:space="preserve">
     <value>The amount entered is too high!</value>
@@ -982,5 +982,17 @@
   </data>
   <data name="NewItem" xml:space="preserve">
     <value>New item</value>
+  </data>
+  <data name="HowManyToCraft" xml:space="preserve">
+    <value>How many pieces do you want to craft?</value>
+  </data>
+  <data name="WantCraftThird" xml:space="preserve">
+    <value>Are you sure you want to craft this?</value>
+  </data>
+  <data name="Crafted" xml:space="preserve">
+    <value>Crafted</value>
+  </data>
+  <data name="HowManyToOpen" xml:space="preserve">
+    <value>How many pieces do you want to open?</value>
   </data>
 </root>

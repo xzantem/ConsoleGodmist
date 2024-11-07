@@ -6,8 +6,8 @@ public enum ItemType
     Armor, 
     Smithing, 
     Alchemy, 
-    Potion, 
     Runeforging, 
+    Potion,
     WeaponGaldurite, 
     ArmorGaldurite, 
     LootBag

@@ -1,12 +1,9 @@
-﻿using System.Globalization;
-using System.Runtime.InteropServices;
-using System.Text;
+﻿using System.Text;
 using ConsoleGodmist;
 using ConsoleGodmist.Characters;
 using ConsoleGodmist.Components;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Items;
-using ConsoleGodmist.Items.Lootbags;
 using ConsoleGodmist.Town;
 using Spectre.Console;
 

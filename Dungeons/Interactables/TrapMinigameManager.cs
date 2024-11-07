@@ -276,9 +276,9 @@ public static class TrapMinigameManager
     {
         var size = difficulty switch
         {
-            Difficulty.Easy => 3,
-            Difficulty.Normal => 4,
-            Difficulty.Hard => 5,
+            Difficulty.Easy => 5,
+            Difficulty.Normal => 5,
+            Difficulty.Hard => 6,
             Difficulty.Nightmare => 6,
             _ => 3,
         };
@@ -288,7 +288,14 @@ public static class TrapMinigameManager
             "B1", "B2", "B3",
             "C1", "C2", "C3"
         };
-        var tries = 3;
+        var tries = difficulty switch
+        {
+            Difficulty.Easy => 5,
+            Difficulty.Normal => 4,
+            Difficulty.Hard => 4,
+            Difficulty.Nightmare => 3,
+            _ => 3,
+        };
         var bombPosition = Random.Shared.Next(0, 9);
         AnsiConsole.Write(new Text($"Gamba grid challenge: Try to guess which squares don't contain the bomb! (You must select exactly {size} fields)\n"));
         var table = new Grid();
@@ -320,10 +327,10 @@ public static class TrapMinigameManager
                 tries--;
                 AnsiConsole.Write(new Text("Bomb was triggered on one of the chosen squares! ", Stylesheet.Styles["failure"]));
                 if (tries > 0)
-                    AnsiConsole.Write(new Text($"Tries left: {tries}", Stylesheet.Styles["default"]));
+                    AnsiConsole.Write(new Text($"Tries left: {tries}\n", Stylesheet.Styles["default"]));
                 else
                 {
-                    AnsiConsole.Write(new Text("The bomb explodes!", Stylesheet.Styles["failure"]));
+                    AnsiConsole.Write(new Text("The bomb explodes!\n", Stylesheet.Styles["failure"]));
                     return false;
                 }
             }

@@ -528,6 +528,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crafted.
+        /// </summary>
+        internal static string Crafted {
+            get {
+                return ResourceManager.GetString("Crafted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create alchemical ingredient.
         /// </summary>
         internal static string CreateAlchemy {
@@ -1230,11 +1239,29 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How many to delete?.
+        ///   Looks up a localized string similar to How many pieces do you want to craft?.
+        /// </summary>
+        internal static string HowManyToCraft {
+            get {
+                return ResourceManager.GetString("HowManyToCraft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How many pieces do you want to delete?.
         /// </summary>
         internal static string HowManyToDelete {
             get {
                 return ResourceManager.GetString("HowManyToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How many pieces do you want to open?.
+        /// </summary>
+        internal static string HowManyToOpen {
+            get {
+                return ResourceManager.GetString("HowManyToOpen", resourceCulture);
             }
         }
         
@@ -2675,6 +2702,15 @@ namespace ConsoleGodmist {
         internal static string WantBuyThird {
             get {
                 return ResourceManager.GetString("WantBuyThird", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to craft this?.
+        /// </summary>
+        internal static string WantCraftThird {
+            get {
+                return ResourceManager.GetString("WantCraftThird", resourceCulture);
             }
         }
         

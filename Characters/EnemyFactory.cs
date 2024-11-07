@@ -12,18 +12,14 @@ public static class EnemyFactory
     public static EnemyCharacter CreateEnemy(string alias, int level)
     {
         var enemy = EnemiesList.FirstOrDefault(x => x.Alias == alias);
-        enemy.Level = level;
-        enemy.Initialize();
-        return enemy;
+        return new EnemyCharacter(enemy, level);
     }
     public static EnemyCharacter CreateEnemy(DungeonType dungeonType, int level)
     {
         var enemy = EngineMethods.RandomChoice(EnemiesList
             .Where(x => x.DefaultLocation == dungeonType)
             .ToDictionary(s => s, enemy => 1));
-        enemy.Level = level;
-        enemy.Initialize();
-        return enemy;
+        return new EnemyCharacter(enemy, level);
     }
 
     public static void InitializeEnemies()

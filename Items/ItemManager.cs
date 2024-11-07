@@ -1,9 +1,4 @@
-﻿using System.Globalization;
-using System.Text.Json;
-using ConsoleGodmist.Characters;
-using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items.Lootbags;
-using Spectre.Console;
+﻿using System.Text.Json;
 
 namespace ConsoleGodmist.Items;
 
