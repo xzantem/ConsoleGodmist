@@ -39,7 +39,7 @@ public class GainShield : IActiveSkillEffect
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() >=
-                    EngineMethods.EffectChance(enemy.Resistances[StatusEffectType.Shield].Value(), ShieldChance)) return;
+                    UtilityMethods.EffectChance(enemy.Resistances[StatusEffectType.Shield].Value(), ShieldChance)) return;
                 var enemyShield = CalculateShield(enemy, caster);
                 StatusEffectHandler.AddStatusEffect(enemyShield, enemy);
                 CharacterEventTextService.DisplayStatusEffectText(enemy, enemyShield);

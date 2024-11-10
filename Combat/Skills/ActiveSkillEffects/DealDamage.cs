@@ -34,7 +34,7 @@ public class DealDamage : IActiveSkillEffect
         var damage = caster.DamageDealt * DamageBase switch
         {
             DamageBase.Minimal => caster.MinimalAttack,
-            DamageBase.Random => EngineMethods.RandomDouble(caster.MinimalAttack, caster.MaximalAttack + 1),
+            DamageBase.Random => UtilityMethods.RandomDouble(caster.MinimalAttack, caster.MaximalAttack + 1),
             DamageBase.Maximal => caster.MaximalAttack
         };
         damage *= DamageMultiplier;

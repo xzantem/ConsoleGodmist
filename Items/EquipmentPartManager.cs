@@ -59,22 +59,22 @@ public static class EquipmentPartManager
     public static T GetRandomPart<T>(int tier, CharacterClass intendedClass) where T : IEquipmentPart
     {
         if (typeof(T) == typeof(WeaponHead))
-            return (T)(object)EngineMethods.RandomChoice(WeaponHeads
+            return (T)(object)UtilityMethods.RandomChoice(WeaponHeads
                 .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(WeaponBinder))
-            return (T)(object)EngineMethods.RandomChoice(WeaponBinders
+            return (T)(object)UtilityMethods.RandomChoice(WeaponBinders
                 .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(WeaponHandle))
-            return (T)(object)EngineMethods.RandomChoice(WeaponHandles
+            return (T)(object)UtilityMethods.RandomChoice(WeaponHandles
                 .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(ArmorPlate))
-            return (T)(object)EngineMethods.RandomChoice(ArmorPlates
+            return (T)(object)UtilityMethods.RandomChoice(ArmorPlates
                 .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(ArmorBinder))
-            return (T)(object)EngineMethods.RandomChoice(ArmorBinders
+            return (T)(object)UtilityMethods.RandomChoice(ArmorBinders
                 .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         if (typeof(T) == typeof(ArmorBase))
-            return (T)(object)EngineMethods.RandomChoice(ArmorBases
+            return (T)(object)UtilityMethods.RandomChoice(ArmorBases
                 .Where(x => x.Tier == tier && x.Material != "None" && x.IntendedClass == intendedClass).ToList());
         throw new NotSupportedException();
     }

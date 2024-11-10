@@ -35,7 +35,7 @@ public class DebuffResistance : IActiveSkillEffect
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() <
-                    EngineMethods.EffectChance(enemy.Resistances[StatusEffectType.Debuff].Value(), DebuffChance))
+                    UtilityMethods.EffectChance(enemy.Resistances[StatusEffectType.Debuff].Value(), DebuffChance))
                 {
                     enemy.AddResistanceModifier(ResistanceToDebuff,
                         new StatModifier(ModifierType, -DebuffStrength, source, DebuffDuration));

@@ -1,5 +1,6 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Modifiers;
+using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
@@ -31,13 +32,11 @@ public class Battle
         {
             user.StartNewTurn();
         }
-        //BattleTextService.DisplayTurnOrder(Users);
         while (Users.Keys.Any(x => !x.MovedThisTurn) && !Escaped)
         {
             foreach (var user in Users.Keys.Where(user => user.TryMove()))
             {
                 BattleTextService.DisplayMovementText(user.User);
-                //BattleTextService.DisplayTurnOrder(Users);
                 if (user.User.StatusEffects
                     .Any(x => x.Type is StatusEffectType.Stun or
                         StatusEffectType.Freeze or StatusEffectType.Sleep))
@@ -51,24 +50,26 @@ public class Battle
                 {
                     case 0:
                         var hasMoved = false;
-                        while (!hasMoved) 
+                        while (!hasMoved)
+                        {
+                            CheckForDead();
+                            if (CheckForResult() != -1)
+                                return;
+                            BattleTextService.DisplayStatusText(user, Users
+                                .FirstOrDefault(x => x.Key != user).Key);
                             hasMoved = PlayerMove(user, Users
-                                     .FirstOrDefault(x => x.Key != user).Key);
+                                .FirstOrDefault(x => x.Key != user).Key);
+                        }
                         break;
                     case 1:
                         Thread.Sleep(1000);
-                        AIMove(user, EngineMethods
+                        AIMove(user, UtilityMethods
                             .RandomChoice(Users
                                 .Where(x => x.Key != user)
                                 .ToDictionary(x => x.Key, x => 1)));
+                        if (CheckForResult() != -1)
+                            return;
                         break;
-                }
-                var dead = Users
-                    .Where(x => x.Key.User.CurrentHealth == 0);
-                foreach (var deadUser in dead)
-                {
-                    BattleTextService.DisplayDeathText(deadUser.Key.User);
-                    Users.Remove(deadUser.Key);
                 }
             }
         }
@@ -79,37 +80,48 @@ public class Battle
         StatusEffectHandler.HandleEffects(user.StatusEffects, user);
         user.HandleModifiers();
         user.RegenResource((int)user.ResourceRegen);
+        CheckForDead();
     }
 
-    public bool ChooseSkill(PlayerCharacter player, Character target)
+    public void ChooseSkill(BattleUser player, Character target)
     {
-        var skills = player.ActiveSkills
-            .Select(x => x.Name + $" ({x.ResourceCost} {BattleTextService.ResourceShortText(player)})").ToArray();
+        var skills = (player.User as PlayerCharacter)?.ActiveSkills
+            .Select(x => x.Name + $" ({x.ResourceCost} {BattleTextService.ResourceShortText(player.User as PlayerCharacter)}, " +
+                         $"{(int)(x.ActionCost * player.MaxActionPoints.Value())} {locale.ActionPointsShort})").ToArray();
         var choices = skills.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
-        return choice != locale.Return && player.ActiveSkills[Array.IndexOf(choices, choice)].Use(player, target);
-        ;
+        if (choice == locale.Return) return;
+        if (!((player.User as PlayerCharacter)?.ActiveSkills[Array.IndexOf(choices, choice)]
+                .ActionCost * player.MaxActionPoints.Value() > player.CurrentActionPoints))
+            (player.User as PlayerCharacter)!.ActiveSkills[Array.IndexOf(choices, choice)]
+                .Use(player, target);
     }
     public bool PlayerMove(BattleUser player, BattleUser target)
     {
-        BattleTextService.DisplayStatusText(player, target);
         List<string> choices =
         [
-            locale.UseSkill, locale.UsePotion, locale.ShowStats, locale.ShowStatus, 
+            locale.UseSkill, locale.UsePotion + $" ({(int)(0.2 * player.MaxActionPoints.Value())} {locale.ActionPointsShort})", 
+            locale.ShowStats, locale.ShowStatus, locale.EndTurn
         ];
         if (CanEscape)
             choices.Add(locale.Escape);
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)));
+            .HighlightStyle(new Style(Color.Gold3_1)).Title($"{locale.ChooseNextAction} " +
+                $"({player.CurrentActionPoints:F0}/{player.MaxActionPoints.Value():F0} {locale.ActionPointsShort})"));
         switch (Array.IndexOf(choices.ToArray(), choice))
         {
             case 0:
-                return ChooseSkill(player.User as PlayerCharacter, target.User);
+                ChooseSkill(player, target.User);
+                CheckForDead();
+                return false;
             case 1:
-                PotionManager.ChoosePotion((player.User as PlayerCharacter).Inventory.Items
+                var potion = PotionManager.ChoosePotion((player.User as PlayerCharacter).Inventory.Items
                     .Where(x => x.Key.ItemType == ItemType.Potion)
-                    .Select(x => x.Key).Cast<Potion>().ToList()).Use();
+                    .Select(x => x.Key).Cast<Potion>().ToList());
+                if (potion == null) return false;
+                player.UseActionPoints(0.2 * player.MaxActionPoints.Value());
+                potion.Use();
                 return false;
             case 2:
                 var charactersStats = new string[Users.Keys.Count];
@@ -136,6 +148,8 @@ public class Battle
                     .ElementAt(Array.IndexOf(charactersStatus, characterStatusChoice)).Key.User);
                 return false;
             case 4:
+                return true;
+            case 5:
                 BattleTextService.DisplayTryEscapeText();
                 if (!(Random.Shared.NextDouble() < 0.5 + EscapeAttempts * 0.1))
                 {
@@ -153,24 +167,41 @@ public class Battle
     }
     public void AIMove(BattleUser enemy, BattleUser target)
     {
+        var possibleSkills = new List<ActiveSkill>();
         BattleTextService.DisplayStatusText(target, enemy);
-        var possibleSkills = enemy.User.ActiveSkills
-            .Where(x => x.ResourceCost <= enemy.User.CurrentResource || 
-                        Math.Abs(enemy.User.MaximalResource - enemy.User.CurrentResource) < 0.01)
-            .ToDictionary(x => x, x => 1);
-        var usedSkill = EngineMethods.RandomChoice(possibleSkills);
-        usedSkill.Use(enemy.User, target.User);
-        Thread.Sleep(1000);
+        do
+        {
+            possibleSkills = enemy.User.ActiveSkills
+                .Where(x => (x.ResourceCost <= enemy.User.CurrentResource ||
+                            Math.Abs(enemy.User.MaximalResource - enemy.User.CurrentResource) < 0.01)
+                            && x.ActionCost * enemy.MaxActionPoints.Value() <= enemy.CurrentActionPoints)
+                .ToList();
+            var usedSkill = UtilityMethods.RandomChoice(possibleSkills);
+            usedSkill.Use(enemy, target.User);
+            CheckForDead();
+            Thread.Sleep(1000);
+        } while (possibleSkills.Count > 0 && CheckForResult() != -1);
     }
 
     public int CheckForResult()
     {
         if (Users.All(x => x.Value == 0))
-            return 0;
+            return 0; // Player win
         if (Users.All(x => x.Value == 1))
-            return 1;
+            return 1; // Enemy win
         if (Escaped)
-            return 2;
-        return -1;
+            return 2; // Player escaped
+        return -1; // No change
+    }
+
+    public void CheckForDead()
+    {
+        var dead = Users
+            .Where(x => x.Key.User.CurrentHealth == 0);
+        foreach (var deadUser in dead)
+        {
+            BattleTextService.DisplayDeathText(deadUser.Key.User);
+            Users.Remove(deadUser.Key);
+        }
     }
 }

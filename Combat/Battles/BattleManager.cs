@@ -39,11 +39,6 @@ public static class BattleManager
         GenerateReward(initial);
     }
 
-    public static void ResumeBattle(Battle battle)
-    {
-        
-    }
-
     private static void GenerateReward(Dictionary<BattleUser, int> usersTeams)
     {
         var player = usersTeams.ElementAt(0).Key.User as PlayerCharacter;
@@ -66,7 +61,7 @@ public static class BattleManager
             experienceReward += (int)Math.Max(0.1, (1 - 0.15 * Math.Abs(player!.Level - dungeon.DungeonLevel)) 
                                                    * (Math.Pow(dungeon.DungeonLevel, 1.1) + 3));
             if (Random.Shared.NextDouble() < lootBagChance)
-                player.Inventory.AddItem(LootbagManager.GetLootbag(dungeon.DungeonType, enemy.Key.User.Level), 10);
+                player.Inventory.AddItem(LootbagManager.GetLootbag(dungeon.DungeonType, enemy.Key.User.Level));
             if (Random.Shared.NextDouble() < weaponBagChance)
                 player.Inventory.AddItem(new WeaponLootbag(enemy.Key.User.Level));
             if (Random.Shared.NextDouble() < armorBagChance)

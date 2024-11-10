@@ -106,7 +106,7 @@ public static class TrapMinigameManager
         {
             AnsiConsole.Write(new Text($"Memory challenge: Remember the sequence that will show up in {5 - i}\n"));
             Thread.Sleep(1000);
-            EngineMethods.ClearConsole();
+            UtilityMethods.ClearConsole();
         }
         for (var i = size - 1; i >= 0; i--)
         {
@@ -126,7 +126,7 @@ public static class TrapMinigameManager
             }
             AnsiConsole.Write(new Text($"({i})\n"));
             Thread.Sleep(1000);
-            EngineMethods.ClearConsole();
+            UtilityMethods.ClearConsole();
         }
         AnsiConsole.Write(new Text($"Current sequence: "));
         foreach (var t in playerAnswer)
@@ -176,7 +176,7 @@ public static class TrapMinigameManager
         {
             AnsiConsole.Write(new Text($"Reaction challenge: Quickly press the buttons that will start appearing in {5 - i}\n"));
             Thread.Sleep(1000);
-            EngineMethods.ClearConsole();
+            UtilityMethods.ClearConsole();
         }
         for (var i = 0; i < 5; i++)
         {
@@ -207,7 +207,7 @@ public static class TrapMinigameManager
                 
                 Thread.Sleep(100);
                 AnsiConsole.Write("\n");
-                EngineMethods.ClearConsole();
+                UtilityMethods.ClearConsole();
             }
             if (!keyPressDetected) return false;
             AnsiConsole.Write(new Text("Good!", Stylesheet.Styles["rarity-uncommon"]));

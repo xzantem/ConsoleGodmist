@@ -1,6 +1,4 @@
 ﻿using ConsoleGodmist.Items;
-using ConsoleGodmist.Items;
-using ConsoleGodmist.Items;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

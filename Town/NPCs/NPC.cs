@@ -101,7 +101,7 @@ public abstract class NPC
                 player.Say(locale.IDontHaveEnough);
                 return;
             }
-            if (!EngineMethods.Confirmation(locale.WantBuyThird, true))
+            if (!UtilityMethods.Confirmation(locale.WantBuyThird, true))
             {
                 player.Say(locale.NoSorry);
                 return;
@@ -122,7 +122,7 @@ public abstract class NPC
             }
             var amount = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToBuy)
                 .Validate(Validator));
-            if (!EngineMethods.Confirmation(locale.WantBuyThird, true))
+            if (!UtilityMethods.Confirmation(locale.WantBuyThird, true))
             {
                 player.Say(locale.NoSorry);
                 return;
@@ -157,8 +157,8 @@ public abstract class NPC
         var cost = selected.Key.Cost * (Inventory.PossibleWares.Contains(selected.Key.ItemType) ? 0.5 : 0.25);
         if (selected.Value == 1 || !selected.Key.Stackable)
         {
-            Say($"{locale.ICanGiveYou} {cost} {locale.CrownsGenitive}");
-            if (!EngineMethods.Confirmation(locale.WantSellThird, true))
+            Say($"{locale.ICanGiveYou} {(int)cost} {locale.CrownsGenitive}");
+            if (!UtilityMethods.Confirmation(locale.WantSellThird, true))
             {
                 player.Say(locale.NoSorry);
                 return;
@@ -176,7 +176,7 @@ public abstract class NPC
                 .Validate(Validator));
             cost *= amount;
             Say($"{locale.ICanGiveYou} {cost} {locale.CrownsGenitive}");
-            if (!EngineMethods.Confirmation(locale.WantSellThird, true))
+            if (!UtilityMethods.Confirmation(locale.WantSellThird, true))
             {
                 player.Say(locale.NoSorry);
                 return;

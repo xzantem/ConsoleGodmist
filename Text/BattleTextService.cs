@@ -12,18 +12,18 @@ public static class BattleTextService
     public static void DisplayStatusText(BattleUser player, BattleUser enemy)
     {
         var playerShields = player.User.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
-            ? $"(+{player.User.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
-                .Cast<Shield>().Sum(s => s.Strength):F0})"
+            ? $"(+{(int)player.User.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
+                .Cast<Shield>().Sum(s => s.Strength)})"
             : "";
         var enemyShields = enemy.User.StatusEffects.Any(x => x.Type == StatusEffectType.Shield)
-            ? $"(+{player.User.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
-                .Cast<Shield>().Sum(s => s.Strength):F0})"
+            ? $"(+{(int)player.User.StatusEffects.Where(x => x.Type == StatusEffectType.Shield)
+                .Cast<Shield>().Sum(s => s.Strength)})"
             : "";
-        AnsiConsole.Write(new Text($"\n{player.User.Name}, {locale.Level} {player.User.Level} ({player.ActionValue})", Stylesheet.Styles["success"]));
+        AnsiConsole.Write(new Text($"\n{player.User.Name}, {locale.Level} {player.User.Level} ({player.ActionValue} {locale.ToMove})", Stylesheet.Styles["success"]));
         AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)player.User.CurrentHealth}{playerShields}/{(int)player.User.MaximalHealth}" +
                                    $", {ResourceShortText(player.User)}: {(int)player.User.CurrentResource}/{(int)player.User.MaximalResource}\n"
             , Stylesheet.Styles["default"]));
-        AnsiConsole.Write(new Text($"{enemy.User.Name}, {locale.Level} {enemy.User.Level} ({enemy.ActionValue})", Stylesheet.Styles["failure"]));
+        AnsiConsole.Write(new Text($"\n{enemy.User.Name}, {locale.Level} {enemy.User.Level} ({enemy.ActionValue} {locale.ToMove})", Stylesheet.Styles["failure"]));
         AnsiConsole.Write(new Text($"\n{locale.HealthC}: {(int)enemy.User.CurrentHealth}{enemyShields}/{(int)enemy.User.MaximalHealth}" +
                                    $", {ResourceShortText(enemy.User)}: {(int)enemy.User.CurrentResource}/{(int)enemy.User.MaximalResource}\n\n"
             , Stylesheet.Styles["default"]));
@@ -53,16 +53,6 @@ public static class BattleTextService
     public static void DisplayDeathText(Character dead)
     {
         AnsiConsole.Write(new Text($"{dead.Name} {locale.Dies}\n", Stylesheet.Styles["value-lost"]));
-    }
-
-    public static void DisplayTurnOrder(Dictionary<BattleUser, int> battleUsers)
-    {
-        battleUsers = battleUsers.ToList().OrderBy(x => x.Key.ActionValue)
-            .ToDictionary(x => x.Key, x => x.Value);
-        var segments = battleUsers
-            .Select(battleUser => $"{battleUser.Key.User.Name} ({battleUser.Key.ActionValue})")
-            .ToList();
-        AnsiConsole.Write(new Text($"{locale.TurnOrder}: [{string.Join(" -> ", segments)}]\n", Stylesheet.Styles["default"]));
     }
 
     public static void DisplayBattleStartText(EnemyCharacter enemy)

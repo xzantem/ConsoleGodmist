@@ -45,7 +45,7 @@ public class InflictDoTStatusEffect : IActiveSkillEffect
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() >=
-                    EngineMethods.EffectChance(enemy.Resistances[DoTType].Value(), Chance)) return;
+                    UtilityMethods.EffectChance(enemy.Resistances[DoTType].Value(), Chance)) return;
                 StatusEffectHandler.AddStatusEffect(status, enemy);
                 break;
         }

@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace ConsoleGodmist
 {
-    internal static class EngineMethods
+    internal static class UtilityMethods
     {
         public static Random Random = new();
         public static double RandomDouble(double minValue, double maxValue)

@@ -100,13 +100,13 @@ public static class PotionManager
         var components = new List<PotionComponent>();
         for (var i = 0; i < 3; i++)
         {
-            var randomized = EngineMethods.RandomChoice(possibleComponents);
+            var randomized = UtilityMethods.RandomChoice(possibleComponents);
             components.Add(randomized);
             possibleComponents.Remove(randomized);
         }
 
         return new Potion("Potion", "", components,
-                new PotionCatalyst(EngineMethods.RandomChoice(Enum.GetValues<PotionCatalystEffect>().ToList()), tier));
+                new PotionCatalyst(UtilityMethods.RandomChoice(Enum.GetValues<PotionCatalystEffect>().ToList()), tier));
     }
 
     public static string GetCatalystMaterial(PotionCatalystEffect effect, int tier)
@@ -149,10 +149,12 @@ public static class PotionManager
 
     public static Potion? ChoosePotion(List<Potion> potions)
     {
+        if (potions.Count == 0) return null;
         var pots = potions.Select(x => $"{x.Name} ({x.CurrentCharges}/{x.MaximalCharges})").ToArray();
         var choices = pots.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
-        return choice == locale.Return ? null : potions.ElementAt(Array.IndexOf(choices, choice));
+        return choice == locale.Return || potions.ElementAt(Array.IndexOf(choices, choice)).CurrentCharges == 0 ? 
+            null : potions.ElementAt(Array.IndexOf(choices, choice));
     }
 }

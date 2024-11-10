@@ -1,7 +1,5 @@
-using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items;
 using ConsoleGodmist.Items;
 using ConsoleGodmist.TextService;
 using Newtonsoft.Json;

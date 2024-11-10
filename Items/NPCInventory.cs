@@ -49,7 +49,7 @@ public class NPCInventory
                         .Where(x => x.ItemType == type &&
                                     (int)x.Rarity == tier + 2 && !RotatingShop.ContainsKey(x)).ToList(); 
                     while (RotatingShop.Count - initial < 15 && RotatingShop.Count - initial < items.Count)
-                        RotatingShop.TryAdd(EngineMethods.RandomChoice(items), Random.Shared.Next(10, 21));
+                        RotatingShop.TryAdd(UtilityMethods.RandomChoice(items), Random.Shared.Next(10, 21));
                     break;
                 case ItemType.Potion:
                     while (RotatingShop.Count - initial < 5)
@@ -100,7 +100,7 @@ public class NPCInventory
     public KeyValuePair<IItem, int> ElementAt(int index)
     {
         var items = RotatingShop.Concat(BoughtFromPlayer).ToList();
-        return index <= RotatingShop.Count - 1 ? RotatingShop.ElementAt(index) : 
-            BoughtFromPlayer.ElementAt(index - RotatingShop.Count + 1);
+        return index <= RotatingShop.Count + 1 ? RotatingShop.ElementAt(index) : 
+            BoughtFromPlayer.ElementAt(index - RotatingShop.Count);
     }
 }

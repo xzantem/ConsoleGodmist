@@ -56,7 +56,7 @@ public class Alchemist : NPC
             return;
         }
         Say(locale.WantTreatment);
-        if (!EngineMethods.Confirmation(locale.WantTreatmentThird, true)) return;
+        if (!UtilityMethods.Confirmation(locale.WantTreatmentThird, true)) return;
         SpendGold(cost);
         player.Heal(player.MaximalHealth - player.CurrentHealth);
     }
@@ -90,7 +90,7 @@ public class Alchemist : NPC
             return;
         }
         Say(locale.WantRefill);
-        if (!EngineMethods.Confirmation(locale.WantRefillThird, true)) return;
+        if (!UtilityMethods.Confirmation(locale.WantRefillThird, true)) return;
         SpendGold((int)(amount * cost));
         potion.Refill(amount);
     }

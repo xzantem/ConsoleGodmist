@@ -21,7 +21,7 @@ public class Stat
 
     public double Value(int level = 1)
     {
-        var value = EngineMethods.ScaledStat(BaseValue, ScalingFactor, level);
+        var value = UtilityMethods.ScaledStat(BaseValue, ScalingFactor, level);
         // Order of modifiers:
         // 1. Multiply by all relative modifiers
         // 2. Add all additive modifiers

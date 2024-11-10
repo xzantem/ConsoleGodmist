@@ -69,6 +69,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AP.
+        /// </summary>
+        internal static string ActionPointsShort {
+            get {
+                return ResourceManager.GetString("ActionPointsShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adamantite ore.
         /// </summary>
         internal static string AdamantiteOre {
@@ -398,6 +407,15 @@ namespace ConsoleGodmist {
         internal static string ChooseNameForSave {
             get {
                 return ResourceManager.GetString("ChooseNameForSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose your next action.
+        /// </summary>
+        internal static string ChooseNextAction {
+            get {
+                return ResourceManager.GetString("ChooseNextAction", resourceCulture);
             }
         }
         
@@ -920,6 +938,15 @@ namespace ConsoleGodmist {
         internal static string EnchanterGreeting {
             get {
                 return ResourceManager.GetString("EnchanterGreeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End turn.
+        /// </summary>
+        internal static string EndTurn {
+            get {
+                return ResourceManager.GetString("EndTurn", resourceCulture);
             }
         }
         
@@ -2450,6 +2477,15 @@ namespace ConsoleGodmist {
         internal static string ToInspect {
             get {
                 return ResourceManager.GetString("ToInspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to move.
+        /// </summary>
+        internal static string ToMove {
+            get {
+                return ResourceManager.GetString("ToMove", resourceCulture);
             }
         }
         

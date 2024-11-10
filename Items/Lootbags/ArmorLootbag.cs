@@ -18,7 +18,7 @@ public class ArmorLootbag : Lootbag
         var toOpen = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToOpen + $" Up to {inInventory}: ")
             .DefaultValue(inInventory)
             .Validate(Validator));
-        var amount = EngineMethods.RandomChoice(new Dictionary<int, int> { {1, 3}, {2, 4}, {3, 1} });
+        var amount = UtilityMethods.RandomChoice(new Dictionary<int, int> { {1, 3}, {2, 4}, {3, 1} });
         for (var i = 0; i < amount * toOpen; i++)
         {
             var weapon = EquippableItemService.GetRandomArmor(Level / 10 + 1);

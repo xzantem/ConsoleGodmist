@@ -33,7 +33,7 @@ public class InflictGenericStatusEffect : IActiveSkillEffect
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() >=
-                    EngineMethods.EffectChance(enemy.Resistances[StatusEffect.Type].Value(), Chance)) return;
+                    UtilityMethods.EffectChance(enemy.Resistances[StatusEffect.Type].Value(), Chance)) return;
                 StatusEffectHandler.AddStatusEffect(StatusEffect, enemy);
                 break;
         }

@@ -34,6 +34,7 @@
     <Content Include="bin\Debug\net6.0\json\plant-drop-table.json" />
     <Content Include="bin\Debug\net6.0\json\lootbag-drop-tables.json" />
     <Content Include="bin\Debug\net6.0\json\potion-components.json" />
+    <Content Include="bin\Debug\net6.0\json\quests.json" />
   </ItemGroup>
 
   <ItemGroup>

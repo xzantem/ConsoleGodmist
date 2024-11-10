@@ -64,7 +64,7 @@ public static class InventoryMenuHandler
                     DeleteItem();
                     break;
                 case 4:
-                    if (!EngineMethods.Confirmation(locale.DeleteJunkConfirmation))
+                    if (!UtilityMethods.Confirmation(locale.DeleteJunkConfirmation))
                         break;
                     Inventory.RemoveJunk();
                     break;
@@ -109,13 +109,13 @@ public static class InventoryMenuHandler
                 new TextPrompt<int>($"{locale.HowManyToDelete} [[max {item.Value}]] ")
                     .DefaultValue(1)
                     .Validate(Validator));
-            if (!EngineMethods.Confirmation($"{locale.DeleteItemConfirmation}: {item.Key.Name} ({number})?"))
+            if (!UtilityMethods.Confirmation($"{locale.DeleteItemConfirmation}: {item.Key.Name} ({number})?"))
                 return;
             Inventory.TryRemoveItem(item.Key, number);
         }
         else
         {
-            if (!EngineMethods.Confirmation($"{locale.DeleteItemConfirmation}: {item.Key.Name}?"))
+            if (!UtilityMethods.Confirmation($"{locale.DeleteItemConfirmation}: {item.Key.Name}?"))
                 return;
             Inventory.TryRemoveItem(item.Key);
         }

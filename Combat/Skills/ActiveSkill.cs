@@ -12,6 +12,7 @@ public class ActiveSkill
     public string Name => NameAliasHelper.GetName(Alias);
     public string Alias { get; set; }
     public int ResourceCost { get; set; }
+    public double ActionCost { get; set; }
     public bool AlwaysHits { get; set; }
     public int Accuracy { get; set; }
     public int Hits { get; set; }
@@ -22,38 +23,41 @@ public class ActiveSkill
         
     }
 
-    public ActiveSkill(string alias, int resourceCost, bool alwaysHits, int accuracy,
+    public ActiveSkill(string alias, int resourceCost, double actionCost, bool alwaysHits, int accuracy,
         List<IActiveSkillEffect> effects, int hits = 1)
     {
         Alias = alias;
         ResourceCost = resourceCost;
+        ActionCost = actionCost;
         AlwaysHits = alwaysHits;
         Accuracy = accuracy;
         Effects = effects;
         Hits = hits;
     }
 
-    public bool Use(Character caster, Character enemy)
+    public bool Use(BattleUser caster, Character enemy)
     {
-        if (!(caster.CurrentResource >= ResourceCost) && 
-            (caster.ResourceType != ResourceType.Fury || 
-             !(Math.Abs(caster.MaximalResource - caster.CurrentResource) < 0.001)) && ResourceCost != -1) return false;
-        ActiveSkillTextService.DisplayUseSkillText(caster, enemy, this);
-        caster.UseResource(ResourceCost);
+        if ((!(caster.User.CurrentResource >= ResourceCost) && 
+            (caster.User.ResourceType != ResourceType.Fury || 
+             !(Math.Abs(caster.User.MaximalResource - caster.User.CurrentResource) < 0.001)) && ResourceCost != -1) || 
+            caster.CurrentActionPoints < caster.MaxActionPoints.Value() * ActionCost) return false;
+        ActiveSkillTextService.DisplayUseSkillText(caster.User, enemy, this);
+        caster.User.UseResource(ResourceCost);
+        caster.UseActionPoints(caster.MaxActionPoints.Value() * ActionCost);
         foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Self)) 
-            effect.Execute(caster, enemy, Alias);
+            effect.Execute(caster.User, enemy, Alias);
         if (Effects.All(x => x.Target != SkillTarget.Enemy)) return true;
         {
             for (var i = 0; i < Hits; i++)
             {
                 {
-                    if (!CheckHit(caster, enemy) && !AlwaysHits)
+                    if (!CheckHit(caster.User, enemy) && !AlwaysHits)
                     {
-                        ActiveSkillTextService.DisplayMissText(caster);
+                        ActiveSkillTextService.DisplayMissText(caster.User);
                         continue;
                     }
                     foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Enemy))
-                        effect.Execute(caster, enemy, Alias);
+                        effect.Execute(caster.User, enemy, Alias);
                 }
             }
         }

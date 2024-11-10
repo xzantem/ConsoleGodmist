@@ -16,7 +16,7 @@ public class DropPool
 
     public KeyValuePair<IItem, ItemDrop> Choice(int level)
     {
-        var choice = EngineMethods.RandomChoice(Pool
+        var choice = UtilityMethods.RandomChoice(Pool
             .Where(item => item.Value.MinLevel <= level && item.Value.MaxLevel >= level)
             .ToDictionary(item => item.Key, item => item.Value)
             .ToDictionary(x => x, x => x.Value.Weight));

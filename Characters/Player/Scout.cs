@@ -36,16 +36,16 @@ namespace ConsoleGodmist.Characters
             Speed = _speed.BaseValue;
             SwitchWeapon(new Weapon(CharacterClass.Scout));
             SwitchArmor(new Armor(CharacterClass.Scout));
-            ActiveSkills[0] = new ActiveSkill("DaggerThrow", 0, false, 82,
+            ActiveSkills[0] = new ActiveSkill("DaggerThrow", 0, 0.6, false, 82,
             [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0)]);
-            ActiveSkills[1] = new ActiveSkill("Exchange", 40, false, 74,
+            ActiveSkills[1] = new ActiveSkill("Exchange", 40, 0.4, false, 74,
                 [new DebuffStat(SkillTarget.Enemy, StatType.Dodge, ModifierType.Additive, 15, 0.8, 3)]);
-            ActiveSkills[2] = new ActiveSkill("CloudOfSmoke", 50, false, 70,
+            ActiveSkills[2] = new ActiveSkill("CloudOfSmoke", 50, 0.3, false, 70,
                 [new DebuffStat(SkillTarget.Enemy, StatType.Accuracy, ModifierType.Additive, 20, 0.8, 3)]);
-            ActiveSkills[3] = new ActiveSkill("Hookshot", 25, false, 80,
+            ActiveSkills[3] = new ActiveSkill("Hookshot", 25, 0.3, false, 80,
             [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0),
                 new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Stun, "Hookshot", 2), 0.75)]);
-            ActiveSkills[4] = new ActiveSkill("AccurateThrow", 50, true, 85,
+            ActiveSkills[4] = new ActiveSkill("AccurateThrow", 50, 0.7, true, 85,
             [new DealDamage(DamageType.Physical, DamageBase.Maximal, 1, true, true, 0)]);
         }
         public Scout() {}

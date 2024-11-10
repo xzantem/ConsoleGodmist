@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Enums;
 using Spectre.Console;
 using Spectre.Console.Rendering;
 
@@ -94,7 +95,7 @@ public static class CraftingManager
             .GetValueOrDefault(ItemManager.GetItem(x.Key)) / x.Value);
         var amount = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToCraft + $" (x{item.CraftedAmount}) Up to {maxAmount}: ")
             .Validate(Validator));
-        if (!EngineMethods.Confirmation(locale.WantCraftThird, true))
+        if (!UtilityMethods.Confirmation(locale.WantCraftThird, true))
         {
             PlayerHandler.player.Say(locale.NoSorry);
             return;
@@ -111,6 +112,18 @@ public static class CraftingManager
         ValidationResult Validator(int n) {
             if (n > maxAmount) return ValidationResult.Error(locale.ChoseTooMany);
             return n < 0 ? ValidationResult.Error(locale.IntBelowZero) : ValidationResult.Success();
+        }
+    }
+
+    public static void CraftWeapon()
+    {
+        var chosenQuality = Quality.Normal;
+        WeaponHead head = null;
+        WeaponBinder binder = null;
+        WeaponHandle handle = null;
+        while (true)
+        {
+            return;
         }
     }
 }

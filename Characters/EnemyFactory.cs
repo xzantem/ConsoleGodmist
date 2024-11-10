@@ -16,7 +16,7 @@ public static class EnemyFactory
     }
     public static EnemyCharacter CreateEnemy(DungeonType dungeonType, int level)
     {
-        var enemy = EngineMethods.RandomChoice(EnemiesList
+        var enemy = UtilityMethods.RandomChoice(EnemiesList
             .Where(x => x.DefaultLocation == dungeonType)
             .ToDictionary(s => s, enemy => 1));
         return new EnemyCharacter(enemy, level);

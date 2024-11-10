@@ -34,16 +34,16 @@ namespace ConsoleGodmist.Characters
             ResourceType = ResourceType.Mana;
             SwitchWeapon(new Weapon(CharacterClass.Sorcerer));
             SwitchArmor(new Armor(CharacterClass.Sorcerer));
-            ActiveSkills[0] = new ActiveSkill("EnergyOrb", 5, true, 100,
+            ActiveSkills[0] = new ActiveSkill("EnergyOrb", 5, 0.75, true, 100,
             [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 0)]);
-            ActiveSkills[1] = new ActiveSkill("Fireball", 60, true, 100,
+            ActiveSkills[1] = new ActiveSkill("Fireball", 60, 0.75, true, 100,
                 [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 0),
                 new InflictDoTStatusEffect(SkillTarget.Enemy, 3, 0.8, "Fireball", StatusEffectType.Burn, 0.75)]);
-            ActiveSkills[2] = new ActiveSkill("Focus", 0, true, 100,
+            ActiveSkills[2] = new ActiveSkill("Focus", 0, 0.85, true, 100,
             [new TradeHealthForResource(SkillTarget.Self, 0.1, 2)]);
-            ActiveSkills[3] = new ActiveSkill("MagicShield", 80, true, 100,
+            ActiveSkills[3] = new ActiveSkill("MagicShield", 80, 0.4, true, 100,
             [new GainShield(SkillTarget.Self, "MagicShield", DamageBase.Random, 2, 1, -1)]);
-            ActiveSkills[4] = new ActiveSkill("ExhaustingSpells", -1, true, 100,
+            ActiveSkills[4] = new ActiveSkill("ExhaustingSpells", -1, 0, true, 100,
             [new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Buff, "ExhaustingSpells", -1, "Halts mana regen, but attacks have a 70% chance to slow by 12 for 3 turns"), 1, SkillTarget.Self)]);
         }
         public Sorcerer() {}

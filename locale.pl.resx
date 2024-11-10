@@ -993,4 +993,16 @@
   <data name="HowManyToOpen" xml:space="preserve">
     <value>Ile sztuk chcesz otworzyć?</value>
   </data>
+  <data name="ActionPointsShort" xml:space="preserve">
+    <value>PA</value>
+  </data>
+  <data name="ToMove" xml:space="preserve">
+    <value>do ruchu</value>
+  </data>
+  <data name="EndTurn" xml:space="preserve">
+    <value>Zakończ turę</value>
+  </data>
+  <data name="ChooseNextAction" xml:space="preserve">
+    <value>Wybierz swoją następną akcję</value>
+  </data>
 </root>

@@ -17,7 +17,7 @@ public class DungeonFloor
     {
         Traps = [];
         Battles = [];
-        var starterRoomField = EngineMethods.RandomChoice(new
+        var starterRoomField = UtilityMethods.RandomChoice(new
             Dictionary<DungeonFieldType, double> { { DungeonFieldType.Empty, 0.5 }, { DungeonFieldType.Battle, 0.5 } });
         StarterRoom = new DungeonRoom(starterRoomField);
         if (starterRoomField == DungeonFieldType.Battle)
@@ -38,7 +38,7 @@ public class DungeonFloor
         };
         for (var i = 0; i < length; i++)
         {
-            var fieldType = EngineMethods.RandomChoice(weights);
+            var fieldType = UtilityMethods.RandomChoice(weights);
             Corridor.Add(new DungeonCorridor(fieldType));
             switch (fieldType)
             {

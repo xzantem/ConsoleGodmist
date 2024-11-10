@@ -89,7 +89,7 @@ public class Blacksmith : NPC
                         continue;
                     }
                     Say(locale.WantUpgrade);
-                    if (!EngineMethods.Confirmation(locale.WantUpgradeThird, true)) continue;
+                    if (!UtilityMethods.Confirmation(locale.WantUpgradeThird, true)) continue;
                     SpendGold((int)cost);
                     if (Random.Shared.NextDouble() < upgradeChance)
                     {
@@ -150,7 +150,7 @@ public class Blacksmith : NPC
                         continue;
                     }
                     Say(locale.WantUpgrade);
-                    if (!EngineMethods.Confirmation(locale.WantUpgradeThird, true)) continue;
+                    if (!UtilityMethods.Confirmation(locale.WantUpgradeThird, true)) continue;
                     SpendGold((int)cost);
                     if (Random.Shared.NextDouble() < upgradeChance)
                     {
@@ -194,9 +194,9 @@ public class Blacksmith : NPC
             return;
         }
         Say(locale.WantReforge);
-        if (!EngineMethods.Confirmation(locale.WantReforgeThird, true)) return;
+        if (!UtilityMethods.Confirmation(locale.WantReforgeThird, true)) return;
         SpendGold(cost);
-        var success = EngineMethods.RandomChoice(new Dictionary<int, double>
+        var success = UtilityMethods.RandomChoice(new Dictionary<int, double>
         { { -1, 0.1 }, { 0, 0.2 }, { 1, 0.5 }, { 2, 0.2 } });
         switch (success)
         {
@@ -238,9 +238,9 @@ public class Blacksmith : NPC
             return;
         }
         Say(locale.WantReforge);
-        if (!EngineMethods.Confirmation(locale.WantReforgeThird, true)) return;
+        if (!UtilityMethods.Confirmation(locale.WantReforgeThird, true)) return;
         SpendGold(cost);
-        var success = EngineMethods.RandomChoice(new Dictionary<int, double>
+        var success = UtilityMethods.RandomChoice(new Dictionary<int, double>
             { { -1, 0.1 }, { 0, 0.2 }, { 1, 0.5 }, { 2, 0.2 } });
         switch (success)
         {
