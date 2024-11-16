@@ -2,6 +2,7 @@ using Spectre.Console;
 using System.Globalization;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Characters;
+using ConsoleGodmist.Quests;
 using ConsoleGodmist.Town;
 
 namespace ConsoleGodmist.Utilities
@@ -68,6 +69,7 @@ namespace ConsoleGodmist.Utilities
                 3 => Difficulty.Nightmare,
                 _ => throw new NotImplementedException()
             };
+            QuestManager.InitSideQuests();
             Console.WriteLine(locale.Opening_1);
             Console.WriteLine(locale.Opening_2);
             Console.WriteLine(locale.Opening_3);
@@ -76,12 +78,13 @@ namespace ConsoleGodmist.Utilities
             AnsiConsole.Write($"\n{locale.TownGuard_Name}: ", new Style(Color.CornflowerBlue));
             Console.WriteLine(locale.TownGuard_Line);
 
-            string[] choices1 = { locale.WarriorLocative, locale.ScoutLocative, locale.SorcererLocative, locale.PaladinLocative };
+            string[] choices1 = [locale.WarriorLocative, locale.ScoutLocative, locale.SorcererLocative, locale.PaladinLocative
+            ];
             var choice1 = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices1)
                 .Title($"\n...: {locale.Iam} ")
                 .HighlightStyle(new Style(Color.MediumPurple3)));
-            CharacterClass characterClass = Array.IndexOf(choices1, choice1) switch
+            var characterClass = Array.IndexOf(choices1, choice1) switch
             {
                 0 => CharacterClass.Warrior,
                 1 => CharacterClass.Scout,

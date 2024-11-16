@@ -26,10 +26,10 @@ public abstract class NPC
     public double ServiceCostMod => LoyaltyLevel switch
     {
         < 2 => 1.0,
-        >= 2 and < 4 => 0.99,
-        >= 4 and < 7 => 0.96,
-        >= 7 and < 9 => 0.91,
-        >= 9 and < 12 => 0.84,
+        < 4 => 0.99,
+        < 7 => 0.96,
+        < 9 => 0.91,
+        < 12 => 0.84,
         >= 12 => 0.75
     };
 
@@ -178,14 +178,14 @@ public abstract class NPC
             var amount = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToSell)
                 .Validate(Validator));
             cost *= amount;
-            Say($"{locale.ICanGiveYou} {cost} {locale.CrownsGenitive}");
+            Say($"{locale.ICanGiveYou} {(int)cost} {locale.CrownsGenitive}");
             if (!UtilityMethods.Confirmation(locale.WantSellThird, true))
             {
                 player.Say(locale.NoSorry);
                 return;
             }
             player.Inventory.TryRemoveItem(selected.Key, amount);
-            player.GainGold((int)(cost * amount));
+            player.GainGold((int)cost);
             AnsiConsole.Write(new Text($"{locale.Sold}: ", Stylesheet.Styles["value-gained"]));
             selected.Key.WriteName();
             AnsiConsole.Write(new Text($" ({amount})", Stylesheet.Styles["default"]));

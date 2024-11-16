@@ -38,7 +38,9 @@ public static class DataPersistanceManager
         var data = JsonConvert.DeserializeObject<SaveData>(json);
         PlayerHandler.player = data.Player;
         GameSettings.Difficulty = data.Difficulty;
-        MainQuestManager.Quests = data.Quests;
+        QuestManager.MainQuests = data.Quests[0];
+        QuestManager.RandomizedSideQuests = data.Quests[1];
+        QuestManager.BossSideQuests = data.Quests[2];
         TownsHandler.Arungard = data.Town;
         return true;
     }

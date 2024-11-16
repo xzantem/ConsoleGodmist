@@ -35,38 +35,6 @@ class Program
         while (true)
         {
             MainMenu.Menu();
-            MainQuestManager.Quests = [new Quest
-            {
-                Alias = "RuinScouting",
-                RecommendedLevel = 2,
-                QuestState = QuestState.Available,
-                QuestGiver = "Alchemist",
-                QuestEnder = "Alchemist",
-                AcceptDialogue = ["Do this"],
-                HandInDialogue = ["Well done"],
-                Stages =
-                [
-                    new QuestStage
-                    {
-                        Objectives =
-                        [
-                            new DescendQuestObjective
-                            {
-                                IsComplete = false,
-                                Target = DungeonType.Catacombs,
-                                FloorToReach = 4
-                            }
-                        ],
-                        Alias = "RuinScouting"
-                    }
-                ],
-                QuestReward = new QuestReward
-                {
-                    Gold = 200,
-                    Experience = (int)(Math.Pow(2, 1.5) + 13),
-                    Honor = 4
-                }
-            }];
             TownsHandler.Arungard.EnterTown();
             AnsiConsole.Clear();
         }

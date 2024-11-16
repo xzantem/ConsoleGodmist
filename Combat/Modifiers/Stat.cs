@@ -8,10 +8,18 @@ public class Stat
     public double ScalingFactor { get; set; }
     public List<StatModifier> Modifiers { get; private set; } = [];
     
+    public Stat() {}
+    
     public Stat(double baseValue, double scalingFactor)
     {
         BaseValue = baseValue;
         ScalingFactor = scalingFactor;
+    }
+    public Stat(double baseValue, double scalingFactor, List<StatModifier> modifiers)
+    {
+        BaseValue = baseValue;
+        ScalingFactor = scalingFactor;
+        Modifiers = modifiers;
     }
     //public Stat(double baseValue, double scalingFactor)
     //{

@@ -34,11 +34,11 @@ public class Quest
         Stages = stages;
         QuestReward = questReward;
         QuestState = QuestState.Available;
-        Prerequisites = new List<string>();
+        Prerequisites = [];
         QuestGiver = questGiver;
         QuestEnder = questGiver;
-        AcceptDialogue = new List<string> { acceptDialogue };
-        HandInDialogue = new List<string> { handInDialogue };
+        AcceptDialogue = [acceptDialogue];
+        HandInDialogue = [handInDialogue];
     }
 
     public void TryProgress(QuestObjectiveContext context)

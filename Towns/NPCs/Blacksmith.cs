@@ -1,6 +1,8 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using ConsoleGodmist.Quests;
+using ConsoleGodmist.TextService;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -31,12 +33,23 @@ public class Blacksmith : NPC
         while (true)
         {
             AnsiConsole.Write(new Text($"{locale.LoyaltyLevel}: [{LoyaltyLevel}/15]\n", Stylesheet.Styles["npc-blacksmith"]));
-            string[] choices = [locale.OpenShop, locale.CreateSmithing, locale.CreateWeapon, 
-                locale.CreateArmor, locale.UpgradeWeapon, locale.UpgradeArmor, locale.ReforgeWeapon, 
-                locale.ReforgeArmor, locale.Return];
-            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
+            Dictionary<string, int> choices = new()
+            {
+                { locale.OpenShop, 0 },
+                { locale.CreateSmithing, 1 },
+                { locale.CreateWeapon, 2 },
+                { locale.CreateArmor, 3 },
+                { locale.UpgradeWeapon, 4 },
+                { locale.UpgradeArmor, 5 },
+                { locale.ReforgeWeapon, 6 },
+                { locale.ReforgeArmor, 7 },
+                { locale.Return, 10 },
+            };
+            if (QuestNPCHandler.GetAvailableQuests(Name).Count > 0) choices.Add(locale.AcceptQuest, 8);
+            if (QuestNPCHandler.GetReturnableQuests(Name).Count > 0) choices.Add(locale.ReturnQuest, 9);
+            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
                 .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]));
-            switch (Array.IndexOf(choices, choice))
+            switch (choices[choice])
             {
                 case 0: DisplayShop(); break;
                 case 1: CraftItem(); break;
@@ -46,7 +59,11 @@ public class Blacksmith : NPC
                 case 5: UpgradeArmor(); break;
                 case 6: ReforgeWeapon(); break;
                 case 7: ReforgeArmor(); break;
-                case 8: return;
+                case 8: //Accept quest
+                    break;
+                case 9: //Return quest
+                    break;
+                case 10: return;
             }
             AnsiConsole.Write(new FigletText(locale.Blacksmith).Centered()
                 .Color(Stylesheet.Styles["npc-blacksmith"].Foreground));

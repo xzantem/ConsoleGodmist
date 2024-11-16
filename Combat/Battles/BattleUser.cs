@@ -26,6 +26,7 @@ public class BattleUser
     {
         ActionPointer = Math.Pow(10, ActionPointerInitial);
         ActionValue = (int)(ActionPointer / User.Speed);
+        MaxActionPoints = new Stat(User.Speed / 2, 0, MaxActionPoints.Modifiers);
         CurrentActionPoints = MaxActionPoints.Value();
     }
 

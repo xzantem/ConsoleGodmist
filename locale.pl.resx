@@ -1044,4 +1044,10 @@
   <data name="TalkTo" xml:space="preserve">
     <value>Porozmawiaj z</value>
   </data>
+  <data name="AcceptQuest" xml:space="preserve">
+    <value>Przyjmij zadanie</value>
+  </data>
+  <data name="ReturnQuest" xml:space="preserve">
+    <value>Oddaj zadanie</value>
+  </data>
 </root>

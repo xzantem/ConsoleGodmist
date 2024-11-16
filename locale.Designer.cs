@@ -60,6 +60,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept quest.
+        /// </summary>
+        internal static string AcceptQuest {
+            get {
+                return ResourceManager.GetString("AcceptQuest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accuracy.
         /// </summary>
         internal static string Accuracy {
@@ -2225,6 +2234,15 @@ namespace ConsoleGodmist {
         internal static string Return {
             get {
                 return ResourceManager.GetString("Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return quest.
+        /// </summary>
+        internal static string ReturnQuest {
+            get {
+                return ResourceManager.GetString("ReturnQuest", resourceCulture);
             }
         }
         

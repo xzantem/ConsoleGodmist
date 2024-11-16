@@ -14,6 +14,14 @@ public class KillQuestObjective : IQuestObjective
         $"{locale.Kill} {EnemyFactory.EnemiesList.Find(x => x.Alias == Target).Name} " +
         $"({QuestProgress/AmountToKill})";
 
+    public KillQuestObjective(string target, int amountToKill)
+    {
+        Target = target;
+        AmountToKill = amountToKill;
+        IsComplete = false;
+        QuestProgress = 0;
+    }
+
     public void Progress(QuestObjectiveContext context)
     {
         if (context.KillTarget != Target) return;

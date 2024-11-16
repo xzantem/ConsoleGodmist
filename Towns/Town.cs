@@ -61,7 +61,8 @@ namespace ConsoleGodmist.Town
                         break;
                     case 7: AnsiConsole.Write(PlayerHandler.player.Name + ", Poziom " + PlayerHandler.player.Level + " " + PlayerHandler.player.CharacterClass); break;
                     case 8: DataPersistanceManager.SaveGame(new SaveData(PlayerHandler.player, GameSettings.Difficulty, 
-                        MainQuestManager.Quests, this)); break;
+                        [QuestManager.MainQuests, QuestManager.RandomizedSideQuests, QuestManager.BossSideQuests]
+                        ,QuestManager.BossProgress, this)); break;
                     case 9: return;
                 }
             }
