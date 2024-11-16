@@ -1,13 +1,17 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Town;
 using ConsoleGodmist.Town.NPCs;
 using ConsoleGodmist.Utilities;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Quests;
 
 public class Quest
 {
+    [JsonIgnore]
     public string Name => NameAliasHelper.GetName(Alias);
+    [JsonIgnore]
     public string Description => NameAliasHelper.GetName(Alias + "Description");
     public string Alias { get; set; }
     public int RecommendedLevel { get; set; }
@@ -15,12 +19,27 @@ public class Quest
     public QuestReward QuestReward { get; set; }
     public QuestState QuestState { get; set; }
     public List<string> Prerequisites { get; set; }
-    public NPC QuestGiver { get; set; }
-    public NPC QuestEnder { get; set; }
+    public string QuestGiver { get; set; }
+    public string QuestEnder { get; set; }
     public List<string> AcceptDialogue { get; set; }
     public List<string> HandInDialogue { get; set; }
     
     public Quest() {}
+
+    public Quest(string alias, int level, List<QuestStage> stages, QuestReward questReward, string questGiver,
+        string acceptDialogue, string handInDialogue)
+    {
+        Alias = alias;
+        RecommendedLevel = level;
+        Stages = stages;
+        QuestReward = questReward;
+        QuestState = QuestState.Available;
+        Prerequisites = new List<string>();
+        QuestGiver = questGiver;
+        QuestEnder = questGiver;
+        AcceptDialogue = new List<string> { acceptDialogue };
+        HandInDialogue = new List<string> { handInDialogue };
+    }
 
     public void TryProgress(QuestObjectiveContext context)
     {
@@ -42,7 +61,7 @@ public class Quest
     {
         QuestState = QuestState.Accepted;
         foreach (var str in AcceptDialogue)
-            QuestGiver.Say(str);
+            TownsHandler.FindNPC(QuestGiver).Say(str);
     }
 
     public void TryCompleteQuest()
@@ -57,7 +76,7 @@ public class Quest
         GetRewards();
         QuestState = QuestState.HandedIn;
         foreach (var str in HandInDialogue)
-            QuestEnder.Say(str);
+            TownsHandler.FindNPC(QuestEnder).Say(str);
     }
 
     private void GetRewards()
@@ -66,7 +85,7 @@ public class Quest
         if (QuestReward.Gold != 0) player.GainGold(QuestReward.Gold);
         if (QuestReward.Experience != 0) player.GainExperience(QuestReward.Experience);
         if (QuestReward.Honor !=  0) player.GainHonor(QuestReward.Honor);
-        if (QuestReward.Items.Count <= 0) return;
+        if (QuestReward.Items.Count == 0) return;
         foreach (var item in QuestReward.Items)
             player.Inventory.AddItem(item.Key, item.Value);
     }

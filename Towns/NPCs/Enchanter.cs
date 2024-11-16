@@ -1,20 +1,26 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using Newtonsoft.Json;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town.NPCs;
 
 public class Enchanter : NPC
 {
-    public Enchanter()
+    public Enchanter(string alias)
     {
-        Alias = "Enchanter";
+        Alias = alias;
         Inventory = new NPCInventory([ItemType.Runeforging, ItemType.WeaponGaldurite, ItemType.ArmorGaldurite]);
         CraftableItems = ItemManager.CraftableIngredients.Where(x => x.ItemType == ItemType.Runeforging)
             .Cast<ICraftable>().ToList();
         LoyaltyLevel = 1;
         GoldSpent = 0;
+    }
+    [JsonConstructor]
+    public Enchanter()
+    {
+        Alias = "Enchanter";
     }
 
     public override void OpenMenu()

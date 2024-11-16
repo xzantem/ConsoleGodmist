@@ -1005,4 +1005,43 @@
   <data name="ChooseNextAction" xml:space="preserve">
     <value>Wybierz swoją następną akcję</value>
   </data>
+  <data name="Kill" xml:space="preserve">
+    <value>Zabij</value>
+  </data>
+  <data name="EnemiesIn" xml:space="preserve">
+    <value>przeciwników w</value>
+  </data>
+  <data name="CatacombsLocative" xml:space="preserve">
+    <value>Katakumbach</value>
+  </data>
+  <data name="ForestLocative" xml:space="preserve">
+    <value>Lesie</value>
+  </data>
+  <data name="ElvishRuinsLocative" xml:space="preserve">
+    <value>Elfickich Ruinach</value>
+  </data>
+  <data name="CoveLocative" xml:space="preserve">
+    <value>Zatoce</value>
+  </data>
+  <data name="DesertLocative" xml:space="preserve">
+    <value>Pustyni</value>
+  </data>
+  <data name="TempleLocative" xml:space="preserve">
+    <value>Świątyni</value>
+  </data>
+  <data name="MountainsLocative" xml:space="preserve">
+    <value>Górach</value>
+  </data>
+  <data name="SwampLocative" xml:space="preserve">
+    <value>Bagnie</value>
+  </data>
+  <data name="Descend" xml:space="preserve">
+    <value>Zejdź na </value>
+  </data>
+  <data name="FloorIn" xml:space="preserve">
+    <value>piętro w</value>
+  </data>
+  <data name="TalkTo" xml:space="preserve">
+    <value>Porozmawiaj z</value>
+  </data>
 </root>

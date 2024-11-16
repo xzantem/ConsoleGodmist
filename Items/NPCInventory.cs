@@ -1,13 +1,16 @@
 ﻿using ConsoleGodmist.Enums;
+using Newtonsoft.Json;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Items;
 
 public class NPCInventory
 {
-    public Dictionary<IItem, int> RotatingShop { get; private set; }
-    public Dictionary<IItem, int> BoughtFromPlayer { get; private set; }
-    public List<ItemType> PossibleWares { get; private set; }
+    [JsonConverter(typeof(ItemConverter))]
+    public Dictionary<IItem, int> RotatingShop { get; set; }
+    [JsonConverter(typeof(ItemConverter))]
+    public Dictionary<IItem, int> BoughtFromPlayer { get; set; }
+    public List<ItemType> PossibleWares { get; set; }
 
     public NPCInventory(List<ItemType> itemTypesInShop)
     {

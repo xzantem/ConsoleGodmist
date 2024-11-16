@@ -2,6 +2,7 @@ using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using ConsoleGodmist.TextService;
+using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
 using Spectre.Console;
 

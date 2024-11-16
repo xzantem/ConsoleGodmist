@@ -9,6 +9,8 @@ public class TalkQuestObjective : IQuestObjective
 
     public List<string> Dialogue { get; set; }
     public NPC NPCToTalkTo { get; set; }
+    public string Description => 
+        $"{locale.TalkTo} {NPCToTalkTo.Name}";
     public void Progress(QuestObjectiveContext context)
     {
         if (context.TalkTarget != NPCToTalkTo) return;

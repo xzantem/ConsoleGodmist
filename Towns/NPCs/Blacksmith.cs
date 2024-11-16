@@ -1,20 +1,26 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using Newtonsoft.Json;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town.NPCs;
 
 public class Blacksmith : NPC
 {
-    public Blacksmith()
+    public Blacksmith(string alias)
     {
-        Alias = "Blacksmith";
+        Alias = alias;
         Inventory = new NPCInventory([ItemType.Smithing, ItemType.Weapon, ItemType.Armor]);
         CraftableItems = ItemManager.CraftableIngredients.Where(x => x.ItemType == ItemType.Smithing)
             .Cast<ICraftable>().ToList();
         LoyaltyLevel = 1;
         GoldSpent = 0;
+    }
+    [JsonConstructor]
+    public Blacksmith()
+    {
+        Alias = "Blacksmith";
     }
 
     public override void OpenMenu()

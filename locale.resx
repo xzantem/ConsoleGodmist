@@ -1007,4 +1007,43 @@
   <data name="ChooseNextAction" xml:space="preserve">
     <value>Choose your next action</value>
   </data>
+  <data name="Kill" xml:space="preserve">
+    <value>Kill</value>
+  </data>
+  <data name="EnemiesIn" xml:space="preserve">
+    <value>enemies in the</value>
+  </data>
+  <data name="CatacombsLocative" xml:space="preserve">
+    <value>Catacombs</value>
+  </data>
+  <data name="ForestLocative" xml:space="preserve">
+    <value>Forest</value>
+  </data>
+  <data name="ElvishRuinsLocative" xml:space="preserve">
+    <value>Elvish Ruins</value>
+  </data>
+  <data name="CoveLocative" xml:space="preserve">
+    <value>Cove</value>
+  </data>
+  <data name="DesertLocative" xml:space="preserve">
+    <value>Desert</value>
+  </data>
+  <data name="TempleLocative" xml:space="preserve">
+    <value>Temple</value>
+  </data>
+  <data name="MountainsLocative" xml:space="preserve">
+    <value>Mountains</value>
+  </data>
+  <data name="SwampLocative" xml:space="preserve">
+    <value>Swamp</value>
+  </data>
+  <data name="Descend" xml:space="preserve">
+    <value>Descend onto the </value>
+  </data>
+  <data name="FloorIn" xml:space="preserve">
+    <value>floor in the</value>
+  </data>
+  <data name="TalkTo" xml:space="preserve">
+    <value>Talk to</value>
+  </data>
 </root>

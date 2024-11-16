@@ -339,6 +339,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Catacombs.
+        /// </summary>
+        internal static string CatacombsLocative {
+            get {
+                return ResourceManager.GetString("CatacombsLocative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change modifier.
         /// </summary>
         internal static string ChangeModifier {
@@ -542,6 +551,15 @@ namespace ConsoleGodmist {
         internal static string Cove {
             get {
                 return ResourceManager.GetString("Cove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cove.
+        /// </summary>
+        internal static string CoveLocative {
+            get {
+                return ResourceManager.GetString("CoveLocative", resourceCulture);
             }
         }
         
@@ -852,6 +870,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Descend onto the .
+        /// </summary>
+        internal static string Descend {
+            get {
+                return ResourceManager.GetString("Descend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Desert.
         /// </summary>
         internal static string Desert {
@@ -866,6 +893,15 @@ namespace ConsoleGodmist {
         internal static string DesertGem {
             get {
                 return ResourceManager.GetString("DesertGem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Desert.
+        /// </summary>
+        internal static string DesertLocative {
+            get {
+                return ResourceManager.GetString("DesertLocative", resourceCulture);
             }
         }
         
@@ -924,6 +960,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Elvish Ruins.
+        /// </summary>
+        internal static string ElvishRuinsLocative {
+            get {
+                return ResourceManager.GetString("ElvishRuinsLocative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enchanter.
         /// </summary>
         internal static string Enchanter {
@@ -947,6 +992,15 @@ namespace ConsoleGodmist {
         internal static string EndTurn {
             get {
                 return ResourceManager.GetString("EndTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to enemies in the.
+        /// </summary>
+        internal static string EnemiesIn {
+            get {
+                return ResourceManager.GetString("EnemiesIn", resourceCulture);
             }
         }
         
@@ -1077,11 +1131,29 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to floor in the.
+        /// </summary>
+        internal static string FloorIn {
+            get {
+                return ResourceManager.GetString("FloorIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forest.
         /// </summary>
         internal static string Forest {
             get {
                 return ResourceManager.GetString("Forest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forest.
+        /// </summary>
+        internal static string ForestLocative {
+            get {
+                return ResourceManager.GetString("ForestLocative", resourceCulture);
             }
         }
         
@@ -1437,6 +1509,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kill.
+        /// </summary>
+        internal static string Kill {
+            get {
+                return ResourceManager.GetString("Kill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Knight.
         /// </summary>
         internal static string Knight {
@@ -1631,6 +1712,15 @@ namespace ConsoleGodmist {
         internal static string Mountains {
             get {
                 return ResourceManager.GetString("Mountains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mountains.
+        /// </summary>
+        internal static string MountainsLocative {
+            get {
+                return ResourceManager.GetString("MountainsLocative", resourceCulture);
             }
         }
         
@@ -2436,6 +2526,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Swamp.
+        /// </summary>
+        internal static string SwampLocative {
+            get {
+                return ResourceManager.GetString("SwampLocative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sword &amp; Dagger.
         /// </summary>
         internal static string SwordAndDagger {
@@ -2454,11 +2553,29 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Talk to.
+        /// </summary>
+        internal static string TalkTo {
+            get {
+                return ResourceManager.GetString("TalkTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Temple.
         /// </summary>
         internal static string Temple {
             get {
                 return ResourceManager.GetString("Temple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temple.
+        /// </summary>
+        internal static string TempleLocative {
+            get {
+                return ResourceManager.GetString("TempleLocative", resourceCulture);
             }
         }
         

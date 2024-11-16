@@ -3,17 +3,20 @@ using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using ConsoleGodmist.TextService;
 using ConsoleGodmist.Utilities;
+using Newtonsoft.Json;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town.NPCs;
 
 public abstract class NPC
 {
+    [JsonIgnore]
     public string Alias { get; set; }
 
     public string Name => NameAliasHelper.GetName(Alias);
     
     public NPCInventory Inventory { get; set; }
+    [JsonIgnore]
     public List<ICraftable?> CraftableItems { get; set; }
      
     public int LoyaltyLevel { get; set; }

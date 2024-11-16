@@ -1,31 +1,40 @@
 ﻿using ConsoleGodmist.Characters;
-using ConsoleGodmist.Combat.Battles;
-using ConsoleGodmist.Combat.Modifiers;
-using ConsoleGodmist.Components;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items;
+using ConsoleGodmist.Quests;
 using ConsoleGodmist.TextService;
 using ConsoleGodmist.Town.NPCs;
+using ConsoleGodmist.Utilities;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town
 {
-    internal class Town
+    public class Town
     {
-        public Alchemist Alchemist { get; private set; } = new();
-        public Blacksmith Blacksmith { get; private set; } = new();
-        public Enchanter Enchanter { get; private set; } = new();
+        public List<NPC> NPCs { get; set; }
+        public string TownName { get; set; }
+
+        public Town(string name)
+        {
+            NPCs =
+            [
+                new Alchemist("Alchemist"),
+                new Blacksmith("Blacksmith"),
+                new Enchanter("Enchanter")
+            ];
+            TownName = name;
+        }
+        public Town() {}
 
         public void EnterTown()
         {
             while (true)
             {
                 //AnsiConsole.Clear();
-                AnsiConsole.Write(new FigletText("Arungard").Centered().Color(Color.Gold3_1));
+                AnsiConsole.Write(new FigletText(TownName).Centered().Color(Color.Gold3_1));
                 string[] choices =
                 [
-                    locale.StartExpedition, locale.Blacksmith, locale.Alchemist,
+                    locale.StartExpedition, locale.Alchemist, locale.Blacksmith,
                     locale.Enchanter, "Druid", locale.QuestLog,
                     locale.OpenInventory, locale.ShowCharacter, locale.SaveGame, locale.ExitToMenu
                 ];
@@ -39,19 +48,20 @@ namespace ConsoleGodmist.Town
                         DungeonMovementManager.TraverseDungeon();
                         break;
                     case 1:
-                        Blacksmith.OpenMenu();
+                        NPCs[0].OpenMenu();
                         break;
                     case 2:
-                        Alchemist.OpenMenu();
+                        NPCs[1].OpenMenu();
                         break;
                     case 3:
-                        Enchanter.OpenMenu();
+                        NPCs[2].OpenMenu();
                         break;
                     case 6:
                         InventoryMenuHandler.OpenInventoryMenu();
                         break;
                     case 7: AnsiConsole.Write(PlayerHandler.player.Name + ", Poziom " + PlayerHandler.player.Level + " " + PlayerHandler.player.CharacterClass); break;
-                    case 8: DataPersistanceManager.SaveGame(); break;
+                    case 8: DataPersistanceManager.SaveGame(new SaveData(PlayerHandler.player, GameSettings.Difficulty, 
+                        MainQuestManager.Quests, this)); break;
                     case 9: return;
                 }
             }

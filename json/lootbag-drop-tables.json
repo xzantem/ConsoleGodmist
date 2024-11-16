@@ -1,0 +1,2930 @@
+﻿{
+  "BonySupplyBag": {
+    "Table": [
+      {
+      "Pool": {
+        "WeakAlcohol": {
+          "MinAmount": 1,
+          "MaxAmount": 2,
+          "MinLevel": 1,
+          "MaxLevel": 10,
+          "Weight": 1
+        },
+        "Alcohol": {
+          "MinAmount": 1,
+          "MaxAmount": 2,
+          "MinLevel": 11,
+          "MaxLevel": 20,
+          "Weight": 1
+        },
+        "GoodAlcohol": {
+          "MinAmount": 1,
+          "MaxAmount": 2,
+          "MinLevel": 21,
+          "MaxLevel": 30,
+          "Weight": 1
+        },
+        "StrongAlcohol": {
+          "MinAmount": 1,
+          "MaxAmount": 2,
+          "MinLevel": 31,
+          "MaxLevel": 40,
+          "Weight": 1
+        },
+        "PerfectAlcohol": {
+          "MinAmount": 1,
+          "MaxAmount": 2,
+          "MinLevel": 41,
+          "MaxLevel": 50,
+          "Weight": 1
+        }
+      },
+      "Chances": [0.8]
+      },
+      {
+        "Pool": 
+          {
+            "IronOre": {
+              "MinAmount": 3,
+              "MaxAmount": 5,
+              "MinLevel": 1,
+              "MaxLevel": 20,
+              "Weight": 1
+            },
+            "SilverOre": {
+              "Weight": 1,
+              "MinAmount": 3,
+              "MaxAmount": 5,
+              "MinLevel": 21,
+              "MaxLevel": 40
+            },
+            "AdamantiteOre": {
+              "Weight": 1,
+              "MinAmount": 3,
+              "MaxAmount": 5,
+              "MinLevel": 41,
+              "MaxLevel": 50
+            },
+            "GoatSkin": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 1,
+              "MaxLevel": 10
+            },
+            "DeerSkin": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 11,
+              "MaxLevel": 20
+            },
+            "TrollSkin": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 21,
+              "MaxLevel": 30
+            },
+            "WolfSkin": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 31,
+              "MaxLevel": 40
+            },
+            "HellhoundSkin": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 41,
+              "MaxLevel": 50
+            },
+            "LarchWood": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 1,
+              "MaxLevel": 10
+            },
+            "BirchWood": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 11,
+              "MaxLevel": 20
+            },
+            "ElmWood": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 21,
+              "MaxLevel": 30
+            },
+            "OakWood": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 31,
+              "MaxLevel": 40
+            },
+            "BlackOakWood": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 41,
+              "MaxLevel": 50
+            },
+            "CottonFiber": {
+              "Weight": 1,
+              "MinAmount": 3,
+              "MaxAmount": 4,
+              "MinLevel": 1,
+              "MaxLevel": 10
+            },
+            "PalmFiber": {
+              "Weight": 1,
+              "MinAmount": 3,
+              "MaxAmount": 4,
+              "MinLevel": 11,
+              "MaxLevel": 20
+            },
+            "SilverclawFiber": {
+              "Weight": 1,
+              "MinAmount": 3,
+              "MaxAmount": 4,
+              "MinLevel": 21,
+              "MaxLevel": 30
+            },
+            "HempFiber": {
+              "Weight": 1,
+              "MinAmount": 3,
+              "MaxAmount": 4,
+              "MinLevel": 31,
+              "MaxLevel": 40
+            },
+            "SilkFiber": {
+              "Weight": 1,
+              "MinAmount": 3,
+              "MaxAmount": 4,
+              "MinLevel": 41,
+              "MaxLevel": 50
+            },
+            "RedEnergyDust": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 1,
+              "MaxLevel": 10
+            },
+            "YellowEnergyDust": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 11,
+              "MaxLevel": 20
+            },
+            "GreenEnergyDust": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 21,
+              "MaxLevel": 30
+            },
+            "BlueEnergyDust": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 31,
+              "MaxLevel": 40
+            },
+            "PurpleEnergyDust": {
+              "Weight": 1,
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 41,
+              "MaxLevel": 50
+            }
+          },
+        "Chances": [1, 0.7, 0.3]
+      },
+      {
+        "Pool":
+        {
+            "Coal": {
+              "MinAmount": 2,
+              "MaxAmount": 3,
+              "MinLevel": 11,
+              "MaxLevel": 30,
+              "Weight": 1
+            },
+            "Moondust": {
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 31,
+              "MaxLevel": 50,
+              "Weight": 1
+            }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool": 
+          {
+            "Puffball": {
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 1,
+              "MaxLevel": 20,
+              "Weight": 1
+            },
+            "DaddyLonglegs": {
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 1,
+              "MaxLevel": 20,
+              "Weight": 1
+            },
+            "DwarvenMoss": {
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 21,
+              "MaxLevel": 40,
+              "Weight": 1
+            },
+            "Swordshrub": {
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 21,
+              "MaxLevel": 40,
+              "Weight": 1
+            },
+            "BlackWidow": {
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 41,
+              "MaxLevel": 50,
+              "Weight": 1
+            },
+            "Cavortius": {
+              "MinAmount": 1,
+              "MaxAmount": 3,
+              "MinLevel": 41,
+              "MaxLevel": 50,
+              "Weight": 1
+            }
+          },
+        "Chances": [1, 0.4]
+      },
+      {
+        "Pool": 
+          {
+            "SolidLimestone": {
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 11,
+              "MaxLevel": 20,
+              "Weight": 1
+            },
+            "SolidGranite": {
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 21,
+              "MaxLevel": 40,
+              "Weight": 1
+            },
+            "SolidMarble": {
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 41,
+              "MaxLevel": 50,
+              "Weight": 1
+            }
+          },
+        "Chances": [0.3]
+      },
+      {
+        "Pool": 
+          {
+            "Garnet": {
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 11,
+              "MaxLevel": 50,
+              "Weight": 1
+            },
+            "Amber": {
+              "MinAmount": 1,
+              "MaxAmount": 1,
+              "MinLevel": 11,
+              "MaxLevel": 50,
+              "Weight": 1
+            }
+          },
+        "Chances": [0.15]
+      },
+      {
+        "Pool": 
+          {
+            "SkeletonBone": {
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 1,
+              "MaxLevel": 50,
+              "Weight": 1
+            },
+            "UndeadBrain": {
+              "MinAmount": 1,
+              "MaxAmount": 2,
+              "MinLevel": 1,
+              "MaxLevel": 50,
+              "Weight": 1
+            }
+          },
+        "Chances": [0.4]
+      },
+      {
+        "Pool": 
+          {
+            "Ectoplasm": {
+              "MinAmount": 1,
+              "MaxAmount": 1,
+              "MinLevel": 21,
+              "MaxLevel": 50,
+              "Weight": 1
+            },
+            "GhoulClaw": {
+              "MinAmount": 1,
+              "MaxAmount": 1,
+              "MinLevel": 21,
+              "MaxLevel": 50,
+              "Weight": 1
+            }
+          },
+        "Chances": [0.3]
+      }
+    ]
+  },
+  "LeafySupplyBag": {
+    "Table": [
+      {
+        "Pool": {
+          "WeakAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10,
+            "Weight": 1
+          },
+          "Alcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "GoodAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "StrongAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "PerfectAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "IronOre": {
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SilverOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 21,
+            "MaxLevel": 40
+          },
+          "AdamantiteOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "GoatSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "DeerSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "TrollSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "WolfSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "HellhoundSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "LarchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "BirchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "ElmWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "OakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "BlackOakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "CottonFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "PalmFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "SilverclawFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "HempFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "SilkFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "RedEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "YellowEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "GreenEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "BlueEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "PurpleEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          }
+        },
+        "Chances": [1, 0.7, 0.3]
+      },
+      {
+        "Pool":
+        {
+          "Coal": {
+            "MinAmount": 2,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "Moondust": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "Puffball": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DaddyLonglegs": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DwarvenMoss": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "Swordshrub": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "BlackWidow": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Cavortius": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [1, 0.4]
+      },
+      {
+        "Pool":
+        {
+          "SolidLimestone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SolidGranite": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "SolidMarble": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      },
+      {
+        "Pool":
+        {
+          "Garnet": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Amber": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.15]
+      },
+      {
+        "Pool":
+        {
+          "SkeletonBone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "UndeadBrain": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.4]
+      },
+      {
+        "Pool":
+        {
+          "Ectoplasm": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "GhoulClaw": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      }
+    ]
+  },
+  "DemonicSupplyBag": {
+    "Table": [
+      {
+        "Pool": {
+          "WeakAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10,
+            "Weight": 1
+          },
+          "Alcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "GoodAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "StrongAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "PerfectAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "IronOre": {
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SilverOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 21,
+            "MaxLevel": 40
+          },
+          "AdamantiteOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "GoatSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "DeerSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "TrollSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "WolfSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "HellhoundSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "LarchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "BirchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "ElmWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "OakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "BlackOakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "CottonFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "PalmFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "SilverclawFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "HempFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "SilkFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "RedEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "YellowEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "GreenEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "BlueEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "PurpleEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          }
+        },
+        "Chances": [1, 0.7, 0.3]
+      },
+      {
+        "Pool":
+        {
+          "Coal": {
+            "MinAmount": 2,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "Moondust": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "Puffball": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DaddyLonglegs": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DwarvenMoss": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "Swordshrub": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "BlackWidow": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Cavortius": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [1, 0.4]
+      },
+      {
+        "Pool":
+        {
+          "SolidLimestone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SolidGranite": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "SolidMarble": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      },
+      {
+        "Pool":
+        {
+          "Garnet": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Amber": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.15]
+      },
+      {
+        "Pool":
+        {
+          "SkeletonBone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "UndeadBrain": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.4]
+      },
+      {
+        "Pool":
+        {
+          "Ectoplasm": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "GhoulClaw": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      }
+    ]
+  },
+  "PirateSupplyBag": {
+    "Table": [
+      {
+        "Pool": {
+          "WeakAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10,
+            "Weight": 1
+          },
+          "Alcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "GoodAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "StrongAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "PerfectAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "IronOre": {
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SilverOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 21,
+            "MaxLevel": 40
+          },
+          "AdamantiteOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "GoatSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "DeerSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "TrollSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "WolfSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "HellhoundSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "LarchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "BirchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "ElmWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "OakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "BlackOakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "CottonFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "PalmFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "SilverclawFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "HempFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "SilkFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "RedEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "YellowEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "GreenEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "BlueEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "PurpleEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          }
+        },
+        "Chances": [1, 0.7, 0.3]
+      },
+      {
+        "Pool":
+        {
+          "Coal": {
+            "MinAmount": 2,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "Moondust": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "Puffball": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DaddyLonglegs": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DwarvenMoss": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "Swordshrub": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "BlackWidow": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Cavortius": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [1, 0.4]
+      },
+      {
+        "Pool":
+        {
+          "SolidLimestone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SolidGranite": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "SolidMarble": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      },
+      {
+        "Pool":
+        {
+          "Garnet": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Amber": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.15]
+      },
+      {
+        "Pool":
+        {
+          "SkeletonBone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "UndeadBrain": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.4]
+      },
+      {
+        "Pool":
+        {
+          "Ectoplasm": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "GhoulClaw": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      }
+    ]
+  },
+  "SandySupplyBag": {
+    "Table": [
+      {
+        "Pool": {
+          "WeakAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10,
+            "Weight": 1
+          },
+          "Alcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "GoodAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "StrongAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "PerfectAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "IronOre": {
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SilverOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 21,
+            "MaxLevel": 40
+          },
+          "AdamantiteOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "GoatSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "DeerSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "TrollSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "WolfSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "HellhoundSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "LarchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "BirchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "ElmWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "OakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "BlackOakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "CottonFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "PalmFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "SilverclawFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "HempFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "SilkFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "RedEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "YellowEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "GreenEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "BlueEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "PurpleEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          }
+        },
+        "Chances": [1, 0.7, 0.3]
+      },
+      {
+        "Pool":
+        {
+          "Coal": {
+            "MinAmount": 2,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "Moondust": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "Puffball": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DaddyLonglegs": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DwarvenMoss": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "Swordshrub": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "BlackWidow": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Cavortius": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [1, 0.4]
+      },
+      {
+        "Pool":
+        {
+          "SolidLimestone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SolidGranite": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "SolidMarble": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      },
+      {
+        "Pool":
+        {
+          "Garnet": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Amber": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.15]
+      },
+      {
+        "Pool":
+        {
+          "SkeletonBone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "UndeadBrain": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.4]
+      },
+      {
+        "Pool":
+        {
+          "Ectoplasm": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "GhoulClaw": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      }
+    ]
+  },
+  "TempleSupplyBag": {
+    "Table": [
+      {
+        "Pool": {
+          "WeakAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10,
+            "Weight": 1
+          },
+          "Alcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "GoodAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "StrongAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "PerfectAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "IronOre": {
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SilverOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 21,
+            "MaxLevel": 40
+          },
+          "AdamantiteOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "GoatSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "DeerSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "TrollSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "WolfSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "HellhoundSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "LarchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "BirchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "ElmWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "OakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "BlackOakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "CottonFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "PalmFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "SilverclawFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "HempFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "SilkFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "RedEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "YellowEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "GreenEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "BlueEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "PurpleEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          }
+        },
+        "Chances": [1, 0.7, 0.3]
+      },
+      {
+        "Pool":
+        {
+          "Coal": {
+            "MinAmount": 2,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "Moondust": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "Puffball": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DaddyLonglegs": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DwarvenMoss": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "Swordshrub": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "BlackWidow": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Cavortius": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [1, 0.4]
+      },
+      {
+        "Pool":
+        {
+          "SolidLimestone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SolidGranite": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "SolidMarble": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      },
+      {
+        "Pool":
+        {
+          "Garnet": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Amber": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.15]
+      },
+      {
+        "Pool":
+        {
+          "SkeletonBone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "UndeadBrain": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.4]
+      },
+      {
+        "Pool":
+        {
+          "Ectoplasm": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "GhoulClaw": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      }
+    ]
+  },
+  "MountainousSupplyBag": {
+    "Table": [
+      {
+        "Pool": {
+          "WeakAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10,
+            "Weight": 1
+          },
+          "Alcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "GoodAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "StrongAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "PerfectAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "IronOre": {
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SilverOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 21,
+            "MaxLevel": 40
+          },
+          "AdamantiteOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "GoatSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "DeerSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "TrollSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "WolfSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "HellhoundSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "LarchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "BirchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "ElmWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "OakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "BlackOakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "CottonFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "PalmFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "SilverclawFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "HempFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "SilkFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "RedEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "YellowEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "GreenEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "BlueEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "PurpleEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          }
+        },
+        "Chances": [1, 0.7, 0.3]
+      },
+      {
+        "Pool":
+        {
+          "Coal": {
+            "MinAmount": 2,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "Moondust": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "Puffball": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DaddyLonglegs": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DwarvenMoss": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "Swordshrub": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "BlackWidow": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Cavortius": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [1, 0.4]
+      },
+      {
+        "Pool":
+        {
+          "SolidLimestone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SolidGranite": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "SolidMarble": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      },
+      {
+        "Pool":
+        {
+          "Garnet": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Amber": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.15]
+      },
+      {
+        "Pool":
+        {
+          "SkeletonBone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "UndeadBrain": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.4]
+      },
+      {
+        "Pool":
+        {
+          "Ectoplasm": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "GhoulClaw": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      }
+    ]
+  },
+  "MurkySupplyBag": {
+    "Table": [
+      {
+        "Pool": {
+          "WeakAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10,
+            "Weight": 1
+          },
+          "Alcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "GoodAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "StrongAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "PerfectAlcohol": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "IronOre": {
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SilverOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 21,
+            "MaxLevel": 40
+          },
+          "AdamantiteOre": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 5,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "GoatSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "DeerSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "TrollSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "WolfSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "HellhoundSkin": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "LarchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "BirchWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "ElmWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "OakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "BlackOakWood": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "CottonFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "PalmFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "SilverclawFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "HempFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "SilkFiber": {
+            "Weight": 1,
+            "MinAmount": 3,
+            "MaxAmount": 4,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          },
+          "RedEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 10
+          },
+          "YellowEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20
+          },
+          "GreenEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 30
+          },
+          "BlueEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 40
+          },
+          "PurpleEnergyDust": {
+            "Weight": 1,
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50
+          }
+        },
+        "Chances": [1, 0.7, 0.3]
+      },
+      {
+        "Pool":
+        {
+          "Coal": {
+            "MinAmount": 2,
+            "MaxAmount": 3,
+            "MinLevel": 11,
+            "MaxLevel": 30,
+            "Weight": 1
+          },
+          "Moondust": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 31,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.8]
+      },
+      {
+        "Pool":
+        {
+          "Puffball": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DaddyLonglegs": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 1,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "DwarvenMoss": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "Swordshrub": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "BlackWidow": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Cavortius": {
+            "MinAmount": 1,
+            "MaxAmount": 3,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [1, 0.4]
+      },
+      {
+        "Pool":
+        {
+          "SolidLimestone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 20,
+            "Weight": 1
+          },
+          "SolidGranite": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 21,
+            "MaxLevel": 40,
+            "Weight": 1
+          },
+          "SolidMarble": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 41,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      },
+      {
+        "Pool":
+        {
+          "Garnet": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "Amber": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 11,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.15]
+      },
+      {
+        "Pool":
+        {
+          "SkeletonBone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "UndeadBrain": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.4]
+      },
+      {
+        "Pool":
+        {
+          "Ectoplasm": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          },
+          "GhoulClaw": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 21,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.3]
+      }
+    ]
+  }
+}

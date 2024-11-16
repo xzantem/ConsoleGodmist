@@ -1,6 +1,6 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Battles;
-using ConsoleGodmist.Components;
+using ConsoleGodmist.Utilities;
 
 namespace ConsoleGodmist.Dungeons;
 using Enums;

@@ -24,6 +24,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>locale.resx</DependentUpon>
     </Compile>
+    <Compile Remove="Utilities\DataPersistance\IDataPersistent.cs" />
+    <Compile Remove="Quests\Objectives\ActivateQuestObjective.cs" />
+    <Compile Remove="Quests\Objectives\CollectQuestObjective.cs" />
+    <Compile Remove="Quests\Objectives\GiveItemQuestObjective.cs" />
   </ItemGroup>
 
   <ItemGroup>

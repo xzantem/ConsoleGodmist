@@ -4,8 +4,8 @@
     "EnemyType": 0,
     "DefaultLocation": 0,
     "_maximalHealth": { "BaseValue": 350, "ScalingFactor": 23 },
-    "_minimalAttack": { "BaseValue": 42, "ScalingFactor": 2.73 },
-    "_maximalAttack": { "BaseValue": 64, "ScalingFactor": 4.16 },
+    "_minimalAttack": { "BaseValue": 21, "ScalingFactor": 2.73 },
+    "_maximalAttack": { "BaseValue": 32, "ScalingFactor": 4.16 },
     "_dodge": { "BaseValue": 15, "ScalingFactor": 0.1125 },
     "_physicalDefense": { "BaseValue": 10, "ScalingFactor": 2 },
     "_magicDefense": { "BaseValue": 4, "ScalingFactor": 0.8 },
@@ -13,8 +13,9 @@
     "_speed": { "BaseValue": 44, "ScalingFactor": 0 },
     "_accuracy": { "BaseValue": 80, "ScalingFactor": 0 },
     "_critMod": { "BaseValue": 2, "ScalingFactor": 0 },
+    "_damageDealt": { "BaseValue": 1, "ScalingFactor": 0 },
+    "_damageTaken": { "BaseValue": 1, "ScalingFactor": 0 },
     "Resistances": {
-      "Buff": { "BaseValue": 0.5, "ScalingFactor": 0 },
       "Debuff": { "BaseValue": 0.35, "ScalingFactor": 0 },
       "Bleed": { "BaseValue": 1, "ScalingFactor": 0 },
       "Poison": { "BaseValue": 0.2, "ScalingFactor": 0 },
@@ -22,22 +23,23 @@
       "Stun": { "BaseValue": 0.25, "ScalingFactor": 0 },
       "Freeze": { "BaseValue": 0.25, "ScalingFactor": 0 },
       "Frostbite": { "BaseValue": 0.25, "ScalingFactor": 0 },
-      "Sleep": { "BaseValue": 0.5, "ScalingFactor": 0 },
-      "Invisible": { "BaseValue": 0.5, "ScalingFactor": 0 },
-      "Paralysis": { "BaseValue": 0.5, "ScalingFactor": 0 },
-      "Provocation": { "BaseValue": 0.5, "ScalingFactor": 0 },
-      "Shield": { "BaseValue": 0.5, "ScalingFactor": 0 }
+      "Sleep": { "BaseValue": 0.25, "ScalingFactor": 0 },
+      "Paralysis": { "BaseValue": 0.25, "ScalingFactor": 0 },
+      "Provocation": { "BaseValue": 0.35, "ScalingFactor": 0 }
     },
     "ResourceType": "Fury",
     "_maximalResource": { "BaseValue": 50, "ScalingFactor": 0},
+    "_resourceRegen": { "BaseValue": 0, "ScalingFactor": 0},
     "ActiveSkills": 
     [
       {
-      "Alias": "BoneSword",
-      "ResourceCost": 0,
-      "AlwaysHits": false,
-      "Accuracy": 79,
-      "Effects": [
+        "Alias": "BoneSword",
+        "ResourceCost": 0,
+        "ActionCost": 0.6,
+        "AlwaysHits": false,
+        "Accuracy": 79, 
+        "Hits": 1, 
+        "Effects": [
         {
           "Type" : "DealDamage",
           "Target": 1,
@@ -46,15 +48,24 @@
           "DamageMultiplier": 1,
           "DamageInstances": 1,
           "CanCrit": true,
-          "AlwaysCrits": false
+          "AlwaysCrits": false,
+          "LifeSteal": 0
+        },
+        {
+          "Type" : "RegenResource",
+          "Target": 0,
+          "RegenAmount": 10,
+          "RegenBase": 0
         }
-      ]
+        ]
       },
       {
         "Alias": "CrossStrike",
         "ResourceCost": 30,
+        "ActionCost": 0.6,
         "AlwaysHits": false,
         "Accuracy": 72,
+        "Hits": 2,
         "Effects": [
           {
             "Type" : "DealDamage",
@@ -62,9 +73,9 @@
             "DamageType": 0,
             "DamageBase": 1,
             "DamageMultiplier": 0.6,
-            "DamageInstances": 2,
             "CanCrit": true,
-            "AlwaysCrits": false
+            "AlwaysCrits": false,
+            "LifeSteal": 0
           },
           {
             "Type" : "InflictDoTStatusEffect",
@@ -76,29 +87,317 @@
             "Chance": 0.85
           }
         ]
+      },
+      {
+        "Alias": "BoneZeal",
+        "ResourceCost": 15,
+        "ActionCost": 0.3,
+        "AlwaysHits": true,
+        "Accuracy": 100,
+        "Hits": 1,
+        "Effects": [
+          {
+            "Type" : "BuffStat",
+            "StatToBuff": 10,
+            "Target": 0,
+            "ModifierType": 2,
+            "BuffStrength": 0.15,
+            "BuffChance": 1,
+            "BuffDuration": 2
+          },
+          {
+            "Type" : "BuffStat",
+            "StatToBuff": 7,
+            "Target": 0,
+            "ModifierType": 1,
+            "BuffStrength": 15,
+            "BuffChance": 1,
+            "BuffDuration": 2
+          }
+        ]
       }
     ],
     "DropTable": {
       "Table": 
           [{
             "Pool": {
-              "Puffball": {
+              "SkeletonBone": {
                 "MinAmount": 1,
-                "MaxAmount": 1,
+                "MaxAmount": 2,
                 "MinLevel": 1,
                 "MaxLevel": 50,
                 "Weight": 1
-              },
-              "DaddyLonglegs": {
-                "Weight": 1,
-                "MinAmount": 1,
-                "MaxAmount": 1,
-                "MinLevel": 1,
-                "MaxLevel": 50
               }
             },
-            "Chances": [1, 0.7, 0.3]
+            "Chances": [0.35]
           }]
       }
+  },
+  {
+    "Alias": "Goner",
+    "EnemyType": 0,
+    "DefaultLocation": 0,
+    "_maximalHealth": { "BaseValue": 500, "ScalingFactor": 33 },
+    "_minimalAttack": { "BaseValue": 15, "ScalingFactor": 1.95 },
+    "_maximalAttack": { "BaseValue": 24, "ScalingFactor": 3.12 },
+    "_dodge": { "BaseValue": 4, "ScalingFactor": 0.03 },
+    "_physicalDefense": { "BaseValue": 13, "ScalingFactor": 2.6 },
+    "_magicDefense": { "BaseValue": 11, "ScalingFactor": 2.2 },
+    "_critChance": { "BaseValue": 0.09, "ScalingFactor": 0.000225 },
+    "_speed": { "BaseValue": 32, "ScalingFactor": 0 },
+    "_accuracy": { "BaseValue": 80, "ScalingFactor": 0 },
+    "_critMod": { "BaseValue": 1.7, "ScalingFactor": 0 },
+    "_damageDealt": { "BaseValue": 1, "ScalingFactor": 0 },
+    "_damageTaken": { "BaseValue": 1, "ScalingFactor": 0 },
+    "Resistances": {
+      "Debuff": { "BaseValue": 0.5, "ScalingFactor": 0 },
+      "Bleed": { "BaseValue": 0.65, "ScalingFactor": 0 },
+      "Poison": { "BaseValue": 0.6, "ScalingFactor": 0 },
+      "Burn": { "BaseValue": 0.1, "ScalingFactor": 0 },
+      "Stun": { "BaseValue": 0.4, "ScalingFactor": 0 },
+      "Freeze": { "BaseValue": 0.4, "ScalingFactor": 0 },
+      "Frostbite": { "BaseValue": 0.4, "ScalingFactor": 0 },
+      "Sleep": { "BaseValue": 0.4, "ScalingFactor": 0 },
+      "Paralysis": { "BaseValue": 0.4, "ScalingFactor": 0 },
+      "Provocation": { "BaseValue": 0.4, "ScalingFactor": 0 }
+    },
+    "ResourceType": "Fury",
+    "_maximalResource": { "BaseValue": 50, "ScalingFactor": 0},
+    "_resourceRegen": { "BaseValue": 0, "ScalingFactor": 0},
+    "ActiveSkills":
+    [
+      {
+        "Alias": "ManicBite",
+        "ResourceCost": 0,
+        "ActionCost": 0.65,
+        "AlwaysHits": false,
+        "Accuracy": 69,
+        "Hits": 1,
+        "Effects": [
+          {
+            "Type" : "DealDamage",
+            "Target": 1,
+            "DamageType": 0,
+            "DamageBase": 1,
+            "DamageMultiplier": 1,
+            "DamageInstances": 1,
+            "CanCrit": true,
+            "AlwaysCrits": false,
+            "LifeSteal": 0.5
+          },
+          {
+            "Type" : "InflictDoTStatusEffect",
+            "Target": 1,
+            "Duration": 2,
+            "Strength": 0.3,
+            "Source": "ManicBite",
+            "DoTType": "Bleed",
+            "Chance": 0.8
+          },
+          {
+            "Type" : "RegenResource",
+            "Target": 0,
+            "RegenAmount": 10,
+            "RegenBase": 0
+          }
+        ]
+      },
+      {
+        "Alias": "Vomit",
+        "ResourceCost": 25,
+        "ActionCost": 0.6,
+        "AlwaysHits": false,
+        "Accuracy": 78,
+        "Hits": 1,
+        "Effects": [
+          {
+            "Type" : "InflictDoTStatusEffect",
+            "Target": 1,
+            "Duration": 3,
+            "Strength": 0.75,
+            "Source": "Vomit",
+            "DoTType": "Poison",
+            "Chance": 0.9
+          },
+          {
+            "Type" : "DebuffStat",
+            "Target": 1,
+            "StatToDebuff": 7,
+            "ModifierType": 1,
+            "DebuffStrength": 8,
+            "DebuffChance": 0.75,
+            "DebuffDuration": 3
+          }
+        ]
+      },
+      {
+        "Alias": "SmellOfBlood",
+        "ResourceCost": 15,
+        "ActionCost": 0.35,
+        "AlwaysHits": false,
+        "Accuracy": 100,
+        "Hits": 1,
+        "Effects": [
+          {
+            "Type" : "BuffStat",
+            "StatToBuff": 7,
+            "Target": 0,
+            "ModifierType": 1,
+            "BuffStrength": 15,
+            "BuffChance": 1,
+            "BuffDuration": 2
+          }
+        ]
+      }
+    ],
+    "DropTable": {
+      "Table":
+      [{
+        "Pool": {
+          "UndeadBrain": {
+            "MinAmount": 1,
+            "MaxAmount": 1,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [1.0]
+      }]
     }
+  },
+  {
+    "Alias": "InfectedTree",
+    "EnemyType": 0,
+    "DefaultLocation": 1,
+    "_maximalHealth": { "BaseValue": 450, "ScalingFactor": 30 },
+    "_minimalAttack": { "BaseValue": 30, "ScalingFactor": 1.95 },
+    "_maximalAttack": { "BaseValue": 35, "ScalingFactor": 2.28 },
+    "_dodge": { "BaseValue": 11, "ScalingFactor": 0.0825 },
+    "_physicalDefense": { "BaseValue": 12, "ScalingFactor": 2.4 },
+    "_magicDefense": { "BaseValue": 15, "ScalingFactor": 3 },
+    "_critChance": { "BaseValue": 0.06, "ScalingFactor": 0.00015 },
+    "_speed": { "BaseValue": 30, "ScalingFactor": 0 },
+    "_accuracy": { "BaseValue": 80, "ScalingFactor": 0 },
+    "_critMod": { "BaseValue": 1.6, "ScalingFactor": 0 },
+    "_damageDealt": { "BaseValue": 1, "ScalingFactor": 0 },
+    "_damageTaken": { "BaseValue": 1, "ScalingFactor": 0 },
+    "Resistances": {
+      "Debuff": { "BaseValue": 0.45, "ScalingFactor": 0 },
+      "Bleed": { "BaseValue": 1, "ScalingFactor": 0 },
+      "Poison": { "BaseValue": 0.7, "ScalingFactor": 0 },
+      "Burn": { "BaseValue": 0.1, "ScalingFactor": 0 },
+      "Stun": { "BaseValue": 0.55, "ScalingFactor": 0 },
+      "Freeze": { "BaseValue": 0.55, "ScalingFactor": 0 },
+      "Frostbite": { "BaseValue": 0.55, "ScalingFactor": 0 },
+      "Sleep": { "BaseValue": 0.55, "ScalingFactor": 0 },
+      "Paralysis": { "BaseValue": 0.55, "ScalingFactor": 0 },
+      "Provocation": { "BaseValue": 0.45, "ScalingFactor": 0 }
+    },
+    "ResourceType": "Mana",
+    "_maximalResource": { "BaseValue": 150, "ScalingFactor": 0},
+    "_resourceRegen": { "BaseValue": 15, "ScalingFactor": 0},
+    "ActiveSkills":
+    [
+      {
+        "Alias": "BoneSword",
+        "ResourceCost": 0,
+        "ActionCost": 0.7,
+        "AlwaysHits": false,
+        "Accuracy": 79,
+        "Hits": 1,
+        "Effects": [
+          {
+            "Type" : "DealDamage",
+            "Target": 1,
+            "DamageType": 0,
+            "DamageBase": 1,
+            "DamageMultiplier": 1,
+            "DamageInstances": 1,
+            "CanCrit": true,
+            "AlwaysCrits": false,
+            "LifeSteal": 0
+          },
+          {
+            "Type" : "RegenResource",
+            "Target": 0,
+            "RegenAmount": 10,
+            "RegenBase": 0
+          }
+        ]
+      },
+      {
+        "Alias": "CrossStrike",
+        "ResourceCost": 30,
+        "ActionCost": 0.65,
+        "AlwaysHits": false,
+        "Accuracy": 72,
+        "Hits": 2,
+        "Effects": [
+          {
+            "Type" : "DealDamage",
+            "Target": 1,
+            "DamageType": 0,
+            "DamageBase": 1,
+            "DamageMultiplier": 0.6,
+            "CanCrit": true,
+            "AlwaysCrits": false,
+            "LifeSteal": 0
+          },
+          {
+            "Type" : "InflictDoTStatusEffect",
+            "Target": 1,
+            "Duration": 3,
+            "Strength": 0.6,
+            "Source": "CrossStrike",
+            "DoTType": "Bleed",
+            "Chance": 0.85
+          }
+        ]
+      },
+      {
+        "Alias": "BoneZeal",
+        "ResourceCost": 15,
+        "ActionCost": 0.3,
+        "AlwaysHits": true,
+        "Accuracy": 100,
+        "Hits": 1,
+        "Effects": [
+          {
+            "Type" : "BuffStat",
+            "StatToBuff": 10,
+            "Target": 0,
+            "ModifierType": 2,
+            "BuffStrength": 0.15,
+            "BuffChance": 1,
+            "BuffDuration": 2
+          },
+          {
+            "Type" : "BuffStat",
+            "StatToBuff": 7,
+            "Target": 0,
+            "ModifierType": 1,
+            "BuffStrength": 15,
+            "BuffChance": 1,
+            "BuffDuration": 2
+          }
+        ]
+      }
+    ],
+    "DropTable": {
+      "Table":
+      [{
+        "Pool": {
+          "SkeletonBone": {
+            "MinAmount": 1,
+            "MaxAmount": 2,
+            "MinLevel": 1,
+            "MaxLevel": 50,
+            "Weight": 1
+          }
+        },
+        "Chances": [0.35]
+      }]
+    }
+  }
 ]

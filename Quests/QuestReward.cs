@@ -10,4 +10,12 @@ public class QuestReward
     public Dictionary<IItem, int> Items { get; set; }
     
     public QuestReward() {}
+
+    public QuestReward(int gold, int experience, int honor, Dictionary<IItem, int> items)
+    {
+        Gold = gold;
+        Experience = experience;
+        Honor = honor;
+        Items = items;
+    }
 }

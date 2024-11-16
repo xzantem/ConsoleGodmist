@@ -1,11 +1,10 @@
 using Spectre.Console;
-using System.Threading;
 using System.Globalization;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Characters;
-using ConsoleGodmist.Items;
+using ConsoleGodmist.Town;
 
-namespace ConsoleGodmist.Components
+namespace ConsoleGodmist.Utilities
 {
     internal static class MainMenu
     {
@@ -52,8 +51,9 @@ namespace ConsoleGodmist.Components
             };
         }
 
-        private static async void NewGame()
+        private static void NewGame()
         {
+            TownsHandler.Arungard = new Town.Town("Arungard");
             string[] choices = [$"{locale.Easy} (50%)", $"{locale.Normal} (100%)", $"{locale.Hard} (150%)", $"{locale.Nightmare} (200%)"
             ];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()

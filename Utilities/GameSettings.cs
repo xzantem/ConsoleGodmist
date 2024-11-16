@@ -1,6 +1,6 @@
 ﻿using ConsoleGodmist.Enums;
 
-namespace ConsoleGodmist.Components;
+namespace ConsoleGodmist.Utilities;
 
 public static class GameSettings
 {
