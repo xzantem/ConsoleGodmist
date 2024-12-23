@@ -30,6 +30,7 @@ public class Weapon : BaseItem, IEquippable
     public Quality Quality { get; set; }
     public double UpgradeModifier { get; set; }
     public List<Galdurite> Galdurites { get; set; }
+    public int GalduriteSlots => (int)((UpgradeModifier - 1) / 0.2);
 
     //Weapon implementations
     
@@ -171,25 +172,34 @@ public class Weapon : BaseItem, IEquippable
         }
     }
 
-    public Weapon(WeaponHead head, WeaponBinder binder, WeaponHandle handle, CharacterClass requiredClass, Quality quality)
+    public Weapon(WeaponHead head, WeaponBinder binder, WeaponHandle handle, CharacterClass requiredClass, Quality quality, string alias = "")
     {
         Head = head;
         Binder = binder;
         Handle = handle;
-        Name = NameAliasHelper.GetName(Head.Adjective) + " " + requiredClass switch
+        Quality = quality;
+        if (alias == "")
         {
-            CharacterClass.Warrior => locale.Longsword,
-            CharacterClass.Scout => locale.SwordAndDagger,
-            CharacterClass.Sorcerer => locale.Wand,
-            _ => locale.Hammer
-        } + quality switch
+            Name = NameAliasHelper.GetName(Head.Adjective) + " " + requiredClass switch
+            {
+                CharacterClass.Warrior => locale.Longsword,
+                CharacterClass.Scout => locale.SwordAndDagger,
+                CharacterClass.Sorcerer => locale.Wand,
+                _ => locale.Hammer
+            } + quality switch
+            {
+                Quality.Weak => $" ({locale.Weak})",
+                Quality.Excellent => $" ({locale.Excellent})",
+                _ => ""
+            };
+            Alias = $"{head.Alias}.{binder.Alias}.{handle.Alias}";
+        }
+        else
         {
-            Quality.Weak => $" ({locale.Weak})",
-            Quality.Excellent => $" ({locale.Excellent})",
-            _ => ""
-        };
-        Alias = $"{head.Alias}.{binder.Alias}.{handle.Alias}";
-        Rarity = EquippableItemService.GetRandomRarity();
+            Name = NameAliasHelper.GetName(alias);
+            Alias = alias;
+        }
+        Rarity = EquippableItemService.GetRandomRarity(Quality == Quality.Masterpiece ? 7 : 0);
         BaseCost = (int)((head.MaterialCost * ItemManager.GetItem(head.Material).Cost + 
                    binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
                    handle.MaterialCost * ItemManager.GetItem(handle.Material).Cost) * Quality switch {
@@ -207,7 +217,6 @@ public class Weapon : BaseItem, IEquippable
             _ => 0
         };
         RequiredClass = requiredClass;
-        Quality = quality;
         UpgradeModifier = 1;
         Galdurites = new List<Galdurite>();
     }
@@ -221,27 +230,27 @@ public class Weapon : BaseItem, IEquippable
         switch (requiredClass)
         {
             case CharacterClass.Warrior:
-                Head = EquipmentPartManager.GetPart<WeaponHead>("BrokenHead");
-                Binder = EquipmentPartManager.GetPart<WeaponBinder>("BrokenBinder");
-                Handle = EquipmentPartManager.GetPart<WeaponHandle>("BrokenHandle");
+                Head = EquipmentPartManager.GetPart<WeaponHead>("BrokenHead", CharacterClass.Warrior);
+                Binder = EquipmentPartManager.GetPart<WeaponBinder>("BrokenBinder", CharacterClass.Warrior);
+                Handle = EquipmentPartManager.GetPart<WeaponHandle>("BrokenHandle", CharacterClass.Warrior);
                 Name = NameAliasHelper.GetName(Head.Adjective) + " " + locale.Longsword;
                 break;
             case CharacterClass.Scout:
-                Head = EquipmentPartManager.GetPart<WeaponHead>("RustyHead");
-                Binder = EquipmentPartManager.GetPart<WeaponBinder>("RustyBinder");
-                Handle = EquipmentPartManager.GetPart<WeaponHandle>("RustyHandle");
+                Head = EquipmentPartManager.GetPart<WeaponHead>("RustyHead", CharacterClass.Scout);
+                Binder = EquipmentPartManager.GetPart<WeaponBinder>("RustyBinder", CharacterClass.Scout);
+                Handle = EquipmentPartManager.GetPart<WeaponHandle>("RustyHandle", CharacterClass.Scout);
                 Name = NameAliasHelper.GetName(Head.Adjective) + " " + locale.SwordAndDagger;
                 break;
             case CharacterClass.Sorcerer:
-                Head = EquipmentPartManager.GetPart<WeaponHead>("SplinteryHead");
-                Binder = EquipmentPartManager.GetPart<WeaponBinder>("SplinteryBinder");
-                Handle = EquipmentPartManager.GetPart<WeaponHandle>("SplinteryHandle");
+                Head = EquipmentPartManager.GetPart<WeaponHead>("SplinteryHead", CharacterClass.Sorcerer);
+                Binder = EquipmentPartManager.GetPart<WeaponBinder>("SplinteryBinder", CharacterClass.Sorcerer);
+                Handle = EquipmentPartManager.GetPart<WeaponHandle>("SplinteryHandle", CharacterClass.Sorcerer);
                 Name = NameAliasHelper.GetName(Head.Adjective) + " " + locale.Wand;
                 break;
             case CharacterClass.Paladin:
-                Head = EquipmentPartManager.GetPart<WeaponHead>("MisshapenHead");
-                Binder = EquipmentPartManager.GetPart<WeaponBinder>("MisshapenBinder");
-                Handle = EquipmentPartManager.GetPart<WeaponHandle>("MisshapenHandle");
+                Head = EquipmentPartManager.GetPart<WeaponHead>("MisshapenHead", CharacterClass.Paladin);
+                Binder = EquipmentPartManager.GetPart<WeaponBinder>("MisshapenBinder", CharacterClass.Paladin);
+                Handle = EquipmentPartManager.GetPart<WeaponHandle>("MisshapenHandle", CharacterClass.Paladin);
                 Name = NameAliasHelper.GetName(Head.Adjective) + " " + locale.Hammer;
                 break;
             default:
@@ -279,29 +288,54 @@ public class Weapon : BaseItem, IEquippable
     {
         base.Inspect(amount);
         var playerWeapon = PlayerHandler.player.Weapon;
-        var averagePlayerDamage = (playerWeapon.MinimalAttack + playerWeapon.MaximalAttack) / 2;
-        var averageDamage = (MinimalAttack + MaximalAttack) / 2;
+        if (this != playerWeapon)
+        {
+            var averagePlayerDamage = (playerWeapon.MinimalAttack + playerWeapon.MaximalAttack) / 2;
+            var averageDamage = (MinimalAttack + MaximalAttack) / 2;
+            AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, +{UpgradeModifier-1:P0}\n", Stylesheet.Styles["default"]));
+            AnsiConsole.Write(new Text($"{locale.Attack}: {MinimalAttack}-{MaximalAttack}", Stylesheet.Styles["default"]));
+            WriteComparator(averageDamage, averagePlayerDamage);
+            if (RequiredClass == CharacterClass.Sorcerer)
+            {
+                AnsiConsole.Write(new Text($"\n{locale.ManaShort}: {Accuracy:F0}"));
+                WriteComparator(Accuracy, playerWeapon.Accuracy);
+                AnsiConsole.Write(new Text($" ({CritChance:F0}/t)"));
+                WriteComparator(CritChance, playerWeapon.CritChance);
+                AnsiConsole.Write(new Text($"\n{locale.Crit}: {CritMod:F2}x"));
+                WriteComparator(CritMod, playerWeapon.CritMod);
+            }
+            else
+            {
+                AnsiConsole.Write(new Text($"\n{locale.Crit}: {CritChance:P2}"));
+                WriteComparator(CritChance, playerWeapon.CritChance);
+                AnsiConsole.Write(new Text($" ({CritMod:F2}x)"));
+                WriteComparator(CritMod, playerWeapon.CritMod);
+                AnsiConsole.Write(new Text($"\n{locale.Accuracy}: {Accuracy}"));
+                WriteComparator(Accuracy, playerWeapon.Accuracy);
+            }
+            AnsiConsole.Write(new Text("\n"));
+            foreach (var effect in GetEffectSums())
+                AnsiConsole.Write(new Text($"{effect.EffectText}"));
+            AnsiConsole.Write(new Text("\n"));
+            return;
+        }
         AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, +{UpgradeModifier-1:P0}\n", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{locale.Attack}: {MinimalAttack}-{MaximalAttack}", Stylesheet.Styles["default"]));
-        WriteComparator(averageDamage, averagePlayerDamage);
         if (RequiredClass == CharacterClass.Sorcerer)
         {
-            AnsiConsole.Write(new Text($"\n{locale.ManaShort}: {Accuracy:F0}"));
-            WriteComparator(Accuracy, playerWeapon.Accuracy);
+            AnsiConsole.Write(new Text($" | {locale.ManaShort}: {Accuracy:F0}"));
             AnsiConsole.Write(new Text($" ({CritChance:F0}/t)"));
-            WriteComparator(CritChance, playerWeapon.CritChance);
-            AnsiConsole.Write(new Text($"\n{locale.Crit}: {CritMod:P2}"));
-            WriteComparator(CritMod, playerWeapon.CritMod);
+            AnsiConsole.Write(new Text($" | {locale.Crit}: {CritMod:F2}x"));
         }
         else
         {
-            AnsiConsole.Write(new Text($"\n{locale.Crit}: {CritChance:P2}"));
-            WriteComparator(CritChance, playerWeapon.CritChance);
+            AnsiConsole.Write(new Text($" | {locale.Crit}: {CritChance:P2}"));
             AnsiConsole.Write(new Text($" ({CritMod:F2}x)"));
-            WriteComparator(CritMod, playerWeapon.CritMod);
-            AnsiConsole.Write(new Text($"\n{locale.Accuracy}: {Accuracy}"));
-            WriteComparator(Accuracy, playerWeapon.Accuracy);
+            AnsiConsole.Write(new Text($" | {locale.Accuracy}: {Accuracy}"));
         }
+        AnsiConsole.Write(new Text("\n"));
+        foreach (var effect in GetEffectSums())
+            AnsiConsole.Write(new Text($"{effect.EffectText}"));
         AnsiConsole.Write(new Text("\n"));
         return;
         void WriteComparator(double value1, double value2)
@@ -313,5 +347,29 @@ public class Weapon : BaseItem, IEquippable
             else
                 AnsiConsole.Write(new Text(" ( v )", Stylesheet.Styles["failure"]));
         }
+    }
+
+    public void AddGaldurite(Galdurite galdurite)
+    {
+        if (Galdurites.Count >= GalduriteSlots || galdurite.ItemType != ItemType.WeaponGaldurite) return;
+        Galdurites.Add(galdurite);
+        galdurite.Reveal();
+    }
+    public void RemoveGaldurite(Galdurite galdurite)
+    {
+        Galdurites.Remove(galdurite);
+    }
+
+    public HashSet<GalduriteComponent> GetEffectSums()
+    {
+        var result = new HashSet<GalduriteComponent>();
+        foreach (var effect in Galdurites.SelectMany(gal => gal.Components))
+        {
+            if (result.All(x => x.EffectType != effect.EffectType))
+                result.Add(effect);
+            else
+                result.FirstOrDefault(x => x.EffectType == effect.EffectType).EffectStrength += effect.EffectStrength;
+        }
+        return result;
     }
 }

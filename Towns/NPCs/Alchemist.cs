@@ -1,6 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using ConsoleGodmist.Quests;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -31,18 +32,24 @@ public class Alchemist : NPC
         while (true)
         {
             AnsiConsole.Write(new Text($"{locale.LoyaltyLevel}: [{LoyaltyLevel}/15]\n", Stylesheet.Styles["npc-alchemist"]));
-            string[] choices = [locale.OpenShop, locale.CureWounds, locale.CreateAlchemy, 
-                locale.CreatePotion, locale.RefillPotion, locale.Return];
-            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
+            Dictionary<string, int> choices = new() {
+                {locale.OpenShop, 0}, {locale.CureWounds, 1}, {locale.CreateAlchemy, 2}, 
+                {locale.CreatePotion, 3}, {locale.RefillPotion, 4} };
+            if (QuestNPCHandler.GetAvailableQuests(Name).Count > 0) choices.Add(locale.AcceptQuest, 5);
+            if (QuestNPCHandler.GetReturnableQuests(Name).Count > 0) choices.Add(locale.ReturnQuest, 6);
+            choices.Add( locale.Return, 7 );
+            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
                 .HighlightStyle(Stylesheet.Styles["npc-alchemist"]));
-            switch (Array.IndexOf(choices, choice))
+            switch (choices[choice])
             {
                 case 0: DisplayShop(); break;
                 case 1: Treat(); break;
                 case 2: CraftItem(); break;
                 case 3: CraftPotion(); break;
                 case 4: RefillPotion(); break;
-                case 5: return;
+                case 5: QuestNPCHandler.SelectQuestToAccept(Name); break;
+                case 6: QuestNPCHandler.SelectQuestToReturn(Name); break;
+                case 7: return;
             }
             AnsiConsole.Write(new FigletText(locale.Alchemist).Centered()
                 .Color(Stylesheet.Styles["npc-alchemist"].Foreground));

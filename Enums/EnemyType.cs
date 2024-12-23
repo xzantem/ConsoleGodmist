@@ -2,8 +2,9 @@
 
 public enum EnemyType
 {
-    Human,
-    Beast,
     Undead,
-    Demon
+    Beast,
+    Human,
+    Demon,
+    Boss
 }

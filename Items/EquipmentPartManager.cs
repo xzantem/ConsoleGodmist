@@ -39,20 +39,36 @@ public static class EquipmentPartManager
             throw new FileNotFoundException($"JSON file not found in {path}");
     }
 
-    public static T GetPart<T>(string alias) where T : IEquipmentPart
+    public static T GetPart<T>(string alias, CharacterClass intendedClass) where T : IEquipmentPart
     {
         if (typeof(T) == typeof(WeaponHead))
-            return (T)(object)WeaponHeads.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)WeaponHeads
+                .FirstOrDefault(x => x.Alias == alias && x.IntendedClass == intendedClass)!;
         if (typeof(T) == typeof(WeaponBinder))
-            return (T)(object)WeaponBinders.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)WeaponBinders
+                .FirstOrDefault(x => x.Alias == alias && x.IntendedClass == intendedClass)!;
         if (typeof(T) == typeof(WeaponHandle))
-            return (T)(object)WeaponHandles.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)WeaponHandles
+                .FirstOrDefault(x => x.Alias == alias && x.IntendedClass == intendedClass)!;
         if (typeof(T) == typeof(ArmorPlate))
-            return (T)(object)ArmorPlates.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)ArmorPlates
+                .FirstOrDefault(x => x.Alias == alias && x.IntendedClass == intendedClass)!;
         if (typeof(T) == typeof(ArmorBinder))
-            return (T)(object)ArmorBinders.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)ArmorBinders
+                .FirstOrDefault(x => x.Alias == alias && x.IntendedClass == intendedClass)!;
         if (typeof(T) == typeof(ArmorBase))
-            return (T)(object)ArmorBases.FirstOrDefault(x => x.Alias == alias)!;
+            return (T)(object)ArmorBases
+                .FirstOrDefault(x => x.Alias == alias && x.IntendedClass == intendedClass)!;
+        throw new NotSupportedException();
+    }
+    public static T GetPart<T>(int id) where T : IEquipmentPart
+    {
+        if (typeof(T) == typeof(WeaponHead)) return (T)(object)WeaponHeads[id];
+        if (typeof(T) == typeof(WeaponBinder)) return (T)(object)WeaponBinders[id];
+        if (typeof(T) == typeof(WeaponHandle)) return (T)(object)WeaponHandles[id];
+        if (typeof(T) == typeof(ArmorPlate)) return (T)(object)ArmorPlates[id];
+        if (typeof(T) == typeof(ArmorBinder)) return (T)(object)ArmorBinders[id];
+        if (typeof(T) == typeof(ArmorBase)) return (T)(object)ArmorBases[id];
         throw new NotSupportedException();
     }
 

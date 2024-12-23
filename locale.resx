@@ -1038,10 +1038,10 @@
     <value>Swamp</value>
   </data>
   <data name="Descend" xml:space="preserve">
-    <value>Descend onto the </value>
+    <value>Descend to floor</value>
   </data>
-  <data name="FloorIn" xml:space="preserve">
-    <value>floor in the</value>
+  <data name="In" xml:space="preserve">
+    <value>in</value>
   </data>
   <data name="TalkTo" xml:space="preserve">
     <value>Talk to</value>
@@ -1051,5 +1051,80 @@
   </data>
   <data name="ReturnQuest" xml:space="preserve">
     <value>Return quest</value>
+  </data>
+  <data name="WantAcceptQuestThird" xml:space="preserve">
+    <value>Do you want to accept this quest?</value>
+  </data>
+  <data name="WantHandInQuestThird" xml:space="preserve">
+    <value>Are you sure you want to hand in this quest?</value>
+  </data>
+  <data name="InspectQuest" xml:space="preserve">
+    <value>Inspect quest</value>
+  </data>
+  <data name="ChangeFilter" xml:space="preserve">
+    <value>Change filters</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>In progress</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="HandedIn" xml:space="preserve">
+    <value>Handed in</value>
+  </data>
+  <data name="NoGalduritesReveal" xml:space="preserve">
+    <value>You don't seem to have any galdurites to reveal</value>
+  </data>
+  <data name="ChooseGalduriteReveal" xml:space="preserve">
+    <value>Which galdurite should I reveal?</value>
+  </data>
+  <data name="ICanReveal" xml:space="preserve">
+    <value>I can reveal this galdurite for</value>
+  </data>
+  <data name="WantReveal" xml:space="preserve">
+    <value>Are you sure you want me to reveal this?</value>
+  </data>
+  <data name="WantRevealThird" xml:space="preserve">
+    <value>Are you sure you want to reveal this galdurite?</value>
+  </data>
+  <data name="NoGalduritesApply" xml:space="preserve">
+    <value>You don't seem to have any galdurites that can be applied onto this</value>
+  </data>
+  <data name="ChooseGalduriteApply" xml:space="preserve">
+    <value>Which galdurite should I apply?</value>
+  </data>
+  <data name="ICanApply" xml:space="preserve">
+    <value>I can apply this for</value>
+  </data>
+  <data name="WantApply" xml:space="preserve">
+    <value>Are you sure you want me to apply this galdurite?</value>
+  </data>
+  <data name="WantApplyThird" xml:space="preserve">
+    <value>Are you sure you want to apply this galdurite?</value>
+  </data>
+  <data name="NoGalduriteSlotsWeapon" xml:space="preserve">
+    <value>This weapon does not have any space for a galdurite</value>
+  </data>
+  <data name="NoGalduriteSlotsArmor" xml:space="preserve">
+    <value>This armor does not have any space for a galdurite</value>
+  </data>
+  <data name="NoGalduritesInWeapon" xml:space="preserve">
+    <value>This weapon does not have any galdurites</value>
+  </data>
+  <data name="NoGalduritesInArmor" xml:space="preserve">
+    <value>This armor does not have any galdurites</value>
+  </data>
+  <data name="ChooseGalduriteRemove" xml:space="preserve">
+    <value>Which galdurite should I remove?</value>
+  </data>
+  <data name="ICanRemove" xml:space="preserve">
+    <value>I can remove this galdurite for</value>
+  </data>
+  <data name="WantRemove" xml:space="preserve">
+    <value>Are you sure you want me to remove this galdurite?</value>
+  </data>
+  <data name="WantRemoveThird" xml:space="preserve">
+    <value>Are you sure you want to remove this galdurite? (You will not get it back!)</value>
   </data>
 </root>

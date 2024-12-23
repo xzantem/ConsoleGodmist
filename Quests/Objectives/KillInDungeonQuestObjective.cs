@@ -31,7 +31,7 @@ public class KillInDungeonQuestObjective : IQuestObjective
 
     public void Progress(QuestObjectiveContext context)
     {
-        if (context.KillInDungeonTarget != Target) return;
+        if (context.KillInDungeonTarget == null || context.KillInDungeonTarget != Target) return;
         QuestProgress++;
         if (QuestProgress >= AmountToKill)
             IsComplete = true;

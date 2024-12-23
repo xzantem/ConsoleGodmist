@@ -11,7 +11,7 @@ public class DescendQuestObjective : IQuestObjective
     public DungeonType Target { get; set; }
     public int FloorToReach { get; set; }
     public string Description => 
-        $"{locale.Descend} {FloorToReach} {locale.FloorIn} {NameAliasHelper.GetDungeonType(Target, "Locative")}";
+        $"{locale.Descend} {FloorToReach} {locale.In} {NameAliasHelper.GetDungeonType(Target, "Locative")}";
     public DescendQuestObjective()
     {
         IsComplete = false;
@@ -25,7 +25,8 @@ public class DescendQuestObjective : IQuestObjective
     }
     public void Progress(QuestObjectiveContext context)
     {
-        if (context.DescendTarget == Target && FloorToReach == context.DescendFloor)
+        if (context.DescendTarget != null && context.DescendTarget == Target && FloorToReach == context.DescendFloor)
+            
             IsComplete = true;
     }
 }

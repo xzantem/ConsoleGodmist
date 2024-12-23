@@ -12,8 +12,13 @@ public class Quest
     [JsonIgnore]
     public string Name => NameAliasHelper.GetName(Alias);
     [JsonIgnore]
-    public string Description => NameAliasHelper.GetName(Alias + "Description");
+    public string Description =>
+        IsSideQuest ? Stages[0].Objectives[0].Description : 
+            NameAliasHelper.GetName(Alias + "Description");
+
     public string Alias { get; set; }
+    
+    public bool IsSideQuest { get; set; }
     public int RecommendedLevel { get; set; }
     public List<QuestStage> Stages { get; set; }
     public QuestReward QuestReward { get; set; }
@@ -27,7 +32,7 @@ public class Quest
     public Quest() {}
 
     public Quest(string alias, int level, List<QuestStage> stages, QuestReward questReward, string questGiver,
-        string acceptDialogue, string handInDialogue)
+        string acceptDialogue, string handInDialogue, bool isSideQuest = false)
     {
         Alias = alias;
         RecommendedLevel = level;
@@ -39,6 +44,7 @@ public class Quest
         QuestEnder = questGiver;
         AcceptDialogue = [acceptDialogue];
         HandInDialogue = [handInDialogue];
+        IsSideQuest = isSideQuest;
     }
 
     public void TryProgress(QuestObjectiveContext context)
@@ -48,7 +54,7 @@ public class Quest
         {
             objective.Progress(context);
         }
-        if (GetCurrentStage().Objectives.All(o => o.IsComplete))
+        if (GetCurrentStage() == default)
             TryCompleteQuest();
     }
 

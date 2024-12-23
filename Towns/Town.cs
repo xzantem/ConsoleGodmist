@@ -56,10 +56,15 @@ namespace ConsoleGodmist.Town
                     case 3:
                         NPCs[2].OpenMenu();
                         break;
+                    case 5:
+                        QuestLog.OpenLog();
+                        break;
                     case 6:
                         InventoryMenuHandler.OpenInventoryMenu();
                         break;
-                    case 7: AnsiConsole.Write(PlayerHandler.player.Name + ", Poziom " + PlayerHandler.player.Level + " " + PlayerHandler.player.CharacterClass); break;
+                    case 7: 
+                        CharacterEventTextService.DisplayCharacterMenuText(PlayerHandler.player);
+                        break;
                     case 8: DataPersistanceManager.SaveGame(new SaveData(PlayerHandler.player, GameSettings.Difficulty, 
                         [QuestManager.MainQuests, QuestManager.RandomizedSideQuests, QuestManager.BossSideQuests]
                         ,QuestManager.BossProgress, this)); break;

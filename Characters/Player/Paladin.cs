@@ -35,15 +35,15 @@ namespace ConsoleGodmist.Characters
             SwitchWeapon(new Weapon(CharacterClass.Paladin));
             SwitchArmor(new Armor(CharacterClass.Paladin));
             ActiveSkills[0] = new ActiveSkill("Judgement", 0,0.6, false, 83,
-            [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0)]);
+            [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0, 0)]);
             ActiveSkills[1] = new ActiveSkill("CrushingStrike", 30,0.7, false, 75,
-                [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0),
+                [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0, 0),
                     new DebuffResistance(SkillTarget.Enemy, StatusEffectType.Stun, ModifierType.Additive, 0.3, 0.9, 3),
-                    new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Stun, "CrushingStrike", 3), 0.5)]);
+                    new InflictGenericStatusEffect(StatusEffectType.Stun, 3, 0.5, "CrushingStrike", "")]);
             ActiveSkills[2] = new ActiveSkill("Cure", 50, 0.4, true, 100,
             [new HealTarget(SkillTarget.Self, 1.5, DamageBase.Random)]);
             ActiveSkills[3] = new ActiveSkill("HolyTransfusion", 60, 0.65, true, 100,
-            [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 1)]);
+            [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 1, 0)]);
             ActiveSkills[4] = new ActiveSkill("ShieldOfReflection", 40, 0.4,true, 100,
             [new BuffStat(SkillTarget.Self, StatType.Dodge, ModifierType.Multiplicative, 0.4, 1, 5)]);
         }

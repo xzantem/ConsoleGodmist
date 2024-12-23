@@ -24,8 +24,8 @@ public static class InventoryMenuHandler
                         $"{1 + tempIndex++}. {item.Key.Name} - {item.Value}x" : 
                         $"{1 + tempIndex++}. {item.Key.Name}", item.Key.NameStyle())).ToList();
             AnsiConsole.Write(new Rows(rows.GetRange(index, Math.Min(pageSize, rows.Count - index))));
-            AnsiConsole.Write(new Text($"\n{locale.Weight}: {Inventory.PackWeight}/{Inventory.MaxPackWeight}" +
-                                       $" | ----- | {locale.Crowns}: {PlayerHandler.player.Gold} cr\n"));
+            AnsiConsole.Write(new Text($"{locale.Weight}: {Inventory.PackWeight}/{Inventory.MaxPackWeight}" +
+                                       $" | ----- | {locale.Crowns}: {PlayerHandler.player.Gold} cr\n\n"));
             if (Inventory.Items.Count == 0)
             {
                 AnsiConsole.Write(new Text(locale.InventoryEmpty + "\n"));
@@ -142,6 +142,7 @@ public static class InventoryMenuHandler
     private static void InspectItem()
     {
         var item = Inventory.Items.ElementAt(ChooseItem(false));
+        AnsiConsole.Write("\n\n");
         item.Key.Inspect(item.Value);
         var cont = AnsiConsole.Prompt(
             new TextPrompt<string>(locale.PressAnyKey)

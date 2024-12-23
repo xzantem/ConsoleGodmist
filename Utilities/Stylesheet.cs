@@ -14,6 +14,7 @@ public static class Stylesheet
             { "default-cursive", new Style(Color.White, Color.Black, Decoration.Italic) },
             { "default-bold", new Style(Color.White, Color.Black, Decoration.Italic) },
             { "default-strikethrough", new Style(Color.White, Color.Black, Decoration.Strikethrough) },
+            { "quest-completed", new Style(Color.Chartreuse4, Color.Black, Decoration.Strikethrough) },
             { "npc-player" , new Style(Color.MediumPurple3)},
             { "npc-blacksmith" , new Style(Color.LightSalmon3_1)},
             { "npc-alchemist" , new Style(Color.MediumSpringGreen)},

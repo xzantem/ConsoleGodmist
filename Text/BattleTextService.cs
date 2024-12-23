@@ -92,7 +92,7 @@ public static class BattleTextService
                                   $"{locale.Attack}: {target.MinimalAttack:F0}-{target.MaximalAttack:F0}, {locale.Crit}: " +
                                   $"{target.CritChance:P2} [{target.CritMod:F2}x]\n" +
                                   $"{locale.Accuracy}: {(int)target.Accuracy:F0}, {locale.Speed}: {target.Speed:F0}\n" +
-                                  $"{locale.Defense}: {target.PhysicalDefense:F0} | {target.MagicDefense:F0}, " +
+                                  $"{locale.Defense}: {target.PhysicalDefense:F0}:{target.MagicDefense:F0}, " +
                                   $"{locale.Dodge}: {target.Dodge:F0}\n\n", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{locale.Resistances}\n", Stylesheet.Styles["default-bold"]));
         AnsiConsole.Write(new Text($"{locale.Debuff}: {target.Resistances[StatusEffectType.Debuff].Value():P0}, " +
@@ -184,15 +184,15 @@ public static class BattleTextService
         }
         foreach (var modifier in target.GetModifiers())
         {
-            var mod = modifier.Value.Type switch
+            var mod = modifier.Key.Type switch
             {
-                ModifierType.Multiplicative => modifier.Value.Mod.ToString("+#%;-#%;0%"),
-                ModifierType.Relative => modifier.Value.Mod.ToString("+#%;-#%;0%"),
-                ModifierType.Absolute => modifier.Value.Mod.ToString("+#;-#;0"),
-                ModifierType.Additive => modifier.Value.Mod.ToString("+#;-#;0")
+                ModifierType.Multiplicative => modifier.Key.Mod.ToString("+#%;-#%;0%"),
+                ModifierType.Relative => modifier.Key.Mod.ToString("+#%;-#%;0%"),
+                ModifierType.Absolute => modifier.Key.Mod.ToString("+#;-#;0"),
+                ModifierType.Additive => modifier.Key.Mod.ToString("+#;-#;0")
             };
-            AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(modifier.Key.ToString())} " +
-                                       $"({modifier.Value.Source}): {mod} [{modifier.Value.RemainingDuration}]\n"));
+            AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(modifier.Value.ToString())} " +
+                                       $"({modifier.Key.Source}): {mod} [{modifier.Key.RemainingDuration}]\n"));
         }
     }
 }

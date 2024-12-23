@@ -60,6 +60,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In progress.
+        /// </summary>
+        internal static string Accepted {
+            get {
+                return ResourceManager.GetString("Accepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept quest.
         /// </summary>
         internal static string AcceptQuest {
@@ -357,6 +366,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change filters.
+        /// </summary>
+        internal static string ChangeFilter {
+            get {
+                return ResourceManager.GetString("ChangeFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change modifier.
         /// </summary>
         internal static string ChangeModifier {
@@ -389,6 +407,33 @@ namespace ConsoleGodmist {
         internal static string ChooseDifficulty {
             get {
                 return ResourceManager.GetString("ChooseDifficulty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which galdurite should I apply?.
+        /// </summary>
+        internal static string ChooseGalduriteApply {
+            get {
+                return ResourceManager.GetString("ChooseGalduriteApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which galdurite should I remove?.
+        /// </summary>
+        internal static string ChooseGalduriteRemove {
+            get {
+                return ResourceManager.GetString("ChooseGalduriteRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which galdurite should I reveal?.
+        /// </summary>
+        internal static string ChooseGalduriteReveal {
+            get {
+                return ResourceManager.GetString("ChooseGalduriteReveal", resourceCulture);
             }
         }
         
@@ -542,6 +587,15 @@ namespace ConsoleGodmist {
         internal static string Common {
             get {
                 return ResourceManager.GetString("Common", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completed.
+        /// </summary>
+        internal static string Completed {
+            get {
+                return ResourceManager.GetString("Completed", resourceCulture);
             }
         }
         
@@ -879,7 +933,7 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descend onto the .
+        ///   Looks up a localized string similar to Descend to floor.
         /// </summary>
         internal static string Descend {
             get {
@@ -1140,15 +1194,6 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to floor in the.
-        /// </summary>
-        internal static string FloorIn {
-            get {
-                return ResourceManager.GetString("FloorIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Forest.
         /// </summary>
         internal static string Forest {
@@ -1284,6 +1329,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Handed in.
+        /// </summary>
+        internal static string HandedIn {
+            get {
+                return ResourceManager.GetString("HandedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hard.
         /// </summary>
         internal static string Hard {
@@ -1392,6 +1446,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I can apply this for.
+        /// </summary>
+        internal static string ICanApply {
+            get {
+                return ResourceManager.GetString("ICanApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For this, I can give you.
         /// </summary>
         internal static string ICanGiveYou {
@@ -1419,6 +1482,24 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I can remove this galdurite for.
+        /// </summary>
+        internal static string ICanRemove {
+            get {
+                return ResourceManager.GetString("ICanRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I can reveal this galdurite for.
+        /// </summary>
+        internal static string ICanReveal {
+            get {
+                return ResourceManager.GetString("ICanReveal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I can treat these wounds for.
         /// </summary>
         internal static string ICanTreat {
@@ -1437,11 +1518,29 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to in.
+        /// </summary>
+        internal static string In {
+            get {
+                return ResourceManager.GetString("In", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inspect item.
         /// </summary>
         internal static string InspectItem {
             get {
                 return ResourceManager.GetString("InspectItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inspect quest.
+        /// </summary>
+        internal static string InspectQuest {
+            get {
+                return ResourceManager.GetString("InspectQuest", resourceCulture);
             }
         }
         
@@ -1829,6 +1928,60 @@ namespace ConsoleGodmist {
         internal static string Nightmare {
             get {
                 return ResourceManager.GetString("Nightmare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t seem to have any galdurites that can be applied onto this.
+        /// </summary>
+        internal static string NoGalduritesApply {
+            get {
+                return ResourceManager.GetString("NoGalduritesApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This armor does not have any galdurites.
+        /// </summary>
+        internal static string NoGalduritesInArmor {
+            get {
+                return ResourceManager.GetString("NoGalduritesInArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This weapon does not have any galdurites.
+        /// </summary>
+        internal static string NoGalduritesInWeapon {
+            get {
+                return ResourceManager.GetString("NoGalduritesInWeapon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This armor does not have any space for a galdurite.
+        /// </summary>
+        internal static string NoGalduriteSlotsArmor {
+            get {
+                return ResourceManager.GetString("NoGalduriteSlotsArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This weapon does not have any space for a galdurite.
+        /// </summary>
+        internal static string NoGalduriteSlotsWeapon {
+            get {
+                return ResourceManager.GetString("NoGalduriteSlotsWeapon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t seem to have any galdurites to reveal.
+        /// </summary>
+        internal static string NoGalduritesReveal {
+            get {
+                return ResourceManager.GetString("NoGalduritesReveal", resourceCulture);
             }
         }
         
@@ -2868,6 +3021,33 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to accept this quest?.
+        /// </summary>
+        internal static string WantAcceptQuestThird {
+            get {
+                return ResourceManager.GetString("WantAcceptQuestThird", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want me to apply this galdurite?.
+        /// </summary>
+        internal static string WantApply {
+            get {
+                return ResourceManager.GetString("WantApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to apply this galdurite?.
+        /// </summary>
+        internal static string WantApplyThird {
+            get {
+                return ResourceManager.GetString("WantApplyThird", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to buy this?.
         /// </summary>
         internal static string WantBuyThird {
@@ -2882,6 +3062,15 @@ namespace ConsoleGodmist {
         internal static string WantCraftThird {
             get {
                 return ResourceManager.GetString("WantCraftThird", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to hand in this quest?.
+        /// </summary>
+        internal static string WantHandInQuestThird {
+            get {
+                return ResourceManager.GetString("WantHandInQuestThird", resourceCulture);
             }
         }
         
@@ -2918,6 +3107,42 @@ namespace ConsoleGodmist {
         internal static string WantReforgeThird {
             get {
                 return ResourceManager.GetString("WantReforgeThird", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want me to remove this galdurite?.
+        /// </summary>
+        internal static string WantRemove {
+            get {
+                return ResourceManager.GetString("WantRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove this galdurite? (You will not get it back!).
+        /// </summary>
+        internal static string WantRemoveThird {
+            get {
+                return ResourceManager.GetString("WantRemoveThird", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want me to reveal this?.
+        /// </summary>
+        internal static string WantReveal {
+            get {
+                return ResourceManager.GetString("WantReveal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to reveal this galdurite?.
+        /// </summary>
+        internal static string WantRevealThird {
+            get {
+                return ResourceManager.GetString("WantRevealThird", resourceCulture);
             }
         }
         

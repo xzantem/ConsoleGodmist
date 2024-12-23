@@ -141,7 +141,7 @@ namespace ConsoleGodmist.Characters
             var value = 0;
             for (var i = 1; i <= Math.Min(level, 49); i++)
             {
-                value += (int)(4 * Math.Pow(i, 1.5) + 20);
+                value += (int)(12 * Math.Pow(i, 1.5) + 60);
             }
             return value;
         }

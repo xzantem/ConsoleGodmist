@@ -28,7 +28,7 @@ namespace ConsoleGodmist.Characters
             Resistances.Add(StatusEffectType.Bleed, new Stat(0.7, 0));
             Resistances.Add(StatusEffectType.Poison, new Stat(0.5, 0));
             Resistances.Add(StatusEffectType.Burn, new Stat(0.4, 0));
-            Resistances.Add(StatusEffectType.Stun, new Stat(0.4, 0));
+            Resistances.Add(StatusEffectType.Stun, new Stat(0.6, 0));
             Resistances.Add(StatusEffectType.Freeze, new Stat(0.6, 0));
             Resistances.Add(StatusEffectType.Frostbite, new Stat(0.6, 0));
             Resistances.Add(StatusEffectType.Sleep, new Stat(0.6, 0));
@@ -40,7 +40,7 @@ namespace ConsoleGodmist.Characters
             SwitchWeapon(new Weapon(CharacterClass.Warrior));
             SwitchArmor(new Armor(CharacterClass.Warrior));
             ActiveSkills[0] = new ActiveSkill("Chop", 0, 0.6, false, 80,
-            [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0),
+            [new DealDamage(DamageType.Physical, DamageBase.Random, 1, true, false, 0, 0),
                 new RegenResource(SkillTarget.Self, 10, DamageBase.Flat)]);
             ActiveSkills[1] = new ActiveSkill("Kick", 15, 0.4, false, 73,
                 [new DebuffStat(SkillTarget.Enemy, StatType.Dodge, ModifierType.Additive, 15, 0.8, 3)]);
@@ -48,8 +48,8 @@ namespace ConsoleGodmist.Characters
                 [new BuffStat(SkillTarget.Self, StatType.DamageDealt, ModifierType.Multiplicative, 0.2, 1, 3),
                     new BuffStat(SkillTarget.Self, StatType.MaximalAttack, ModifierType.Multiplicative, 0.2, 1, 3)]);
             ActiveSkills[3] = new ActiveSkill("RightHook", 25, 0.6, false, 72,
-            [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0),
-                new InflictGenericStatusEffect(new StatusEffect(StatusEffectType.Stun, "RightHook", 2), 0.8)]);
+            [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0, 0),
+                new InflictGenericStatusEffect(StatusEffectType.Stun, 2, 0.8, "RightHook", "")]);
             ActiveSkills[4] = new ActiveSkill("FieldBandage", 20, 0.65, true, 100,
                 [new HealTarget(SkillTarget.Self, 0.08, DamageBase.CasterMissingHealth),
                 new ClearStatusEffect(SkillTarget.Self, StatusEffectType.Bleed)]);

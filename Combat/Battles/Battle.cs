@@ -4,6 +4,7 @@ using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using ConsoleGodmist.Quests;
 using ConsoleGodmist.TextService;
 using Spectre.Console;
 
@@ -101,8 +102,8 @@ public class Battle
     {
         List<string> choices =
         [
-            locale.UseSkill, locale.UsePotion + $" ({(int)(0.2 * player.MaxActionPoints.Value())} {locale.ActionPointsShort})", 
-            locale.ShowStats, locale.ShowStatus, locale.EndTurn
+            locale.EndTurn, locale.UseSkill, locale.UsePotion + $" ({(int)(0.2 * player.MaxActionPoints.Value())} {locale.ActionPointsShort})", 
+            locale.ShowStats, locale.ShowStatus
         ];
         if (CanEscape)
             choices.Add(locale.Escape);
@@ -112,10 +113,12 @@ public class Battle
         switch (Array.IndexOf(choices.ToArray(), choice))
         {
             case 0:
+                return true;
+            case 1:
                 ChooseSkill(player, target.User);
                 CheckForDead();
                 return false;
-            case 1:
+            case 2:
                 var potion = PotionManager.ChoosePotion((player.User as PlayerCharacter).Inventory.Items
                     .Where(x => x.Key.ItemType == ItemType.Potion)
                     .Select(x => x.Key).Cast<Potion>().ToList());
@@ -123,7 +126,7 @@ public class Battle
                 player.UseActionPoints(0.2 * player.MaxActionPoints.Value());
                 potion.Use();
                 return false;
-            case 2:
+            case 3:
                 var charactersStats = new string[Users.Keys.Count];
                 for (var i = 0; i < Users.Keys.Count; i++)
                 {
@@ -135,7 +138,7 @@ public class Battle
                 BattleTextService.DisplayBattleStatsText(Users
                     .ElementAt(Array.IndexOf(charactersStats, characterStatsChoice)).Key.User);
                 return false;
-            case 3:
+            case 4:
                 var charactersStatus = new string[Users.Keys.Count];
                 for (var i = 0; i < Users.Keys.Count; i++)
                 {
@@ -147,8 +150,6 @@ public class Battle
                 BattleTextService.DisplayStatusEffectText(Users
                     .ElementAt(Array.IndexOf(charactersStatus, characterStatusChoice)).Key.User);
                 return false;
-            case 4:
-                return true;
             case 5:
                 BattleTextService.DisplayTryEscapeText();
                 if (!(Random.Shared.NextDouble() < 0.5 + EscapeAttempts * 0.1))
@@ -169,18 +170,20 @@ public class Battle
     {
         var possibleSkills = new List<ActiveSkill>();
         BattleTextService.DisplayStatusText(target, enemy);
-        do
+        while (CheckForResult() == -1)
         {
             possibleSkills = enemy.User.ActiveSkills
                 .Where(x => (x.ResourceCost <= enemy.User.CurrentResource ||
-                            Math.Abs(enemy.User.MaximalResource - enemy.User.CurrentResource) < 0.01)
+                             Math.Abs(enemy.User.MaximalResource - enemy.User.CurrentResource) < 0.01)
                             && x.ActionCost * enemy.MaxActionPoints.Value() <= enemy.CurrentActionPoints)
                 .ToList();
+            if (possibleSkills.Count < 1)
+                break;
             var usedSkill = UtilityMethods.RandomChoice(possibleSkills);
             usedSkill.Use(enemy, target.User);
             CheckForDead();
             Thread.Sleep(1000);
-        } while (possibleSkills.Count > 0 && CheckForResult() != -1);
+        } 
     }
 
     public int CheckForResult()
@@ -201,6 +204,11 @@ public class Battle
         foreach (var deadUser in dead)
         {
             BattleTextService.DisplayDeathText(deadUser.Key.User);
+            QuestManager.CheckForProgress(
+                new QuestObjectiveContext((deadUser.Key.User as EnemyCharacter)?.Alias, deadUser.Key.User.Level));
+            QuestManager.CheckForProgress(
+                new QuestObjectiveContext(DungeonMovementManager.CurrentDungeon.DungeonType, 
+                    DungeonMovementManager.CurrentDungeon.DungeonType, deadUser.Key.User.Level));
             Users.Remove(deadUser.Key);
         }
     }

@@ -23,12 +23,12 @@ public static class LootbagManager
             throw new FileNotFoundException($"JSON file not found in {path}");
     }
     
-    public static MaterialLootbag GetLootbag(string alias, int level)
+    public static Lootbag GetLootbag(string alias, int level)
     {
-        return new MaterialLootbag(alias, level, DropTables
+        return new Lootbag(alias, level, DropTables
             .FirstOrDefault(i => i.Key == alias).Value);
     }
-    public static MaterialLootbag GetLootbag(DungeonType dungeonType, int level)
+    public static Lootbag GetSupplyBag(DungeonType dungeonType, int level)
     {
         var alias = dungeonType switch
         {
@@ -42,7 +42,7 @@ public static class LootbagManager
             DungeonType.Swamp => "MurkySupplyBag",
             _ => throw new ArgumentOutOfRangeException(nameof(dungeonType), dungeonType, "Wrong dungeon type specified")
         };
-        return new MaterialLootbag(alias, level, DropTables
+        return new Lootbag(alias, level, DropTables
             .FirstOrDefault(i => i.Key == alias).Value);
     }
 }

@@ -50,24 +50,25 @@ public static class BattleManager
         const double weaponBagChance = 0.125;
         const double armorBagChance = 0.125;
         
-        foreach (var enemy in usersTeams.Where(x => x.Value == 1))
+        foreach (var enemy in usersTeams.Where(x => x.Value == 1).Select(x => x.Key.User as EnemyCharacter))
         {
             moneyReward += (int)(Math.Pow(4, (dungeon.DungeonLevel - 1) * 0.1) * 
                 Random.Shared.Next(15, 31) * 
                 (10 * dungeon.Floors.IndexOf(dungeon.CurrentFloor) + 7)) / 
                            (dungeon.Floors.IndexOf(dungeon.CurrentFloor) + 16);
-            if (enemy.Key.User.Level >= usersTeams.Keys.Average(x => x.User.Level))
+            if (enemy.Level >= usersTeams.Keys.Average(x => x.User.Level))
                 honorReward++;
             experienceReward += (int)Math.Max(0.1, (1 - 0.15 * Math.Abs(player!.Level - dungeon.DungeonLevel)) 
                                                    * (Math.Pow(dungeon.DungeonLevel, 1.1) + 3));
             if (Random.Shared.NextDouble() < lootBagChance)
-                player.Inventory.AddItem(LootbagManager.GetLootbag(dungeon.DungeonType, enemy.Key.User.Level));
+                player.Inventory.AddItem(LootbagManager.GetSupplyBag(dungeon.DungeonType, enemy.Level));
             if (Random.Shared.NextDouble() < weaponBagChance)
-                player.Inventory.AddItem(new WeaponLootbag(enemy.Key.User.Level));
+                player.Inventory.AddItem(LootbagManager.GetLootbag("WeaponBag", enemy.Level));
             if (Random.Shared.NextDouble() < armorBagChance)
-                player.Inventory.AddItem(new ArmorLootbag(enemy.Key.User.Level));
-            foreach (var item in (enemy.Key.User as EnemyCharacter)?
-                     .DropTable.GetDrops(enemy.Key.User.Level)!)
+                player.Inventory.AddItem(LootbagManager.GetLootbag("ArmorBag", enemy.Level));
+            if (enemy.EnemyType.Contains(EnemyType.Boss))
+                player.Inventory.AddItem(LootbagManager.GetLootbag(enemy.Alias + "Bag", enemy.Level));
+            foreach (var item in enemy.DropTable.GetDrops(enemy.Level))
                 player.Inventory.AddItem(item.Key, item.Value);
         }
         player!.GainGold(moneyReward);

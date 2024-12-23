@@ -30,6 +30,8 @@
     <Compile Remove="Quests\Objectives\CollectQuestObjective.cs" />
     <Compile Remove="Quests\Objectives\GiveItemQuestObjective.cs" />
     <Compile Remove="Quests\SideQuestManager.cs" />
+    <Compile Remove="Items\Lootbags\WeaponLootbag.cs" />
+    <Compile Remove="Items\Lootbags\ArmorLootbag.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +39,7 @@
     <Content Include="bin\Debug\net6.0\json\craftable-ingredients.json" />
     <Content Include="bin\Debug\net6.0\json\enemies.json" />
     <Content Include="bin\Debug\net6.0\json\equipment-parts.json" />
+    <Content Include="bin\Debug\net6.0\json\galdurite-components.json" />
     <Content Include="bin\Debug\net6.0\json\plant-drop-table.json" />
     <Content Include="bin\Debug\net6.0\json\lootbag-drop-tables.json" />
     <Content Include="bin\Debug\net6.0\json\potion-components.json" />

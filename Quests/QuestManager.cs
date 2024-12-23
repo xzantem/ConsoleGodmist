@@ -25,8 +25,8 @@ public static class QuestManager
     }
     public static Dictionary<DungeonType, int> BossProgress { get; private set; }
     
-    private const int QuestCount = 4;
-    private const int ProgressTarget = 3;
+    public const int QuestCount = 4;
+    public const int ProgressTarget = 3;
 
     public static void InitMainQuests()
     {
@@ -34,7 +34,8 @@ public static class QuestManager
         if (File.Exists(path))
         {
             var json = File.ReadAllText(path);
-            MainQuests = JsonConvert.DeserializeObject<List<Quest>>(json);
+            MainQuests = new List<Quest>();
+            //MainQuests = JsonConvert.DeserializeObject<List<Quest>>(json);
         }
         else
             throw new FileNotFoundException($"JSON file not found in {path}");
@@ -42,28 +43,29 @@ public static class QuestManager
     
     public static void RerollSideQuests()
     {
-        var level = Math.Max(Math.Min(2 + RandomizedSideQuests
-                .Count(x => x.QuestState is QuestState.Completed or QuestState.HandedIn),
-            BossSideQuests.Max(x => x.RecommendedLevel)), 2);
-        while (RandomizedSideQuests.Count(x => x.QuestState is QuestState.Accepted or QuestState.Available) <= QuestCount)
+        var randomSideQuestLevel = RandomizedSideQuests.Count == 0 ? 2 : 2 + RandomizedSideQuests
+            .Count(x => x.QuestState is QuestState.Completed or QuestState.HandedIn);
+        var bossSideQuestLevel = BossSideQuests.Count == 0 ? 6 : BossSideQuests.Max(x => x.RecommendedLevel);
+        var level = Math.Max(Math.Min(randomSideQuestLevel, bossSideQuestLevel), 2);
+        while (RandomizedSideQuests.Count(x => x.QuestState is QuestState.Accepted or QuestState.Available) < QuestCount)
         {
             var dungeonType = Enum.GetValues<DungeonType>()[Random.Shared.Next(0,8)];
             var randomQuest = Random.Shared.Next(0, 2) switch
             {
-                0 => new Quest(dungeonType.ToString(), level, [
-                        new QuestStage(dungeonType.ToString(),
-                            [new KillInDungeonQuestObjective(dungeonType, Random.Shared.Next(6, 13))])
+                0 => new Quest(dungeonType + "KillDungeon", level, [
+                        new QuestStage(dungeonType + "KillDungeon",
+                            [new KillInDungeonQuestObjective(dungeonType, Random.Shared.Next(6 / 2, 13 / 2))])
                     ], new QuestReward((int)(150 * Math.Pow(4, level / 10.0)),
                         (int)(Math.Pow(level, 1.5) + 13), 4, []), 
                     UtilityMethods.RandomChoice(TownsHandler.Arungard.NPCs.Select(x => x.Alias).ToList()),
-                    "", ""),
-                1 => new Quest(dungeonType.ToString(), level, [
-                        new QuestStage(dungeonType.ToString(),
-                            [new DescendQuestObjective(dungeonType, Random.Shared.Next(5, 11))])
+                    "", "", true),
+                1 => new Quest(dungeonType + "Descend", level, [
+                        new QuestStage(dungeonType + "Descend",
+                            [new DescendQuestObjective(dungeonType, Random.Shared.Next(4 / 2, 8 / 2))])
                     ], new QuestReward((int)(150 * Math.Pow(4, level / 10.0)),
                         (int)(Math.Pow(level, 1.5) + 13), 4, []), 
                     UtilityMethods.RandomChoice(TownsHandler.Arungard.NPCs.Select(x => x.Alias).ToList()),
-                    "", ""),
+                    "", "", true),
             };
             RandomizedSideQuests.Add(randomQuest);
         }
@@ -80,10 +82,14 @@ public static class QuestManager
         }
     }
 
-    public static void InitSideQuests()
+    public static void InitSideQuests(bool clear = false)
     {
-        RandomizedSideQuests ??= [];
-        BossSideQuests ??= [];
+        RandomizedSideQuests = RandomizedSideQuests == null || clear ? [] : RandomizedSideQuests;
+        BossSideQuests = BossSideQuests == null || clear ? [] : BossSideQuests;
+        BossProgress = BossProgress == null || clear ? new Dictionary<DungeonType, int> {
+            {DungeonType.Catacombs, 0}, {DungeonType.Forest, 0}, { DungeonType.ElvishRuins, 0}, { DungeonType.Cove, 0}, 
+            { DungeonType.Desert, 0}, { DungeonType.Temple, 0}, { DungeonType.Mountains, 0}, { DungeonType.Swamp, 0}, 
+        } : BossProgress;
         RerollSideQuests();
         UpdateBossQuests();
     }
@@ -100,7 +106,8 @@ public static class QuestManager
             {
                 var quest = new Quest(target, GetLevel(BossSideQuests.Count),
                     [new QuestStage("", [new KillQuestObjective(target, 1)])],
-                    new QuestReward(0, 0, 0, []), 
+                    new QuestReward((int)(300 * Math.Pow(4, GetLevel(BossSideQuests.Count) / 10.0)), 
+                        (int)(2 * Math.Pow(GetLevel(BossSideQuests.Count), 1.5) + 26), 4, []), 
                     UtilityMethods.RandomChoice(TownsHandler.Arungard.NPCs.Select(x => x.Alias).ToList()),
                     "", "");
                 BossSideQuests.Add(quest);

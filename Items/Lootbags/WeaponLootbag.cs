@@ -5,7 +5,6 @@ namespace ConsoleGodmist.Items;
 
 public class WeaponLootbag : Lootbag
 {
-    public override int ID => 571;
     public override string Alias => "WeaponLootbag";
     public WeaponLootbag(int level)
     {

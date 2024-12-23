@@ -1,6 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using ConsoleGodmist.Quests;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -25,18 +26,27 @@ public class Enchanter : NPC
 
     public override void OpenMenu()
     {
+        PlayerHandler.player.Level = 20;
+        PlayerHandler.player.GainGold(100000);
+        PlayerHandler.player.Inventory.AddItem(EquippableItemService.GetRandomWeapon(2, PlayerHandler.player.CharacterClass));
+        PlayerHandler.player.Inventory.AddItem(new Galdurite(0, 1, 0));
+        PlayerHandler.player.Inventory.AddItem(new Galdurite(0, 1, 0));
+        PlayerHandler.player.Inventory.AddItem(new Galdurite(0, 1, 0));
         AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
             .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
         Say($"{locale.EnchanterGreeting}, {PlayerHandler.player.Name}?\n");
         while (true)
         {
             AnsiConsole.Write(new Text($"{locale.LoyaltyLevel}: [{LoyaltyLevel}/15]\n", Stylesheet.Styles["npc-enchanter"]));
-            string[] choices = [locale.OpenShop, locale.CreateEnchanting, locale.CreateGaldurite, 
-                locale.RevealGaldurite, locale.ApplyWeaponGaldurite, locale.ApplyArmorGaldurite, 
-                locale.RemoveWeaponGaldurite, locale.RemoveArmorGaldurite, locale.Return];
-            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
+            Dictionary<string, int> choices = new() {{locale.OpenShop, 0}, {locale.CreateEnchanting, 1}, 
+                {locale.CreateGaldurite, 2}, {locale.RevealGaldurite, 3}, {locale.ApplyWeaponGaldurite, 4}, 
+                {locale.ApplyArmorGaldurite, 5}, {locale.RemoveWeaponGaldurite, 6}, {locale.RemoveArmorGaldurite, 7}};
+            if (QuestNPCHandler.GetAvailableQuests(Name).Count > 0) choices.Add(locale.AcceptQuest, 8);
+            if (QuestNPCHandler.GetReturnableQuests(Name).Count > 0) choices.Add(locale.ReturnQuest, 9);
+            choices.Add( locale.Return, 10 );
+            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
                 .HighlightStyle(Stylesheet.Styles["npc-enchanter"]));
-            switch (Array.IndexOf(choices, choice))
+            switch (choices[choice])
             {
                 case 0: DisplayShop(); break;
                 case 1: CraftItem(); break;
@@ -46,7 +56,9 @@ public class Enchanter : NPC
                 case 5: InsertArmorGaldurite(); break;
                 case 6: RemoveWeaponGaldurite(); break;
                 case 7: RemoveArmorGaldurite(); break;
-                case 8: return;
+                case 8: QuestNPCHandler.SelectQuestToAccept(Name); break;
+                case 9: QuestNPCHandler.SelectQuestToReturn(Name); break;
+                case 10: return;
             }
             AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
                 .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
@@ -54,27 +66,158 @@ public class Enchanter : NPC
     }
     public void CraftGaldurite()
     {
-        throw new NotImplementedException();
     }
     public void ExamineGaldurite()
     {
-        throw new NotImplementedException();
+        var player = PlayerHandler.player;
+        var galdurites = player.Inventory.Items
+            .Where(x => x.Key.ItemType is ItemType.WeaponGaldurite or ItemType.ArmorGaldurite && 
+                        !(x.Key as Galdurite).Revealed)
+            .Select(x => x.Key).Cast<Galdurite>().ToList();
+        if (galdurites.Count == 0)
+        {
+            Say(locale.NoGalduritesReveal);
+            return;
+        }
+        Say(locale.ChooseGalduriteReveal);
+        var galdurite = GalduriteManager.ChooseGaldurite(galdurites);
+        if (galdurite == null) return;
+        var cost = (int)(PlayerHandler.HonorDiscountModifier * ServiceCostMod * 0.2 * galdurite.Cost);
+        Say($"{locale.ICanReveal} {cost} {locale.CrownsGenitive}");
+        if (player.Gold < cost)
+        {
+            player.Say(locale.IDontHaveEnough);
+            return;
+        }
+        Say(locale.WantReveal);
+        if (!UtilityMethods.Confirmation(locale.WantRevealThird, true)) return;
+        SpendGold(cost);
+        galdurite.Reveal();
+        galdurite.Inspect();
     }
     public void InsertWeaponGaldurite()
     {
-        throw new NotImplementedException();
+        var player = PlayerHandler.player;
+        if (player.Weapon.Galdurites.Count < player.Weapon.GalduriteSlots)
+        {
+            var galdurites = player.Inventory.Items.Keys
+            .Where(x => x.ItemType == ItemType.WeaponGaldurite)
+            .Cast<Galdurite>()
+            .Where(x => player.Weapon.Rarity >= x.Rarity && player.Weapon.RequiredLevel >= x.RequiredLevel)
+            .ToList();
+            if (galdurites.Count == 0)
+            {
+                Say(locale.NoGalduritesApply);
+                return;
+            }
+            Say(locale.ChooseGalduriteApply);
+            var galdurite = GalduriteManager.ChooseGaldurite(galdurites);
+            if (galdurite == null) return;
+            var cost = (int)(PlayerHandler.HonorDiscountModifier * ServiceCostMod * galdurite.Cost * 0.75);
+            Say($"{locale.ICanApply} {cost} {locale.CrownsGenitive}");
+            if (player.Gold < cost)
+            {
+                player.Say(locale.IDontHaveEnough);
+                return;
+            }
+            Say(locale.WantApply);
+            galdurite.Inspect();
+            if (!UtilityMethods.Confirmation(locale.WantApplyThird, true)) return;
+            SpendGold(cost);
+            player.Weapon.AddGaldurite(galdurite);
+            player.Inventory.TryRemoveItem(galdurite);
+        }
+        else
+        {
+            Say(locale.NoGalduriteSlotsWeapon);
+        }
     }
     public void InsertArmorGaldurite()
     {
-        throw new NotImplementedException();
+        var player = PlayerHandler.player;
+        if (player.Armor.Galdurites.Count < player.Armor.GalduriteSlots)
+        {
+            var galdurites = player.Inventory.Items.Keys
+                .Where(x => x.ItemType == ItemType.ArmorGaldurite)
+                .Cast<Galdurite>()
+                .Where(x => player.Armor.Rarity >= x.Rarity && player.Armor.RequiredLevel >= x.RequiredLevel)
+                .ToList();
+            if (galdurites.Count == 0)
+            {
+                Say(locale.NoGalduritesApply);
+                return;
+            }
+            Say(locale.ChooseGalduriteApply);
+            var galdurite = GalduriteManager.ChooseGaldurite(galdurites);
+            if (galdurite == null) return;
+            var cost = (int)(PlayerHandler.HonorDiscountModifier * ServiceCostMod * galdurite.Cost * 0.75);
+            Say($"{locale.ICanApply} {cost} {locale.CrownsGenitive}");
+            if (player.Gold < cost)
+            {
+                player.Say(locale.IDontHaveEnough);
+                return;
+            }
+            Say(locale.WantApply);
+            galdurite.Inspect();
+            if (!UtilityMethods.Confirmation(locale.WantApplyThird, true)) return;
+            SpendGold(cost);
+            player.Armor.AddGaldurite(galdurite);
+            player.Inventory.TryRemoveItem(galdurite);
+        }
+        else
+        {
+            Say(locale.NoGalduriteSlotsArmor);
+        }
     }
     public void RemoveWeaponGaldurite()
     {
-        throw new NotImplementedException();
+        var player = PlayerHandler.player;
+        var galdurites = player.Weapon.Galdurites;
+        if (galdurites.Count == 0)
+        {
+            Say(locale.NoGalduritesInWeapon);
+            return;
+        }
+        Say(locale.ChooseGalduriteRemove);
+        var galdurite = GalduriteManager.ChooseGaldurite(galdurites);
+        if (galdurite == null) return;
+        var cost = (int)(PlayerHandler.HonorDiscountModifier * ServiceCostMod * galdurite.Cost * 4);
+        Say($"{locale.ICanRemove} {cost} {locale.CrownsGenitive}");
+        if (player.Gold < cost)
+        {
+            player.Say(locale.IDontHaveEnough);
+            return;
+        }
+        Say(locale.WantRemove);
+        galdurite.Inspect();
+        if (!UtilityMethods.Confirmation(locale.WantRemoveThird, true)) return;
+        SpendGold(cost);
+        player.Weapon.RemoveGaldurite(galdurite);
     }
     public void RemoveArmorGaldurite()
     {
-        throw new NotImplementedException();
+        var player = PlayerHandler.player;
+        var galdurites = player.Armor.Galdurites;
+        if (galdurites.Count == 0)
+        {
+            Say(locale.NoGalduritesInArmor);
+            return;
+        }
+        Say(locale.ChooseGalduriteRemove);
+        var galdurite = GalduriteManager.ChooseGaldurite(galdurites);
+        if (galdurite == null) return;
+        var cost = (int)(PlayerHandler.HonorDiscountModifier * ServiceCostMod * galdurite.Cost * 4);
+        Say($"{locale.ICanRemove} {cost} {locale.CrownsGenitive}");
+        if (player.Gold < cost)
+        {
+            player.Say(locale.IDontHaveEnough);
+            return;
+        }
+        Say(locale.WantRemove);
+        galdurite.Inspect();
+        if (!UtilityMethods.Confirmation(locale.WantRemoveThird, true)) return;
+        SpendGold(cost);
+        player.Armor.RemoveGaldurite(galdurite);
     }
 
     public override void Say(string message)

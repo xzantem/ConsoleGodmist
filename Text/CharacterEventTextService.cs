@@ -1,6 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Utilities;
 using Spectre.Console;
 
 namespace ConsoleGodmist.TextService;
@@ -162,5 +163,43 @@ public static class CharacterEventTextService
             default:
                 throw new ArgumentOutOfRangeException();
         }
+    }
+
+    public static void DisplayCharacterMenuText(PlayerCharacter player)
+    {
+        var resourceType = player.ResourceType switch
+        {
+            ResourceType.Fury => "RP",
+            ResourceType.Mana => "MP",
+            ResourceType.Momentum => "SP"
+        };
+        AnsiConsole.Write(new Text($"\n{player.Name} [{NameAliasHelper.GetName(player.HonorLevel.ToString())} (" +
+                                   $"{player.Honor})], {locale.Level} {player.Level} " +
+                                   $"{NameAliasHelper.GetName(player.CharacterClass.ToString())} " +
+                                   $"({player.CurrentExperience}/{player.RequiredExperience})", Stylesheet.Styles["highlight-good"]));
+        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {player.CurrentHealth:F0}/{player.MaximalHealth:F0}" +
+                                  $", {resourceType}: {player.CurrentResource:F0}/{player.MaximalResource:F0}\n" +
+                                  $"{locale.Attack}: {player.MinimalAttack:F0}-{player.MaximalAttack:F0}, {locale.Crit}: " +
+                                  $"{player.CritChance:P2} [{player.CritMod:F2}x]\n" +
+                                  $"{locale.Accuracy}: {(int)player.Accuracy:F0}, {locale.Speed}: {player.Speed:F0}\n" +
+                                  $"{locale.Defense}: {player.PhysicalDefense:F0}:{player.MagicDefense:F0}, " +
+                                  $"{locale.Dodge}: {player.Dodge:F0}\n\n", Stylesheet.Styles["default"]));
+        AnsiConsole.Write(new Text($"{locale.Resistances}\n", Stylesheet.Styles["default-bold"]));
+        AnsiConsole.Write(new Text($"{locale.Debuff}: {player.Resistances[StatusEffectType.Debuff].Value():P0}, " +
+                                   $"{locale.Stun}: {player.Resistances[StatusEffectType.Stun].Value():P0}, " +
+                                   $"{locale.Freeze}: {player.Resistances[StatusEffectType.Freeze].Value():P0}\n" +
+                                   $"{locale.Bleed}: {player.Resistances[StatusEffectType.Bleed].Value():P0}, " +
+                                   $"{locale.Poison}: {player.Resistances[StatusEffectType.Poison].Value():P0}, " +
+                                   $"{locale.Burn}: {player.Resistances[StatusEffectType.Burn].Value():P0}\n" +
+                                   $"{locale.Frostbite}: {player.Resistances[StatusEffectType.Frostbite].Value():P0}, " +
+                                   $"{locale.Sleep}: {player.Resistances[StatusEffectType.Sleep].Value():P0}, " +
+                                   $"{locale.Paralysis}: {player.Resistances[StatusEffectType.Paralysis].Value():P0}, " +
+                                   $"{locale.Provocation}: {player.Resistances[StatusEffectType.Provocation].Value():P0}\n\n", 
+            Stylesheet.Styles["default"]));
+        PlayerHandler.player.Weapon.Inspect();
+        PlayerHandler.player.Armor.Inspect();
+        var cont = AnsiConsole.Prompt(
+            new TextPrompt<string>(locale.PressAnyKey)
+                .AllowEmpty());
     }
 }

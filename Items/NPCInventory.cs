@@ -50,7 +50,7 @@ public class NPCInventory
                 case ItemType.Runeforging:
                     var items = ItemManager.Items
                         .Where(x => x.ItemType == type &&
-                                    (int)x.Rarity == tier + 2 && !RotatingShop.ContainsKey(x)).ToList(); 
+                                    (int)x.Rarity <= tier + 2 && !RotatingShop.ContainsKey(x)).ToList(); 
                     while (RotatingShop.Count - initial < 15 && RotatingShop.Count - initial < items.Count)
                         RotatingShop.TryAdd(UtilityMethods.RandomChoice(items), Random.Shared.Next(10, 21));
                     break;

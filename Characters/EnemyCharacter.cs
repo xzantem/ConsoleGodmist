@@ -7,7 +7,7 @@ namespace ConsoleGodmist.Characters;
 
 public class EnemyCharacter : Character
 {
-    public EnemyType EnemyType { get; set; }
+    public List<EnemyType> EnemyType { get; set; }
     public string Alias { get; set; }
     public override string Name
     {
@@ -26,6 +26,7 @@ public class EnemyCharacter : Character
 
     public EnemyCharacter(EnemyCharacter other, int level) // Deep Copy for initializing new monsters
     {
+        Level = level;
         Alias = other.Alias;
         EnemyType = other.EnemyType;
         DefaultLocation = other.DefaultLocation;
@@ -51,6 +52,5 @@ public class EnemyCharacter : Character
         Resistances = other.Resistances.ToDictionary(x => x.Key, x => 
             new Stat(x.Value.BaseValue, x.Value.ScalingFactor));
         ActiveSkills = (ActiveSkill[])other.ActiveSkills.Clone();
-        Level = level;
     }
 }

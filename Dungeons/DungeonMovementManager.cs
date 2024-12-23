@@ -3,6 +3,7 @@ using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Quests;
 using ConsoleGodmist.TextService;
 using Spectre.Console;
 
@@ -52,7 +53,7 @@ public static class DungeonMovementManager
                     InventoryMenuHandler.OpenInventoryMenu();
                     break;
                 case 3:
-                    //Open Quest Log
+                    QuestLog.OpenLog();
                     break;
                 case 4:
                     //Show Character Info

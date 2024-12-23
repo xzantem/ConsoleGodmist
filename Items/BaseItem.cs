@@ -21,7 +21,7 @@ public abstract class BaseItem : IItem
     public virtual string Description { get; set; }
     public virtual ItemType ItemType { get; set; }
     public virtual void Inspect(int amount = 1){
-        AnsiConsole.Write(new Text($"\n\n{Name}", NameStyle()));
+        AnsiConsole.Write(new Text($"{Name}", NameStyle()));
         if (Stackable)
             AnsiConsole.Write(new Text($" {amount}x", NameStyle()));
         AnsiConsole.Write(new Text($"\n{RarityName()}, ", NameStyle()));

@@ -23,6 +23,7 @@ public class Armor : BaseItem, IEquippable
     public Quality Quality { get; set; }
     public double UpgradeModifier { get; set; }
     public List<Galdurite> Galdurites { get; set; }
+    public int GalduriteSlots => (int)((UpgradeModifier - 1) / 0.2);
     
     //Armor implementations
     public ArmorPlate Plate { get; set; }
@@ -123,24 +124,33 @@ public class Armor : BaseItem, IEquippable
         }
     }
     
-    public Armor(ArmorPlate plate, ArmorBinder binder, ArmorBase armBase, CharacterClass requiredClass, Quality quality, int requiredLevel = 0)
+    public Armor(ArmorPlate plate, ArmorBinder binder, ArmorBase armBase, CharacterClass requiredClass, Quality quality, string alias = "")
     {
         Plate = plate;
         Binder = binder;
         Base = armBase;
-        Name = NameAliasHelper.GetName(Plate.Adjective) + " " + requiredClass switch
+        Quality = quality;
+        if (alias == "")
         {
-            CharacterClass.Warrior => locale.Hauberk,
-            CharacterClass.Scout => locale.Tunic,
-            CharacterClass.Sorcerer => locale.Robe,
-            _ => locale.Cuirass
-        } + quality switch
+            Name = NameAliasHelper.GetName(Plate.Adjective) + " " + requiredClass switch
+            {
+                CharacterClass.Warrior => locale.Hauberk,
+                CharacterClass.Scout => locale.Tunic,
+                CharacterClass.Sorcerer => locale.Robe,
+                _ => locale.Cuirass
+            } + quality switch
+            {
+                Quality.Weak => $" ({locale.Weak})",
+                Quality.Excellent => $" ({locale.Excellent})",
+                _ => ""
+            };
+            Alias = $"{plate.Alias}.{binder.Alias}.{armBase.Alias}";
+        }
+        else
         {
-            Quality.Weak => $" ({locale.Weak})",
-            Quality.Excellent => $" ({locale.Excellent})",
-            _ => ""
-        };
-        Alias = $"{plate.Alias}.{binder.Alias}.{armBase.Alias}";
+            Name = NameAliasHelper.GetName(alias);
+            Alias = alias;
+        }
         Rarity = EquippableItemService.GetRandomRarity();
         BaseCost = (int)((plate.MaterialCost * ItemManager.GetItem(plate.Material).Cost + 
                    binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
@@ -150,18 +160,15 @@ public class Armor : BaseItem, IEquippable
             Quality.Excellent => 2,
             Quality.Masterpiece => 4,
             _ => 1 });
-        RequiredLevel = requiredLevel == 0
-            ? Math.Max(Math.Max(plate.Tier, binder.Tier), armBase.Tier) * 10 - 5 + quality switch
-            {
-                Quality.Weak => -3,
-                Quality.Normal => 0,
-                Quality.Excellent => 3,
-                Quality.Masterpiece => 5,
-                _ => 0
-            }
-            : requiredLevel;
+        RequiredLevel = Math.Max(Math.Max(plate.Tier, binder.Tier), armBase.Tier) * 10 - 5 + quality switch
+        {
+            Quality.Weak => -3,
+            Quality.Normal => 0,
+            Quality.Excellent => 3,
+            Quality.Masterpiece => 5,
+            _ => 0
+        };
         RequiredClass = requiredClass;
-        Quality = quality;
         UpgradeModifier = 1;
         Galdurites = new List<Galdurite>();
     }
@@ -176,27 +183,27 @@ public class Armor : BaseItem, IEquippable
         switch (requiredClass)
         {
             case CharacterClass.Warrior:
-                Plate = EquipmentPartManager.GetPart<ArmorPlate>("ScratchedPlate");
-                Binder = EquipmentPartManager.GetPart<ArmorBinder>("ScratchedBinder");
-                Base = EquipmentPartManager.GetPart<ArmorBase>("ScratchedBase");
+                Plate = EquipmentPartManager.GetPart<ArmorPlate>("ScratchedPlate", CharacterClass.Warrior);
+                Binder = EquipmentPartManager.GetPart<ArmorBinder>("ScratchedBinder", CharacterClass.Warrior);
+                Base = EquipmentPartManager.GetPart<ArmorBase>("ScratchedBase", CharacterClass.Warrior);
                 Name = NameAliasHelper.GetName(Plate.Adjective) + " " + locale.Hauberk;
                 break;
             case CharacterClass.Scout:
-                Plate = EquipmentPartManager.GetPart<ArmorPlate>("HoleyPlate");
-                Binder = EquipmentPartManager.GetPart<ArmorBinder>("HoleyBinder");
-                Base = EquipmentPartManager.GetPart<ArmorBase>("HoleyBase");
+                Plate = EquipmentPartManager.GetPart<ArmorPlate>("HoleyPlate", CharacterClass.Scout);
+                Binder = EquipmentPartManager.GetPart<ArmorBinder>("HoleyBinder", CharacterClass.Scout);
+                Base = EquipmentPartManager.GetPart<ArmorBase>("HoleyBase", CharacterClass.Scout);
                 Name = NameAliasHelper.GetName(Plate.Adjective) + " " + locale.Tunic;
                 break;
             case CharacterClass.Sorcerer:
-                Plate = EquipmentPartManager.GetPart<ArmorPlate>("TornPlate");
-                Binder = EquipmentPartManager.GetPart<ArmorBinder>("TornBinder");
-                Base = EquipmentPartManager.GetPart<ArmorBase>("TornBase");
+                Plate = EquipmentPartManager.GetPart<ArmorPlate>("TornPlate", CharacterClass.Sorcerer);
+                Binder = EquipmentPartManager.GetPart<ArmorBinder>("TornBinder", CharacterClass.Sorcerer);
+                Base = EquipmentPartManager.GetPart<ArmorBase>("TornBase", CharacterClass.Sorcerer);
                 Name = NameAliasHelper.GetName(Plate.Adjective) + " " + locale.Robe;
                 break;
             case CharacterClass.Paladin:
-                Plate = EquipmentPartManager.GetPart<ArmorPlate>("PiercedPlate");
-                Binder = EquipmentPartManager.GetPart<ArmorBinder>("PiercedBinder");
-                Base = EquipmentPartManager.GetPart<ArmorBase>("PiercedBase");
+                Plate = EquipmentPartManager.GetPart<ArmorPlate>("PiercedPlate", CharacterClass.Paladin);
+                Binder = EquipmentPartManager.GetPart<ArmorBinder>("PiercedBinder", CharacterClass.Paladin);
+                Base = EquipmentPartManager.GetPart<ArmorBase>("PiercedBase", CharacterClass.Paladin);
                 Name = NameAliasHelper.GetName(Plate.Adjective) + " " + locale.Cuirass;
                 break;
             default:
@@ -234,25 +241,64 @@ public class Armor : BaseItem, IEquippable
     {
         base.Inspect(amount);
         var playerArmor = PlayerHandler.player.Armor;
+        if (playerArmor != this)
+        {
+            AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, +{UpgradeModifier-1:P0}\n", Stylesheet.Styles["default"]));
+            AnsiConsole.Write(new Text($"{locale.Defense}: {PhysicalDefense}", Stylesheet.Styles["default"]));
+            WriteComparator(PhysicalDefense, playerArmor.PhysicalDefense);
+            AnsiConsole.Write(new Text($" | {MagicDefense}", Stylesheet.Styles["default"]));
+            WriteComparator(MagicDefense, playerArmor.MagicDefense);
+            AnsiConsole.Write(new Text($"\n{locale.Dodge}: {Dodge}", Stylesheet.Styles["default"]));
+            WriteComparator(Dodge, playerArmor.Dodge);
+            AnsiConsole.Write(new Text($"\n{locale.HealthC}: {MaximalHealth}", Stylesheet.Styles["default"]));
+            WriteComparator(MaximalHealth, playerArmor.MaximalHealth);
+            AnsiConsole.Write(new Text("\n"));
+            foreach (var effect in GetEffectSums())
+                AnsiConsole.Write(new Text($"{effect.EffectText}"));
+            AnsiConsole.Write(new Text("\n"));
+            return;
+        }
         AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, +{UpgradeModifier-1:P0}\n", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{locale.Defense}: {PhysicalDefense}", Stylesheet.Styles["default"]));
-        WriteComparator(PhysicalDefense, playerArmor.PhysicalDefense);
-        AnsiConsole.Write(new Text($" | {MagicDefense}", Stylesheet.Styles["default"]));
-        WriteComparator(MagicDefense, playerArmor.MagicDefense);
-        AnsiConsole.Write(new Text($"\n{locale.Dodge}: {Dodge}", Stylesheet.Styles["default"]));
-        WriteComparator(Dodge, playerArmor.Dodge);
-        AnsiConsole.Write(new Text($"\n{locale.HealthC}: {MaximalHealth}", Stylesheet.Styles["default"]));
-        WriteComparator(MaximalHealth, playerArmor.MaximalHealth);
+        AnsiConsole.Write(new Text($":{MagicDefense}", Stylesheet.Styles["default"]));
+        AnsiConsole.Write(new Text($" | {locale.Dodge}: {Dodge}", Stylesheet.Styles["default"]));
+        AnsiConsole.Write(new Text($" | {locale.HealthC}: {MaximalHealth}", Stylesheet.Styles["default"]));
+        AnsiConsole.Write(new Text("\n"));
+        foreach (var effect in GetEffectSums())
+            AnsiConsole.Write(new Text($"{effect.EffectText}"));
         AnsiConsole.Write(new Text("\n"));
         return;
         void WriteComparator(double value1, double value2)
         {
             if (value1 > value2)
                 AnsiConsole.Write(new Text(" ( ^ )", Stylesheet.Styles["success"]));
-            else if (value1 == value2)
+            else if (Math.Abs(value1 - value2) < 0.00001)
                 AnsiConsole.Write(new Text(" ( ~ )", Stylesheet.Styles["default"]));
             else
                 AnsiConsole.Write(new Text(" ( v )", Stylesheet.Styles["failure"]));
         }
+    }
+    public void AddGaldurite(Galdurite galdurite)
+    {
+        if (Galdurites.Count >= GalduriteSlots || galdurite.ItemType != ItemType.ArmorGaldurite) return;
+        Galdurites.Add(galdurite);
+        galdurite.Reveal();
+    }
+    public void RemoveGaldurite(Galdurite galdurite)
+    {
+        Galdurites.Remove(galdurite);
+    }
+    
+    public HashSet<GalduriteComponent> GetEffectSums()
+    {
+        var result = new HashSet<GalduriteComponent>();
+        foreach (var effect in Galdurites.SelectMany(gal => gal.Components))
+        {
+            if (result.All(x => x.EffectType != effect.EffectType))
+                result.Add(effect);
+            else
+                result.FirstOrDefault(x => x.EffectType == effect.EffectType).EffectStrength += effect.EffectStrength;
+        }
+        return result;
     }
 }

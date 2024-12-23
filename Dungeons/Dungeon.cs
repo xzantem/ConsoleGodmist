@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Linq;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Quests;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Dungeons
@@ -59,6 +60,7 @@ namespace ConsoleGodmist.Dungeons
             };
             length = Math.Clamp(length, 1, 16);
             Floors.Add(new DungeonFloor((int)length, Floors.Count, DungeonType, DungeonLevel));
+            QuestManager.CheckForProgress(new QuestObjectiveContext(DungeonType, Floors.Count - 1, DungeonLevel));
         }
         public void Ascend()
         {

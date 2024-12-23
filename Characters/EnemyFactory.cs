@@ -1,13 +1,13 @@
-﻿using System.Text.Json;
-using ConsoleGodmist.Combat.Modifiers;
-using ConsoleGodmist.Enums;
-using ConsoleGodmist.Items;
+﻿using ConsoleGodmist.Enums;
+using ConsoleGodmist.Quests;
 
 namespace ConsoleGodmist.Characters;
 
 public static class EnemyFactory
 {
     public static List<EnemyCharacter> EnemiesList;
+
+    private const double BossChance = 0.2;
     
     public static EnemyCharacter CreateEnemy(string alias, int level)
     {
@@ -16,9 +16,21 @@ public static class EnemyFactory
     }
     public static EnemyCharacter CreateEnemy(DungeonType dungeonType, int level)
     {
+        if (QuestManager.BossProgress[dungeonType] >= QuestManager.ProgressTarget &&
+            Random.Shared.NextDouble() < BossChance) // If the dungeon quest progress to boss is suitable, try to generate boss
+        {
+            var target = QuestManager.GetBossQuestTarget
+                (dungeonType, Random.Shared.Next(1, QuestManager.BossProgress[dungeonType] / 3 + 1)); // Getting boss name
+            if (QuestManager.BossSideQuests.Where(x => x.QuestState != QuestState.Available)
+                .Any(x => x.Alias == target)) // Check if the boss kill quest is Accepted
+            {
+                var boss = EnemiesList.FirstOrDefault(x => x.Name == target);
+                return new EnemyCharacter(boss, level);
+            }
+        }
         var enemy = UtilityMethods.RandomChoice(EnemiesList
-            .Where(x => x.DefaultLocation == dungeonType)
-            .ToDictionary(s => s, enemy => 1));
+            .Where(x => x.DefaultLocation == dungeonType && x.EnemyType.All(t => t != EnemyType.Boss))
+            .ToList());
         return new EnemyCharacter(enemy, level);
     }
 

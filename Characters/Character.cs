@@ -278,30 +278,30 @@ namespace ConsoleGodmist.Characters
             _damageTaken.Decrement();
         }
 
-        public Dictionary<StatType, StatModifier> GetModifiers()
+        public Dictionary<StatModifier, StatType> GetModifiers()
         {
             var mods = _maximalHealth.Modifiers
-                .ToDictionary(mod => StatType.MaximalHealth, mod => mod);
+                .ToDictionary(mod => mod, mod => StatType.MaximalHealth);
             foreach (var mod in _minimalAttack.Modifiers)
-                mods.Add(StatType.MinimalAttack, mod);
+                mods.Add(mod, StatType.MinimalAttack);
             foreach (var mod in _maximalAttack.Modifiers)
-                mods.Add(StatType.MaximalAttack, mod);
+                mods.Add(mod, StatType.MaximalAttack);
             foreach (var mod in _dodge.Modifiers)
-                mods.Add(StatType.Dodge, mod);
+                mods.Add(mod, StatType.Dodge);
             foreach (var mod in _physicalDefense.Modifiers)
-                mods.Add(StatType.PhysicalDefense, mod);
+                mods.Add(mod, StatType.PhysicalDefense);
             foreach (var mod in _magicDefense.Modifiers)
-                mods.Add(StatType.MagicDefense, mod);
+                mods.Add(mod, StatType.MagicDefense);
             foreach (var mod in _accuracy.Modifiers)
-                mods.Add(StatType.Accuracy, mod);
+                mods.Add(mod, StatType.Accuracy);
             foreach (var mod in _speed.Modifiers)
-                mods.Add(StatType.Speed, mod);
+                mods.Add(mod, StatType.Speed);
             foreach (var mod in _maximalResource.Modifiers)
-                mods.Add(StatType.MaximalResource, mod);
+                mods.Add(mod, StatType.MaximalResource);
             foreach (var mod in _damageDealt.Modifiers)
-                mods.Add(StatType.DamageDealt, mod);
+                mods.Add(mod, StatType.DamageDealt);
             foreach (var mod in _damageTaken.Modifiers)
-                mods.Add(StatType.DamageTaken, mod);
+                mods.Add(mod, StatType.DamageTaken);
             return mods;
         }
     }

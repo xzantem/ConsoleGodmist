@@ -31,6 +31,7 @@ class Program
         EnemyFactory.InitializeEnemies();
         PlantDropManager.InitPlantDrops();
         PotionManager.InitComponents();
+        GalduriteManager.InitComponents();
         
         while (true)
         {

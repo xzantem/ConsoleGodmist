@@ -14,11 +14,12 @@ public class DealDamage : IActiveSkillEffect
     public bool CanCrit { get; set; }
     public bool AlwaysCrits { get; set; }
     public double LifeSteal { get; set; }
+    public double ArmorPen { get; set; }
     
     public DealDamage() {}
 
     public DealDamage(DamageType damageType, DamageBase damageBase, double damageMultiplier, bool canCrit,
-        bool alwaysCrits, double lifeSteal)
+        bool alwaysCrits, double lifeSteal, double armorPen)
     {
         Target = SkillTarget.Enemy;
         DamageType = damageType;
@@ -27,6 +28,7 @@ public class DealDamage : IActiveSkillEffect
         CanCrit = canCrit;
         AlwaysCrits = alwaysCrits;
         LifeSteal = lifeSteal;
+        ArmorPen = armorPen;
     }
 
     private double CalculateDamage(Character caster, Character enemy)

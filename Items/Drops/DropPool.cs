@@ -1,4 +1,6 @@
-﻿namespace ConsoleGodmist.Items;
+﻿using ConsoleGodmist.Enums;
+
+namespace ConsoleGodmist.Items;
 
 public class DropPool
 {
@@ -20,7 +22,31 @@ public class DropPool
             .Where(item => item.Value.MinLevel <= level && item.Value.MaxLevel >= level)
             .ToDictionary(item => item.Key, item => item.Value)
             .ToDictionary(x => x, x => x.Value.Weight));
-        return new KeyValuePair<IItem, ItemDrop>(ItemManager.GetItem(choice.Key), choice.Value);
+        var item = new KeyValuePair<IItem, ItemDrop>();
+        var choiceSplit = choice.Key.Split('_');
+        switch (choiceSplit[0])
+        {
+            case "WeaponDrop":
+                item = new KeyValuePair<IItem, ItemDrop>(EquippableItemService.GetRandomWeapon(level / 10 + 1),
+                    choice.Value);
+                break;
+            case "ArmorDrop":
+                item = new KeyValuePair<IItem, ItemDrop>(EquippableItemService.GetRandomArmor(level / 10 + 1),
+                    choice.Value);
+                break;
+            case "BossEquipmentDrop":
+                item = new KeyValuePair<IItem, ItemDrop>(
+                    EquippableItemService.GetBossDrop(level / 10 + 1, choiceSplit[1]), choice.Value);
+                break;
+            case "GalduriteDrop":
+                item = new KeyValuePair<IItem, ItemDrop>(new Galdurite((byte)Random.Shared.Next(0, 2), 
+                    level < 21 ? 1 : level < 41 ? 2 : 3, Convert.ToInt32(choiceSplit[1])), choice.Value);
+                break;
+            default:
+                item = new KeyValuePair<IItem, ItemDrop>(ItemManager.GetItem(choice.Key), choice.Value);
+                break;
+        }
+        return item;
     }
 
     public KeyValuePair<IItem, int> GetDrop(int level)

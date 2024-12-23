@@ -154,7 +154,6 @@ public static class PotionManager
         var choices = pots.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
-        return choice == locale.Return || potions.ElementAt(Array.IndexOf(choices, choice)).CurrentCharges == 0 ? 
-            null : potions.ElementAt(Array.IndexOf(choices, choice));
+        return choice == locale.Return ? null : potions.ElementAt(Array.IndexOf(choices, choice));
     }
 }

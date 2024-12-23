@@ -13,6 +13,7 @@ public class DropTable
         Dictionary<IItem, int> drops = new();
         foreach (var pool in Table)
         {
+            if (pool.Pool == null) continue;
             var poolCopy = new DropPool(pool);
             foreach (var t in poolCopy.Chances)
             {

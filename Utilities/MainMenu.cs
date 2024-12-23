@@ -69,7 +69,8 @@ namespace ConsoleGodmist.Utilities
                 3 => Difficulty.Nightmare,
                 _ => throw new NotImplementedException()
             };
-            QuestManager.InitSideQuests();
+            QuestManager.InitMainQuests();
+            QuestManager.InitSideQuests(true);
             Console.WriteLine(locale.Opening_1);
             Console.WriteLine(locale.Opening_2);
             Console.WriteLine(locale.Opening_3);
