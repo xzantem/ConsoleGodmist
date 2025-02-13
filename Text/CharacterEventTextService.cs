@@ -185,16 +185,16 @@ public static class CharacterEventTextService
                                   $"{locale.Defense}: {player.PhysicalDefense:F0}:{player.MagicDefense:F0}, " +
                                   $"{locale.Dodge}: {player.Dodge:F0}\n\n", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{locale.Resistances}\n", Stylesheet.Styles["default-bold"]));
-        AnsiConsole.Write(new Text($"{locale.Debuff}: {player.Resistances[StatusEffectType.Debuff].Value():P0}, " +
-                                   $"{locale.Stun}: {player.Resistances[StatusEffectType.Stun].Value():P0}, " +
-                                   $"{locale.Freeze}: {player.Resistances[StatusEffectType.Freeze].Value():P0}\n" +
-                                   $"{locale.Bleed}: {player.Resistances[StatusEffectType.Bleed].Value():P0}, " +
-                                   $"{locale.Poison}: {player.Resistances[StatusEffectType.Poison].Value():P0}, " +
-                                   $"{locale.Burn}: {player.Resistances[StatusEffectType.Burn].Value():P0}\n" +
-                                   $"{locale.Frostbite}: {player.Resistances[StatusEffectType.Frostbite].Value():P0}, " +
-                                   $"{locale.Sleep}: {player.Resistances[StatusEffectType.Sleep].Value():P0}, " +
-                                   $"{locale.Paralysis}: {player.Resistances[StatusEffectType.Paralysis].Value():P0}, " +
-                                   $"{locale.Provocation}: {player.Resistances[StatusEffectType.Provocation].Value():P0}\n\n", 
+        AnsiConsole.Write(new Text($"{locale.Debuff}: {player.Resistances[StatusEffectType.Debuff].Value(player, "DebuffResistance"):P0}, " +
+                                   $"{locale.Stun}: {player.Resistances[StatusEffectType.Stun].Value(player, "StunResistance"):P0}, " +
+                                   $"{locale.Freeze}: {player.Resistances[StatusEffectType.Freeze].Value(player, "FreezeResistance"):P0}\n" +
+                                   $"{locale.Bleed}: {player.Resistances[StatusEffectType.Bleed].Value(player, "BleedResistance"):P0}, " +
+                                   $"{locale.Poison}: {player.Resistances[StatusEffectType.Poison].Value(player, "PoisonResistance"):P0}, " +
+                                   $"{locale.Burn}: {player.Resistances[StatusEffectType.Burn].Value(player, "BurnResistance"):P0}\n" +
+                                   $"{locale.Frostbite}: {player.Resistances[StatusEffectType.Frostbite].Value(player, "FrostbiteResistance"):P0}, " +
+                                   $"{locale.Sleep}: {player.Resistances[StatusEffectType.Sleep].Value(player, "SleepResistance"):P0}, " +
+                                   $"{locale.Paralysis}: {player.Resistances[StatusEffectType.Paralysis].Value(player, "ParalysisResistance"):P0}, " +
+                                   $"{locale.Provocation}: {player.Resistances[StatusEffectType.Provocation].Value(player, "ProvocationResistance"):P0}\n\n", 
             Stylesheet.Styles["default"]));
         PlayerHandler.player.Weapon.Inspect();
         PlayerHandler.player.Armor.Inspect();

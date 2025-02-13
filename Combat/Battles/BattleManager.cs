@@ -8,7 +8,7 @@ namespace ConsoleGodmist.Combat.Battles;
 
 public static class BattleManager
 {
-    public static Battle CurrentBattle { get; private set; }
+    public static Battle? CurrentBattle { get; private set; }
     
     public static void StartNewBattle(Battle battle)
     {

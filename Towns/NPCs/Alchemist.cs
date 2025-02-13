@@ -7,6 +7,7 @@ using Spectre.Console;
 
 namespace ConsoleGodmist.Town.NPCs;
 
+[JsonConverter(typeof(NPCConverter))]
 public class Alchemist : NPC
 {
     public Alchemist(string alias)
@@ -26,6 +27,7 @@ public class Alchemist : NPC
 
     public override void OpenMenu()
     {
+        PlayerHandler.player.Inventory.AddItem(LootbagManager.GetSupplyBag(DungeonType.Catacombs, 15), 20);
         AnsiConsole.Write(new FigletText(locale.Alchemist).Centered()
             .Color(Stylesheet.Styles["npc-alchemist"].Foreground));
         Say($"{locale.AlchemistGreeting1}, {PlayerHandler.player.Name}. {locale.AlchemistGreeting2}\n");
@@ -45,7 +47,7 @@ public class Alchemist : NPC
                 case 0: DisplayShop(); break;
                 case 1: Treat(); break;
                 case 2: CraftItem(); break;
-                case 3: CraftPotion(); break;
+                case 3: CraftingManager.CraftPotion(); break;
                 case 4: RefillPotion(); break;
                 case 5: QuestNPCHandler.SelectQuestToAccept(Name); break;
                 case 6: QuestNPCHandler.SelectQuestToReturn(Name); break;
@@ -73,10 +75,6 @@ public class Alchemist : NPC
         SpendGold(cost);
         player.Heal(player.MaximalHealth - player.CurrentHealth);
     }
-    public void CraftPotion()
-    {
-        throw new NotImplementedException();
-    }
     public void RefillPotion()
     {
         var player = PlayerHandler.player;
@@ -88,9 +86,9 @@ public class Alchemist : NPC
             Say(locale.NoPotions);
             return;
         }
-        var cost = 6 * PlayerHandler.HonorDiscountModifier * ServiceCostMod * Math.Pow(4, (player.Level - 1)/10.0);
+        var cost = (int)(6 * PlayerHandler.HonorDiscountModifier * ServiceCostMod * Math.Pow(4, (player.Level - 1)/10.0));
         Say(locale.ChooseRefillPotion);
-        var potion = PotionManager.ChoosePotion(potions);
+        var potion = PotionManager.ChoosePotion(potions, true);
         if (potion == null) return;
         var amount = Math.Min(potion.MaximalCharges - potion.CurrentCharges,
             AnsiConsole.Prompt(new TextPrompt<int>(locale.ChooseRefillAmount)
@@ -99,12 +97,22 @@ public class Alchemist : NPC
         Say($"{locale.ICanRefill} {amount * cost} {locale.CrownsGenitive}");
         if (player.Gold < amount * cost)
         {
-            player.Say(locale.IDontHaveEnough);
+            player.Say(locale.IDontHaveEnough + "\n");
+            return;
+        }
+        if (player.Inventory.Items.All(x => x.Key.Alias != potion.Components[0].Material &&
+                                            x.Key.Alias != potion.Components[1].Material &&
+                                            x.Key.Alias != potion.Components[2].Material))
+        {
+            AnsiConsole.Write(locale.NotEnoughMaterials + "\n");
             return;
         }
         Say(locale.WantRefill);
         if (!UtilityMethods.Confirmation(locale.WantRefillThird, true)) return;
-        SpendGold((int)(amount * cost));
+        SpendGold((amount * cost));
+        player.Inventory.TryRemoveItem(ItemManager.GetItem(potion.Components[0].Material));
+        player.Inventory.TryRemoveItem(ItemManager.GetItem(potion.Components[1].Material));
+        player.Inventory.TryRemoveItem(ItemManager.GetItem(potion.Components[2].Material));
         potion.Refill(amount);
     }
     public override void Say(string message)

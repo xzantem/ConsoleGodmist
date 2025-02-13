@@ -25,9 +25,9 @@ public class BattleUser
     public void ResetAction()
     {
         ActionPointer = Math.Pow(10, ActionPointerInitial);
-        ActionValue = (int)(ActionPointer / User.Speed);
+        ActionValue += (int)(ActionPointer / User.Speed);
         MaxActionPoints = new Stat(User.Speed / 2, 0, MaxActionPoints.Modifiers);
-        CurrentActionPoints = MaxActionPoints.Value();
+        CurrentActionPoints = MaxActionPoints.Value(User, "MaxActionPoints");
     }
 
     public bool TryMove()
@@ -37,6 +37,11 @@ public class BattleUser
         ResetAction();
         MovedThisTurn = true;
         return true;
+    }
+
+    public void AdvanceMove(int amount)
+    {
+        ActionValue -= amount;
     }
 
     public void UseActionPoints(double amount)

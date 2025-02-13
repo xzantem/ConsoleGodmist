@@ -3,11 +3,13 @@ using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using ConsoleGodmist.Quests;
 using ConsoleGodmist.TextService;
+using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Town.NPCs;
 
+[JsonConverter(typeof(NPCConverter))]
 public class Blacksmith : NPC
 {
     public Blacksmith(string alias)
@@ -46,8 +48,8 @@ public class Blacksmith : NPC
             {
                 case 0: DisplayShop(); break;
                 case 1: CraftItem(); break;
-                case 2: CraftWeapon(); break;
-                case 3: CraftArmor(); break;
+                case 2: CraftingManager.CraftWeapon(); break;
+                case 3: CraftingManager.CraftArmor(); break;
                 case 4: UpgradeWeapon(); break;
                 case 5: UpgradeArmor(); break;
                 case 6: ReforgeWeapon(); break;
@@ -59,14 +61,6 @@ public class Blacksmith : NPC
             AnsiConsole.Write(new FigletText(locale.Blacksmith).Centered()
                 .Color(Stylesheet.Styles["npc-blacksmith"].Foreground));
         }
-    }
-    public void CraftWeapon()
-    {
-        throw new NotImplementedException();
-    }
-    public void CraftArmor()
-    {
-        throw new NotImplementedException();
     }
 
     public void UpgradeWeapon()
@@ -142,7 +136,7 @@ public class Blacksmith : NPC
                 case >= 2:
                     Say(locale.MaxUpgradeAlready); return;
                 case >= 1.6:
-                    //Add quest condition
+                    //TODO: Add quest condition
                     Say(locale.ToolsTooWeak); return;
             }
             var cost = PlayerHandler.HonorDiscountModifier * ServiceCostMod * (1 + player.Armor.Cost) / 2.0 * 
@@ -200,7 +194,7 @@ public class Blacksmith : NPC
             case ItemRarity.Junk:
                 Say(locale.TryReforgeJunk); return;
         }
-        var cost = (int)(player.Weapon.Cost * ServiceCostMod * PlayerHandler.HonorDiscountModifier / 10.0);
+        var cost = (int)(player.Weapon.Cost * ServiceCostMod * PlayerHandler.HonorDiscountModifier / 4.0);
         Say($"{locale.ICanReforge} {cost} {locale.CrownsGenitive}");
         if (player.Gold < cost)
         {
@@ -210,8 +204,11 @@ public class Blacksmith : NPC
         Say(locale.WantReforge);
         if (!UtilityMethods.Confirmation(locale.WantReforgeThird, true)) return;
         SpendGold(cost);
-        var success = UtilityMethods.RandomChoice(new Dictionary<int, double>
-        { { -1, 0.1 }, { 0, 0.2 }, { 1, 0.5 }, { 2, 0.2 } });
+        var success = UtilityMethods.RandomChoice(player.Weapon.Rarity switch
+        {
+            _ => new Dictionary<int, double>
+                { { -1, 0.1 }, { 0, 0.2 }, { 1, 0.5 }, { 2, 0.2 } }
+        });
         switch (success)
         {
             case -1:
@@ -244,7 +241,7 @@ public class Blacksmith : NPC
             case ItemRarity.Junk:
                 Say(locale.TryReforgeJunk); return;
         }
-        var cost = (int)(player.Armor.Cost * ServiceCostMod * PlayerHandler.HonorDiscountModifier / 10.0);
+        var cost = (int)(player.Armor.Cost * ServiceCostMod * PlayerHandler.HonorDiscountModifier / 4.0);
         Say($"{locale.ICanReforge} {cost} {locale.CrownsGenitive}");
         if (player.Gold < cost)
         {

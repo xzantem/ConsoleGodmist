@@ -32,16 +32,18 @@ public class InflictGenericStatusEffect : IActiveSkillEffect
     public void Execute(Character caster, Character enemy, string source)
     {
         var effect = new StatusEffect(EffectType, Source, Duration, Effect);
+        var chance =
+            UtilityMethods.CalculateModValue(Chance, caster.PassiveEffects.GetModifiers("SuppressionChanceMod"));
         switch (Target)
         {
             case SkillTarget.Self:
-                if (Random.Shared.NextDouble() >= Chance) return;
+                if (Random.Shared.NextDouble() >= chance) return;
                 StatusEffectHandler.AddStatusEffect(effect, caster);
                 CharacterEventTextService.DisplayStatusEffectText(caster, effect);
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() >=
-                    UtilityMethods.EffectChance(enemy.Resistances[effect.Type].Value(), Chance)) return;
+                    UtilityMethods.EffectChance(enemy.Resistances[effect.Type].Value(enemy, $"{effect.Type.ToString()}Resistance"), chance)) return;
                 StatusEffectHandler.AddStatusEffect(effect, enemy);
                 break;
         }

@@ -9,5 +9,9 @@ public class StatModifier(ModifierType modifierType, double value, string source
     public double Mod { get; private set; } = value;
     public int Duration { get; private set; } = duration;
     public string Source { get; private set; } = source;
-    public int RemainingDuration = duration;
+
+    public void Tick()
+    {
+        Duration--;
+    }
 }

@@ -110,7 +110,7 @@ public abstract class NPC
         >= 12 => 0.75
     };
 
-    public int CalculateGoldRequired(int level)
+    private static int CalculateGoldRequired(int level)
     {
         var value = 0;
         for (var i = 1; i <= Math.Min(level, 14); i++)
@@ -144,11 +144,26 @@ public abstract class NPC
             {
                 case 2:
                     AnsiConsole.Write(new Text($"{locale.InspectItem}: \n", Stylesheet.Styles["default"]));
-                    InspectItem(NPCMenuHandler.ChooseItem(Inventory));
+                    try
+                    {
+                        InspectItem(NPCMenuHandler.ChooseItem(Inventory));
+                    }
+                    catch
+                    {
+                        
+                    }
                     break;
                 case 3:
                     AnsiConsole.Write(new Text($"{locale.BuyItem}: \n", Stylesheet.Styles["default"]));
-                    BuyItem(NPCMenuHandler.ChooseItem(Inventory));
+                    try
+                    {
+                        BuyItem(NPCMenuHandler.ChooseItem(Inventory));
+                    }
+                    catch
+                    {
+
+                    }
+
                     break;
                 case 4:
                     AnsiConsole.Write(new Text($"{locale.SellItem}: \n", Stylesheet.Styles["default"]));

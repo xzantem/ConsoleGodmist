@@ -249,6 +249,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Base.
+        /// </summary>
+        internal static string Base {
+            get {
+                return ResourceManager.GetString("Base", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Battle! You meet.
         /// </summary>
         internal static string BattleStart {
@@ -366,6 +375,42 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Catalyst.
+        /// </summary>
+        internal static string Catalyst {
+            get {
+                return ResourceManager.GetString("Catalyst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change catalyst.
+        /// </summary>
+        internal static string ChangeCatalyst {
+            get {
+                return ResourceManager.GetString("ChangeCatalyst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change color.
+        /// </summary>
+        internal static string ChangeColor {
+            get {
+                return ResourceManager.GetString("ChangeColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change effect.
+        /// </summary>
+        internal static string ChangeEffect {
+            get {
+                return ResourceManager.GetString("ChangeEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change filters.
         /// </summary>
         internal static string ChangeFilter {
@@ -375,11 +420,47 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change level.
+        /// </summary>
+        internal static string ChangeLevel {
+            get {
+                return ResourceManager.GetString("ChangeLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change modifier.
         /// </summary>
         internal static string ChangeModifier {
             get {
                 return ResourceManager.GetString("ChangeModifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change part.
+        /// </summary>
+        internal static string ChangePart {
+            get {
+                return ResourceManager.GetString("ChangePart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change quality.
+        /// </summary>
+        internal static string ChangeQuality {
+            get {
+                return ResourceManager.GetString("ChangeQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change type.
+        /// </summary>
+        internal static string ChangeType {
+            get {
+                return ResourceManager.GetString("ChangeType", resourceCulture);
             }
         }
         
@@ -398,6 +479,15 @@ namespace ConsoleGodmist {
         internal static string Charges {
             get {
                 return ResourceManager.GetString("Charges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a name for the armor.
+        /// </summary>
+        internal static string ChooseArmorName {
+            get {
+                return ResourceManager.GetString("ChooseArmorName", resourceCulture);
             }
         }
         
@@ -483,6 +573,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose a name for the potion.
+        /// </summary>
+        internal static string ChoosePotionName {
+            get {
+                return ResourceManager.GetString("ChoosePotionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose amount of charges to refill.
         /// </summary>
         internal static string ChooseRefillAmount {
@@ -515,6 +614,15 @@ namespace ConsoleGodmist {
         internal static string ChooseUpgradeChance {
             get {
                 return ResourceManager.GetString("ChooseUpgradeChance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a name for the weapon.
+        /// </summary>
+        internal static string ChooseWeaponName {
+            get {
+                return ResourceManager.GetString("ChooseWeaponName", resourceCulture);
             }
         }
         
@@ -582,6 +690,24 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        internal static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The color for the galdurite was not selected!.
+        /// </summary>
+        internal static string ColorNotSelected {
+            get {
+                return ResourceManager.GetString("ColorNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Common.
         /// </summary>
         internal static string Common {
@@ -596,6 +722,15 @@ namespace ConsoleGodmist {
         internal static string Completed {
             get {
                 return ResourceManager.GetString("Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regen condensation.
+        /// </summary>
+        internal static string Condensation {
+            get {
+                return ResourceManager.GetString("Condensation", resourceCulture);
             }
         }
         
@@ -1005,11 +1140,47 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        internal static string Duration {
+            get {
+                return ResourceManager.GetString("Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Easy.
         /// </summary>
         internal static string Easy {
             get {
                 return ResourceManager.GetString("Easy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effect.
+        /// </summary>
+        internal static string Effect {
+            get {
+                return ResourceManager.GetString("Effect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not all effects were selected!.
+        /// </summary>
+        internal static string EffectsNotSelected {
+            get {
+                return ResourceManager.GetString("EffectsNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effect strength.
+        /// </summary>
+        internal static string EffectStrength {
+            get {
+                return ResourceManager.GetString("EffectStrength", resourceCulture);
             }
         }
         
@@ -1986,6 +2157,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You don&apos;t seem to have any potions I can refill.
         /// </summary>
         internal static string NoPotions {
@@ -2049,11 +2229,29 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have enough materials!.
+        /// </summary>
+        internal static string NotEnoughMaterials {
+            get {
+                return ResourceManager.GetString("NotEnoughMaterials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pack is too heavy to pick up.
         /// </summary>
         internal static string NotEnoughWeight {
             get {
                 return ResourceManager.GetString("NotEnoughWeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no wares in the  inventory.
+        /// </summary>
+        internal static string NoWares {
+            get {
+                return ResourceManager.GetString("NoWares", resourceCulture);
             }
         }
         
@@ -2175,6 +2373,24 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Part.
+        /// </summary>
+        internal static string Part {
+            get {
+                return ResourceManager.GetString("Part", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to select all three parts before crafting can begin!.
+        /// </summary>
+        internal static string PartsNotSelected {
+            get {
+                return ResourceManager.GetString("PartsNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Piece of zinc.
         /// </summary>
         internal static string PieceOfZinc {
@@ -2220,6 +2436,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Charge amount.
+        /// </summary>
+        internal static string PotionCapacity {
+            get {
+                return ResourceManager.GetString("PotionCapacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press any key to continue.
         /// </summary>
         internal static string PressAnyKey {
@@ -2243,6 +2468,24 @@ namespace ConsoleGodmist {
         internal static string Provocation {
             get {
                 return ResourceManager.GetString("Provocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quality.
+        /// </summary>
+        internal static string Quality {
+            get {
+                return ResourceManager.GetString("Quality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quest log is empty.
+        /// </summary>
+        internal static string QuestListEmpty {
+            get {
+                return ResourceManager.GetString("QuestListEmpty", resourceCulture);
             }
         }
         
@@ -2918,6 +3161,15 @@ namespace ConsoleGodmist {
         internal static string Uncertain {
             get {
                 return ResourceManager.GetString("Uncertain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to unchanged.
+        /// </summary>
+        internal static string Unchanged {
+            get {
+                return ResourceManager.GetString("Unchanged", resourceCulture);
             }
         }
         

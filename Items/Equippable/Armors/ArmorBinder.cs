@@ -1,4 +1,5 @@
-﻿using ConsoleGodmist.Combat.Skills;
+﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Skills;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
@@ -20,4 +21,13 @@ public class ArmorBinder : IEquipmentPart
     public int MaterialCost { get; set; }
     
     public ArmorBinder() {}
+    
+    public string DescriptionText(double costMultiplier)
+    {
+        return $"{Name}, {locale.Level} {Tier * 10 - 5} " +
+               $"({MaterialCost * costMultiplier}x {NameAliasHelper.GetName(Material)} ({PlayerHandler.player.Inventory.
+                   Items.FirstOrDefault(x => x.Key.Alias == Material).Value}))\n{locale.HealthC}: " +
+               $"{Health} | {locale.Dodge}: *{1 + DodgeBonus:P0} | {locale.Defense}: " +
+               $"*{1+PhysicalDefenseBonus:P0}:{1+MagicDefenseBonus:P0}\n";
+    }
 }

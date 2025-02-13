@@ -1,13 +1,13 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
 using Spectre.Console;
-using Spectre.Console.Rendering;
 
 namespace ConsoleGodmist.Items;
 
-public class Weapon : BaseItem, IEquippable
+public sealed class Weapon : BaseItem, IEquippable, IUsable
 {
     //Base IItem implementations
     public override string Name { get; set; }
@@ -18,7 +18,7 @@ public class Weapon : BaseItem, IEquippable
     public int BaseCost { get; set; }
 
     [JsonIgnore]
-    public override int Cost => (int)(BaseCost * EquippableItemService.RarityModifier(Rarity));
+    public override int Cost => (int)(BaseCost * EquippableItemService.RarityPriceModifier(Rarity));
     [JsonIgnore]
     public override bool Stackable => false;
     [JsonIgnore]
@@ -30,7 +30,7 @@ public class Weapon : BaseItem, IEquippable
     public Quality Quality { get; set; }
     public double UpgradeModifier { get; set; }
     public List<Galdurite> Galdurites { get; set; }
-    public int GalduriteSlots => (int)((UpgradeModifier - 1) / 0.2);
+    public int GalduriteSlots => (int)Math.Floor(UpgradeModifier * 5 - 5);
 
     //Weapon implementations
     
@@ -113,7 +113,7 @@ public class Weapon : BaseItem, IEquippable
             if (RequiredClass == CharacterClass.Sorcerer)
                 multiplier *= Binder.Tier * 10 - 5;
             value += multiplier;
-            value *= EquippableItemService.RarityModifier(Rarity) * (Head.CritChanceBonus + Handle.CritChanceBonus + 1);
+            value *= EquippableItemService.RarityStatModifier(Rarity) * (Head.CritChanceBonus + Handle.CritChanceBonus + 1);
             return value;
         }
     }
@@ -139,7 +139,7 @@ public class Weapon : BaseItem, IEquippable
                 _ => 0
             };
             value += multiplier * (Head.Tier * 10 - 5);
-            value *= EquippableItemService.RarityModifier(Rarity) * (Binder.CritModBonus + Handle.CritModBonus + 1);
+            value *= EquippableItemService.RarityStatModifier(Rarity) * (Binder.CritModBonus + Handle.CritModBonus + 1);
             return value;
         }
     }
@@ -167,7 +167,7 @@ public class Weapon : BaseItem, IEquippable
             if (RequiredClass == CharacterClass.Sorcerer)
                 multiplier *= Handle.Tier * 10 - 5;
             value += (int)multiplier;
-            value *= EquippableItemService.RarityModifier(Rarity) * (Head.AccuracyBonus + Binder.AccuracyBonus + 1);
+            value *= EquippableItemService.RarityStatModifier(Rarity) * (Head.AccuracyBonus + Binder.AccuracyBonus + 1);
             return (int)value;
         }
     }
@@ -290,7 +290,7 @@ public class Weapon : BaseItem, IEquippable
         var playerWeapon = PlayerHandler.player.Weapon;
         if (this != playerWeapon)
         {
-            var averagePlayerDamage = (playerWeapon.MinimalAttack + playerWeapon.MaximalAttack) / 2;
+            var averagePlayerDamage = (playerWeapon!.MinimalAttack + playerWeapon.MaximalAttack) / 2;
             var averageDamage = (MinimalAttack + MaximalAttack) / 2;
             AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, +{UpgradeModifier-1:P0}\n", Stylesheet.Styles["default"]));
             AnsiConsole.Write(new Text($"{locale.Attack}: {MinimalAttack}-{MaximalAttack}", Stylesheet.Styles["default"]));
@@ -315,7 +315,7 @@ public class Weapon : BaseItem, IEquippable
             }
             AnsiConsole.Write(new Text("\n"));
             foreach (var effect in GetEffectSums())
-                AnsiConsole.Write(new Text($"{effect.EffectText}"));
+                AnsiConsole.Write(new Text($"{effect.EffectText}\n"));
             AnsiConsole.Write(new Text("\n"));
             return;
         }
@@ -335,32 +335,42 @@ public class Weapon : BaseItem, IEquippable
         }
         AnsiConsole.Write(new Text("\n"));
         foreach (var effect in GetEffectSums())
-            AnsiConsole.Write(new Text($"{effect.EffectText}"));
+            AnsiConsole.Write(new Text($"{effect.EffectText}\n"));
         AnsiConsole.Write(new Text("\n"));
         return;
         void WriteComparator(double value1, double value2)
         {
             if (value1 > value2)
                 AnsiConsole.Write(new Text(" ( ^ )", Stylesheet.Styles["success"]));
-            else if (value1 == value2)
+            else if (Math.Abs(value1 - value2) < 0.001)
                 AnsiConsole.Write(new Text(" ( ~ )", Stylesheet.Styles["default"]));
             else
                 AnsiConsole.Write(new Text(" ( v )", Stylesheet.Styles["failure"]));
         }
     }
 
+    public void UpdatePassives(PlayerCharacter player)
+    {
+        player.PassiveEffects.InnateEffects.RemoveAll(x => x.Source == "WeaponGaldurites");
+        foreach (var effect in EquippableItemService.GetListenerPassiveEffects(false, player, 
+                         GetEffectSums()).OfType<ListenerPassiveEffect>()) player.PassiveEffects.Add(effect);
+        foreach (var effect in EquippableItemService.GetInnatePassiveEffects(false, player, 
+                     GetEffectSums())) player.PassiveEffects.Add(effect);
+    }
     public void AddGaldurite(Galdurite galdurite)
     {
         if (Galdurites.Count >= GalduriteSlots || galdurite.ItemType != ItemType.WeaponGaldurite) return;
         Galdurites.Add(galdurite);
+        UpdatePassives(PlayerHandler.player);
         galdurite.Reveal();
     }
     public void RemoveGaldurite(Galdurite galdurite)
     {
         Galdurites.Remove(galdurite);
+        UpdatePassives(PlayerHandler.player);
     }
 
-    public HashSet<GalduriteComponent> GetEffectSums()
+    private HashSet<GalduriteComponent> GetEffectSums()
     {
         var result = new HashSet<GalduriteComponent>();
         foreach (var effect in Galdurites.SelectMany(gal => gal.Components))
@@ -368,7 +378,7 @@ public class Weapon : BaseItem, IEquippable
             if (result.All(x => x.EffectType != effect.EffectType))
                 result.Add(effect);
             else
-                result.FirstOrDefault(x => x.EffectType == effect.EffectType).EffectStrength += effect.EffectStrength;
+                result.FirstOrDefault(x => x.EffectType == effect.EffectType)!.EffectStrength += effect.EffectStrength;
         }
         return result;
     }

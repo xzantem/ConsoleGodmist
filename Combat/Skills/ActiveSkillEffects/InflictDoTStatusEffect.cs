@@ -36,16 +36,18 @@ public class InflictDoTStatusEffect : IActiveSkillEffect
     public void Execute(Character caster, Character enemy, string source)
     {
         var strength = Strength * Random.Shared.Next((int)caster.MinimalAttack, (int)caster.MinimalAttack + 1);
+        var chance =
+            UtilityMethods.CalculateModValue(Chance, caster.PassiveEffects.GetModifiers("DoTChanceMod"));
         var status = new DoTStatusEffect(strength, DoTType, Source, Duration);
         switch (Target)
         {
             case SkillTarget.Self:
-                if (Random.Shared.NextDouble() >= Chance) return;
+                if (Random.Shared.NextDouble() >= chance) return;
                 StatusEffectHandler.AddStatusEffect(status, caster);
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() >=
-                    UtilityMethods.EffectChance(enemy.Resistances[DoTType].Value(), Chance)) return;
+                    UtilityMethods.EffectChance(enemy.Resistances[DoTType].Value(enemy, $"{DoTType.ToString()}Resistance"), chance)) return;
                 StatusEffectHandler.AddStatusEffect(status, enemy);
                 break;
         }

@@ -1,4 +1,5 @@
-﻿using ConsoleGodmist.Enums;
+﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Enums;
 
 namespace ConsoleGodmist.Combat.Modifiers;
 
@@ -21,35 +22,33 @@ public class Stat
         ScalingFactor = scalingFactor;
         Modifiers = modifiers;
     }
-    //public Stat(double baseValue, double scalingFactor)
-    //{
-     //   BaseValue = baseValue;
-     //   ScalingFactor = scalingFactor;
-    //}
 
-    public double Value(int level = 1)
+    public double Value(Character owner, string statName)
     {
-        var value = UtilityMethods.ScaledStat(BaseValue, ScalingFactor, level);
-        // Order of modifiers:
-        // 1. Multiply by all relative modifiers
-        // 2. Add all additive modifiers
-        // 3. Multiply by all multiplicative modifiers
-        // 4. Add all absolute modifiers
-        value = Modifiers.Where(modifier => modifier.Type == ModifierType.Relative)
-            .Aggregate(value, (current, modifier) => current * (1 + modifier.Mod)) + Modifiers
-            .Where(modifier => modifier.Type == ModifierType.Additive).Sum(modifier => modifier.Mod);
-        return Modifiers.Where(modifier => modifier.Type == ModifierType.Multiplicative)
-            .Aggregate(value, (current, modifier) => current * (1 + modifier.Mod)) + Modifiers
-            .Where(modifier => modifier.Type == ModifierType.Absolute).Sum(modifier => modifier.Mod);
+        var value = UtilityMethods.ScaledStat(BaseValue, ScalingFactor, owner.Level);
+        var mods = new List<StatModifier>();
+        mods.AddRange(Modifiers);
+        mods.AddRange(owner.PassiveEffects.GetModifiers(statName));
+        if (statName is "PhysicalDefense" or "MagicDefense")
+            mods.AddRange(owner.PassiveEffects.GetModifiers("TotalDefense"));
+        if (statName is "BleedResistance" or "PoisonResistance" or "BurnResistance")
+        { mods.AddRange(owner.PassiveEffects.GetModifiers("DoTResistanceMod"));
+            mods.AddRange(owner.PassiveEffects.GetModifiers("TotalResistanceMod")); }
+        else if (statName.EndsWith("Resistance") && statName.StartsWith("Debuff"))
+        { mods.AddRange(owner.PassiveEffects.GetModifiers("DebuffResistanceMod"));
+            mods.AddRange(owner.PassiveEffects.GetModifiers("TotalResistanceMod")); }
+        else if(statName.EndsWith("Resistance"))
+        { mods.AddRange(owner.PassiveEffects.GetModifiers("SuppressionResistanceMod")); 
+            mods.AddRange(owner.PassiveEffects.GetModifiers("TotalResistanceMod")); }
+        return UtilityMethods.CalculateModValue(value, mods);
     }
 
-    public void Decrement()
+    public void Tick()
     {
         foreach (var modifier in Modifiers.ToList())
         {
-            if (modifier.RemainingDuration != -1)
-                modifier.RemainingDuration--;
-            if (modifier.RemainingDuration == 0)
+            modifier.Tick();
+            if (modifier.Duration <= 0)
                 Modifiers.Remove(modifier);
         }
     }

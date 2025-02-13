@@ -11,7 +11,7 @@ namespace ConsoleGodmist.Dungeons;
 
 public static class DungeonMovementManager
 {
-    public static Dungeon CurrentDungeon { get; private set; }
+    public static Dungeon? CurrentDungeon { get; private set; }
     private static DungeonRoom CurrentLocation { get; set; } = null!;
     private static int LocationIndex { get; set; }
     private static int LastMovement { get; set; }
@@ -216,6 +216,7 @@ public static class DungeonMovementManager
     {
         StatusEffectHandler.HandleEffects(PlayerHandler.player.StatusEffects, PlayerHandler.player);
         PlayerHandler.player.HandleModifiers();
+        PlayerHandler.player.PassiveEffects.TickEffects();
         switch (CurrentLocation.FieldType)
         {
             case DungeonFieldType.Battle:

@@ -10,13 +10,13 @@ namespace ConsoleGodmist.Items;
 
 public static class EquipmentPartManager
 {
-    private static List<WeaponHead> WeaponHeads { get; set; } = null!;
-    private static List<WeaponBinder> WeaponBinders { get; set; } = null!;
-    private static List<WeaponHandle> WeaponHandles { get; set; } = null!;
+    public static List<WeaponHead> WeaponHeads { get; private set; } = null!;
+    public static List<WeaponBinder> WeaponBinders { get; private set; } = null!;
+    public static List<WeaponHandle> WeaponHandles { get; private set; } = null!;
 
-    private static List<ArmorPlate> ArmorPlates { get; set; } = null!;
-    private static List<ArmorBinder> ArmorBinders { get; set; } = null!;
-    private static List<ArmorBase> ArmorBases { get; set; } = null!;
+    public static List<ArmorPlate> ArmorPlates { get; private set; } = null!;
+    public static List<ArmorBinder> ArmorBinders { get; private set; } = null!;
+    public static List<ArmorBase> ArmorBases { get; private set; } = null!;
 
     public static void InitItems()
     {

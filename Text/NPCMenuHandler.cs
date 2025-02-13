@@ -51,6 +51,11 @@ public static class NPCMenuHandler
     public static int ChooseItem(NPCInventory inventory)
     {
         var items = inventory.RotatingShop.Concat(inventory.BoughtFromPlayer).ToList();
+        if (items.Count == 0)
+        {
+            AnsiConsole.Write(locale.NoWares);
+            return -1;
+        }
         var tempIndex = 0;
         var choices = items.Select(item =>
             (item.Key.Stackable ? 

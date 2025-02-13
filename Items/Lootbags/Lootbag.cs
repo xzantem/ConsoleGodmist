@@ -5,7 +5,7 @@ using Spectre.Console;
 
 namespace ConsoleGodmist.Items;
 
-public class Lootbag : BaseItem
+public class Lootbag : BaseItem, IUsable
 {
     public new string Name => NameAliasHelper.GetName(Alias);
     public override int Weight => 0;
@@ -42,7 +42,7 @@ public class Lootbag : BaseItem
         _ => ItemRarity.Legendary
     };
     public int Level { get; set; }
-    public override bool Use()
+    public bool Use()
     {
         var inInventory = PlayerHandler.player.Inventory.Items.FirstOrDefault(x => x.Key.Alias == Alias).Value;
         var toOpen = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToOpen + $" Up to {inInventory}: ")
@@ -53,6 +53,9 @@ public class Lootbag : BaseItem
             var drops = DropTable.GetDrops(Level);
             foreach (var drop in drops)
                 PlayerHandler.player.Inventory.AddItem(drop.Key, drop.Value);
+            AnsiConsole.Write(new Text(locale.PressAnyKey, Stylesheet.Styles["highlight-good"]));
+            Console.ReadKey();
+            AnsiConsole.Write("\n");
         }
         PlayerHandler.player.Inventory.TryRemoveItem(this, toOpen);
         return false;

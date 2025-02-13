@@ -7,7 +7,7 @@ public class Freeze(string source, int duration) : StatusEffect(StatusEffectType
 {
     public void Handle(Character target)
     {
-        base.Handle(target);
+        base.Tick(target);
         target.AddModifier(StatType.Speed, new StatModifier(ModifierType.Additive, Duration, Source, Duration));
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 
 namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
@@ -37,12 +38,12 @@ public class RegenResource : IActiveSkillEffect
             DamageBase.Minimal => RegenAmount * caster.MinimalAttack,
             DamageBase.Random => RegenAmount * Random.Shared.Next((int)caster.MinimalAttack, (int)caster.MaximalAttack + 1),
             DamageBase.Maximal => RegenAmount * caster.MinimalAttack,
-            DamageBase.CasterMaxHealth => RegenAmount * caster.MaximalHealth,
-            DamageBase.TargetMaxHealth => RegenAmount * enemy.MaximalHealth,
-            DamageBase.CasterCurrentHealth => RegenAmount * caster.CurrentHealth,
-            DamageBase.TargetCurrentHealth => RegenAmount * enemy.CurrentHealth,
-            DamageBase.CasterMissingHealth => RegenAmount * (caster.MaximalHealth - caster.CurrentHealth),
-            DamageBase.TargetMissingHealth => RegenAmount * (enemy.MaximalHealth - enemy.CurrentHealth)
+            DamageBase.CasterMaxHealth => RegenAmount * caster.MaximalResource,
+            DamageBase.TargetMaxHealth => RegenAmount * enemy.MaximalResource,
+            DamageBase.CasterCurrentHealth => RegenAmount * caster.CurrentResource,
+            DamageBase.TargetCurrentHealth => RegenAmount * enemy.CurrentResource,
+            DamageBase.CasterMissingHealth => RegenAmount * (caster.MaximalResource - caster.CurrentResource),
+            DamageBase.TargetMissingHealth => RegenAmount * (enemy.MaximalResource - enemy.CurrentResource)
         };
     }
 }

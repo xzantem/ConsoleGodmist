@@ -19,7 +19,7 @@ public static class StatusEffectHandler
             .Where(effect => effect.Type == StatusEffectType.Regeneration).Cast<Regeneration>().ToList(), target);
         foreach (var effect in effects.ToList())
         {
-            effect.Handle(target);
+            effect.Tick(target);
         }
     }
 
@@ -41,7 +41,7 @@ public static class StatusEffectHandler
                 StatusEffectType.Poison => DamageType.Poison,
                 StatusEffectType.Burn => DamageType.Burn,
             };
-            target.TakeDamage(damageType, dot.Value);
+            target.TakeDamage(damageType, dot.Value, dot);
         }
     }
 

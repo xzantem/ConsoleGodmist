@@ -7,6 +7,7 @@ using Spectre.Console;
 
 namespace ConsoleGodmist.Town.NPCs;
 
+[JsonConverter(typeof(NPCConverter))]
 public class Enchanter : NPC
 {
     public Enchanter(string alias)
@@ -26,12 +27,14 @@ public class Enchanter : NPC
 
     public override void OpenMenu()
     {
-        PlayerHandler.player.Level = 20;
-        PlayerHandler.player.GainGold(100000);
+        PlayerHandler.player.GainExperience(10000);
         PlayerHandler.player.Inventory.AddItem(EquippableItemService.GetRandomWeapon(2, PlayerHandler.player.CharacterClass));
-        PlayerHandler.player.Inventory.AddItem(new Galdurite(0, 1, 0));
-        PlayerHandler.player.Inventory.AddItem(new Galdurite(0, 1, 0));
-        PlayerHandler.player.Inventory.AddItem(new Galdurite(0, 1, 0));
+        PlayerHandler.player.Inventory.AddItem(EquippableItemService.GetRandomArmor(2, PlayerHandler.player.CharacterClass));
+        for (int i = 0; i < 5; i++)
+            PlayerHandler.player.Inventory.AddItem(new Galdurite(false, 1, 0));
+        for (int i = 0; i < 5; i++)
+            PlayerHandler.player.Inventory.AddItem(new Galdurite(true, 1, 0));
+        PlayerHandler.player.GainGold(100000);
         AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
             .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
         Say($"{locale.EnchanterGreeting}, {PlayerHandler.player.Name}?\n");
@@ -50,7 +53,7 @@ public class Enchanter : NPC
             {
                 case 0: DisplayShop(); break;
                 case 1: CraftItem(); break;
-                case 2: CraftGaldurite(); break;
+                case 2: CraftingManager.CraftGaldurite(); break;
                 case 3: ExamineGaldurite(); break;
                 case 4: InsertWeaponGaldurite(); break;
                 case 5: InsertArmorGaldurite(); break;
@@ -63,9 +66,6 @@ public class Enchanter : NPC
             AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
                 .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
         }
-    }
-    public void CraftGaldurite()
-    {
     }
     public void ExamineGaldurite()
     {

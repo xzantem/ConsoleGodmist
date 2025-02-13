@@ -38,23 +38,23 @@ public class Trap(Difficulty difficulty, DungeonField location, int trapType, Du
                 {
                     { DamageType.True, PlayerHandler.player.MaximalHealth / 10 },
                     { DamageType.Physical, PlayerHandler.player.MaximalHealth / 5 }
-                });
+                }, this);
                 break;
             case DungeonType.Forest:
-                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10, this);
                 StatusEffectHandler.AddStatusEffect(new DoTStatusEffect(PlayerHandler.player.MaximalHealth / 25, 
                     StatusEffectType.Poison, "Trap", 5), PlayerHandler.player);
                 break;
             case DungeonType.ElvishRuins:
-                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10, this);
                 break;
             case DungeonType.Cove:
-                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10, this);
                 StatusEffectHandler.AddStatusEffect(new DoTStatusEffect(PlayerHandler.player.MaximalHealth / 25, 
                     StatusEffectType.Burn, "Trap", 5), PlayerHandler.player);
                 break;
             case DungeonType.Desert:
-                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10, this);
                 PlayerHandler.player.AddModifier(StatType.Dodge, new StatModifier(ModifierType.Additive, 15, "Trap", 5));
                 break;
             case DungeonType.Temple:
@@ -62,15 +62,15 @@ public class Trap(Difficulty difficulty, DungeonField location, int trapType, Du
                 {
                     { DamageType.True, PlayerHandler.player.MaximalHealth / 10 },
                     { DamageType.Magic, PlayerHandler.player.MaximalHealth / 5 }
-                });
+                }, this);
                 break;
             case DungeonType.Mountains:
-                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10, this);
                 StatusEffectHandler.AddStatusEffect(new DoTStatusEffect(PlayerHandler.player.MaximalHealth / 25, 
                     StatusEffectType.Bleed, "Trap", 5), PlayerHandler.player);
                 break;
             case DungeonType.Swamp:
-                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10);
+                PlayerHandler.player.TakeDamage(DamageType.True, PlayerHandler.player.MaximalHealth / 10, this);
                 PlayerHandler.player.AddModifier(StatType.Speed, new StatModifier(ModifierType.Additive, 10, "Trap", 5));
                 break;
         }

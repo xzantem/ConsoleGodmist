@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.TextService;
 using Spectre.Console;
@@ -31,16 +32,19 @@ public class DealDamage : IActiveSkillEffect
         ArmorPen = armorPen;
     }
 
-    private double CalculateDamage(Character caster, Character enemy)
+    private double CalculateDamage(Character caster, Character target)
     {
-        var damage = caster.DamageDealt * DamageBase switch
+        var damage = DamageBase switch
         {
             DamageBase.Minimal => caster.MinimalAttack,
             DamageBase.Random => UtilityMethods.RandomDouble(caster.MinimalAttack, caster.MaximalAttack + 1),
             DamageBase.Maximal => caster.MaximalAttack
         };
         damage *= DamageMultiplier;
+        damage = UtilityMethods.CalculateModValue(damage, GetDamageModifiers(caster, target));
         if ((!CanCrit || !(Random.Shared.NextDouble() < caster.CritChance)) && !AlwaysCrits) return damage;
+        if (Random.Shared.NextDouble() <
+            UtilityMethods.CalculateModValue(0, target.PassiveEffects.GetModifiers("CritSaveChance"))) return damage;
         damage *= caster.CritMod;
         ActiveSkillTextService.DisplayCritText(caster);
         return damage;
@@ -51,8 +55,8 @@ public class DealDamage : IActiveSkillEffect
         var damage = 0.0;
         damage = Target switch
         {
-            SkillTarget.Self => caster.TakeDamage(DamageType, CalculateDamage(caster, enemy)),
-            SkillTarget.Enemy => enemy.TakeDamage(DamageType, CalculateDamage(caster, enemy)),
+            SkillTarget.Self => caster.TakeDamage(DamageType, CalculateDamage(caster, caster), caster),
+            SkillTarget.Enemy => enemy.TakeDamage(DamageType, CalculateDamage(caster, enemy), caster),
             _ => damage
         };
         if (!(LifeSteal > 0) || !(damage > 0)) return;
@@ -65,5 +69,44 @@ public class DealDamage : IActiveSkillEffect
                 caster.Heal(damage * LifeSteal);
                 break;
         }
+    }
+
+    private List<StatModifier> GetDamageModifiers(Character caster, Character target)
+    {
+
+        var mods = caster.PassiveEffects.GetModifiers("DamageDealtMod");
+        switch (DamageType)
+        {
+            case DamageType.Physical:
+                mods.AddRange(caster.PassiveEffects.GetModifiers("PhysicalDamageDealtMod"));
+                break;
+            case DamageType.Magic:
+                mods.AddRange(caster.PassiveEffects.GetModifiers("MagicDamageDealtMod"));
+                break;
+        }
+
+        if (target is not EnemyCharacter character) return mods;
+        foreach (var monsterType in character.EnemyType)
+        {
+            switch (monsterType)
+            {
+                case EnemyType.Undead:
+                    mods.AddRange(caster.PassiveEffects.GetModifiers("UndeadDamageDealtMod"));
+                    break;
+                case EnemyType.Beast:
+                    mods.AddRange(caster.PassiveEffects.GetModifiers("BeastDamageDealtMod"));
+                    break;
+                case EnemyType.Human:
+                    mods.AddRange(caster.PassiveEffects.GetModifiers("HumanDamageDealtMod"));
+                    break;
+                case EnemyType.Demon:
+                    mods.AddRange(caster.PassiveEffects.GetModifiers("DemonDamageDealtMod"));
+                    break;
+                default:
+                    continue;
+            }
+            break;
+        }
+        return mods;
     }
 }

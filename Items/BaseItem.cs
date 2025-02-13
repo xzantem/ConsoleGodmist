@@ -57,11 +57,6 @@ public abstract class BaseItem : IItem
         };
     }
 
-    public virtual bool Use()
-    {
-        return false;
-    }
-
     public void WriteItemType()
     {
         AnsiConsole.Write(new Text($"[{ItemTypeName()}]", Stylesheet.Styles["default"]));

@@ -1,9 +1,9 @@
 ﻿using ConsoleGodmist.Characters;
-using ConsoleGodmist.Town.NPCs;
-using ConsoleGodmist.Utilities;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Quests;
 
+[JsonConverter(typeof(QuestObjectiveConverter))]
 public class KillQuestObjective : IQuestObjective
 {
     public bool IsComplete { get; set; }
@@ -13,6 +13,11 @@ public class KillQuestObjective : IQuestObjective
     public string Description => 
         $"{locale.Kill} {EnemyFactory.EnemiesList.Find(x => x.Alias == Target).Name} " +
         $"({QuestProgress/AmountToKill})";
+    
+    [JsonConstructor]
+    public KillQuestObjective()
+    {
+    }
 
     public KillQuestObjective(string target, int amountToKill)
     {

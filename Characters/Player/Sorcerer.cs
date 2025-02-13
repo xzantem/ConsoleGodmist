@@ -9,6 +9,34 @@ namespace ConsoleGodmist.Characters
 {
     public class Sorcerer : PlayerCharacter {
         public override string Name { get; set; }
+        
+        [JsonIgnore]
+        public override double MaximalResource
+        {
+            get => _maximalResource.Value(this, "MaximalResource") + Weapon?.Accuracy?? 0;
+            protected set => _maximalResource.BaseValue = value;
+        }
+        [JsonIgnore]
+        public override double ResourceRegen
+        {
+            get
+            {
+                if (ResourceType == ResourceType.Momentum) return Speed >= 100 ? Speed / 10 : Speed / 5;
+                return _resourceRegen.Value(this, "ResourceRegen") + Weapon?.CritChance?? 0;
+            }
+            set => _resourceRegen.BaseValue = value;
+        }
+        public override double CritChance
+        {
+            get => _critChance.Value(this, "CritChance");
+            protected set => _critChance.BaseValue = value;
+        }
+        public override double Accuracy
+        {
+            get => _accuracy.Value(this, "Accuracy");
+            protected set => _accuracy.BaseValue = value;
+        }
+
         // Mana
         // Capped at 120, increased through various means, such as weapons or galdurites or potions
         // Start battle with full Mana, regenerates passively each turn by 15 (also can be increased)
@@ -47,28 +75,5 @@ namespace ConsoleGodmist.Characters
             [new InflictGenericStatusEffect(StatusEffectType.Buff, -1, 1, "ExhaustingSpells", "Halts mana regen, but attacks have a 70% chance to slow by 12 for 3 turns", SkillTarget.Self)]);
         }
         public Sorcerer() {}
-
-        public void SwitchWeapon(Weapon weapon)
-        {
-            if (Weapon != null)
-            {
-                var oldWeapon = Weapon;
-                Inventory.AddItem(oldWeapon);
-                MinimalAttack += weapon.MinimalAttack - oldWeapon.MinimalAttack;
-                MaximalAttack += weapon.MaximalAttack - oldWeapon.MaximalAttack;
-                ResourceRegen += weapon.CritChance - oldWeapon.CritChance;
-                CritMod += weapon.CritMod - oldWeapon.CritMod;
-                MaximalResource += weapon.Accuracy - oldWeapon.Accuracy;
-            }
-            else
-            {
-                MinimalAttack += weapon.MinimalAttack;
-                MaximalAttack += weapon.MaximalAttack;
-                ResourceRegen += weapon.CritChance;
-                CritMod += weapon.CritMod;
-                MaximalResource += weapon.Accuracy;
-            }
-            Weapon = weapon;
-        }
     }
 }

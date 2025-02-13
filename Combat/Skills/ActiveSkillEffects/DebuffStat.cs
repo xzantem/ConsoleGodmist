@@ -34,8 +34,10 @@ public class DebuffStat : IActiveSkillEffect
                     new StatModifier(ModifierType, -DebuffStrength, source, DebuffDuration));
                 break;
             case SkillTarget.Enemy:
+                var chance =
+                    UtilityMethods.CalculateModValue(DebuffChance, caster.PassiveEffects.GetModifiers("DebuffChanceMod"));
                 if (Random.Shared.NextDouble() <
-                    UtilityMethods.EffectChance(enemy.Resistances[StatusEffectType.Debuff].Value(), DebuffChance))
+                    UtilityMethods.EffectChance(enemy.Resistances[StatusEffectType.Debuff].Value(enemy, "DebuffResistance"), chance))
                 {
                     enemy.AddModifier(StatToDebuff,
                         new StatModifier(ModifierType, -DebuffStrength, source, DebuffDuration));

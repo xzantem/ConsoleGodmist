@@ -39,7 +39,7 @@ public class DropPool
                     EquippableItemService.GetBossDrop(level / 10 + 1, choiceSplit[1]), choice.Value);
                 break;
             case "GalduriteDrop":
-                item = new KeyValuePair<IItem, ItemDrop>(new Galdurite((byte)Random.Shared.Next(0, 2), 
+                item = new KeyValuePair<IItem, ItemDrop>(new Galdurite(Random.Shared.Next(0, 2) == 1, 
                     level < 21 ? 1 : level < 41 ? 2 : 3, Convert.ToInt32(choiceSplit[1])), choice.Value);
                 break;
             default:

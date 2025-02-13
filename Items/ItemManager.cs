@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-
 namespace ConsoleGodmist.Items;
 
 public static class ItemManager
@@ -11,6 +10,10 @@ public static class ItemManager
             var temp = new List<IItem>();
             temp = temp.Concat(BaseIngredients).ToList();
             temp = temp.Concat(CraftableIngredients).ToList();
+            temp.Add(new TownPortalScroll());
+            temp.Add(new Bandage());
+            temp.Add(new Antidote());
+            temp.Add(new WetTowel());
             return temp;
         }
     }

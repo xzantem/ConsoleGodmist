@@ -1,19 +1,18 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Utilities;
-using Newtonsoft.Json;
 using Spectre.Console;
 
 namespace ConsoleGodmist.Items;
 
-public class Armor : BaseItem, IEquippable
+public sealed class Armor : BaseItem, IEquippable, IUsable
 {
     //BaseItem implementations
     public override string Name { get; set; }
     public override int Weight => 5;
     public override int ID => 560;
     public int BaseCost { get; set; }
-    public override int Cost => (int)(BaseCost * EquippableItemService.RarityModifier(Rarity));
+    public override int Cost => (int)(BaseCost * EquippableItemService.RarityPriceModifier(Rarity));
     public override bool Stackable => false;
     public override ItemType ItemType => ItemType.Armor;
     
@@ -23,7 +22,7 @@ public class Armor : BaseItem, IEquippable
     public Quality Quality { get; set; }
     public double UpgradeModifier { get; set; }
     public List<Galdurite> Galdurites { get; set; }
-    public int GalduriteSlots => (int)((UpgradeModifier - 1) / 0.2);
+    public int GalduriteSlots => (int)Math.Floor(UpgradeModifier * 5 - 5);
     
     //Armor implementations
     public ArmorPlate Plate { get; set; }
@@ -50,7 +49,7 @@ public class Armor : BaseItem, IEquippable
                 _ => 0
             };
             value += multiplier * (Binder.Tier * 10 - 5);
-            value *= EquippableItemService.RarityModifier(Rarity) * (Plate.HealthBonus + Base.HealthBonus + 1);
+            value *= EquippableItemService.RarityStatModifier(Rarity) * (Plate.HealthBonus + Base.HealthBonus + 1);
             return (int)value;
         }
     }
@@ -69,7 +68,7 @@ public class Armor : BaseItem, IEquippable
                 _ => 0
             };
             value += multiplier;
-            value *= EquippableItemService.RarityModifier(Rarity) * (Plate.DodgeBonus + Binder.DodgeBonus + 1);
+            value *= EquippableItemService.RarityStatModifier(Rarity) * (Plate.DodgeBonus + Binder.DodgeBonus + 1);
             return (int)value;
         }
     }
@@ -151,7 +150,7 @@ public class Armor : BaseItem, IEquippable
             Name = NameAliasHelper.GetName(alias);
             Alias = alias;
         }
-        Rarity = EquippableItemService.GetRandomRarity();
+        Rarity = EquippableItemService.GetRandomRarity(Quality == Quality.Masterpiece ? 7 : 0);
         BaseCost = (int)((plate.MaterialCost * ItemManager.GetItem(plate.Material).Cost + 
                    binder.MaterialCost * ItemManager.GetItem(binder.Material).Cost + 
                    armBase.MaterialCost * ItemManager.GetItem(armBase.Material).Cost) * quality switch {
@@ -245,7 +244,7 @@ public class Armor : BaseItem, IEquippable
         {
             AnsiConsole.Write(new Text($"{locale.Level} {RequiredLevel}, +{UpgradeModifier-1:P0}\n", Stylesheet.Styles["default"]));
             AnsiConsole.Write(new Text($"{locale.Defense}: {PhysicalDefense}", Stylesheet.Styles["default"]));
-            WriteComparator(PhysicalDefense, playerArmor.PhysicalDefense);
+            WriteComparator(PhysicalDefense, playerArmor!.PhysicalDefense);
             AnsiConsole.Write(new Text($" | {MagicDefense}", Stylesheet.Styles["default"]));
             WriteComparator(MagicDefense, playerArmor.MagicDefense);
             AnsiConsole.Write(new Text($"\n{locale.Dodge}: {Dodge}", Stylesheet.Styles["default"]));
@@ -254,7 +253,7 @@ public class Armor : BaseItem, IEquippable
             WriteComparator(MaximalHealth, playerArmor.MaximalHealth);
             AnsiConsole.Write(new Text("\n"));
             foreach (var effect in GetEffectSums())
-                AnsiConsole.Write(new Text($"{effect.EffectText}"));
+                AnsiConsole.Write(new Text($"{effect.EffectText}\n"));
             AnsiConsole.Write(new Text("\n"));
             return;
         }
@@ -265,7 +264,7 @@ public class Armor : BaseItem, IEquippable
         AnsiConsole.Write(new Text($" | {locale.HealthC}: {MaximalHealth}", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text("\n"));
         foreach (var effect in GetEffectSums())
-            AnsiConsole.Write(new Text($"{effect.EffectText}"));
+            AnsiConsole.Write(new Text($"{effect.EffectText}\n"));
         AnsiConsole.Write(new Text("\n"));
         return;
         void WriteComparator(double value1, double value2)
@@ -278,18 +277,28 @@ public class Armor : BaseItem, IEquippable
                 AnsiConsole.Write(new Text(" ( v )", Stylesheet.Styles["failure"]));
         }
     }
+    public void UpdatePassives(PlayerCharacter player)
+    {
+        player.PassiveEffects.InnateEffects.RemoveAll(x => x.Source == "ArmorGaldurites");
+        foreach (var effect in EquippableItemService.GetListenerPassiveEffects(false, player, GetEffectSums()))
+            player.PassiveEffects.Add(effect);
+        foreach (var effect in EquippableItemService.GetInnatePassiveEffects(false, player, GetEffectSums()))
+            player.PassiveEffects.Add(effect);
+    }
     public void AddGaldurite(Galdurite galdurite)
     {
         if (Galdurites.Count >= GalduriteSlots || galdurite.ItemType != ItemType.ArmorGaldurite) return;
         Galdurites.Add(galdurite);
+        UpdatePassives(PlayerHandler.player);
         galdurite.Reveal();
     }
     public void RemoveGaldurite(Galdurite galdurite)
     {
         Galdurites.Remove(galdurite);
+        UpdatePassives(PlayerHandler.player);
     }
     
-    public HashSet<GalduriteComponent> GetEffectSums()
+    private HashSet<GalduriteComponent> GetEffectSums()
     {
         var result = new HashSet<GalduriteComponent>();
         foreach (var effect in Galdurites.SelectMany(gal => gal.Components))
@@ -297,7 +306,7 @@ public class Armor : BaseItem, IEquippable
             if (result.All(x => x.EffectType != effect.EffectType))
                 result.Add(effect);
             else
-                result.FirstOrDefault(x => x.EffectType == effect.EffectType).EffectStrength += effect.EffectStrength;
+                result.FirstOrDefault(x => x.EffectType == effect.EffectType)!.EffectStrength += effect.EffectStrength;
         }
         return result;
     }

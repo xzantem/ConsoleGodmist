@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Battles;
+using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.TextService;
 using ConsoleGodmist.Utilities;
@@ -35,39 +36,45 @@ public class ActiveSkill
         Hits = hits;
     }
 
-    public bool Use(BattleUser caster, Character enemy)
+    public void Use(BattleUser caster, BattleUser enemy)
     {
-        if ((!(caster.User.CurrentResource >= ResourceCost) && 
+        var resourceCost = (int)UtilityMethods.CalculateModValue(ResourceCost, caster.User.PassiveEffects.GetModifiers("ResourceCost"));
+        if ((!(caster.User.CurrentResource >= resourceCost) && 
             (caster.User.ResourceType != ResourceType.Fury || 
-             !(Math.Abs(caster.User.MaximalResource - caster.User.CurrentResource) < 0.001)) && ResourceCost != -1) || 
-            caster.CurrentActionPoints < caster.MaxActionPoints.Value() * ActionCost) return false;
-        ActiveSkillTextService.DisplayUseSkillText(caster.User, enemy, this);
-        caster.User.UseResource(ResourceCost);
-        caster.UseActionPoints(caster.MaxActionPoints.Value() * ActionCost);
+             !(Math.Abs(caster.User.MaximalResource - caster.User.CurrentResource) < 0.001)) && resourceCost > 0) || 
+            caster.CurrentActionPoints < caster.MaxActionPoints.BaseValue * ActionCost) return; // Skill not used, too little Resource or ActionPoints, TODO: Split conditions, add info banner
+        var toHit = CheckHit(caster.User, enemy.User);
+        ActiveSkillTextService.DisplayUseSkillText(caster.User, enemy.User, this, AlwaysHits ? 1 : toHit.Item2);
+        caster.User.UseResource(resourceCost);
+        caster.UseActionPoints(caster.MaxActionPoints.BaseValue * ActionCost);
         foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Self)) 
-            effect.Execute(caster.User, enemy, Alias);
-        if (Effects.All(x => x.Target != SkillTarget.Enemy)) return true;
+            effect.Execute(caster.User, enemy.User, Alias);
+        if (Effects.All(x => x.Target != SkillTarget.Enemy)) return;
         {
             for (var i = 0; i < Hits; i++)
             {
                 {
-                    if (!CheckHit(caster.User, enemy) && !AlwaysHits)
+                    if (toHit.Item1 && !AlwaysHits)
                     {
                         ActiveSkillTextService.DisplayMissText(caster.User);
                         continue;
                     }
                     foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Enemy))
-                        effect.Execute(caster.User, enemy, Alias);
+                    {
+                        effect.Execute(caster.User, enemy.User, Alias);
+                        caster.User.PassiveEffects.HandleBattleEvent(new BattleEventData("OnHit", caster, enemy));
+                    }
                 }
             }
         }
-        return true;
     }
 
-    private bool CheckHit(Character caster, Character target)
+    private (bool, double) CheckHit(Character caster, Character target)
     {
         var accuracy = (caster.Accuracy + Accuracy) / 2;
         var hitChance = accuracy * accuracy / (accuracy + target.Dodge);
-        return Random.Shared.NextDouble() * 100 < hitChance;
+        hitChance = Math.Min(UtilityMethods.CalculateModValue(hitChance, 
+            caster.PassiveEffects.GetModifiers("HitChanceMod")), 100);
+        return (Random.Shared.NextDouble() * 100 < hitChance, hitChance / 100);
     }
 }

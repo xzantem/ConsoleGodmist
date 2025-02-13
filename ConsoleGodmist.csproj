@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Godmist</Configurations>
@@ -35,18 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bin\Debug\net6.0\json\base-ingredients.json" />
-    <Content Include="bin\Debug\net6.0\json\craftable-ingredients.json" />
-    <Content Include="bin\Debug\net6.0\json\enemies.json" />
-    <Content Include="bin\Debug\net6.0\json\equipment-parts.json" />
-    <Content Include="bin\Debug\net6.0\json\galdurite-components.json" />
-    <Content Include="bin\Debug\net6.0\json\plant-drop-table.json" />
-    <Content Include="bin\Debug\net6.0\json\lootbag-drop-tables.json" />
-    <Content Include="bin\Debug\net6.0\json\potion-components.json" />
-    <Content Include="bin\Debug\net6.0\json\quests.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Update="locale.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
@@ -61,6 +49,18 @@
     <None Include="bin\Debug\net6.0\json\plant-drop-table.json" />
     <None Include="bin\Debug\net6.0\json\potion-components.json" />
     <None Include="bin\Debug\net6.0\json\quests.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0\json\base-ingredients.json" />
+    <Content Include="bin\Debug\net8.0\json\craftable-ingredients.json" />
+    <Content Include="bin\Debug\net8.0\json\enemies.json" />
+    <Content Include="bin\Debug\net8.0\json\equipment-parts.json" />
+    <Content Include="bin\Debug\net8.0\json\galdurite-components.json" />
+    <Content Include="bin\Debug\net8.0\json\lootbag-drop-tables.json" />
+    <Content Include="bin\Debug\net8.0\json\plant-drop-table.json" />
+    <Content Include="bin\Debug\net8.0\json\potion-components.json" />
+    <Content Include="bin\Debug\net8.0\json\quests.json" />
   </ItemGroup>
 
 </Project>

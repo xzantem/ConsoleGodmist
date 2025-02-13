@@ -10,6 +10,6 @@ public class Regeneration(double strength, string source, int duration, string r
     public string RegenType { get; private set; } = regenType;
     public void Handle(Character target)
     {
-        base.Handle(target);
+        base.Tick(target);
     }
 }

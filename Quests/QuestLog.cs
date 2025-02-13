@@ -18,7 +18,8 @@ public static class QuestLog
             foreach (var objective in stage.Objectives)
                 AnsiConsole.Write(new Text($"\t- {objective.Description}\n", 
                     objective.IsComplete ? Stylesheet.Styles["quest-completed"] : Stylesheet.Styles["default"]));
-            if (!stage.Objectives.All(x => x.IsComplete)) {AnsiConsole.Write("\n");return;}
+            if (stage.Objectives.All(x => x.IsComplete)) continue;
+            AnsiConsole.Write("\n");return;
         }
         AnsiConsole.Write(new Text($"{locale.TalkTo} {quest.QuestEnder}\n\n", 
             quest.QuestState == QuestState.HandedIn ? Stylesheet.Styles["quest-completed"]: Stylesheet.Styles["default"]));
@@ -34,10 +35,11 @@ public static class QuestLog
         var index = 0;
         while (true)
         {
-            var tempIndex = 0;
+            
             var rows = quests.Where(x => filters.Contains(x.QuestState)).Select(x => 
                 new Text($"{NameAliasHelper.GetName(x.QuestState.ToString())} - " +
                          $"{x.Name} ({x.RecommendedLevel})")).ToList();
+            if (rows.Count == 0) { AnsiConsole.Write(new Text(locale.QuestListEmpty, Stylesheet.Styles["default"])); }
             AnsiConsole.Write(new Rows(rows.GetRange(index, Math.Min(pageSize, rows.Count - index))));
             AnsiConsole.Write("\n\n");
             Dictionary<string, int> choices = [];
@@ -55,7 +57,10 @@ public static class QuestLog
             {
                 case 0: index += scrollAmount; break;
                 case 1: index -= scrollAmount; break;
-                case 2: InspectQuest(quests[ChooseQuest(rows)]); break;
+                case 2:
+                    try { InspectQuest(quests[ChooseQuest(rows)]); }
+                    catch { AnsiConsole.Write(new Text(locale.QuestListEmpty, Stylesheet.Styles["error"])); }
+                    break;
                 case 3: filters = ChangeFilters(); break;
                 case 4: return;
             }

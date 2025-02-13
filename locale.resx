@@ -1127,4 +1127,88 @@
   <data name="WantRemoveThird" xml:space="preserve">
     <value>Are you sure you want to remove this galdurite? (You will not get it back!)</value>
   </data>
+  <data name="Part" xml:space="preserve">
+    <value>Part</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Unchanged" xml:space="preserve">
+    <value>unchanged</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
+  <data name="ChangePart" xml:space="preserve">
+    <value>Change part</value>
+  </data>
+  <data name="ChangeQuality" xml:space="preserve">
+    <value>Change quality</value>
+  </data>
+  <data name="PartsNotSelected" xml:space="preserve">
+    <value>You have to select all three parts before crafting can begin!</value>
+  </data>
+  <data name="NotEnoughMaterials" xml:space="preserve">
+    <value>You don't have enough materials!</value>
+  </data>
+  <data name="ChooseWeaponName" xml:space="preserve">
+    <value>Choose a name for the weapon</value>
+  </data>
+  <data name="ChooseArmorName" xml:space="preserve">
+    <value>Choose a name for the armor</value>
+  </data>
+  <data name="Effect" xml:space="preserve">
+    <value>Effect</value>
+  </data>
+  <data name="Catalyst" xml:space="preserve">
+    <value>Catalyst</value>
+  </data>
+  <data name="PotionCapacity" xml:space="preserve">
+    <value>Charge amount</value>
+  </data>
+  <data name="EffectStrength" xml:space="preserve">
+    <value>Effect strength</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Condensation" xml:space="preserve">
+    <value>Regen condensation</value>
+  </data>
+  <data name="ChangeEffect" xml:space="preserve">
+    <value>Change effect</value>
+  </data>
+  <data name="ChangeCatalyst" xml:space="preserve">
+    <value>Change catalyst</value>
+  </data>
+  <data name="ChoosePotionName" xml:space="preserve">
+    <value>Choose a name for the potion</value>
+  </data>
+  <data name="EffectsNotSelected" xml:space="preserve">
+    <value>Not all effects were selected!</value>
+  </data>
+  <data name="Base" xml:space="preserve">
+    <value>Base</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="ChangeType" xml:space="preserve">
+    <value>Change type</value>
+  </data>
+  <data name="ChangeColor" xml:space="preserve">
+    <value>Change color</value>
+  </data>
+  <data name="ChangeLevel" xml:space="preserve">
+    <value>Change level</value>
+  </data>
+  <data name="ColorNotSelected" xml:space="preserve">
+    <value>The color for the galdurite was not selected!</value>
+  </data>
+  <data name="QuestListEmpty" xml:space="preserve">
+    <value>Quest log is empty</value>
+  </data>
+  <data name="NoWares" xml:space="preserve">
+    <value>There are no wares in the  inventory</value>
+  </data>
 </root>

@@ -14,9 +14,9 @@ namespace ConsoleGodmist.Characters
         public abstract string Name { get; set; }
         public Stat _maximalHealth;
         [JsonIgnore]
-        public double MaximalHealth
+        public virtual double MaximalHealth
         {
-            get => _maximalHealth.Value(Level);
+            get => _maximalHealth.Value(this, "MaximalHealth");
             protected set => _maximalHealth.BaseValue = value;
         }
         public double _currentHealth;
@@ -27,69 +27,69 @@ namespace ConsoleGodmist.Characters
         }
         public Stat _minimalAttack;
         [JsonIgnore]
-        public double MinimalAttack {
-            get => _minimalAttack.Value(Level);
+        public virtual double MinimalAttack {
+            get => _minimalAttack.Value(this, "MinimalAttack");
             protected set => _minimalAttack.BaseValue = value;
         }
         public Stat _maximalAttack;
         [JsonIgnore]
-        public double MaximalAttack { 
-            get  => _maximalAttack.Value(Level);
+        public virtual double MaximalAttack { 
+            get  => _maximalAttack.Value(this, "MaximalAttack");
             protected set => _maximalAttack.BaseValue = Math.Max(_minimalAttack.BaseValue, value);
         }
         public Stat _dodge;
         [JsonIgnore]
-        public double Dodge {
-            get => _dodge.Value(Level);
+        public virtual double Dodge {
+            get => _dodge.Value(this, "Dodge");
             protected set => _dodge.BaseValue = value;
         }
         public Stat _physicalDefense;
         [JsonIgnore]
-        public double PhysicalDefense {
-            get => _physicalDefense.Value(Level);
+        public virtual double PhysicalDefense {
+            get => _physicalDefense.Value(this, "PhysicalDefense");
             protected set => _physicalDefense.BaseValue = value;
         }
         public Stat _magicDefense;
         [JsonIgnore]
-        public double MagicDefense
+        public virtual double MagicDefense
         {
-            get => _magicDefense.Value(Level);
+            get => _magicDefense.Value(this, "MagicDefense");
             protected set => _magicDefense.BaseValue = value;
         }
         public Stat _critChance;
         [JsonIgnore]
-        public double CritChance
+        public virtual double CritChance
         {
-            get => Math.Clamp(_critChance.Value(Level), 0, 1);
-            protected set => _critChance.BaseValue = Math.Clamp(value, 0, 0.5D);
+            get => Math.Clamp(_critChance.Value(this, "CritChance"), 0, 1);
+            protected set => _critChance.BaseValue = value;
         }
         public Stat _speed;
         [JsonIgnore]
         public double Speed
         {
-            get => _speed.Value(Level) + (ResourceType == ResourceType.Momentum ? CurrentResource / 10 : 0);
+            get => _speed.Value(this, "Speed") + (ResourceType == ResourceType.Momentum ? CurrentResource / 10 : 0);
             protected set => _speed.BaseValue = value;
         }
 
         public Stat _accuracy; 
         [JsonIgnore]
-        public double Accuracy
+        public virtual double Accuracy
         {
-            get => _accuracy.Value(Level) - (ResourceType == ResourceType.Fury ? CurrentResource / 3 : 0);
+            get => _accuracy.Value(this, "Accuracy") - (ResourceType == ResourceType.Fury ? CurrentResource / 3 : 0);
             protected set => _accuracy.BaseValue = value;
         }
         public Stat _critMod; 
         [JsonIgnore]
-        public double CritMod
+        public virtual double CritMod
         {
-            get => _critMod.Value(Level);
+            get => _critMod.Value(this, "CritMod");
             protected set => _critMod.BaseValue = value;
         }
         public Stat _maximalResource; 
         [JsonIgnore]
-        public double MaximalResource
+        public virtual double MaximalResource
         {
-            get => _maximalResource.Value(Level);
+            get => _maximalResource.Value(this, "MaximalResource");
             protected set => _maximalResource.BaseValue = value;
         }
         protected double _currentResource;
@@ -101,33 +101,19 @@ namespace ConsoleGodmist.Characters
         }
         public Stat _resourceRegen;
         [JsonIgnore]
-        public double ResourceRegen
+        public virtual double ResourceRegen
         {
             get
             {
                 if (ResourceType == ResourceType.Momentum) return Speed >= 100 ? Speed / 10 : Speed / 5;
-                return _resourceRegen.Value(Level);
+                return _resourceRegen.Value(this, "ResourceRegen");
             }
             set => _resourceRegen.BaseValue = value;
-        }
-        public Stat _damageDealt;
-        [JsonIgnore]
-        public double DamageDealt
-        {
-            get => _damageDealt.Value(Level);
-            set => _damageDealt.BaseValue = value;
-        }
-        public Stat _damageTaken;
-        [JsonIgnore]
-        public double DamageTaken
-        {
-            get => _damageTaken.Value(Level);
-            set => _damageTaken.BaseValue = value;
         }
 
         public ResourceType ResourceType { get; set; }
         public List<StatusEffect> StatusEffects { get; set; }
-        
+        public PassiveEffectList PassiveEffects { get; set; }
         public Dictionary<StatusEffectType, Stat> Resistances { get; set; }
         public int Level {get; set;}
         
@@ -138,6 +124,7 @@ namespace ConsoleGodmist.Characters
             Stat critChance, Stat dodge, Stat physicalDefense, Stat magicDefense, Stat speed, Stat accuracy,
             Stat critMod, int level = 1) 
         {
+            PassiveEffects = new PassiveEffectList();
             Name = name;
             _maximalHealth = maxHealth;
             CurrentHealth = maxHealth.BaseValue;
@@ -148,8 +135,6 @@ namespace ConsoleGodmist.Characters
             _physicalDefense = physicalDefense;
             _magicDefense = magicDefense;
             _resourceRegen = new Stat(0, 0);
-            _damageDealt = new Stat(1, 0);
-            _damageTaken = new Stat(1, 0);
             _speed = speed;
             _accuracy = accuracy;
             _critMod = critMod;
@@ -157,11 +142,11 @@ namespace ConsoleGodmist.Characters
             StatusEffects = [];
             ActiveSkills = new ActiveSkill[5];
         }
-        public void TakeDamage(Dictionary<DamageType, double> damage)
+        public void TakeDamage(Dictionary<DamageType, double> damage, dynamic source)
         {
             var damageTaken = damage
                 .ToDictionary(damageType => damageType.Key, 
-                    damageType => DamageMitigated(damageType.Value, damageType.Key));
+                    damageType => (double)DamageMitigated(damageType.Value, damageType.Key, source));
             CharacterEventTextService.DisplayTakeDamageText(this, damageTaken
                 .ToDictionary(x => x.Key, x => (int)x.Value));
             var shields = StatusEffects
@@ -171,9 +156,9 @@ namespace ConsoleGodmist.Characters
                 damageSum = StatusEffectHandler.TakeShieldsDamage(shields, this, damageSum);
             CurrentHealth -= damageSum;
         }
-        public double TakeDamage(DamageType damageType, double damage)
+        public double TakeDamage(DamageType damageType, double damage, dynamic source)
         {
-            var damageTaken = DamageMitigated(damage, damageType);
+            double damageTaken = DamageMitigated(damage, damageType, source);
             CharacterEventTextService.DisplayTakeDamageText
                 (this, new Dictionary<DamageType, int> { {damageType, (int)damageTaken}});
             var shields = StatusEffects
@@ -193,19 +178,50 @@ namespace ConsoleGodmist.Characters
 
         public void RegenResource(int amount)
         {
-            CurrentResource = Math.Min(CurrentResource + amount, MaximalResource);
+            CurrentResource = Math.Min(CurrentResource + UtilityMethods.
+                CalculateModValue(amount, PassiveEffects.GetModifiers("ResourceRegenMod")), MaximalResource);
             //CharacterEventTextService.DisplayResourceRegenText(this, amount);
         }
 
-        public double DamageMitigated(double damage, DamageType damageType)
+        public double DamageMitigated(double damage, DamageType damageType, dynamic source)
         {
+            var armorPen = source is Character caster
+                ? new Dictionary<DamageType, double> {
+                    { DamageType.Physical, UtilityMethods.CalculateModValue(0, caster.PassiveEffects.GetModifiers("PhysicalArmorPen")) },
+                    { DamageType.Magic, UtilityMethods.CalculateModValue(0, caster.PassiveEffects.GetModifiers("MagicArmorPen")) } }
+                : new Dictionary<DamageType, double>
+                { { DamageType.Physical, 0 }, { DamageType.Magic, 0 } };
             damage = damageType switch
             {
-                DamageType.Physical => damage * damage / (damage + PhysicalDefense),
-                DamageType.Magic => damage * damage / (damage + MagicDefense),
+                DamageType.Physical => damage * damage / (damage + PhysicalDefense * (1 - armorPen[DamageType.Physical])),
+                DamageType.Magic => damage * damage / (damage + MagicDefense * (1 - armorPen[DamageType.Physical])),
+                DamageType.Bleed => damage * (1.5 - Resistances[StatusEffectType.Bleed].Value(this, "BleedResistance")),
+                DamageType.Poison => damage * (1.5 - Resistances[StatusEffectType.Poison].Value(this, "PoisonResistance")),
+                DamageType.Burn => damage * (1.5 - Resistances[StatusEffectType.Burn].Value(this, "BurnResistance")),
                 _ => damage
             };
-            return Math.Max(DamageTaken * damage, 1);
+            var mods = new List<StatModifier>();
+            mods.AddRange(PassiveEffects.GetModifiers("DamageTaken"));
+            switch (damageType)
+            {
+                case DamageType.Physical:
+                    mods.AddRange(PassiveEffects.GetModifiers("PhysicalDamageTaken"));
+                    break;
+                case DamageType.Magic:
+                    mods.AddRange(PassiveEffects.GetModifiers("MagicDamageTaken"));
+                    break;
+                case DamageType.Bleed:
+                    mods.AddRange(PassiveEffects.GetModifiers("BleedDamageTaken"));
+                    break;
+                case DamageType.Poison:
+                    mods.AddRange(PassiveEffects.GetModifiers("PoisonDamageTaken"));
+                    break;
+                case DamageType.Burn:
+                    mods.AddRange(PassiveEffects.GetModifiers("BurnDamageTaken"));
+                    break;
+            }
+            damage = UtilityMethods.CalculateModValue(damage, mods);
+            return Math.Max(damage, 1);
         }
         public void Heal(double heal) {
             CurrentHealth += heal;
@@ -246,12 +262,6 @@ namespace ConsoleGodmist.Characters
                 case StatType.MaximalResource:
                     _maximalResource.AddModifier(modifier);
                     break;
-                case StatType.DamageDealt:
-                    _damageDealt.AddModifier(modifier);
-                    break;
-                case StatType.DamageTaken:
-                    _damageTaken.AddModifier(modifier);
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
             }
@@ -265,17 +275,15 @@ namespace ConsoleGodmist.Characters
 
         public void HandleModifiers()
         {
-            _maximalHealth.Decrement();
-            _minimalAttack.Decrement();
-            _maximalAttack.Decrement();
-            _dodge.Decrement();
-            _physicalDefense.Decrement();
-            _magicDefense.Decrement();
-            _accuracy.Decrement();
-            _speed.Decrement();
-            _maximalResource.Decrement();
-            _damageDealt.Decrement();
-            _damageTaken.Decrement();
+            _maximalHealth.Tick();
+            _minimalAttack.Tick();
+            _maximalAttack.Tick();
+            _dodge.Tick();
+            _physicalDefense.Tick();
+            _magicDefense.Tick();
+            _accuracy.Tick();
+            _speed.Tick();
+            _maximalResource.Tick();
         }
 
         public Dictionary<StatModifier, StatType> GetModifiers()
@@ -298,10 +306,6 @@ namespace ConsoleGodmist.Characters
                 mods.Add(mod, StatType.Speed);
             foreach (var mod in _maximalResource.Modifiers)
                 mods.Add(mod, StatType.MaximalResource);
-            foreach (var mod in _damageDealt.Modifiers)
-                mods.Add(mod, StatType.DamageDealt);
-            foreach (var mod in _damageTaken.Modifiers)
-                mods.Add(mod, StatType.DamageTaken);
             return mods;
         }
     }

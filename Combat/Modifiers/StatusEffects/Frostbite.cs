@@ -7,7 +7,7 @@ public class Frostbite(string source, int duration) : StatusEffect(StatusEffectT
 {
     public void Handle(Character target)
     {
-        base.Handle(target);
+        base.Tick(target);
         StatusEffectHandler.AddStatusEffect(new StatusEffect(StatusEffectType.Debuff, source, duration), target);
     }
 }

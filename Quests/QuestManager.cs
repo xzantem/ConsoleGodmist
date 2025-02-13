@@ -23,7 +23,7 @@ public static class QuestManager
             return quests;
         }
     }
-    public static Dictionary<DungeonType, int> BossProgress { get; private set; }
+    public static Dictionary<DungeonType, int> BossProgress { get; set; }
     
     public const int QuestCount = 4;
     public const int ProgressTarget = 3;

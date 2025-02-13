@@ -1125,4 +1125,88 @@
   <data name="WantRemoveThird" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć ten galduryt? (Nie odzyskasz go!)</value>
   </data>
+  <data name="Part" xml:space="preserve">
+    <value>Część</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="Unchanged" xml:space="preserve">
+    <value>bez zmian</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Jakość</value>
+  </data>
+  <data name="ChangePart" xml:space="preserve">
+    <value>Zmień część</value>
+  </data>
+  <data name="ChangeQuality" xml:space="preserve">
+    <value>Zmień jakość</value>
+  </data>
+  <data name="PartsNotSelected" xml:space="preserve">
+    <value>Musisz wybrać wszystkie trzy części zanim tworzenie może się rozpocząć!</value>
+  </data>
+  <data name="NotEnoughMaterials" xml:space="preserve">
+    <value>Nie masz wystarczająco materiałów!</value>
+  </data>
+  <data name="ChooseWeaponName" xml:space="preserve">
+    <value>Wybierz nazwę dla broni</value>
+  </data>
+  <data name="ChooseArmorName" xml:space="preserve">
+    <value>Wybierz nazwę dla pancerza</value>
+  </data>
+  <data name="Effect" xml:space="preserve">
+    <value>Efekt</value>
+  </data>
+  <data name="Catalyst" xml:space="preserve">
+    <value>Katalizator</value>
+  </data>
+  <data name="PotionCapacity" xml:space="preserve">
+    <value>Ilość ładunków</value>
+  </data>
+  <data name="EffectStrength" xml:space="preserve">
+    <value>Siła efektu</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Czas trwania</value>
+  </data>
+  <data name="Condensation" xml:space="preserve">
+    <value>Kondensacja regeneracji</value>
+  </data>
+  <data name="ChangeEffect" xml:space="preserve">
+    <value>Zmień efekt</value>
+  </data>
+  <data name="ChangeCatalyst" xml:space="preserve">
+    <value>Zmień katalizator</value>
+  </data>
+  <data name="ChoosePotionName" xml:space="preserve">
+    <value>Wybierz nazwę dla mikstury</value>
+  </data>
+  <data name="EffectsNotSelected" xml:space="preserve">
+    <value>Nie wybrano wszystkich efektów!</value>
+  </data>
+  <data name="Base" xml:space="preserve">
+    <value>Baza</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Kolor</value>
+  </data>
+  <data name="ChangeType" xml:space="preserve">
+    <value>Zmień typ</value>
+  </data>
+  <data name="ChangeColor" xml:space="preserve">
+    <value>Zmień kolor</value>
+  </data>
+  <data name="ChangeLevel" xml:space="preserve">
+    <value>Zmień poziom</value>
+  </data>
+  <data name="ColorNotSelected" xml:space="preserve">
+    <value>Nie wybrano żadnego koloru galdurytu!</value>
+  </data>
+  <data name="QuestListEmpty" xml:space="preserve">
+    <value>Lista zadań jest pusta</value>
+  </data>
+  <data name="NoWares" xml:space="preserve">
+    <value>Nie ma żadnych rzeczy na sprzedaż</value>
+  </data>
 </root>

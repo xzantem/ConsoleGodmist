@@ -14,11 +14,11 @@ public class TradeHealthForResource : IActiveSkillEffect
         switch (Target)
         {
             case SkillTarget.Self:
-                damage = caster.TakeDamage(DamageType.True, HealthSacrificed * caster.MaximalHealth);
+                damage = caster.TakeDamage(DamageType.True, HealthSacrificed * caster.MaximalHealth, caster);
                 caster.RegenResource((int)(damage * ExchangeRatio));
                 break;
             case SkillTarget.Enemy:
-                damage = enemy.TakeDamage(DamageType.True, HealthSacrificed * enemy.MaximalHealth);
+                damage = enemy.TakeDamage(DamageType.True, HealthSacrificed * enemy.MaximalHealth, caster);
                 enemy.RegenResource((int)(damage * ExchangeRatio));
                 break;
         }

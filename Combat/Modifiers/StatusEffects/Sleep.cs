@@ -9,6 +9,6 @@ public class Sleep(double strength, string source, int duration, bool canInterru
     public bool CanInterrupt { get; private set; } = canInterrupt;
     public void Handle(Character target)
     {
-        base.Handle(target);
+        base.Tick(target);
     }
 }

@@ -1,9 +1,12 @@
-﻿using ConsoleGodmist.Enums;
+﻿using ConsoleGodmist.Combat.Skills;
+using ConsoleGodmist.Enums;
 using ConsoleGodmist.Town.NPCs;
 using ConsoleGodmist.Utilities;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Quests;
 
+[JsonConverter(typeof(QuestObjectiveConverter))]
 public class KillInDungeonQuestObjective : IQuestObjective
 {
     public bool IsComplete { get; set; }
@@ -15,10 +18,9 @@ public class KillInDungeonQuestObjective : IQuestObjective
     public int AmountToKill { get; set; }
     public int QuestProgress { get; private set; }
 
+    [JsonConstructor]
     public KillInDungeonQuestObjective()
     {
-        QuestProgress = 0;
-        IsComplete = false;
     }
 
     public KillInDungeonQuestObjective(DungeonType dungeon, int amountToKill)

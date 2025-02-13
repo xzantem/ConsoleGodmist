@@ -1,0 +1,367 @@
+{
+  "_maximalHealth": {
+    "BaseValue": 450.0,
+    "ScalingFactor": 12.5,
+    "Modifiers": []
+  },
+  "_minimalAttack": {
+    "BaseValue": 24.0,
+    "ScalingFactor": 0.7,
+    "Modifiers": []
+  },
+  "_maximalAttack": {
+    "BaseValue": 36.0,
+    "ScalingFactor": 0.95,
+    "Modifiers": []
+  },
+  "_dodge": {
+    "BaseValue": 18.0,
+    "ScalingFactor": 0.05,
+    "Modifiers": []
+  },
+  "_physicalDefense": {
+    "BaseValue": 18.0,
+    "ScalingFactor": 0.45,
+    "Modifiers": []
+  },
+  "_magicDefense": {
+    "BaseValue": 10.0,
+    "ScalingFactor": 0.3,
+    "Modifiers": []
+  },
+  "_critChance": {
+    "BaseValue": 0.03,
+    "ScalingFactor": 0.0,
+    "Modifiers": []
+  },
+  "_speed": {
+    "BaseValue": 40.0,
+    "ScalingFactor": 0.0,
+    "Modifiers": []
+  },
+  "_accuracy": {
+    "BaseValue": 64.0,
+    "ScalingFactor": 0.0,
+    "Modifiers": []
+  },
+  "_critMod": {
+    "BaseValue": 1.5,
+    "ScalingFactor": 0.0,
+    "Modifiers": []
+  },
+  "_maximalResource": {
+    "BaseValue": 50.0,
+    "ScalingFactor": 0.0,
+    "Modifiers": []
+  },
+  "Name": "zanterm",
+  "MaximalHealth": 450.0,
+  "MinimalAttack": 24.0,
+  "MaximalAttack": 36.0,
+  "Dodge": 18.0,
+  "PhysicalDefense": 18.0,
+  "MagicDefense": 10.0,
+  "Accuracy": 64.0,
+  "CharacterClass": 0,
+  "Gold": 100,
+  "CurrentExperience": 0,
+  "RequiredExperience": 24,
+  "Honor": 0,
+  "HonorLevel": 4,
+  "Inventory": {
+    "Items": {}
+  },
+  "Weapon": {
+    "Name": " Longsword",
+    "Alias": "StarterWeapon.Warrior",
+    "Weight": 5,
+    "ID": 559,
+    "Cost": 15,
+    "Rarity": 2,
+    "Stackable": false,
+    "Description": null,
+    "ItemType": 0,
+    "RequiredLevel": 1,
+    "RequiredClass": 0,
+    "Quality": 1,
+    "UpgradeModifier": 1.0,
+    "Head": {
+      "Type": "WeaponHead",
+      "MinimalAttack": 4,
+      "MaximalAttack": 8,
+      "CritMod": 0.5,
+      "CritChanceBonus": 0.0,
+      "AccuracyBonus": 0.0,
+      "Name": "BrokenHead",
+      "Alias": "BrokenHead",
+      "Adjective": "Broken",
+      "Tier": 1,
+      "Material": "None",
+      "GoldCost": 5,
+      "MaterialCost": 0
+    },
+    "Binder": {
+      "Type": "WeaponBinder",
+      "AttackBonus": 0.0,
+      "CritChance": 0.03,
+      "CritModBonus": 0.0,
+      "AccuracyBonus": 0.0,
+      "Name": "BrokenBinder",
+      "Alias": "BrokenBinder",
+      "Tier": 1,
+      "Material": "None",
+      "GoldCost": 5,
+      "MaterialCost": 0
+    },
+    "Handle": {
+      "Type": "WeaponHandle",
+      "AttackBonus": 0.0,
+      "CritChanceBonus": 0.0,
+      "CritModBonus": 0.0,
+      "Accuracy": 64,
+      "Name": "BrokenHandle",
+      "Alias": "BrokenHandle",
+      "Tier": 1,
+      "Material": "None",
+      "GoldCost": 5,
+      "MaterialCost": 0
+    },
+    "MinimalAttack": 4,
+    "MaximalAttack": 8,
+    "CritChance": 0.03,
+    "CritMod": 0.5,
+    "Accuracy": 64
+  },
+  "Armor": {
+    "Name": " Hauberk",
+    "Alias": "StarterWeapon.Warrior",
+    "Weight": 5,
+    "ID": 560,
+    "Cost": 15,
+    "Rarity": 2,
+    "Stackable": false,
+    "Description": null,
+    "ItemType": 1,
+    "RequiredLevel": 1,
+    "RequiredClass": 0,
+    "Quality": 1,
+    "UpgradeModifier": 1.0,
+    "Plate": {
+      "Type": "ArmorPlate",
+      "HealthBonus": 0.0,
+      "DodgeBonus": 0.0,
+      "PhysicalDefense": 6,
+      "MagicDefense": 2,
+      "Name": "ScratchedPlate",
+      "Alias": "ScratchedPlate",
+      "Adjective": "Broken",
+      "Tier": 1,
+      "Material": "None",
+      "GoldCost": 5,
+      "MaterialCost": 0
+    },
+    "Binder": {
+      "Type": "ArmorBinder",
+      "Health": 75,
+      "DodgeBonus": 0.0,
+      "PhysicalDefenseBonus": 0.0,
+      "MagicDefenseBonus": 0.0,
+      "Name": "ScratchedBinder",
+      "Alias": "ScratchedBinder",
+      "Tier": 1,
+      "Material": "None",
+      "GoldCost": 5,
+      "MaterialCost": 0
+    },
+    "Base": {
+      "Type": "ArmorBase",
+      "HealthBonus": 0.0,
+      "Dodge": 8,
+      "PhysicalDefenseBonus": 0.0,
+      "MagicDefenseBonus": 0.0,
+      "Name": "ScratchedBase",
+      "Alias": "ScratchedBase",
+      "Tier": 1,
+      "Material": "None",
+      "GoldCost": 5,
+      "MaterialCost": 0
+    },
+    "MaximalHealth": 75,
+    "Dodge": 8,
+    "PhysicalDefense": 6,
+    "MagicDefense": 2
+  },
+  "CurrentHealth": 450.0,
+  "CritChance": 0.03,
+  "Speed": 40.0,
+  "CritMod": 1.5,
+  "MaximalResource": 50.0,
+  "CurrentResource": 0.0,
+  "ResourceType": 1,
+  "StatusEffects": [],
+  "Resistances": {
+    "Buff": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Debuff": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Bleed": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Poison": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Burn": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Stun": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Freeze": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Frostbite": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Sleep": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Invisible": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Paralysis": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Provocation": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    },
+    "Shield": {
+      "BaseValue": 0.5,
+      "ScalingFactor": 0.0,
+      "Modifiers": []
+    }
+  },
+  "Level": 1,
+  "ActiveSkills": [
+    {
+      "Name": "TestDamaging",
+      "Alias": "TestDamaging",
+      "ResourceCost": 0,
+      "AlwaysHits": false,
+      "Accuracy": 80,
+      "Effects": [
+        {
+          "Type": "DealDamage",
+          "Target": 1,
+          "DamageType": 0,
+          "DamageBase": 1,
+          "DamageMultiplier": 1.0,
+          "DamageInstances": 1,
+          "CanCrit": true,
+          "AlwaysCrits": false
+        }
+      ]
+    },
+    {
+      "Name": "TestDamaging",
+      "Alias": "TestDamaging",
+      "ResourceCost": 0,
+      "AlwaysHits": false,
+      "Accuracy": 80,
+      "Effects": [
+        {
+          "Type": "DealDamage",
+          "Target": 1,
+          "DamageType": 0,
+          "DamageBase": 1,
+          "DamageMultiplier": 1.0,
+          "DamageInstances": 1,
+          "CanCrit": true,
+          "AlwaysCrits": false
+        }
+      ]
+    },
+    {
+      "Name": "TestDamaging",
+      "Alias": "TestDamaging",
+      "ResourceCost": 0,
+      "AlwaysHits": false,
+      "Accuracy": 80,
+      "Effects": [
+        {
+          "Type": "DealDamage",
+          "Target": 1,
+          "DamageType": 0,
+          "DamageBase": 1,
+          "DamageMultiplier": 1.0,
+          "DamageInstances": 1,
+          "CanCrit": true,
+          "AlwaysCrits": false
+        }
+      ]
+    },
+    {
+      "Name": "TestDamaging",
+      "Alias": "TestDamaging",
+      "ResourceCost": 0,
+      "AlwaysHits": false,
+      "Accuracy": 80,
+      "Effects": [
+        {
+          "Type": "DealDamage",
+          "Target": 1,
+          "DamageType": 0,
+          "DamageBase": 1,
+          "DamageMultiplier": 1.0,
+          "DamageInstances": 1,
+          "CanCrit": true,
+          "AlwaysCrits": false
+        }
+      ]
+    },
+    {
+      "Name": "TestDamaging",
+      "Alias": "TestDamaging",
+      "ResourceCost": 0,
+      "AlwaysHits": false,
+      "Accuracy": 80,
+      "Effects": [
+        {
+          "Type": "DealDamage",
+          "Target": 1,
+          "DamageType": 0,
+          "DamageBase": 1,
+          "DamageMultiplier": 1.0,
+          "DamageInstances": 1,
+          "CanCrit": true,
+          "AlwaysCrits": false
+        }
+      ]
+    }
+  ]
+}

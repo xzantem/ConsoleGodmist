@@ -12,7 +12,7 @@ public class Galdurite : BaseItem
     public override bool Stackable => false;
     public GalduriteComponent[] Components { get; set; }
     
-    public override int Cost => (int)(BaseCost * EquippableItemService.RarityModifier(Rarity) * (Revealed ? 
+    public override int Cost => (int)(BaseCost * EquippableItemService.RarityPriceModifier(Rarity) * (Revealed ? 
                                       Components.Aggregate(1.0, (x, y) => 
                                           x * ("DCBAS".IndexOf(y.EffectTier) + 18) / 20) : 1));
     
@@ -27,17 +27,17 @@ public class Galdurite : BaseItem
         Revealed = true;
     }
 
-    public Galdurite(byte equipmentType, int tier, int bias, string color = "Random")
+    public Galdurite(bool equipmentType, int tier, int bias, string color = "Random")
     {
-        ItemType = equipmentType == 0 ? ItemType.WeaponGaldurite : ItemType.ArmorGaldurite;
+        ItemType = equipmentType ? ItemType.ArmorGaldurite : ItemType.WeaponGaldurite;
         Alias = (equipmentType, tier) switch
         {
-            (0, 1) => "MeagreWeaponGaldurite",
-            (0, 2) => "FairWeaponGaldurite",
-            (0, 3) => "PotentWeaponGaldurite",
-            (1, 1) => "MeagreArmorGaldurite",
-            (1, 2) => "FairArmorGaldurite",
-            (1, 3) => "PotentArmorGaldurite",
+            (false, 1) => "MeagreWeaponGaldurite",
+            (false, 2) => "FairWeaponGaldurite",
+            (false, 3) => "PotentWeaponGaldurite",
+            (true, 1) => "MeagreArmorGaldurite",
+            (true, 2) => "FairArmorGaldurite",
+            (true, 3) => "PotentArmorGaldurite",
             _ => throw new ArgumentOutOfRangeException(nameof(equipmentType), equipmentType, null)
         };
         Revealed = false;
@@ -97,7 +97,7 @@ public class Galdurite : BaseItem
                 AnsiConsole.Write(new Text("? - ???\n", Stylesheet.Styles["default"]));
                 continue;
             }
-            AnsiConsole.Write(new Text($"{component.EffectTier} - {component.EffectText}", 
+            AnsiConsole.Write(new Text($"{component.EffectTier} - {component.EffectText}\n", 
                 Stylesheet.Styles["default"]));
         }
     }

@@ -95,16 +95,16 @@ public static class BattleTextService
                                   $"{locale.Defense}: {target.PhysicalDefense:F0}:{target.MagicDefense:F0}, " +
                                   $"{locale.Dodge}: {target.Dodge:F0}\n\n", Stylesheet.Styles["default"]));
         AnsiConsole.Write(new Text($"{locale.Resistances}\n", Stylesheet.Styles["default-bold"]));
-        AnsiConsole.Write(new Text($"{locale.Debuff}: {target.Resistances[StatusEffectType.Debuff].Value():P0}, " +
-                                   $"{locale.Stun}: {target.Resistances[StatusEffectType.Stun].Value():P0}, " +
-                                   $"{locale.Freeze}: {target.Resistances[StatusEffectType.Freeze].Value():P0}\n" +
-                                   $"{locale.Bleed}: {target.Resistances[StatusEffectType.Bleed].Value():P0}, " +
-                                   $"{locale.Poison}: {target.Resistances[StatusEffectType.Poison].Value():P0}, " +
-                                   $"{locale.Burn}: {target.Resistances[StatusEffectType.Burn].Value():P0}\n" +
-                                   $"{locale.Frostbite}: {target.Resistances[StatusEffectType.Frostbite].Value():P0}, " +
-                                   $"{locale.Sleep}: {target.Resistances[StatusEffectType.Sleep].Value():P0}, " +
-                                   $"{locale.Paralysis}: {target.Resistances[StatusEffectType.Paralysis].Value():P0}, " +
-                                   $"{locale.Provocation}: {target.Resistances[StatusEffectType.Provocation].Value():P0}\n\n", 
+        AnsiConsole.Write(new Text($"{locale.Debuff}: {target.Resistances[StatusEffectType.Debuff].Value(target, "DebuffResistance"):P0}, " +
+                                   $"{locale.Stun}: {target.Resistances[StatusEffectType.Stun].Value(target, "StunResistance"):P0}, " +
+                                   $"{locale.Freeze}: {target.Resistances[StatusEffectType.Freeze].Value(target, "FreezeResistance"):P0}\n" +
+                                   $"{locale.Bleed}: {target.Resistances[StatusEffectType.Bleed].Value(target, "BleedResistance"):P0}, " +
+                                   $"{locale.Poison}: {target.Resistances[StatusEffectType.Poison].Value(target, "PoisonResistance"):P0}, " +
+                                   $"{locale.Burn}: {target.Resistances[StatusEffectType.Burn].Value(target, "BurnResistance"):P0}\n" +
+                                   $"{locale.Frostbite}: {target.Resistances[StatusEffectType.Frostbite].Value(target, "FrostbiteResistance"):P0}, " +
+                                   $"{locale.Sleep}: {target.Resistances[StatusEffectType.Sleep].Value(target, "SleepResistance"):P0}, " +
+                                   $"{locale.Paralysis}: {target.Resistances[StatusEffectType.Paralysis].Value(target, "ParalysisResistance"):P0}, " +
+                                   $"{locale.Provocation}: {target.Resistances[StatusEffectType.Provocation].Value(target, "ProvocationResistance"):P0}\n\n", 
             Stylesheet.Styles["default"]));
     }
 
@@ -125,17 +125,17 @@ public static class BattleTextService
                     AnsiConsole.Write(new Text($"{locale.Bleed} ({string.Join(", ",dotsList
                         .Where(x => x.Type == StatusEffectType.Bleed).Select(s => s.Source))}): {(int)dotsList
                         .Where(x => x.Type == StatusEffectType.Bleed).Sum(s => s.Strength)} [{dotsList
-                        .Where(x => x.Type == StatusEffectType.Bleed).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-bleed"]));
+                        .Where(x => x.Type == StatusEffectType.Bleed).Max(s => s.Duration)}]\n", Stylesheet.Styles["damage-bleed"]));
                 if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Poison))
                     AnsiConsole.Write(new Text($"{locale.Poison} ({string.Join(", ",dotsList
                         .Where(x => x.Type == StatusEffectType.Poison).Select(s => s.Source))}): {(int)dotsList
                         .Where(x => x.Type == StatusEffectType.Poison).Sum(s => s.Strength)} [{dotsList
-                        .Where(x => x.Type == StatusEffectType.Poison).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-poison"]));
+                        .Where(x => x.Type == StatusEffectType.Poison).Max(s => s.Duration)}]\n", Stylesheet.Styles["damage-poison"]));
                 if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Burn))
                     AnsiConsole.Write(new Text($"{locale.Burn} ({string.Join(", ",dotsList
                         .Where(x => x.Type == StatusEffectType.Burn).Select(s => s.Source))}): {(int)dotsList
                         .Where(x => x.Type == StatusEffectType.Burn).Sum(s => s.Strength)} [{dotsList
-                        .Where(x => x.Type == StatusEffectType.Burn).Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["damage-burn"]));
+                        .Where(x => x.Type == StatusEffectType.Burn).Max(s => s.Duration)}]\n", Stylesheet.Styles["damage-burn"]));
             }
 
             if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Sleep))
@@ -144,7 +144,7 @@ public static class BattleTextService
                     .Where(x => x.Type == StatusEffectType.Sleep).Cast<Sleep>().ToList();
                 AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", sleeps
                     .Select(s => s.Source))}): +{(int)sleeps.Sum(s => s.Strength)} [{sleeps
-                    .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+                    .Max(s => s.Duration)}]\n", Stylesheet.Styles["default"]));
             }
             if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Shield))
             {
@@ -152,7 +152,7 @@ public static class BattleTextService
                     .Where(x => x.Type == StatusEffectType.Shield).Cast<Shield>().ToList();
                 AnsiConsole.Write(new Text($"{locale.Sleep} ({string.Join(", ", shields
                     .Select(s => s.Source))}): +{(int)shields.Sum(s => s.Strength)} [{shields
-                    .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+                    .Max(s => s.Duration)}]\n", Stylesheet.Styles["default"]));
             }
             if (target.StatusEffects.Any(x => x.Type == StatusEffectType.Regeneration))
             {
@@ -164,21 +164,21 @@ public static class BattleTextService
                     AnsiConsole.Write(new Text($"{locale.Regeneration} ({string.Join(", ", regensHealth
                         .Select(s => s.Source))}): +{(int)regensHealth
                         .Sum(s => s.Strength)} {locale.HealthShort} [{regensHealth
-                        .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+                        .Max(s => s.Duration)}]\n", Stylesheet.Styles["default"]));
                 if (regensResource.Count > 0)
                     AnsiConsole.Write(new Text($"{locale.Regeneration} ({string.Join(", ", regensResource
                         .Select(s => s.Source))}): +{(int)regensResource
                         .Sum(s => s.Strength)} {ResourceShortText(target)} [{regensResource
-                        .Max(s => s.RemainingDuration)}]\n", Stylesheet.Styles["default"]));
+                        .Max(s => s.Duration)}]\n", Stylesheet.Styles["default"]));
             }
             var other = target.StatusEffects.Where(x => x.Type != StatusEffectType.Bleed && 
                                         x.Type != StatusEffectType.Poison && x.Type != StatusEffectType.Burn &&
                                         x.Type != StatusEffectType.Sleep && x.Type != StatusEffectType.Shield && 
                                         x.Type != StatusEffectType.Regeneration).ToList();
-            foreach (var status in other.OrderByDescending(x => x.RemainingDuration).OrderBy(x => x.Type))
+            foreach (var status in other.OrderByDescending(x => x.Duration).OrderBy(x => x.Type))
             {
                 AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(status.Type.ToString())} " +
-                                           $"({status.Source}): {status.Effect} [{status.RemainingDuration}]\n"));
+                                           $"({status.Source}): {status.Effect} [{status.Duration}]\n"));
             }
 
         }
@@ -192,7 +192,7 @@ public static class BattleTextService
                 ModifierType.Additive => modifier.Key.Mod.ToString("+#;-#;0")
             };
             AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(modifier.Value.ToString())} " +
-                                       $"({modifier.Key.Source}): {mod} [{modifier.Key.RemainingDuration}]\n"));
+                                       $"({modifier.Key.Source}): {mod} [{modifier.Key.Duration}]\n"));
         }
     }
 }

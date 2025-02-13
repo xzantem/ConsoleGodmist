@@ -1,8 +1,10 @@
-﻿using ConsoleGodmist.Town.NPCs;
-using ConsoleGodmist.Utilities;
+﻿
+using ConsoleGodmist.Town.NPCs;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Quests;
 
+[JsonConverter(typeof(QuestObjectiveConverter))]
 public class TalkQuestObjective : IQuestObjective
 {
     public bool IsComplete { get; set; }
@@ -17,5 +19,9 @@ public class TalkQuestObjective : IQuestObjective
         IsComplete = true;
         foreach (var str in Dialogue)
             NPCToTalkTo.Say(str);
+    }
+    [JsonConstructor]
+    public TalkQuestObjective()
+    {
     }
 }

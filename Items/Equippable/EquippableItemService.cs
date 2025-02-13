@@ -1,10 +1,13 @@
-﻿using ConsoleGodmist.Enums;
+﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Modifiers;
+using ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
+using ConsoleGodmist.Enums;
 
 namespace ConsoleGodmist.Items;
 
 public static class EquippableItemService
 {
-    public static double RarityModifier(ItemRarity rarity)
+    public static double RarityPriceModifier(ItemRarity rarity)
     {
         return rarity switch
         {
@@ -16,6 +19,21 @@ public static class EquippableItemService
             ItemRarity.Legendary => 1.75,
             ItemRarity.Mythical => 2,
             ItemRarity.Godly => 2.5,
+            _ => 1
+        };
+    }
+    public static double RarityStatModifier(ItemRarity rarity)
+    {
+        return rarity switch
+        {
+            ItemRarity.Destroyed => 0.6,
+            ItemRarity.Damaged => 0.7,
+            ItemRarity.Uncommon => 1.025,
+            ItemRarity.Rare => 1.05,
+            ItemRarity.Ancient => 1.125,
+            ItemRarity.Legendary => 1.225,
+            ItemRarity.Mythical => 1.35,
+            ItemRarity.Godly => 1.5,
             _ => 1
         };
     }
@@ -126,5 +144,74 @@ public static class EquippableItemService
             EquipmentPartManager.GetRandomPart<ArmorBinder>(tier, requiredClass),
             EquipmentPartManager.GetRandomPart<ArmorBase>(tier, requiredClass),
             requiredClass, Quality.Masterpiece, alias);
+    }
+    
+    public static List<InnatePassiveEffect> GetInnatePassiveEffects(bool equipmentType, PlayerCharacter player,
+        HashSet<GalduriteComponent> components)
+    {
+        var allowedTypes = new List<string>
+        {
+            "DamageDealtMod", "PhysicalDamageDealtMod", "MagicDamageDealtMod", "CritChanceMod", "CritModMod",
+            "HitChanceMod", "SuppressionChanceMod","DebuffChanceMod", "DoTChanceMod", "ItemChanceMod", 
+            "ResourceRegenMod", "UndeadDamageDealtMod", "HumanDamageDealtMod", "BeastDamageDealtMod",
+            "DemonDamageDealtMod", "ExperienceGainMod", "GoldGainMod", "PhysicalDefensePen", "MagicDefensePen", 
+            "MaximalHealthMod", "DodgeMod", "PhysicalDefenseMod", "MagicDefenseMod", "TotalDefenseMod", "SpeedMod", 
+            "MaxActionPointsMod", "DoTResistanceMod", "SuppressionResistanceMod", "DebuffResistanceMod", 
+            "TotalResistanceMod", "PhysicalDamageTakenMod", "MagicDamageTakenMod", "DamageTakenMod", "MaximalResourceMod",
+            "BleedDamageTakenMod", "PoisonDamageTakenMod", "BurnDamageTakenMod", "ResourceCostMod", "CritSaveChanceMod"
+        };
+        return (from component in components
+            where allowedTypes.Contains(component.EffectType)
+            select new InnatePassiveEffect(player, equipmentType ? "ArmorGaldurites" : "WeaponGaldurites",
+                component.EffectType, [component.EffectStrength, ModifierType.Multiplicative])).ToList();
+    }
+
+    public static List<ListenerPassiveEffect?> GetListenerPassiveEffects(bool equipmentType, PlayerCharacter player,
+        HashSet<GalduriteComponent> components)
+    {
+        var source = equipmentType ? "ArmorGaldurites" : "WeaponGaldurites";
+        return components.Select(component => component.EffectType switch
+            {
+                "BleedOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5, source,
+                            StatusEffectType.Bleed, component.EffectStrength)
+                        .Execute(player, data.Target?.User, source), player, source),
+                "PoisonOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5, source,
+                            StatusEffectType.Poison, component.EffectStrength)
+                        .Execute(player, data.Target?.User, source), player, source),
+                "BurnOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5, source,
+                            StatusEffectType.Burn, component.EffectStrength)
+                        .Execute(player, data.Target?.User, source), player, source),
+                "HealOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => new HealTarget(SkillTarget.Self, component.EffectStrength, DamageBase.Random).Execute(
+                        player, player, source), player, source),
+                "ResourceOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => new RegenResource(SkillTarget.Self, component.EffectStrength, DamageBase.CasterMaxHealth)
+                        .Execute(player, player, source), player, source),
+                "AdvanceMoveOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => data.Source.AdvanceMove((int)component.EffectStrength), player, source),
+                "StunOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => new InflictGenericStatusEffect(StatusEffectType.Stun, 1, component.EffectStrength,
+                        source, "Stun").Execute(player, data.Target?.User, source), player,
+                    source),
+                "FreezeOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => new InflictGenericStatusEffect(StatusEffectType.Freeze, 1, component.EffectStrength,
+                        source, "Stun").Execute(player, data.Target?.User, source), player,
+                    source),
+                "SlowOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
+                    data => new DebuffStat(SkillTarget.Enemy, StatType.Speed, ModifierType.Additive, 20,
+                        component.EffectStrength, 3).Execute(player, data.Target?.User, source), player,
+                    source),
+                "HealthRegenPerTurn" => new ListenerPassiveEffect(data => data.EventType == "PerTurn",
+                    data => new HealTarget(SkillTarget.Self, component.EffectStrength, DamageBase.CasterMaxHealth)
+                        .Execute(player, player, source), player, source),
+                "ResourceRegenPerTurn" => new ListenerPassiveEffect(data => data.EventType == "PerTurn",
+                    data => new RegenResource(SkillTarget.Self, component.EffectStrength, DamageBase.CasterMaxHealth)
+                        .Execute(player, player, source), player, source),
+                _ => null,
+            })
+            .ToList();
     }
 }

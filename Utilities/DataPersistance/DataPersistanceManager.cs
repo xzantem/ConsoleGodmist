@@ -1,6 +1,7 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Quests;
 using ConsoleGodmist.Town;
+using ConsoleGodmist.Town.NPCs;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -35,12 +36,13 @@ public static class DataPersistanceManager
         var prompt = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices).HighlightStyle(new Style(Color.Gold3_1)));
         if (prompt == locale.Return) return false;
         var json = File.ReadAllText(dir + "/" + prompt + ".json");
-        var data = JsonConvert.DeserializeObject<SaveData>(json);
+        var data = JsonConvert.DeserializeObject<SaveData>(json, new QuestObjectiveConverter(), new NPCConverter());
         PlayerHandler.player = data.Player;
         GameSettings.Difficulty = data.Difficulty;
         QuestManager.MainQuests = data.Quests[0];
         QuestManager.RandomizedSideQuests = data.Quests[1];
         QuestManager.BossSideQuests = data.Quests[2];
+        QuestManager.BossProgress = data.BossQuestProgress;
         TownsHandler.Arungard = data.Town;
         return true;
     }

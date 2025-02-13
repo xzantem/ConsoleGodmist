@@ -38,7 +38,7 @@ public class BuffStat : IActiveSkillEffect
                 break;
             case SkillTarget.Enemy:
                 if (Random.Shared.NextDouble() <
-                    UtilityMethods.EffectChance(enemy.Resistances[StatusEffectType.Buff].Value(), BuffChance))
+                    UtilityMethods.EffectChance(enemy.Resistances[StatusEffectType.Buff].Value(enemy, "BuffResistance"), BuffChance))
                 {
                     enemy.AddModifier(StatToBuff,
                         new StatModifier(ModifierType, BuffStrength, source, BuffDuration));

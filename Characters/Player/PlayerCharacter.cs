@@ -11,6 +11,55 @@ namespace ConsoleGodmist.Characters
     [JsonConverter(typeof(PlayerJsonConverter))]
     public abstract class PlayerCharacter : Character
     {
+        public override double MinimalAttack
+        {
+            get => _minimalAttack.Value(this, "MinimalAttack") + (Weapon?.MinimalAttack?? 0);
+            protected set => _minimalAttack.BaseValue = value;
+        }
+        public override double MaximalAttack
+        {
+            get => _maximalAttack.Value(this, "MaximalAttack") + (Weapon?.MaximalAttack?? 0);
+            protected set => _maximalAttack.BaseValue = Math.Max(_minimalAttack.BaseValue, value);
+        }
+        public override double CritChance
+        {
+            get => Math.Clamp(_critChance.Value(this, "CritChance") + (Weapon?.CritChance?? 0), 0, 1);
+            protected set => _critChance.BaseValue = value;
+        }
+        public override double CritMod
+        {
+            get => _critMod.Value(this, "CritMod") + (Weapon?.CritMod ?? 0);
+            protected set => _critMod.BaseValue = value;
+        }
+        public override double Accuracy
+        {
+            get => _accuracy.Value(this, "Accuracy") + (Weapon?.Accuracy ?? 0) - 
+                   (ResourceType == ResourceType.Fury ? CurrentResource / 3 : 0);
+            protected set => _accuracy.BaseValue = value;
+        }
+        public override double MaximalHealth
+        {
+            get => _maximalHealth.Value(this, "MaximalHealth") + (Armor?.MaximalHealth ?? 0);
+            protected set => _maximalHealth.BaseValue = value;
+        }
+
+        public override double Dodge
+        {
+            get => _dodge.Value(this, "Dodge") + (Armor?.Dodge?? 0);
+            protected set => _dodge.BaseValue = value;
+        }
+
+        public override double PhysicalDefense
+        {
+            get => _physicalDefense.Value(this, "PhysicalDefense") + (Armor?.PhysicalDefense?? 0);
+            protected set => _physicalDefense.BaseValue = value;
+        }
+
+        public override double MagicDefense
+        {
+            get => _magicDefense.Value(this, "MagicDefense") + (Armor?.MagicDefense?? 0);
+            protected set => _magicDefense.BaseValue = value;
+        }
         protected PlayerCharacter(string name,
             Stat maxHealth,
             Stat minimalAttack,
@@ -25,6 +74,7 @@ namespace ConsoleGodmist.Characters
             CharacterClass characterClass) : base(name, maxHealth, minimalAttack, maximalAttack, critChance,
             dodge, physicalDefense, magicDefense, speed, accuracy, critMod, 1)
         {
+            PassiveEffects = new PassiveEffectList();
             CharacterClass = characterClass;
             Resistances = new Dictionary<StatusEffectType, Stat>();
         }
@@ -56,57 +106,25 @@ namespace ConsoleGodmist.Characters
             }
         }
         public Inventory Inventory { get; set; } = new();
-        public Weapon Weapon { get; set; }
-        public Armor Armor { get; set; }
+        public Weapon? Weapon { get; set; }
+        public Armor? Armor { get; set; }
 
         public void SwitchWeapon(Weapon weapon)
         {
-            if (Weapon != null)
-            {
-                var oldWeapon = Weapon;
-                Inventory.AddItem(oldWeapon);
-                MinimalAttack += weapon.MinimalAttack - oldWeapon.MinimalAttack;
-                MaximalAttack += weapon.MaximalAttack - oldWeapon.MaximalAttack;
-                CritChance += weapon.CritChance - oldWeapon.CritChance;
-                CritMod += weapon.CritMod - oldWeapon.CritMod;
-                Accuracy += weapon.Accuracy - oldWeapon.Accuracy;
-            }
-            else
-            {
-                MinimalAttack += weapon.MinimalAttack;
-                MaximalAttack += weapon.MaximalAttack;
-                CritChance += weapon.CritChance;
-                CritMod += weapon.CritMod;
-                Accuracy += weapon.Accuracy;
-            }
+            if (Weapon != null) Inventory.AddItem(Weapon);
             Weapon = weapon;
+            Weapon.UpdatePassives(this);
         }
         public void SwitchArmor(Armor armor)
         {
-            if (Armor != null)
-            {
-                var oldArmor = Armor;
-                Inventory.AddItem(oldArmor);
-                MaximalHealth += armor.MaximalHealth - oldArmor.MaximalHealth;
-                CurrentHealth += armor.MaximalHealth - oldArmor.MaximalHealth;
-                Dodge += armor.Dodge - oldArmor.Dodge;
-                PhysicalDefense += armor.PhysicalDefense - oldArmor.PhysicalDefense;
-                MagicDefense += armor.MagicDefense - oldArmor.MagicDefense;
-            }
-            else
-            {
-                MaximalHealth += armor.MaximalHealth;
-                CurrentHealth += armor.MaximalHealth;
-                Dodge += armor.Dodge;
-                PhysicalDefense += armor.PhysicalDefense;
-                MagicDefense += armor.MagicDefense;
-            }
-            
+            if (Armor != null) Inventory.AddItem(Armor);
             Armor = armor;
+            _currentHealth += armor.MaximalHealth;
+            Armor.UpdatePassives(this);
         }
 
         public void GainGold(int gold) {
-            Gold += gold;
+            Gold += (int)UtilityMethods.CalculateModValue(gold, PassiveEffects.GetModifiers("GoldGainMod"));
             CharacterEventTextService.DisplayGoldGainText(this, gold);
         }
         public void LoseGold(int gold) {
@@ -115,7 +133,8 @@ namespace ConsoleGodmist.Characters
         }
         public void GainExperience(int experience)
         {
-            var experienceGained = (int)(experience * PlayerHandler.HonorExperienceModifier);
+            var experienceGained = (int)UtilityMethods
+                .CalculateModValue(experience * PlayerHandler.HonorExperienceModifier, PassiveEffects.GetModifiers("ExperienceGainMod"));
             CurrentExperience += experienceGained;
             CharacterEventTextService.DisplayExperienceGainText(experienceGained);
             while (CurrentExperience >= RequiredExperience) {
@@ -141,7 +160,7 @@ namespace ConsoleGodmist.Characters
             var value = 0;
             for (var i = 1; i <= Math.Min(level, 49); i++)
             {
-                value += (int)(12 * Math.Pow(i, 1.5) + 60);
+                value += (int)(12 * Math.Pow(i, 1.5) + 12);
             }
             return value;
         }

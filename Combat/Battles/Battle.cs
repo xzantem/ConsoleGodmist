@@ -43,10 +43,10 @@ public class Battle
                         StatusEffectType.Freeze or StatusEffectType.Sleep))
                 {
                     BattleTextService.DisplayCannotMoveText(user.User);
-                    HandleEffects(user.User);
+                    HandleEffects(user);
                     continue;
                 }
-                HandleEffects(user.User);
+                HandleEffects(user);
                 switch (Users[user])
                 {
                     case 0:
@@ -76,25 +76,27 @@ public class Battle
         }
         TurnCount++;
     }
-    public void HandleEffects(Character user)
+    public void HandleEffects(BattleUser user)
     {
-        StatusEffectHandler.HandleEffects(user.StatusEffects, user);
-        user.HandleModifiers();
-        user.RegenResource((int)user.ResourceRegen);
+        StatusEffectHandler.HandleEffects(user.User.StatusEffects, user.User);
+        user.User.HandleModifiers();
+        user.User.RegenResource((int)user.User.ResourceRegen);
+        user.User.PassiveEffects.HandleBattleEvent(new BattleEventData("PerTurn", user));
+        user.User.PassiveEffects.TickEffects();
         CheckForDead();
     }
 
-    public void ChooseSkill(BattleUser player, Character target)
+    public void ChooseSkill(BattleUser player, BattleUser target)
     {
         var skills = (player.User as PlayerCharacter)?.ActiveSkills
-            .Select(x => x.Name + $" ({x.ResourceCost} {BattleTextService.ResourceShortText(player.User as PlayerCharacter)}, " +
-                         $"{(int)(x.ActionCost * player.MaxActionPoints.Value())} {locale.ActionPointsShort})").ToArray();
+            .Select(x => x.Name + $" ({(int)UtilityMethods.CalculateModValue(x.ResourceCost, player.User.PassiveEffects.GetModifiers("ResourceCost"))} {BattleTextService.ResourceShortText(player.User as PlayerCharacter)}, " +
+                         $"{(int)(x.ActionCost * player.MaxActionPoints.BaseValue)} {locale.ActionPointsShort})").ToArray();
         var choices = skills.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));
         if (choice == locale.Return) return;
         if (!((player.User as PlayerCharacter)?.ActiveSkills[Array.IndexOf(choices, choice)]
-                .ActionCost * player.MaxActionPoints.Value() > player.CurrentActionPoints))
+                .ActionCost * player.MaxActionPoints.BaseValue > player.CurrentActionPoints))
             (player.User as PlayerCharacter)!.ActiveSkills[Array.IndexOf(choices, choice)]
                 .Use(player, target);
     }
@@ -102,28 +104,28 @@ public class Battle
     {
         List<string> choices =
         [
-            locale.EndTurn, locale.UseSkill, locale.UsePotion + $" ({(int)(0.2 * player.MaxActionPoints.Value())} {locale.ActionPointsShort})", 
+            locale.EndTurn, locale.UseSkill, locale.UsePotion + $" ({(int)(0.2 * player.MaxActionPoints.Value(player.User, "MaxActionPoints"))} {locale.ActionPointsShort})", 
             locale.ShowStats, locale.ShowStatus
         ];
         if (CanEscape)
             choices.Add(locale.Escape);
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)).Title($"{locale.ChooseNextAction} " +
-                $"({player.CurrentActionPoints:F0}/{player.MaxActionPoints.Value():F0} {locale.ActionPointsShort})"));
+                $"({player.CurrentActionPoints:F0}/{player.MaxActionPoints.Value(player.User, "MaxActionPoints"):F0} {locale.ActionPointsShort})"));
         switch (Array.IndexOf(choices.ToArray(), choice))
         {
             case 0:
                 return true;
             case 1:
-                ChooseSkill(player, target.User);
+                ChooseSkill(player, target);
                 CheckForDead();
                 return false;
             case 2:
                 var potion = PotionManager.ChoosePotion((player.User as PlayerCharacter).Inventory.Items
                     .Where(x => x.Key.ItemType == ItemType.Potion)
-                    .Select(x => x.Key).Cast<Potion>().ToList());
+                    .Select(x => x.Key).Cast<Potion>().ToList(), false);
                 if (potion == null) return false;
-                player.UseActionPoints(0.2 * player.MaxActionPoints.Value());
+                player.UseActionPoints(0.2 * player.MaxActionPoints.Value(player.User, "MaxActionPoints"));
                 potion.Use();
                 return false;
             case 3:
@@ -168,19 +170,18 @@ public class Battle
     }
     public void AIMove(BattleUser enemy, BattleUser target)
     {
-        var possibleSkills = new List<ActiveSkill>();
         BattleTextService.DisplayStatusText(target, enemy);
         while (CheckForResult() == -1)
         {
-            possibleSkills = enemy.User.ActiveSkills
+            var possibleSkills = enemy.User.ActiveSkills
                 .Where(x => (x.ResourceCost <= enemy.User.CurrentResource ||
                              Math.Abs(enemy.User.MaximalResource - enemy.User.CurrentResource) < 0.01)
-                            && x.ActionCost * enemy.MaxActionPoints.Value() <= enemy.CurrentActionPoints)
+                            && x.ActionCost * enemy.MaxActionPoints.Value(enemy.User, "MaxActionPoints") <= enemy.CurrentActionPoints)
                 .ToList();
             if (possibleSkills.Count < 1)
                 break;
             var usedSkill = UtilityMethods.RandomChoice(possibleSkills);
-            usedSkill.Use(enemy, target.User);
+            usedSkill.Use(enemy, target);
             CheckForDead();
             Thread.Sleep(1000);
         } 

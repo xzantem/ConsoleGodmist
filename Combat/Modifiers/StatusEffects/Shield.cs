@@ -8,7 +8,7 @@ public class Shield(double strength, string source, int duration) : StatusEffect
     public double Strength { get; private set; } = strength;
     public void Handle(Character target)
     {
-        base.Handle(target);
+        base.Tick(target);
     }
     public double TakeDamage(double amount)
     {

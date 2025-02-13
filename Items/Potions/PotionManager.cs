@@ -1,7 +1,9 @@
-﻿using System.Net.NetworkInformation;
+﻿using System.Buffers;
+using System.Net.NetworkInformation;
 using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
 using Spectre.Console;
 
@@ -39,9 +41,9 @@ public static class PotionManager
             case PotionEffect.HealthRegen:
                 var totalHealthRegen = PlayerHandler.player.MaximalHealth * strength;
                 var healthPerTurn = totalHealthRegen / condensedDuration;
-                StatusEffectHandler.AddStatusEffect(
-                    new Regeneration(healthPerTurn, component.Material, condensedDuration, "Health"), 
-                    PlayerHandler.player);
+                PlayerHandler.player.PassiveEffects.Add(new TimedPassiveEffect(
+                    PlayerHandler.player, "Potion", "Regeneration", condensedDuration, [],
+                    () => { PlayerHandler.player.Heal((int)healthPerTurn); }));
                 break;
             case PotionEffect.ResourceRegain:
                 PlayerHandler.player.RegenResource((int)(PlayerHandler.player.MaximalResource * strength));
@@ -52,18 +54,21 @@ public static class PotionManager
                 StatusEffectHandler.AddStatusEffect(
                     new Regeneration(resourcePerTurn, component.Material, condensedDuration, "Resource"), 
                     PlayerHandler.player);
+                PlayerHandler.player.PassiveEffects.Add(new TimedPassiveEffect(
+                    PlayerHandler.player, "Potion", "Regeneration", condensedDuration, [], 
+                    () => { PlayerHandler.player.RegenResource((int)resourcePerTurn); }));
                 break;
             case PotionEffect.MaxResourceIncrease:
                 PlayerHandler.player.AddModifier(StatType.MaximalResource, new StatModifier(ModifierType.Multiplicative, 
                     strength, component.Material, duration));
                 break;
             case PotionEffect.DamageDealtIncrease:
-                PlayerHandler.player.AddModifier(StatType.DamageDealt, new StatModifier(ModifierType.Multiplicative, 
-                    strength, component.Material, duration));
+                PlayerHandler.player.PassiveEffects.Add(new TimedPassiveEffect(
+                    PlayerHandler.player, "Potion", "DamageDealtMod", duration, [strength, ModifierType.Multiplicative]));
                 break;
             case PotionEffect.DamageTakenDecrease:
-                PlayerHandler.player.AddModifier(StatType.DamageTaken, new StatModifier(ModifierType.Multiplicative, 
-                    -strength, component.Material, duration));
+                PlayerHandler.player.PassiveEffects.Add(new TimedPassiveEffect(
+                    PlayerHandler.player, "Potion", "DamageTakenMod", duration, [-strength, ModifierType.Multiplicative]));
                 break;
             case PotionEffect.ResistanceIncrease:
                 foreach (var resistance in PlayerHandler.player.Resistances)
@@ -73,8 +78,8 @@ public static class PotionManager
                 }
                 break;
             case PotionEffect.AccuracyIncrease:
-                PlayerHandler.player.AddModifier(StatType.Accuracy, new StatModifier(ModifierType.Multiplicative, 
-                    strength, component.Material, duration));
+                PlayerHandler.player.PassiveEffects.Add(new TimedPassiveEffect(
+                    PlayerHandler.player, "Potion", "AccuracyMod", duration, [strength, ModifierType.Multiplicative]));
                 break;
             case PotionEffect.SpeedIncrease:
                 PlayerHandler.player.AddModifier(StatType.Speed, new StatModifier(ModifierType.Additive, 
@@ -113,29 +118,29 @@ public static class PotionManager
     {
         return (effect, tier) switch
         {
-            (PotionCatalystEffect.Duration, 1) => "",
-            (PotionCatalystEffect.Duration, 2) => "",
-            (PotionCatalystEffect.Duration, 3) => "",
-            (PotionCatalystEffect.Duration, 4) => "",
-            (PotionCatalystEffect.Duration, 5) => "",
+            (PotionCatalystEffect.Duration, 1) => "HerbalDustNormal",
+            (PotionCatalystEffect.Duration, 2) => "HerbalDustYellow",
+            (PotionCatalystEffect.Duration, 3) => "HerbalDustHuman",
+            (PotionCatalystEffect.Duration, 4) => "HerbalDustLight",
+            (PotionCatalystEffect.Duration, 5) => "HerbalDustFire",
             
-            (PotionCatalystEffect.Strength, 1) => "",
-            (PotionCatalystEffect.Strength, 2) => "",
-            (PotionCatalystEffect.Strength, 3) => "",
-            (PotionCatalystEffect.Strength, 4) => "",
-            (PotionCatalystEffect.Strength, 5) => "",
+            (PotionCatalystEffect.Strength, 1) => "HerbalDustLumpy",
+            (PotionCatalystEffect.Strength, 2) => "HerbalDustGreen",
+            (PotionCatalystEffect.Strength, 3) => "HerbalDustElf",
+            (PotionCatalystEffect.Strength, 4) => "HerbalDustDivinity",
+            (PotionCatalystEffect.Strength, 5) => "HerbalDustAir",
             
-            (PotionCatalystEffect.Condensation, 1) => "",
-            (PotionCatalystEffect.Condensation, 2) => "",
-            (PotionCatalystEffect.Condensation, 3) => "",
-            (PotionCatalystEffect.Condensation, 4) => "",
-            (PotionCatalystEffect.Condensation, 5) => "",
+            (PotionCatalystEffect.Condensation, 1) => "HerbalDustTacky",
+            (PotionCatalystEffect.Condensation, 2) => "HerbalDustPink",
+            (PotionCatalystEffect.Condensation, 3) => "HerbalDustDwarf",
+            (PotionCatalystEffect.Condensation, 4) => "HerbalDustDarkness",
+            (PotionCatalystEffect.Condensation, 5) => "HerbalDustWater",
             
-            (PotionCatalystEffect.Capacity, 1) => "",
-            (PotionCatalystEffect.Capacity, 2) => "",
-            (PotionCatalystEffect.Capacity, 3) => "",
-            (PotionCatalystEffect.Capacity, 4) => "",
-            (PotionCatalystEffect.Capacity, 5) => ""
+            (PotionCatalystEffect.Capacity, 1) => "HerbalDustLoose",
+            (PotionCatalystEffect.Capacity, 2) => "HerbalDustOrange",
+            (PotionCatalystEffect.Capacity, 3) => "HerbalDustLizardman",
+            (PotionCatalystEffect.Capacity, 4) => "HerbalDustDemon",
+            (PotionCatalystEffect.Capacity, 5) => "HerbalDustEarth"
         };
     }
     public static double GetCatalystStrength(PotionCatalystEffect effect, int tier)
@@ -147,10 +152,18 @@ public static class PotionManager
         };
     }
 
-    public static Potion? ChoosePotion(List<Potion> potions)
+    public static Potion? ChoosePotion(List<Potion> potions, bool listMaterials)
     {
+        var inv = PlayerHandler.player.Inventory.Items;
         if (potions.Count == 0) return null;
-        var pots = potions.Select(x => $"{x.Name} ({x.CurrentCharges}/{x.MaximalCharges})").ToArray();
+        var pots = listMaterials ? potions.Select(x => $"{x.Name} ({x.CurrentCharges}/{x.MaximalCharges}) - " + 
+                       $"1x {NameAliasHelper.GetName(x.Components[0].Material)} " + 
+                       $"({inv.FirstOrDefault(m => m.Key.Alias == x.Components[0].Material).Value}), " + 
+                       $"1x {NameAliasHelper.GetName(x.Components[1].Material)} " + 
+                       $"({inv.FirstOrDefault(m => m.Key.Alias == x.Components[1].Material).Value}), " + 
+                       $"1x {NameAliasHelper.GetName(x.Components[2].Material)} " + 
+                       $"({inv.FirstOrDefault(m => m.Key.Alias == x.Components[2].Material).Value})").ToArray()
+                : potions.Select(x => $"{x.Name} ({x.CurrentCharges}/{x.MaximalCharges})").ToArray();
         var choices = pots.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)));

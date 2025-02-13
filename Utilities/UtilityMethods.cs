@@ -1,5 +1,7 @@
 ﻿using Spectre.Console;
 using System.Windows.Input;
+using ConsoleGodmist.Combat.Modifiers;
+using ConsoleGodmist.Enums;
 
 namespace ConsoleGodmist
 {
@@ -198,6 +200,21 @@ namespace ConsoleGodmist
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(log);
+        }
+
+        public static double CalculateModValue(double initial, List<StatModifier> modifiers)
+        {
+            // Order of modifiers:
+            // 1. Multiply by all relative modifiers
+            // 2. Add all additive modifiers
+            // 3. Multiply by all multiplicative modifiers
+            // 4. Add all absolute modifiers
+            initial = modifiers.Where(modifier => modifier.Type == ModifierType.Relative)
+                .Aggregate(initial, (current, modifier) => current * (1 + modifier.Mod)) + modifiers
+                .Where(modifier => modifier.Type == ModifierType.Additive).Sum(modifier => modifier.Mod);
+            return modifiers.Where(modifier => modifier.Type == ModifierType.Multiplicative)
+                .Aggregate(initial, (current, modifier) => current * (1 + modifier.Mod)) + modifiers
+                .Where(modifier => modifier.Type == ModifierType.Absolute).Sum(modifier => modifier.Mod);
         }
     }
 }

@@ -96,8 +96,8 @@ namespace ConsoleGodmist.Utilities
             Console.WriteLine($"\n...: {locale.Iam} {choice1}");
             var prompt = new TextPrompt<string>($"...: {locale.MyNameIs} ").Validate(n => n.Length switch
             {
-                > 20 => ValidationResult.Error(locale.NameTooLong),
-                <= 20 => ValidationResult.Success(),
+                > 32 => ValidationResult.Error(locale.NameTooLong),
+                <= 32 => ValidationResult.Success(),
             });
             prompt.AllowEmpty = false;
             var name = AnsiConsole.Prompt(prompt);

@@ -6,12 +6,16 @@ using Spectre.Console;
 
 namespace ConsoleGodmist.Items;
 
-public class Potion : BaseItem
+public class Potion : BaseItem, IUsable
 {
     public new string Name => NameAliasHelper.GetName(Alias);
     public override int Weight => 2;
     public override int ID => 561;
     public override bool Stackable => false;
+
+    public override int Cost =>
+        (int)(0.5 * (1 + (double)CurrentCharges / MaximalCharges) * (Components.Sum(x => ItemManager
+            .GetItem(x.Material).Cost) * 3 + (Catalyst == null ? 0 : ItemManager.GetItem(Catalyst.Material).Cost)));
     public override ItemType ItemType => ItemType.Potion;
     
     public List<PotionComponent> Components { get; set; }
@@ -24,12 +28,10 @@ public class Potion : BaseItem
         PotionCatalyst catalyst)
     {
         Alias = alias;
-        Cost = components.Sum(x => ItemManager.GetItem(x.Material).Cost) * 3; //+ 
-               //ItemManager.GetItem(catalyst.Material).Cost;
         Rarity = components.Max(x => ItemManager.GetItem(x.Material).Rarity);
         Components = components;
         Catalyst = catalyst;
-        MaximalCharges = CurrentCharges = 5 + (Catalyst.Effect == PotionCatalystEffect.Capacity ? Catalyst.Tier : 0);
+        MaximalCharges = CurrentCharges = 5 + (catalyst == null ? 0 :(Catalyst.Effect == PotionCatalystEffect.Capacity ? Catalyst.Tier : 0));
     }
     public Potion() {}
 
@@ -55,66 +57,6 @@ public class Potion : BaseItem
         base.Inspect(amount);
         AnsiConsole.Write($"{locale.Charges}: {CurrentCharges}/{MaximalCharges}\n");
         foreach (var effect in Components)
-        {
-            var duration = 10 + (int)(Catalyst.Effect == PotionCatalystEffect.Duration ? Catalyst.Strength : 0);
-            var strength = effect.EffectStrength * duration * (Catalyst.Effect == PotionCatalystEffect.Strength ? 1 + Catalyst.Strength : 1) / 10.0;
-            var condensedDuration = duration - (int)(Catalyst.Effect == PotionCatalystEffect.Condensation ? Catalyst.Strength : 0);
-            switch (effect.Effect)
-            {
-                case PotionEffect.HealthRegain:
-                    AnsiConsole.Write(new Text($"- {locale.HealthC} Regain: {strength:P0} {locale.HealthC} " +
-                                               $"instantly\n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.HealthRegen:
-                    AnsiConsole.Write(new Text($"- {locale.HealthC} Regen: {strength:P0} {locale.HealthC} over " +
-                                               $"{condensedDuration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.ResourceRegain:
-                    AnsiConsole.Write(new Text($"- {BattleTextService.ResourceShortText(PlayerHandler.player)} Regain: {strength:P0} " +
-                                               $"{BattleTextService.ResourceShortText(PlayerHandler.player)} " +
-                                               $"instantly\n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.ResourceRegen:
-                    AnsiConsole.Write(new Text($"- {BattleTextService.ResourceShortText(PlayerHandler.player)} Regen: {strength:P0} " + 
-                                               $"{BattleTextService.ResourceShortText(PlayerHandler.player)} over " +
-                                               $"{condensedDuration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.MaxResourceIncrease:
-                    AnsiConsole.Write(new Text($"- Max {BattleTextService.ResourceShortText(PlayerHandler.player)} Increase: +{strength:P0} " + 
-                                               $"{BattleTextService.ResourceShortText(PlayerHandler.player)} for " +
-                                               $"{duration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.DamageDealtIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.DamageDealt}: +{strength:P0} {locale.DamageGenitive} " +
-                                               $"for {duration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.DamageTakenDecrease:
-                    AnsiConsole.Write(new Text($"- {locale.DamageTaken}: -{strength:P0} {locale.DamageGenitive} " +
-                                               $"for {duration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.ResistanceIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.Resistances}: +{strength:P0} {locale.Resistances} " +
-                                               $"for {duration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.SpeedIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.Speed}: +{strength:P0} {locale.Speed} " +
-                                               $"for {duration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.CritChanceIncrese:
-                    AnsiConsole.Write(new Text($"- {locale.CritChance}: +{strength:P0} {locale.CritChance} " +
-                                               $"for {duration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.DodgeIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.Dodge}: +{strength:F0} {locale.Dodge} " +
-                                               $"for {duration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                case PotionEffect.AccuracyIncrease:
-                    AnsiConsole.Write(new Text($"- {locale.Accuracy}: +{strength:P0} {locale.Accuracy} " +
-                                               $"for {duration} turns \n", Stylesheet.Styles["default"]));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+            AnsiConsole.Write(effect.EffectDescription(Catalyst, false));
     }
 }

@@ -1,9 +1,11 @@
-﻿using ConsoleGodmist.Enums;
-using ConsoleGodmist.Town.NPCs;
+﻿
+using ConsoleGodmist.Enums;
 using ConsoleGodmist.Utilities;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Quests;
 
+[JsonConverter(typeof(QuestObjectiveConverter))]
 public class DescendQuestObjective : IQuestObjective
 {
     public bool IsComplete { get; set; }
@@ -12,9 +14,10 @@ public class DescendQuestObjective : IQuestObjective
     public int FloorToReach { get; set; }
     public string Description => 
         $"{locale.Descend} {FloorToReach} {locale.In} {NameAliasHelper.GetDungeonType(Target, "Locative")}";
+    
+    [JsonConstructor]
     public DescendQuestObjective()
     {
-        IsComplete = false;
     }
 
     public DescendQuestObjective(DungeonType dungeon, int floorToReach)

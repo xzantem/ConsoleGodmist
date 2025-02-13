@@ -1,4 +1,6 @@
-﻿namespace ConsoleGodmist.Items;
+﻿using ConsoleGodmist.Characters;
+
+namespace ConsoleGodmist.Items;
 
 public class DropTable
 {
@@ -18,7 +20,9 @@ public class DropTable
             foreach (var t in poolCopy.Chances)
             {
                 if (!poolCopy.Pool.Any(x => x.Value.MinLevel <= level && x.Value.MaxLevel >= level)) break;
-                if (!(Random.Shared.NextDouble() < t)) continue;
+                var dropChance = UtilityMethods.CalculateModValue(Random.Shared.NextDouble(), 
+                    PlayerHandler.player.PassiveEffects.GetModifiers("ItemChanceMod"));
+                if (!(dropChance < t)) continue;
                 var pair = poolCopy.Choice(level);
                 drops.Add(pair.Key, Random.Shared.Next(pair.Value.MinAmount, pair.Value.MaxAmount + 1));
                 poolCopy.Pool.Remove(pair.Key.Alias);
