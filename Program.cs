@@ -35,11 +35,6 @@ class Program
         
         while (true)
         {
-            for (var i = 100; i <= 200; i++)
-            {
-                var j = i / 100.0;
-                Console.WriteLine($"{j}: {(int)Math.Floor(j*5-5)}");
-            }
             MainMenu.Menu();
             TownsHandler.Arungard.EnterTown();
             AnsiConsole.Clear();

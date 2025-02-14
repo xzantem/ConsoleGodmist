@@ -52,8 +52,13 @@ public class DealDamage : IActiveSkillEffect
 
     public void Execute(Character caster, Character enemy, string source)
     {
-        var damage = 0.0;
-        damage = Target switch
+        var damage = Target switch
+        {
+            SkillTarget.Self => CalculateDamage(caster, caster),
+            SkillTarget.Enemy => CalculateDamage(caster, enemy),
+            _ => 0.0
+        };
+        var mitigatedDamage = Target switch
         {
             SkillTarget.Self => caster.TakeDamage(DamageType, CalculateDamage(caster, caster), caster),
             SkillTarget.Enemy => enemy.TakeDamage(DamageType, CalculateDamage(caster, enemy), caster),

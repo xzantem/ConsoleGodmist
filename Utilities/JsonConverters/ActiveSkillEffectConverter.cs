@@ -18,6 +18,7 @@ public class ActiveSkillEffectConverter : JsonConverter
 
         IActiveSkillEffect result = type switch
         {
+            "AdvanceMove" => new AdvanceMove(),
             "BuffStat" => new BuffStat(),
             "ClearStatusEffect" => new ClearStatusEffect(),
             "DealDamage" => new DealDamage(),
@@ -27,6 +28,8 @@ public class ActiveSkillEffectConverter : JsonConverter
             "HealTarget" => new HealTarget(),
             "InflictGenericStatusEffect" => new InflictGenericStatusEffect(),
             "InflictDoTStatusEffect" => new InflictDoTStatusEffect(),
+            "InflictTimedPassiveEffect" => new InflictTimedPassiveEffect(),
+            "ExtendDoT" => new ExtendDoT(),
             "RegenResource" => new RegenResource(),
             "TradeHealthForResource" => new TradeHealthForResource(),  
             _ => throw new NotSupportedException($"Unknown type: {type}")
