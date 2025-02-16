@@ -131,7 +131,7 @@ public sealed class Armor : BaseItem, IEquippable, IUsable
         Quality = quality;
         if (alias == "")
         {
-            Name = NameAliasHelper.GetName(Plate.Adjective) + " " + requiredClass switch
+            Name = NameAliasHelper.GetName(Plate.Adjective+"Adj") + " " + requiredClass switch
             {
                 CharacterClass.Warrior => locale.Hauberk,
                 CharacterClass.Scout => locale.Tunic,

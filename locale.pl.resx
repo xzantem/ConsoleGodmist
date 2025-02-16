@@ -1209,4 +1209,1717 @@
   <data name="NoWares" xml:space="preserve">
     <value>Nie ma żadnych rzeczy na sprzedaż</value>
   </data>
+  <data name="GoatSkin" xml:space="preserve">
+    <value>Skóra kozy</value>
+  </data>
+  <data name="WildDogSkin" xml:space="preserve">
+    <value>Skóra dzikiego psa</value>
+  </data>
+  <data name="RabbitSkin" xml:space="preserve">
+    <value>Skóra królika</value>
+  </data>
+  <data name="FoxSkin" xml:space="preserve">
+    <value>Skóra lisa</value>
+  </data>
+  <data name="TigerSkin" xml:space="preserve">
+    <value>Skóra tygrysa</value>
+  </data>
+  <data name="DeerSkin" xml:space="preserve">
+    <value>Skóra jelenia</value>
+  </data>
+  <data name="BoarSkin" xml:space="preserve">
+    <value>Skóra dzika</value>
+  </data>
+  <data name="LizardSkin" xml:space="preserve">
+    <value>Skóra warana</value>
+  </data>
+  <data name="BearSkin" xml:space="preserve">
+    <value>Skóra niedźwiedzia</value>
+  </data>
+  <data name="TrollSkin" xml:space="preserve">
+    <value>Skóra trolla</value>
+  </data>
+  <data name="AlligatorSkin" xml:space="preserve">
+    <value>Skóra aligatora</value>
+  </data>
+  <data name="LeopardSkin" xml:space="preserve">
+    <value>Skóra leoparda</value>
+  </data>
+  <data name="WolfSkin" xml:space="preserve">
+    <value>Skóra wilka</value>
+  </data>
+  <data name="BuffaloSkin" xml:space="preserve">
+    <value>Skóra bawoła</value>
+  </data>
+  <data name="ScorpionSkin" xml:space="preserve">
+    <value>Skóra skorpiona</value>
+  </data>
+  <data name="CheetahSkin" xml:space="preserve">
+    <value>Skóra geparda</value>
+  </data>
+  <data name="HellhoundSkin" xml:space="preserve">
+    <value>Skóra piekielnego ogara</value>
+  </data>
+  <data name="DragonSkin" xml:space="preserve">
+    <value>Skóra smoka</value>
+  </data>
+  <data name="WyvernSkin" xml:space="preserve">
+    <value>Skóra wiwerny</value>
+  </data>
+  <data name="GriffinSkin" xml:space="preserve">
+    <value>Skóra gryfa</value>
+  </data>
+  <data name="LarchWood" xml:space="preserve">
+    <value>Drewno modrzewiowe</value>
+  </data>
+  <data name="LindenWood" xml:space="preserve">
+    <value>Drewno lipowe</value>
+  </data>
+  <data name="PoplarWood" xml:space="preserve">
+    <value>Drewno topolowe</value>
+  </data>
+  <data name="AlderWood" xml:space="preserve">
+    <value>Drewno olchowe</value>
+  </data>
+  <data name="HawthornWood" xml:space="preserve">
+    <value>Drewno głogowe</value>
+  </data>
+  <data name="BirchWood" xml:space="preserve">
+    <value>Drewno brzozowe</value>
+  </data>
+  <data name="CypressWood" xml:space="preserve">
+    <value>Drewno cyprysowe</value>
+  </data>
+  <data name="CedarWood" xml:space="preserve">
+    <value>Drewno cedrowe</value>
+  </data>
+  <data name="HornbeamWood" xml:space="preserve">
+    <value>Drewno grabowe</value>
+  </data>
+  <data name="ElmWood" xml:space="preserve">
+    <value>Drewno wiązowe</value>
+  </data>
+  <data name="SpruceWood" xml:space="preserve">
+    <value>Drewno świerkowe</value>
+  </data>
+  <data name="ElderWood" xml:space="preserve">
+    <value>Drewno bzowe</value>
+  </data>
+  <data name="OakWood" xml:space="preserve">
+    <value>Drewno dębowe</value>
+  </data>
+  <data name="BeechWood" xml:space="preserve">
+    <value>Drewno bukowe</value>
+  </data>
+  <data name="SequoiaWood" xml:space="preserve">
+    <value>Drewno sekwojowe</value>
+  </data>
+  <data name="FirWood" xml:space="preserve">
+    <value>Drewno jodłowe</value>
+  </data>
+  <data name="BlackOakWood" xml:space="preserve">
+    <value>Drewno czarnodębowe</value>
+  </data>
+  <data name="PineWood" xml:space="preserve">
+    <value>Drewno sosnowe</value>
+  </data>
+  <data name="EbonyWood" xml:space="preserve">
+    <value>Drewno hebanowe</value>
+  </data>
+  <data name="HazelWood" xml:space="preserve">
+    <value>Drewno leszczynowe</value>
+  </data>
+  <data name="CottonFiber" xml:space="preserve">
+    <value>Włókno bawełny</value>
+  </data>
+  <data name="BeechmienFiber" xml:space="preserve">
+    <value>Włókno bukominy</value>
+  </data>
+  <data name="GoatWoolFiber" xml:space="preserve">
+    <value>Włókno koziej wełny</value>
+  </data>
+  <data name="JuteFiber" xml:space="preserve">
+    <value>Włókno juty</value>
+  </data>
+  <data name="SheepWoolFiber" xml:space="preserve">
+    <value>Włókno owczej wełny</value>
+  </data>
+  <data name="PalmFiber" xml:space="preserve">
+    <value>Włókno palmy</value>
+  </data>
+  <data name="LlamaWoolFiber" xml:space="preserve">
+    <value>Włókno lamiej wełny</value>
+  </data>
+  <data name="VasimineFiber" xml:space="preserve">
+    <value>Włókno wasminy</value>
+  </data>
+  <data name="LinenFiber" xml:space="preserve">
+    <value>Włókno lnu</value>
+  </data>
+  <data name="SilverclawFiber" xml:space="preserve">
+    <value>Włókno srebrnoszponu</value>
+  </data>
+  <data name="CamelWoolFiber" xml:space="preserve">
+    <value>Włókno wielbłądziej wełny</value>
+  </data>
+  <data name="MelenaFiber" xml:space="preserve">
+    <value>Włókno meleny</value>
+  </data>
+  <data name="HempFiber" xml:space="preserve">
+    <value>Włókno konopii</value>
+  </data>
+  <data name="YuccaFiber" xml:space="preserve">
+    <value>Włókno juki</value>
+  </data>
+  <data name="UtumeenFiber" xml:space="preserve">
+    <value>Włókno utumeny</value>
+  </data>
+  <data name="TrireedFiber" xml:space="preserve">
+    <value>Włókno trójprętu</value>
+  </data>
+  <data name="SilkFiber" xml:space="preserve">
+    <value>Włókno jedwabiu</value>
+  </data>
+  <data name="TagimineFiber" xml:space="preserve">
+    <value>Włókno tagiminy</value>
+  </data>
+  <data name="ViscoseFiber" xml:space="preserve">
+    <value>Włókno wiskozy</value>
+  </data>
+  <data name="OvariceFiber" xml:space="preserve">
+    <value>Włókno obarysu</value>
+  </data>
+  <data name="PurpleEnergyDust" xml:space="preserve">
+    <value>Fioletowy pył energetyczny</value>
+  </data>
+  <data name="PettySoul" xml:space="preserve">
+    <value>Mizerna dusza</value>
+  </data>
+  <data name="WeakSoul" xml:space="preserve">
+    <value>Mała dusza</value>
+  </data>
+  <data name="NormalSoul" xml:space="preserve">
+    <value>Zwykła dusza</value>
+  </data>
+  <data name="StrongSoul" xml:space="preserve">
+    <value>Silna dusza</value>
+  </data>
+  <data name="PowerfulSoul" xml:space="preserve">
+    <value>Potężna dusza</value>
+  </data>
+  <data name="SkeletonBone" xml:space="preserve">
+    <value>Kość szkieleta</value>
+  </data>
+  <data name="UndeadBrain" xml:space="preserve">
+    <value>Mózg umarlaka</value>
+  </data>
+  <data name="ElfEar" xml:space="preserve">
+    <value>Ucho elfa</value>
+  </data>
+  <data name="DemonHorn" xml:space="preserve">
+    <value>Róg demona</value>
+  </data>
+  <data name="PirateEye" xml:space="preserve">
+    <value>Oko pirata</value>
+  </data>
+  <data name="BirdFeather" xml:space="preserve">
+    <value>Pióro ptaka</value>
+  </data>
+  <data name="CactusFruit" xml:space="preserve">
+    <value>Owoc kaktusa</value>
+  </data>
+  <data name="DefiledHeart" xml:space="preserve">
+    <value>Spaczone serce</value>
+  </data>
+  <data name="CrushedSkull" xml:space="preserve">
+    <value>Skruszona czaszka</value>
+  </data>
+  <data name="TrollKidney" xml:space="preserve">
+    <value>Nerka trolla</value>
+  </data>
+  <data name="LivingLeaf" xml:space="preserve">
+    <value>Żyjący liść</value>
+  </data>
+  <data name="AlligatorTooth" xml:space="preserve">
+    <value>Kieł aligatora</value>
+  </data>
+  <data name="Ectoplasm" xml:space="preserve">
+    <value>Ektoplazma</value>
+  </data>
+  <data name="GhoulClaw" xml:space="preserve">
+    <value>Pazur ghula</value>
+  </data>
+  <data name="WolfFang" xml:space="preserve">
+    <value>Kieł wilka</value>
+  </data>
+  <data name="InterdimensionalTentacle" xml:space="preserve">
+    <value>Pozawymiarowa macka</value>
+  </data>
+  <data name="ShiningSand" xml:space="preserve">
+    <value>Błyszczący piasek</value>
+  </data>
+  <data name="SharkFin" xml:space="preserve">
+    <value>Płetwa rekina</value>
+  </data>
+  <data name="WindElement" xml:space="preserve">
+    <value>Żywioł wiatru</value>
+  </data>
+  <data name="AncientSkin" xml:space="preserve">
+    <value>Starożytna skóra</value>
+  </data>
+  <data name="Histine" xml:space="preserve">
+    <value>Histyna</value>
+  </data>
+  <data name="RukFeather" xml:space="preserve">
+    <value>Pióro ruka</value>
+  </data>
+  <data name="MosquitoProboscis" xml:space="preserve">
+    <value>Ssawka komara</value>
+  </data>
+  <data name="DrownerLung" xml:space="preserve">
+    <value>Płuco topielca</value>
+  </data>
+  <data name="ExecutionerBone" xml:space="preserve">
+    <value>Kość zabójcy</value>
+  </data>
+  <data name="RoyalEctoplasm" xml:space="preserve">
+    <value>Królewska ektoplazma</value>
+  </data>
+  <data name="ForestSpirit" xml:space="preserve">
+    <value>Żywioł lasu</value>
+  </data>
+  <data name="RoyalDemonHorn" xml:space="preserve">
+    <value>Demoniczny róg królewski</value>
+  </data>
+  <data name="AlphaSharkFin" xml:space="preserve">
+    <value>Płetwa alfa-rekina</value>
+  </data>
+  <data name="ProstheticTooth" xml:space="preserve">
+    <value>Sztuczny ząb</value>
+  </data>
+  <data name="EnchantedHand" xml:space="preserve">
+    <value>Zaczarowana dłoń</value>
+  </data>
+  <data name="MaladEnergy" xml:space="preserve">
+    <value>Energia Malada</value>
+  </data>
+  <data name="BerserkBlood" xml:space="preserve">
+    <value>Krew berserka</value>
+  </data>
+  <data name="WyvernScales" xml:space="preserve">
+    <value>Łuski wiwerny</value>
+  </data>
+  <data name="LivingBranch" xml:space="preserve">
+    <value>Żyjąca gałąź</value>
+  </data>
+  <data name="LivingFlower" xml:space="preserve">
+    <value>Żyjący kwiat</value>
+  </data>
+  <data name="Puffball" xml:space="preserve">
+    <value>Purchawka</value>
+  </data>
+  <data name="DaddyLonglegs" xml:space="preserve">
+    <value>Kosarz pospolity</value>
+  </data>
+  <data name="Pinecone" xml:space="preserve">
+    <value>Szyszka</value>
+  </data>
+  <data name="StranglerGrass" xml:space="preserve">
+    <value>Trawa dusicielska</value>
+  </data>
+  <data name="Seaweed" xml:space="preserve">
+    <value>Wodorosty</value>
+  </data>
+  <data name="BloomingCherry" xml:space="preserve">
+    <value>Kwitnąca wiśnia</value>
+  </data>
+  <data name="AloeMeda" xml:space="preserve">
+    <value>Aloe meda</value>
+  </data>
+  <data name="AlzifVines" xml:space="preserve">
+    <value>Pnącza alzif</value>
+  </data>
+  <data name="BylineFlower" xml:space="preserve">
+    <value>Kwiat byliny</value>
+  </data>
+  <data name="TregandianDandelion" xml:space="preserve">
+    <value>Dmuchawiec tregandzki</value>
+  </data>
+  <data name="Bulrush" xml:space="preserve">
+    <value>Sitowie</value>
+  </data>
+  <data name="CommonFly" xml:space="preserve">
+    <value>Mucha zwyczajna</value>
+  </data>
+  <data name="DwarvenMoss" xml:space="preserve">
+    <value>Krasnoludzki mech</value>
+  </data>
+  <data name="Swordshrub" xml:space="preserve">
+    <value>Mieczokrzew</value>
+  </data>
+  <data name="TulipFlower" xml:space="preserve">
+    <value>Kwiat tulipanu</value>
+  </data>
+  <data name="BurningVines" xml:space="preserve">
+    <value>Płonące pnącza</value>
+  </data>
+  <data name="DoragafuraStamens" xml:space="preserve">
+    <value>Prętki doragafury</value>
+  </data>
+  <data name="BananaLeaf" xml:space="preserve">
+    <value>Liść bananowca</value>
+  </data>
+  <data name="RissaFlower" xml:space="preserve">
+    <value>Kwiat rissa</value>
+  </data>
+  <data name="DesertReaper" xml:space="preserve">
+    <value>Żniwiarz pustynny</value>
+  </data>
+  <data name="FrostStamens" xml:space="preserve">
+    <value>Lodowe prętki</value>
+  </data>
+  <data name="RoyalButterfly" xml:space="preserve">
+    <value>Motyl królewski</value>
+  </data>
+  <data name="FlatCalamus" xml:space="preserve">
+    <value>Tatarak płaski</value>
+  </data>
+  <data name="Viperia" xml:space="preserve">
+    <value>Żmijowiec</value>
+  </data>
+  <data name="BlackWidow" xml:space="preserve">
+    <value>Czarna wdowa</value>
+  </data>
+  <data name="Każraniec" xml:space="preserve">
+    <value>Każraniec</value>
+  </data>
+  <data name="ElvishCasisa" xml:space="preserve">
+    <value>Casisa elficka</value>
+  </data>
+  <data name="HellishRose" xml:space="preserve">
+    <value>Piekielna róża</value>
+  </data>
+  <data name="MizukiFruit" xml:space="preserve">
+    <value>Owoc mizuki</value>
+  </data>
+  <data name="Moonshroom" xml:space="preserve">
+    <value>Księżycowy grzyb</value>
+  </data>
+  <data name="JamalaFlower" xml:space="preserve">
+    <value>Kwiat jamali</value>
+  </data>
+  <data name="RoyalScarab" xml:space="preserve">
+    <value>Skarabeusz królewski</value>
+  </data>
+  <data name="AzureSaffron" xml:space="preserve">
+    <value>Szafran błękitny</value>
+  </data>
+  <data name="MountainHearth" xml:space="preserve">
+    <value>Serce gór</value>
+  </data>
+  <data name="GoldenClover" xml:space="preserve">
+    <value>Złota koniczyna</value>
+  </data>
+  <data name="LionCrocus" xml:space="preserve">
+    <value>Lwie krokusy</value>
+  </data>
+  <data name="SkeletonAssassinSmallSoul" xml:space="preserve">
+    <value>Mała dusza Szkieleta Zabójcy</value>
+  </data>
+  <data name="WeakAlcohol" xml:space="preserve">
+    <value>Słaby alkohol</value>
+  </data>
+  <data name="Alcohol" xml:space="preserve">
+    <value>Alkohol</value>
+  </data>
+  <data name="GoodAlcohol" xml:space="preserve">
+    <value>Dobry alkohol</value>
+  </data>
+  <data name="StrongAlcohol" xml:space="preserve">
+    <value>Mocny alkohol</value>
+  </data>
+  <data name="PerfectAlcohol" xml:space="preserve">
+    <value>Perfekcyjny alkohol</value>
+  </data>
+  <data name="WeakGunpowder" xml:space="preserve">
+    <value>Słaby proch strzelniczy</value>
+  </data>
+  <data name="Gunpowder" xml:space="preserve">
+    <value>Proch strzelniczy</value>
+  </data>
+  <data name="StrongGunpowder" xml:space="preserve">
+    <value>Mocny proch strzelniczy</value>
+  </data>
+  <data name="GoodGunpowder" xml:space="preserve">
+    <value>Dobry proch strzelniczy</value>
+  </data>
+  <data name="PerfectGunpowder" xml:space="preserve">
+    <value>Perfekcyjny proch strzelniczy</value>
+  </data>
+  <data name="Bandage" xml:space="preserve">
+    <value>Bandaż</value>
+  </data>
+  <data name="Antidote" xml:space="preserve">
+    <value>Antidotum</value>
+  </data>
+  <data name="WetTowel" xml:space="preserve">
+    <value>Sucha szmatka</value>
+  </data>
+  <data name="TownPortalScroll" xml:space="preserve">
+    <value>Zwoj powrotu do miasta</value>
+  </data>
+  <data name="SolidLimestone" xml:space="preserve">
+    <value>Lity wapień</value>
+  </data>
+  <data name="SolidGranite" xml:space="preserve">
+    <value>Lity granit</value>
+  </data>
+  <data name="SolidMarble" xml:space="preserve">
+    <value>Lity marmur</value>
+  </data>
+  <data name="Garnet" xml:space="preserve">
+    <value>Granat</value>
+  </data>
+  <data name="Sapphire" xml:space="preserve">
+    <value>Szafir</value>
+  </data>
+  <data name="Amethyst" xml:space="preserve">
+    <value>Ametyst</value>
+  </data>
+  <data name="Citrine" xml:space="preserve">
+    <value>Cytryn</value>
+  </data>
+  <data name="Emerald" xml:space="preserve">
+    <value>Szmaragd</value>
+  </data>
+  <data name="Onyx" xml:space="preserve">
+    <value>Onyks</value>
+  </data>
+  <data name="Ruby" xml:space="preserve">
+    <value>Rubin</value>
+  </data>
+  <data name="Diamond" xml:space="preserve">
+    <value>Diament</value>
+  </data>
+  <data name="Topaz" xml:space="preserve">
+    <value>Topaz</value>
+  </data>
+  <data name="Amber" xml:space="preserve">
+    <value>Bursztyn</value>
+  </data>
+  <data name="IronBar" xml:space="preserve">
+    <value>Sztabka żelaza</value>
+  </data>
+  <data name="NickelBar" xml:space="preserve">
+    <value>Sztabka niklu</value>
+  </data>
+  <data name="CopperBar" xml:space="preserve">
+    <value>Sztabka miedzi</value>
+  </data>
+  <data name="TinBar" xml:space="preserve">
+    <value>Sztabka cyny</value>
+  </data>
+  <data name="SteelBar" xml:space="preserve">
+    <value>Sztabka stali</value>
+  </data>
+  <data name="InvarBar" xml:space="preserve">
+    <value>Sztabka inwaru</value>
+  </data>
+  <data name="MeteoricIronBar" xml:space="preserve">
+    <value>Sztabka żelaza meteorytowego</value>
+  </data>
+  <data name="BronzeBar" xml:space="preserve">
+    <value>Sztabka brązu</value>
+  </data>
+  <data name="AnnoditeBar" xml:space="preserve">
+    <value>Sztabka annodytu</value>
+  </data>
+  <data name="SilverBar" xml:space="preserve">
+    <value>Sztabka srebra</value>
+  </data>
+  <data name="CobaltBar" xml:space="preserve">
+    <value>Sztabka kobaltu</value>
+  </data>
+  <data name="GoldBar" xml:space="preserve">
+    <value>Sztabka złota</value>
+  </data>
+  <data name="CriferiteBar" xml:space="preserve">
+    <value>Sztabka kryferytu</value>
+  </data>
+  <data name="BrassBar" xml:space="preserve">
+    <value>Sztabka mosiądzu</value>
+  </data>
+  <data name="SultanSteelBar" xml:space="preserve">
+    <value>Sztabka sułtańskiej stali</value>
+  </data>
+  <data name="TitaniumBar" xml:space="preserve">
+    <value>Sztabka tytanu</value>
+  </data>
+  <data name="NefoliteBar" xml:space="preserve">
+    <value>Sztabka nefolitu</value>
+  </data>
+  <data name="AdamantiteBar" xml:space="preserve">
+    <value>Sztabka adamantium</value>
+  </data>
+  <data name="CifilmBar" xml:space="preserve">
+    <value>Sztabka cifilmu</value>
+  </data>
+  <data name="OrichalcumBar" xml:space="preserve">
+    <value>Sztabka orichalcum</value>
+  </data>
+  <data name="HugeIronBar" xml:space="preserve">
+    <value>Wielka sztabka żelaza</value>
+  </data>
+  <data name="HugeNickelBar" xml:space="preserve">
+    <value>Wielka sztabka niklu</value>
+  </data>
+  <data name="HugeCopperBar" xml:space="preserve">
+    <value>Wielka sztabka miedzi</value>
+  </data>
+  <data name="HugeTinBar" xml:space="preserve">
+    <value>Wielka sztabka cyny</value>
+  </data>
+  <data name="HugeSteelBar" xml:space="preserve">
+    <value>Wielka sztabka stali</value>
+  </data>
+  <data name="HugeInvarBar" xml:space="preserve">
+    <value>Wielka sztabka inwaru</value>
+  </data>
+  <data name="HugeMeteoricIronBar" xml:space="preserve">
+    <value>Wielka sztabka żelaza meteorytowego</value>
+  </data>
+  <data name="HugeBronzeBar" xml:space="preserve">
+    <value>Wielka sztabka brązu</value>
+  </data>
+  <data name="HugeAnnoditeBar" xml:space="preserve">
+    <value>Wielka sztabka annodytu</value>
+  </data>
+  <data name="HugeSilverBar" xml:space="preserve">
+    <value>Wielka sztabka srebra</value>
+  </data>
+  <data name="HugeCobaltBar" xml:space="preserve">
+    <value>Wielka sztabka kobaltu</value>
+  </data>
+  <data name="HugeGoldBar" xml:space="preserve">
+    <value>Wielka sztabka złota</value>
+  </data>
+  <data name="HugeCriferiteBar" xml:space="preserve">
+    <value>Wielka sztabka kryferytu</value>
+  </data>
+  <data name="HugeBrassBar" xml:space="preserve">
+    <value>Wielka sztabka mosiądzu</value>
+  </data>
+  <data name="HugeSultanSteelBar" xml:space="preserve">
+    <value>Wielka sztabka sułtańskiej stali</value>
+  </data>
+  <data name="HugeTitaniumBar" xml:space="preserve">
+    <value>Wielka sztabka tytanu</value>
+  </data>
+  <data name="HugeNefoliteBar" xml:space="preserve">
+    <value>Wielka sztabka nefolitu</value>
+  </data>
+  <data name="HugeAdamantiteBar" xml:space="preserve">
+    <value>Wielka sztabka adamantium</value>
+  </data>
+  <data name="HugeCifilmBar" xml:space="preserve">
+    <value>Wielka sztabka cifilmu</value>
+  </data>
+  <data name="HugeOrichalcumBar" xml:space="preserve">
+    <value>Wielka sztabka orichalcum</value>
+  </data>
+  <data name="PowderedIron" xml:space="preserve">
+    <value>Sproszkowane żelazo</value>
+  </data>
+  <data name="PowderedNickel" xml:space="preserve">
+    <value>Sproszkowany nikiel</value>
+  </data>
+  <data name="PowderedCopper" xml:space="preserve">
+    <value>Sproszkowana miedź</value>
+  </data>
+  <data name="PowderedTin" xml:space="preserve">
+    <value>Sproszkowana cyna</value>
+  </data>
+  <data name="PowderedSteel" xml:space="preserve">
+    <value>Sproszkowana stal</value>
+  </data>
+  <data name="PowderedInvar" xml:space="preserve">
+    <value>Sproszkowany inwar</value>
+  </data>
+  <data name="PowderedMeteoricIron" xml:space="preserve">
+    <value>Sproszkowane żelazo meteorytowe</value>
+  </data>
+  <data name="PowderedBronze" xml:space="preserve">
+    <value>Sproszkowany brąz</value>
+  </data>
+  <data name="PowderedAnnodite" xml:space="preserve">
+    <value>Sproszkowany annodyt</value>
+  </data>
+  <data name="PowderedSilver" xml:space="preserve">
+    <value>Sproszkowane srebro</value>
+  </data>
+  <data name="PowderedCobalt" xml:space="preserve">
+    <value>Sproszkowany kobalt</value>
+  </data>
+  <data name="PowderedGold" xml:space="preserve">
+    <value>Sproszkowane złoto</value>
+  </data>
+  <data name="PowderedCriferite" xml:space="preserve">
+    <value>Sproszkowany kryferyt</value>
+  </data>
+  <data name="PowderedBrass" xml:space="preserve">
+    <value>Sproszkowany mosiądz</value>
+  </data>
+  <data name="PowderedSultanSteel" xml:space="preserve">
+    <value>Sproszkowana sułtańska stal</value>
+  </data>
+  <data name="PowderedTitanium" xml:space="preserve">
+    <value>Sproszkowany tytan</value>
+  </data>
+  <data name="PowderedNefolite" xml:space="preserve">
+    <value>Sproszkowany nefolit</value>
+  </data>
+  <data name="PowderedAdamantite" xml:space="preserve">
+    <value>Sproszkowane adamantium</value>
+  </data>
+  <data name="PowderedCifilm" xml:space="preserve">
+    <value>Sproszkowany cifilm</value>
+  </data>
+  <data name="PowderedOrichalcum" xml:space="preserve">
+    <value>Sproszkowane orichalcum</value>
+  </data>
+  <data name="IronChain" xml:space="preserve">
+    <value>Żelazny łańcuch</value>
+  </data>
+  <data name="NickelChain" xml:space="preserve">
+    <value>Niklowy łańcuch</value>
+  </data>
+  <data name="CopperChain" xml:space="preserve">
+    <value>Miedziany łańcuch</value>
+  </data>
+  <data name="TinChain" xml:space="preserve">
+    <value>Cynowy łańcuch</value>
+  </data>
+  <data name="SteelChain" xml:space="preserve">
+    <value>Stalowy łańcuch</value>
+  </data>
+  <data name="InvarChain" xml:space="preserve">
+    <value>Inwarowy łańcuch</value>
+  </data>
+  <data name="MeteoricChain" xml:space="preserve">
+    <value>Meteorytowy łańcuch</value>
+  </data>
+  <data name="BronzeChain" xml:space="preserve">
+    <value>Brązowy łańcuch</value>
+  </data>
+  <data name="AnnoditeChain" xml:space="preserve">
+    <value>Annodytowy łańcuch</value>
+  </data>
+  <data name="SilverChain" xml:space="preserve">
+    <value>Srebrny łańcuch</value>
+  </data>
+  <data name="CobaltChain" xml:space="preserve">
+    <value>Kobaltowy łańcuch</value>
+  </data>
+  <data name="GoldenChain" xml:space="preserve">
+    <value>Złoty łańcuch</value>
+  </data>
+  <data name="CriferiteChain" xml:space="preserve">
+    <value>Kryferytowy łańcuch</value>
+  </data>
+  <data name="BrassChain" xml:space="preserve">
+    <value>Mosiężny łańcuch</value>
+  </data>
+  <data name="ShellanianChain" xml:space="preserve">
+    <value>Shellański łańcuch</value>
+  </data>
+  <data name="TitaniumChain" xml:space="preserve">
+    <value>Tytanowy łańcuch</value>
+  </data>
+  <data name="NefoliteChain" xml:space="preserve">
+    <value>Nefolitowy łańcuch</value>
+  </data>
+  <data name="AdamantiteChain" xml:space="preserve">
+    <value>Adamantowy łańcuch</value>
+  </data>
+  <data name="CifilmChain" xml:space="preserve">
+    <value>Cifilmowy łańcuch</value>
+  </data>
+  <data name="OrichalcumChain" xml:space="preserve">
+    <value>Orichalconowy łańcuch</value>
+  </data>
+  <data name="IronPlate" xml:space="preserve">
+    <value>Żelazna blacha</value>
+  </data>
+  <data name="NickelPlate" xml:space="preserve">
+    <value>Niklowa blacha</value>
+  </data>
+  <data name="CopperPlate" xml:space="preserve">
+    <value>Miedziana blacha</value>
+  </data>
+  <data name="TinPlate" xml:space="preserve">
+    <value>Cynowa blacha</value>
+  </data>
+  <data name="SteelPlate" xml:space="preserve">
+    <value>Stalowa blacha</value>
+  </data>
+  <data name="InvarPlate" xml:space="preserve">
+    <value>Inwarowa blacha</value>
+  </data>
+  <data name="MeteoricPlate" xml:space="preserve">
+    <value>Meteorytowa blacha</value>
+  </data>
+  <data name="BronzePlate" xml:space="preserve">
+    <value>Brązowa blacha</value>
+  </data>
+  <data name="AnnoditePlate" xml:space="preserve">
+    <value>Annodytowa blacha</value>
+  </data>
+  <data name="SilverPlate" xml:space="preserve">
+    <value>Srebrna blacha</value>
+  </data>
+  <data name="CobaltPlate" xml:space="preserve">
+    <value>Kobaltowa blacha</value>
+  </data>
+  <data name="GoldenPlate" xml:space="preserve">
+    <value>Złota blacha</value>
+  </data>
+  <data name="CriferitePlate" xml:space="preserve">
+    <value>Kryferytowa blacha</value>
+  </data>
+  <data name="BrassPlate" xml:space="preserve">
+    <value>Mosiężna blacha</value>
+  </data>
+  <data name="ShellanianPlate" xml:space="preserve">
+    <value>Shellańska blacha</value>
+  </data>
+  <data name="TitaniumPlate" xml:space="preserve">
+    <value>Tytanowa blacha</value>
+  </data>
+  <data name="NefolitePlate" xml:space="preserve">
+    <value>Nefolitowa blacha</value>
+  </data>
+  <data name="AdamantitePlate" xml:space="preserve">
+    <value>Adamantowa blacha</value>
+  </data>
+  <data name="CifilmPlate" xml:space="preserve">
+    <value>Cifilmowa blacha</value>
+  </data>
+  <data name="OrichalcumPlate" xml:space="preserve">
+    <value>Orichalconowa blacha</value>
+  </data>
+  <data name="GoatHide" xml:space="preserve">
+    <value>Wyprawiona skóra kozy</value>
+  </data>
+  <data name="WildDogHide" xml:space="preserve">
+    <value>Wyprawiona skóra dzikiego psa</value>
+  </data>
+  <data name="RabbitHide" xml:space="preserve">
+    <value>Wyprawiona skóra królika</value>
+  </data>
+  <data name="FoxHide" xml:space="preserve">
+    <value>Wyprawiona skóra lisa</value>
+  </data>
+  <data name="TigerHide" xml:space="preserve">
+    <value>Wyprawiona skóra tygrysa</value>
+  </data>
+  <data name="DeerHide" xml:space="preserve">
+    <value>Wyprawiona skóra jelenia</value>
+  </data>
+  <data name="BoarHide" xml:space="preserve">
+    <value>Wyprawiona skóra dzika</value>
+  </data>
+  <data name="LizardHide" xml:space="preserve">
+    <value>Wyprawiona skóra warana</value>
+  </data>
+  <data name="BearHide" xml:space="preserve">
+    <value>Wyprawiona skóra niedźwiedzia</value>
+  </data>
+  <data name="TrollHide" xml:space="preserve">
+    <value>Wyprawiona skóra trolla</value>
+  </data>
+  <data name="AlligatorHide" xml:space="preserve">
+    <value>Wyprawiona skóra aligatora</value>
+  </data>
+  <data name="LeopardHide" xml:space="preserve">
+    <value>Wyprawiona skóra leoparda</value>
+  </data>
+  <data name="WolfHide" xml:space="preserve">
+    <value>Wyprawiona skóra wilka</value>
+  </data>
+  <data name="BuffaloHide" xml:space="preserve">
+    <value>Wyprawiona skóra bawoła</value>
+  </data>
+  <data name="ScorpionHide" xml:space="preserve">
+    <value>Wyprawiona skóra skorpiona</value>
+  </data>
+  <data name="CheetahHide" xml:space="preserve">
+    <value>Wyprawiona skóra geparda</value>
+  </data>
+  <data name="HellhoundHide" xml:space="preserve">
+    <value>Wyprawiona skóra piekielnego ogara</value>
+  </data>
+  <data name="DragonHide" xml:space="preserve">
+    <value>Wyprawiona skóra smoka</value>
+  </data>
+  <data name="WyvernHide" xml:space="preserve">
+    <value>Wyprawiona skóra wiwerny</value>
+  </data>
+  <data name="GriffinHide" xml:space="preserve">
+    <value>Wyprawiona skóra gryfa</value>
+  </data>
+  <data name="GoatHideStrips" xml:space="preserve">
+    <value>Paski ze skóry kozy</value>
+  </data>
+  <data name="WildDogHideStrips" xml:space="preserve">
+    <value>Paski ze skóry dzikiego psa</value>
+  </data>
+  <data name="RabbitHideStrips" xml:space="preserve">
+    <value>Paski ze skóry królika</value>
+  </data>
+  <data name="FoxHideStrips" xml:space="preserve">
+    <value>Paski ze skóry lisa</value>
+  </data>
+  <data name="TigerHideStrips" xml:space="preserve">
+    <value>Paski ze skóry tygrysa</value>
+  </data>
+  <data name="DeerHideStrips" xml:space="preserve">
+    <value>Paski ze skóry jelenia</value>
+  </data>
+  <data name="BoarHideStrips" xml:space="preserve">
+    <value>Paski ze skóry dzika</value>
+  </data>
+  <data name="LizardHideStrips" xml:space="preserve">
+    <value>Paski ze skóry warana</value>
+  </data>
+  <data name="BearHideStrips" xml:space="preserve">
+    <value>Paski ze skóry niedźwiedzia</value>
+  </data>
+  <data name="TrollHideStrips" xml:space="preserve">
+    <value>Paski ze skóry trolla</value>
+  </data>
+  <data name="AlligatorHideStrips" xml:space="preserve">
+    <value>Paski ze skóry aligatora</value>
+  </data>
+  <data name="LeopardHideStrips" xml:space="preserve">
+    <value>Paski ze skóry leoparda</value>
+  </data>
+  <data name="WolfHideStrips" xml:space="preserve">
+    <value>Paski ze skóry wilka</value>
+  </data>
+  <data name="BuffaloHideStrips" xml:space="preserve">
+    <value>Paski ze skóry bawoła</value>
+  </data>
+  <data name="ScorpionHideStrips" xml:space="preserve">
+    <value>Paski ze skóry skorpiona</value>
+  </data>
+  <data name="CheetahHideStrips" xml:space="preserve">
+    <value>Paski ze skóry geparda</value>
+  </data>
+  <data name="HellhoundHideStrips" xml:space="preserve">
+    <value>Paski ze skóry piekielnego ogara</value>
+  </data>
+  <data name="DragonHideStrips" xml:space="preserve">
+    <value>Paski ze skóry smoka</value>
+  </data>
+  <data name="WyvernHideStrips" xml:space="preserve">
+    <value>Paski ze skóry wiwerny</value>
+  </data>
+  <data name="GriffinHideStrips" xml:space="preserve">
+    <value>Paski ze skóry gryfa</value>
+  </data>
+  <data name="LarchPlank" xml:space="preserve">
+    <value>Modrzewiowa deska</value>
+  </data>
+  <data name="LindenPlank" xml:space="preserve">
+    <value>Lipowa deska</value>
+  </data>
+  <data name="PoplarPlank" xml:space="preserve">
+    <value>Topolowa deska</value>
+  </data>
+  <data name="AlderPlank" xml:space="preserve">
+    <value>Olchowa deska</value>
+  </data>
+  <data name="HawthornPlank" xml:space="preserve">
+    <value>Głogowa deska</value>
+  </data>
+  <data name="BirchPlank" xml:space="preserve">
+    <value>Brzozowa deska</value>
+  </data>
+  <data name="CypressPlank" xml:space="preserve">
+    <value>Cyprysowa deska</value>
+  </data>
+  <data name="CedarPlank" xml:space="preserve">
+    <value>Cedrowa deska</value>
+  </data>
+  <data name="HornbeamPlank" xml:space="preserve">
+    <value>Grabowa deska</value>
+  </data>
+  <data name="ElmPlank" xml:space="preserve">
+    <value>Wiązowa deska</value>
+  </data>
+  <data name="SprucePlank" xml:space="preserve">
+    <value>Świerkowa deska</value>
+  </data>
+  <data name="ElderPlank" xml:space="preserve">
+    <value>Bzowa deska</value>
+  </data>
+  <data name="OakPlank" xml:space="preserve">
+    <value>Dębowa deska</value>
+  </data>
+  <data name="BeechPlank" xml:space="preserve">
+    <value>Bukowa deska</value>
+  </data>
+  <data name="SequoiaPlank" xml:space="preserve">
+    <value>Sekwojowa deska</value>
+  </data>
+  <data name="FirPlank" xml:space="preserve">
+    <value>Jodłowa deska</value>
+  </data>
+  <data name="BlackOakPlank" xml:space="preserve">
+    <value>Czarnodębowa deska</value>
+  </data>
+  <data name="PinePlank" xml:space="preserve">
+    <value>Sosnowa deska</value>
+  </data>
+  <data name="EbonyPlank" xml:space="preserve">
+    <value>Hebanowa deska</value>
+  </data>
+  <data name="HazelPlank" xml:space="preserve">
+    <value>Leszczynowa deska</value>
+  </data>
+  <data name="LarchStick" xml:space="preserve">
+    <value>Modrzewiowy patyk</value>
+  </data>
+  <data name="LindenStick" xml:space="preserve">
+    <value>Lipowy patyk</value>
+  </data>
+  <data name="PoplarStick" xml:space="preserve">
+    <value>Topolowy patyk</value>
+  </data>
+  <data name="AlderStick" xml:space="preserve">
+    <value>Olchowy patyk</value>
+  </data>
+  <data name="HawthornStick" xml:space="preserve">
+    <value>Głogowy patyk</value>
+  </data>
+  <data name="BirchStick" xml:space="preserve">
+    <value>Brzozowy patyk</value>
+  </data>
+  <data name="CypressStick" xml:space="preserve">
+    <value>Cyprysowy patyk</value>
+  </data>
+  <data name="CedarStick" xml:space="preserve">
+    <value>Cedrowy patyk</value>
+  </data>
+  <data name="HornbeamStick" xml:space="preserve">
+    <value>Grabowy patyk</value>
+  </data>
+  <data name="ElmStick" xml:space="preserve">
+    <value>Wiązowy patyk</value>
+  </data>
+  <data name="SpruceStick" xml:space="preserve">
+    <value>Świerkowy patyk</value>
+  </data>
+  <data name="ElderStick" xml:space="preserve">
+    <value>Bzowy patyk</value>
+  </data>
+  <data name="OakStick" xml:space="preserve">
+    <value>Dębowy patyk</value>
+  </data>
+  <data name="BeechStick" xml:space="preserve">
+    <value>Bukowy patyk</value>
+  </data>
+  <data name="SequoiaStick" xml:space="preserve">
+    <value>Sekwojowy patyk</value>
+  </data>
+  <data name="FirStick" xml:space="preserve">
+    <value>Jodłowy patyk</value>
+  </data>
+  <data name="BlackOakStick" xml:space="preserve">
+    <value>Czarnodębowy patyk</value>
+  </data>
+  <data name="PineStick" xml:space="preserve">
+    <value>Sosnowy patyk</value>
+  </data>
+  <data name="EbonyStick" xml:space="preserve">
+    <value>Hebanowy patyk</value>
+  </data>
+  <data name="HazelStick" xml:space="preserve">
+    <value>Leszczynowy patyk</value>
+  </data>
+  <data name="WeakThreadNeedle" xml:space="preserve">
+    <value>Słaba igła do nici</value>
+  </data>
+  <data name="ThreadNeedle" xml:space="preserve">
+    <value>Igła do nici</value>
+  </data>
+  <data name="GoodThreadNeedle" xml:space="preserve">
+    <value>Dobra igła do nici</value>
+  </data>
+  <data name="ExcellentThreadNeedle" xml:space="preserve">
+    <value>Wspaniała igła do nici</value>
+  </data>
+  <data name="PerfectThreadNeedle" xml:space="preserve">
+    <value>Perfekcyjna igła do nici</value>
+  </data>
+  <data name="CottonThread" xml:space="preserve">
+    <value>Bawełniana nitka</value>
+  </data>
+  <data name="BeechmienThread" xml:space="preserve">
+    <value>Bukominowa nitka</value>
+  </data>
+  <data name="GoatWoolThread" xml:space="preserve">
+    <value>Nitka z koziej wełny</value>
+  </data>
+  <data name="JuteThread" xml:space="preserve">
+    <value>Jutowa nitka</value>
+  </data>
+  <data name="SheepWoolThread" xml:space="preserve">
+    <value>Nitka z owczej wełny</value>
+  </data>
+  <data name="PalmThread" xml:space="preserve">
+    <value>Palmowa nitka</value>
+  </data>
+  <data name="LlamaWoolThread" xml:space="preserve">
+    <value>Nitka z lamiej wełny</value>
+  </data>
+  <data name="VasimineThread" xml:space="preserve">
+    <value>Wasminowa nitka</value>
+  </data>
+  <data name="LinenThread" xml:space="preserve">
+    <value>Lniana nitka</value>
+  </data>
+  <data name="SilverclawThread" xml:space="preserve">
+    <value>Srebrnoszponowa nitka</value>
+  </data>
+  <data name="CamelWoolThread" xml:space="preserve">
+    <value>Nitka z wielbłądziej wełny</value>
+  </data>
+  <data name="MelenaThread" xml:space="preserve">
+    <value>Melenowa nitka</value>
+  </data>
+  <data name="HempThread" xml:space="preserve">
+    <value>Konopna nitka</value>
+  </data>
+  <data name="YuccaThread" xml:space="preserve">
+    <value>Jukowa nitka</value>
+  </data>
+  <data name="UtumeenThread" xml:space="preserve">
+    <value>Utumenowa nitka</value>
+  </data>
+  <data name="TrireedThread" xml:space="preserve">
+    <value>Trójprętowa nitka</value>
+  </data>
+  <data name="SilkThread" xml:space="preserve">
+    <value>Jedwabna nitka</value>
+  </data>
+  <data name="TagimineThread" xml:space="preserve">
+    <value>Włókno tagiminy</value>
+  </data>
+  <data name="ViscoseThread" xml:space="preserve">
+    <value>Wiskozowa nitka</value>
+  </data>
+  <data name="OvariceThread" xml:space="preserve">
+    <value>Obarysowa nitka</value>
+  </data>
+  <data name="CottonFabric" xml:space="preserve">
+    <value>Bawełniana tkanina</value>
+  </data>
+  <data name="BeechmienFabric" xml:space="preserve">
+    <value>Bukominowa tkanina</value>
+  </data>
+  <data name="GoatWoolFabric" xml:space="preserve">
+    <value>Tkanina z koziej wełny</value>
+  </data>
+  <data name="JuteFabric" xml:space="preserve">
+    <value>Jutowa tkanina</value>
+  </data>
+  <data name="SheepWoolFabric" xml:space="preserve">
+    <value>Tkanina z owczej wełny</value>
+  </data>
+  <data name="PalmFabric" xml:space="preserve">
+    <value>Palmowa tkanina</value>
+  </data>
+  <data name="LlamaWoolFabric" xml:space="preserve">
+    <value>Tkanina z lamiej wełny</value>
+  </data>
+  <data name="VasimineFabric" xml:space="preserve">
+    <value>Wasminowa tkanina</value>
+  </data>
+  <data name="LinenFabric" xml:space="preserve">
+    <value>Lniana tkanina</value>
+  </data>
+  <data name="SilverclawFabric" xml:space="preserve">
+    <value>Srebrnoszponowa tkanina</value>
+  </data>
+  <data name="CamelWoolFabric" xml:space="preserve">
+    <value>Tkanina z wielbłądziej wełny</value>
+  </data>
+  <data name="MelenaFabric" xml:space="preserve">
+    <value>Melenowa tkanina</value>
+  </data>
+  <data name="HempFabric" xml:space="preserve">
+    <value>Konopna tkanina</value>
+  </data>
+  <data name="YuccaFabric" xml:space="preserve">
+    <value>Jukowa tkanina</value>
+  </data>
+  <data name="UtumeenFabric" xml:space="preserve">
+    <value>Utumenowa tkanina</value>
+  </data>
+  <data name="TrireedFabric" xml:space="preserve">
+    <value>Trójprętowa tkanina</value>
+  </data>
+  <data name="SilkFabric" xml:space="preserve">
+    <value>Jedwabna tkanina</value>
+  </data>
+  <data name="TagimineFabric" xml:space="preserve">
+    <value>Tagiminowa tkanina</value>
+  </data>
+  <data name="ViscoseFabric" xml:space="preserve">
+    <value>Wiskozowa tkanina</value>
+  </data>
+  <data name="OvariceFabric" xml:space="preserve">
+    <value>Obarysowa tkanina</value>
+  </data>
+  <data name="RedEnergyDust" xml:space="preserve">
+    <value>Czerwony pył energetyczny</value>
+  </data>
+  <data name="YellowEnergyDust" xml:space="preserve">
+    <value>Żółty pył energetyczny</value>
+  </data>
+  <data name="GreenEnergyDust" xml:space="preserve">
+    <value>Zielony pył energetyczny</value>
+  </data>
+  <data name="BlueEnergyDust" xml:space="preserve">
+    <value>Niebieski pył energetyczny</value>
+  </data>
+  <data name="HerbalDustNormal" xml:space="preserve">
+    <value>Proch ziołowy: Zwykły</value>
+  </data>
+  <data name="HerbalDustLumpy" xml:space="preserve">
+    <value>Proch ziołowy: Grudkowaty</value>
+  </data>
+  <data name="HerbalDustTacky" xml:space="preserve">
+    <value>Proch ziołowy: Lepki</value>
+  </data>
+  <data name="HerbalDustLoose" xml:space="preserve">
+    <value>Proch ziołowy: Luźny</value>
+  </data>
+  <data name="HerbalDustGreen" xml:space="preserve">
+    <value>Proch ziołowy: Zielony</value>
+  </data>
+  <data name="HerbalDustYellow" xml:space="preserve">
+    <value>Proch ziołowy: Żółty</value>
+  </data>
+  <data name="HerbalDustPink" xml:space="preserve">
+    <value>Proch ziołowy: Różowy</value>
+  </data>
+  <data name="HerbalDustOrange" xml:space="preserve">
+    <value>Proch ziołowy: Pomarańczowy</value>
+  </data>
+  <data name="HerbalDustHuman" xml:space="preserve">
+    <value>Proch ziołowy: Człowiek</value>
+  </data>
+  <data name="HerbalDustElf" xml:space="preserve">
+    <value>Proch ziołowy: Elf</value>
+  </data>
+  <data name="HerbalDustDwarf" xml:space="preserve">
+    <value>Proch ziołowy: Krasnolud</value>
+  </data>
+  <data name="HerbalDustLizardman" xml:space="preserve">
+    <value>Proch ziołowy: Jaszczurolud</value>
+  </data>
+  <data name="HerbalDustLight" xml:space="preserve">
+    <value>Proch ziołowy: Światło</value>
+  </data>
+  <data name="HerbalDustDivinity" xml:space="preserve">
+    <value>Proch ziołowy: Boskość</value>
+  </data>
+  <data name="HerbalDustDarkness" xml:space="preserve">
+    <value>Proch ziołowy: Ciemność</value>
+  </data>
+  <data name="HerbalDustDemon" xml:space="preserve">
+    <value>Proch ziołowy: Demon</value>
+  </data>
+  <data name="HerbalDustFire" xml:space="preserve">
+    <value>Proch ziołowy: Ogień</value>
+  </data>
+  <data name="HerbalDustAir" xml:space="preserve">
+    <value>Proch ziołowy: Powietrze</value>
+  </data>
+  <data name="HerbalDustWater" xml:space="preserve">
+    <value>Proch ziołowy: Woda</value>
+  </data>
+  <data name="HerbalDustEarth" xml:space="preserve">
+    <value>Proch ziołowy: Ziemia</value>
+  </data>
+  <data name="LimestoneGalduriteStone" xml:space="preserve">
+    <value>Wapienny kamień galdurytu</value>
+  </data>
+  <data name="GraniteGalduriteStone" xml:space="preserve">
+    <value>Granitowy kamień galdurytu</value>
+  </data>
+  <data name="MarbleGalduriteStone" xml:space="preserve">
+    <value>Marmurowy kamień galdurytu</value>
+  </data>
+  <data name="RedPowder" xml:space="preserve">
+    <value>Czerwony proszek</value>
+  </data>
+  <data name="CondensedRedPowder" xml:space="preserve">
+    <value>Skondensowany czerwony proszek</value>
+  </data>
+  <data name="MagicalRedPowder" xml:space="preserve">
+    <value>Magiczny czerwony proszek</value>
+  </data>
+  <data name="BluePowder" xml:space="preserve">
+    <value>Niebieski proszek</value>
+  </data>
+  <data name="CondensedBluePowder" xml:space="preserve">
+    <value>Skondensowany niebieski proszek</value>
+  </data>
+  <data name="MagicalBluePowder" xml:space="preserve">
+    <value>Magiczny niebieski proszek</value>
+  </data>
+  <data name="PurplePowder" xml:space="preserve">
+    <value>Fioletowy proszek</value>
+  </data>
+  <data name="CondensedPurplePowder" xml:space="preserve">
+    <value>Skondensowany fioletowy proszek</value>
+  </data>
+  <data name="MagicalPurplePowder" xml:space="preserve">
+    <value>Magiczny fioletowy proszek</value>
+  </data>
+  <data name="YellowPowder" xml:space="preserve">
+    <value>Żółty proszek</value>
+  </data>
+  <data name="MagicalYellowPowder" xml:space="preserve">
+    <value>Magiczny żółty proszek</value>
+  </data>
+  <data name="MagicalPinkPowder" xml:space="preserve">
+    <value>Magiczny różowy proszek</value>
+  </data>
+  <data name="MagicalGreenPowder" xml:space="preserve">
+    <value>Magiczny zielony proszek</value>
+  </data>
+  <data name="MagicalBlackPowder" xml:space="preserve">
+    <value>Magiczny czarny proszek</value>
+  </data>
+  <data name="WhitePowder" xml:space="preserve">
+    <value>Biały proszek</value>
+  </data>
+  <data name="BlackPowder" xml:space="preserve">
+    <value>Czarny proszek</value>
+  </data>
+  <data name="CondensedBlackPowder" xml:space="preserve">
+    <value>Skondensowany czarny proszek</value>
+  </data>
+  <data name="CondensedGreenPowder" xml:space="preserve">
+    <value>Skondensowany zielony proszek</value>
+  </data>
+  <data name="CondensedPinkPowder" xml:space="preserve">
+    <value>Skondensowany różowy proszek</value>
+  </data>
+  <data name="CondensedWhitePowder" xml:space="preserve">
+    <value>Skondensowany biały proszek</value>
+  </data>
+  <data name="CondensedYellowPowder" xml:space="preserve">
+    <value>Skondensowany żółty proszek</value>
+  </data>
+  <data name="GreenPowder" xml:space="preserve">
+    <value>Zielony proszek</value>
+  </data>
+  <data name="PinkPowder" xml:space="preserve">
+    <value>Różowy proszek</value>
+  </data>
+  <data name="MagicalWhitePowder" xml:space="preserve">
+    <value>Magiczny biały proszek</value>
+  </data>
+  <data name="GoldenPowder" xml:space="preserve">
+    <value>Złoty proszek</value>
+  </data>
+  <data name="CondensedGoldenPowder" xml:space="preserve">
+    <value>Skondensowany złoty proszek</value>
+  </data>
+  <data name="MagicalGoldenPowder" xml:space="preserve">
+    <value>Magiczny złoty proszek</value>
+  </data>
+  <data name="OrangePowder" xml:space="preserve">
+    <value>Pomarańczowy proszek</value>
+  </data>
+  <data name="CondensedOrangePowder" xml:space="preserve">
+    <value>Skondensowany pomarańczowy proszek</value>
+  </data>
+  <data name="MagicalOrangePowder" xml:space="preserve">
+    <value>Magiczny pomarańczowy proszek</value>
+  </data>
+  <data name="IronFAdj" xml:space="preserve">
+    <value>Żelazna</value>
+  </data>
+  <data name="IronMAdj" xml:space="preserve">
+    <value>Żelazny</value>
+  </data>
+  <data name="NickelMAdj" xml:space="preserve">
+    <value>Niklowy</value>
+  </data>
+  <data name="CopperMAdj" xml:space="preserve">
+    <value>Miedziany</value>
+  </data>
+  <data name="TinMAdj" xml:space="preserve">
+    <value>Cynowy</value>
+  </data>
+  <data name="SteelMAdj" xml:space="preserve">
+    <value>Stalowy</value>
+  </data>
+  <data name="InvarMAdj" xml:space="preserve">
+    <value>Inwarowy</value>
+  </data>
+  <data name="MeteoricMAdj" xml:space="preserve">
+    <value>Meteorytowy</value>
+  </data>
+  <data name="BronzeMAdj" xml:space="preserve">
+    <value>Brązowy</value>
+  </data>
+  <data name="AnnoditeMAdj" xml:space="preserve">
+    <value>Annodytowy</value>
+  </data>
+  <data name="SilverMAdj" xml:space="preserve">
+    <value>Srebrny</value>
+  </data>
+  <data name="CobaltMAdj" xml:space="preserve">
+    <value>Kobaltowy</value>
+  </data>
+  <data name="GoldMAdj" xml:space="preserve">
+    <value>Złoty</value>
+  </data>
+  <data name="CriferiteMAdj" xml:space="preserve">
+    <value>Kryferytowy</value>
+  </data>
+  <data name="CopperFAdj" xml:space="preserve">
+    <value>Miedziana</value>
+  </data>
+  <data name="InvarFAdj" xml:space="preserve">
+    <value>Inwarowa</value>
+  </data>
+  <data name="MeteoricFAdj" xml:space="preserve">
+    <value>Meteorytowa</value>
+  </data>
+  <data name="BronzeFAdj" xml:space="preserve">
+    <value>Brązowa</value>
+  </data>
+  <data name="AnnoditeFAdj" xml:space="preserve">
+    <value>Annodytowa</value>
+  </data>
+  <data name="SilverFAdj" xml:space="preserve">
+    <value>Srebrna</value>
+  </data>
+  <data name="CobaltFAdj" xml:space="preserve">
+    <value>Kobaltowa</value>
+  </data>
+  <data name="GoldFAdj" xml:space="preserve">
+    <value>Złota</value>
+  </data>
+  <data name="CriferiteFAdj" xml:space="preserve">
+    <value>Kryferytowa</value>
+  </data>
+  <data name="BrassFAdj" xml:space="preserve">
+    <value>Mosiężna</value>
+  </data>
+  <data name="ShellanianFAdj" xml:space="preserve">
+    <value>Shellańska</value>
+  </data>
+  <data name="TitaniumFAdj" xml:space="preserve">
+    <value>Tytanowa</value>
+  </data>
+  <data name="NefoliteFAdj" xml:space="preserve">
+    <value>Nefolitowa</value>
+  </data>
+  <data name="AdamantiteFAdj" xml:space="preserve">
+    <value>Adamantowa</value>
+  </data>
+  <data name="CifilmFAdj" xml:space="preserve">
+    <value>Cifilmowa</value>
+  </data>
+  <data name="OrichalcumFAdj" xml:space="preserve">
+    <value>Orichalconowa</value>
+  </data>
+  <data name="GoatHideFAdj" xml:space="preserve">
+    <value>Kozia</value>
+  </data>
+  <data name="WildDogHideFAdj" xml:space="preserve">
+    <value>Dzika</value>
+  </data>
+  <data name="RabbitHideFAdj" xml:space="preserve">
+    <value>Królicza</value>
+  </data>
+  <data name="FoxHideFAdj" xml:space="preserve">
+    <value>Lisia</value>
+  </data>
+  <data name="TigerHideFAdj" xml:space="preserve">
+    <value>Tygrysia</value>
+  </data>
+  <data name="DeerHideFAdj" xml:space="preserve">
+    <value>Jelenia</value>
+  </data>
+  <data name="BoarHideFAdj" xml:space="preserve">
+    <value>Dzicza</value>
+  </data>
+  <data name="LizardHideFAdj" xml:space="preserve">
+    <value>Warania</value>
+  </data>
+  <data name="BearHideFAdj" xml:space="preserve">
+    <value>Niedźwiedzia</value>
+  </data>
+  <data name="TrollHideFAdj" xml:space="preserve">
+    <value>Trollowa</value>
+  </data>
+  <data name="AlligatorHideFAdj" xml:space="preserve">
+    <value>Aligatorowa</value>
+  </data>
+  <data name="LeopardHideFAdj" xml:space="preserve">
+    <value>Leopardowa</value>
+  </data>
+  <data name="WolfHideFAdj" xml:space="preserve">
+    <value>Wilcza</value>
+  </data>
+  <data name="BuffaloHideFAdj" xml:space="preserve">
+    <value>Bawola</value>
+  </data>
+  <data name="ScorpionHideFAdj" xml:space="preserve">
+    <value>Skorpionowa</value>
+  </data>
+  <data name="CheetahHideFAdj" xml:space="preserve">
+    <value>Gepardzia</value>
+  </data>
+  <data name="HellhoundHideFAdj" xml:space="preserve">
+    <value>Piekielna</value>
+  </data>
+  <data name="DragonHideFAdj" xml:space="preserve">
+    <value>Smocza</value>
+  </data>
+  <data name="WyvernHideFAdj" xml:space="preserve">
+    <value>Wiwernia</value>
+  </data>
+  <data name="GriffinHideFAdj" xml:space="preserve">
+    <value>Gryfia</value>
+  </data>
+  <data name="CottonFAdj" xml:space="preserve">
+    <value>Bawełniana</value>
+  </data>
+  <data name="BeechmienFAdj" xml:space="preserve">
+    <value>Bukominowa</value>
+  </data>
+  <data name="GoatWoolFAdj" xml:space="preserve">
+    <value>Kozia</value>
+  </data>
+  <data name="JuteFAdj" xml:space="preserve">
+    <value>Jutowa</value>
+  </data>
+  <data name="SheepWoolFAdj" xml:space="preserve">
+    <value>Wełniana</value>
+  </data>
+  <data name="PalmFAdj" xml:space="preserve">
+    <value>Palmowa</value>
+  </data>
+  <data name="LlamaWoolFAdj" xml:space="preserve">
+    <value>Lamowa</value>
+  </data>
+  <data name="VasimineFAdj" xml:space="preserve">
+    <value>Wasminowa</value>
+  </data>
+  <data name="LinenFAdj" xml:space="preserve">
+    <value>Lniana</value>
+  </data>
+  <data name="SilverclawFAdj" xml:space="preserve">
+    <value>Srebrnoszponowa</value>
+  </data>
+  <data name="CamelWoolFAdj" xml:space="preserve">
+    <value>Wielbłądzia</value>
+  </data>
+  <data name="MelenaFAdj" xml:space="preserve">
+    <value>Melenowa</value>
+  </data>
+  <data name="HempFAdj" xml:space="preserve">
+    <value>Konopna</value>
+  </data>
+  <data name="YuccaFAdj" xml:space="preserve">
+    <value>Jukowa</value>
+  </data>
+  <data name="UtumeenFAdj" xml:space="preserve">
+    <value>Utumenowa</value>
+  </data>
+  <data name="TrireedFAdj" xml:space="preserve">
+    <value>Trójprętowa</value>
+  </data>
+  <data name="SilkFAdj" xml:space="preserve">
+    <value>Jedwabna</value>
+  </data>
+  <data name="TagimineFAdj" xml:space="preserve">
+    <value>Tagiminowa</value>
+  </data>
+  <data name="ViscoseFAdj" xml:space="preserve">
+    <value>Wiskozowa</value>
+  </data>
+  <data name="OvariceFAdj" xml:space="preserve">
+    <value>Obarysowa</value>
+  </data>
+  <data name="TinFAdj" xml:space="preserve">
+    <value>Cynowa</value>
+  </data>
+  <data name="NickelFAdj" xml:space="preserve">
+    <value>Niklowa</value>
+  </data>
+  <data name="AdamantiteMAdj" xml:space="preserve">
+        <value>Adamantowy</value>
+    </data>
+  <data name="AddNewEffectText" xml:space="preserve">
+        <value>Dodaj nowy efekt</value>
+    </data>
+  <data name="ArmorBag" xml:space="preserve">
+        <value>Torba z pancerzami</value>
+    </data>
+  <data name="BoneSupplyBag" xml:space="preserve">
+        <value>Koścista torba zasobów</value>
+    </data>
+  <data name="BrassMAdj" xml:space="preserve">
+        <value>Mosiężny</value>
+    </data>
+  <data name="DemonicSupplyBag" xml:space="preserve">
+        <value>Demoniczna torba zasobów</value>
+    </data>
+  <data name="CifilmMAdj" xml:space="preserve">
+        <value>Cifilmowy</value>
+    </data>
+  <data name="GalduriteBag" xml:space="preserve">
+        <value>Torba z galdurytami</value>
+    </data>
+  <data name="LeafySupplyBag" xml:space="preserve">
+        <value>Liściasta torba zasobów</value>
+    </data>
+  <data name="MountainousSupplyBag" xml:space="preserve">
+        <value>Górska torba zasobów</value>
+    </data>
+  <data name="MurkySupplyBag" xml:space="preserve">
+        <value>Mulista torba zasobów</value>
+    </data>
+  <data name="NefoliteMAdj" xml:space="preserve">
+        <value>Nefolitowy</value>
+    </data>
+  <data name="OrichalcumMAdj" xml:space="preserve">
+        <value>Orichalconowy</value>
+    </data>
+  <data name="PirateSupplyBag" xml:space="preserve">
+        <value>Piracka torba zasobów</value>
+    </data>
+  <data name="SandySupplyBag" xml:space="preserve">
+        <value>Piaskowa torba zasobów</value>
+    </data>
+  <data name="RemoveEffectText" xml:space="preserve">
+        <value>Usuń efekt</value>
+    </data>
+  <data name="SaveText" xml:space="preserve">
+        <value>Zapisz</value>
+    </data>
+  <data name="ShellanianMAdj" xml:space="preserve">
+        <value>Shellański</value>
+    </data>
+  <data name="SteelFAdj" xml:space="preserve">
+        <value>Stalowa</value>
+    </data>
+  <data name="TempleSupplyBag" xml:space="preserve">
+        <value>Świątynna torba zasobów</value>
+    </data>
+  <data name="TypeText" xml:space="preserve">
+        <value>Typ</value>
+    </data>
+  <data name="TitaniumMAdj" xml:space="preserve">
+        <value>Tytanowy</value>
+    </data>
+  <data name="WeaponBag" xml:space="preserve">
+        <value>Torba z brońmi</value>
+    </data>
+  <data name="Goner" xml:space="preserve">
+    <value>Umarlak</value>
+  </data>
+  <data name="Revenant" xml:space="preserve">
+    <value>Upiór</value>
+  </data>
+  <data name="SkeletonOccultist" xml:space="preserve">
+    <value>Szkielet Okultysta</value>
+  </data>
+  <data name="SkeletonArcher" xml:space="preserve">
+    <value>Szkielet Łucznik</value>
+  </data>
+  <data name="Ghoul" xml:space="preserve">
+    <value>Ghul</value>
+  </data>
+  <data name="SkeletonDefender" xml:space="preserve">
+    <value>Szkielet Obrońca</value>
+  </data>
+  <data name="SkeletonExecutioner" xml:space="preserve">
+    <value>Szkielet Zabójca</value>
+  </data>
+  <data name="DeadKingSpirit" xml:space="preserve">
+    <value>Duch Umarłego Króla</value>
+  </data>
+  <data name="InfectedTree" xml:space="preserve">
+    <value>Zarażone Drzewo</value>
+  </data>
+  <data name="RabidWolf" xml:space="preserve">
+    <value>Wściekły Wilk</value>
+  </data>
+  <data name="BanditThug" xml:space="preserve">
+    <value>Bandyta Rzezimieszek</value>
+  </data>
+  <data name="BanditMarksman" xml:space="preserve">
+    <value>Bandyta Strzelec</value>
+  </data>
+  <data name="ElfArcher" xml:space="preserve">
+    <value>Elfi Łucznik</value>
+  </data>
+  <data name="ElfRanger" xml:space="preserve">
+    <value>Elfi Kłusownik</value>
+  </data>
+  <data name="ElfDruid" xml:space="preserve">
+    <value>Elfi Druid</value>
+  </data>
+  <data name="InfectedEnt" xml:space="preserve">
+    <value>Zarażony Ent</value>
+  </data>
+  <data name="BanditLeader" xml:space="preserve">
+    <value>Przywódca Bandytów</value>
+  </data>
+  <data name="DemonSlave" xml:space="preserve">
+    <value>Niewolnik Demonów</value>
+  </data>
+  <data name="DemonicFootman" xml:space="preserve">
+    <value>Demoniczny Zbrojny</value>
+  </data>
+  <data name="DemonicSorcerer" xml:space="preserve">
+    <value>Demoniczny Czarownik</value>
+  </data>
+  <data name="Imp" xml:space="preserve">
+    <value>Chochlik</value>
+  </data>
+  <data name="Hawia'kalb" xml:space="preserve">
+    <value>Hawia'kalb</value>
+  </data>
+  <data name="DemonicIllusionist" xml:space="preserve">
+    <value>Demoniczny Iluzjonista</value>
+  </data>
+  <data name="Eayan'masakh" xml:space="preserve">
+    <value>Eayan'masakh</value>
+  </data>
+  <data name="DemonicJarl" xml:space="preserve">
+    <value>Demoniczny Jarl</value>
+  </data>
+  <data name="Cerberus" xml:space="preserve">
+    <value>Cerber</value>
+  </data>
+  <data name="PirateCombatant" xml:space="preserve">
+    <value>Pirat Kombatant</value>
+  </data>
+  <data name="PirateHarponeer" xml:space="preserve">
+    <value>Pirat Harpunnik</value>
+  </data>
 </root>

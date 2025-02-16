@@ -1,5 +1,6 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Items;
 
@@ -17,10 +18,12 @@ public class Antidote : BaseItem, ICraftable, IUsable
     public override string Description => "";
     public override ItemType ItemType => ItemType.Alchemy;
 
+    [JsonIgnore]
     public Dictionary<string, int> CraftingRecipe {
         get => new() { { "WeakAlcohol", 1 }, { "AloeMeda", 1 } };
         set => throw new InvalidOperationException(); }
 
+    [JsonIgnore]
     public int CraftedAmount { get => 2; set => throw new InvalidOperationException(); }
 
     public bool Use()
