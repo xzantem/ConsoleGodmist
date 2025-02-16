@@ -180,7 +180,7 @@ public sealed class Weapon : BaseItem, IEquippable, IUsable
         Quality = quality;
         if (alias == "")
         {
-            Name = NameAliasHelper.GetName(Head.Adjective) + " " + requiredClass switch
+            Name = NameAliasHelper.GetName(Head.Adjective+"Adj") + " " + requiredClass switch
             {
                 CharacterClass.Warrior => locale.Longsword,
                 CharacterClass.Scout => locale.SwordAndDagger,

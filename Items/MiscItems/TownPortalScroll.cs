@@ -1,5 +1,6 @@
 ﻿using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Items;
 
@@ -21,8 +22,11 @@ public class TownPortalScroll : BaseItem, ICraftable, IUsable
         DungeonMovementManager.ExitDungeon();
         return true;
     }
+    
+    [JsonIgnore]
     public Dictionary<string, int> CraftingRecipe {
         get => new() { { "TinPlate", 1 }, { "RedEnergyDust", 1 } };
         set => throw new InvalidOperationException(); }
+    [JsonIgnore]
     public int CraftedAmount { get => 1; set => throw new InvalidOperationException(); }
 }

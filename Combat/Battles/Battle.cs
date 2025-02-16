@@ -173,7 +173,12 @@ public class Battle
         BattleTextService.DisplayStatusText(target, enemy);
         while (CheckForResult() == -1)
         {
-            var possibleSkills = enemy.User.ActiveSkills
+            var activeSkills = enemy.User is BossEnemy boss
+                ? boss.CurrentPhase == 1
+                    ? [boss.ActiveSkills[0], boss.ActiveSkills[1], boss.ActiveSkills[2]]
+                    : [boss.ActiveSkills[3], boss.ActiveSkills[4], boss.ActiveSkills[5]] 
+                : enemy.User.ActiveSkills;
+            var possibleSkills = activeSkills
                 .Where(x => (x.ResourceCost <= enemy.User.CurrentResource ||
                              Math.Abs(enemy.User.MaximalResource - enemy.User.CurrentResource) < 0.01)
                             && x.ActionCost * enemy.MaxActionPoints.Value(enemy.User, "MaxActionPoints") <= enemy.CurrentActionPoints)

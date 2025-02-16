@@ -1,5 +1,6 @@
 ﻿using ConsoleGodmist.Characters;
 using ConsoleGodmist.Enums;
+using Newtonsoft.Json;
 
 namespace ConsoleGodmist.Items;
 
@@ -16,11 +17,13 @@ public class Bandage : BaseItem, ICraftable, IUsable
     public override bool Stackable => true;
     public override string Description => "";
     public override ItemType ItemType => ItemType.Alchemy;
-
+    
+    [JsonIgnore]
     public Dictionary<string, int> CraftingRecipe {
         get => new() { { "WeakAlcohol", 1 }, { "CottonFabric", 1 } };
         set => throw new InvalidOperationException(); }
 
+    [JsonIgnore]
     public int CraftedAmount { get => 2; set => throw new InvalidOperationException(); }
 
     public bool Use()
