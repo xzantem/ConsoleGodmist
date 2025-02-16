@@ -1,0 +1,40 @@
+﻿<Window x:Class="SkillEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:skillEditor="clr-namespace:SkillEditor"
+        xmlns:global="clr-namespace:"
+        Title="Skill Editor" Height="450" Width="800">
+    <Window.Resources>
+        <global:EffectsListConverter x:Key="EffectsListConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+            <Button Content="Add New Skill" Click="AddSkill_Click" Margin="5" Padding="10, 5"/>
+            <Button Content="Edit Skill" Click="EditSkill_Click" Margin="5" Padding="10, 5"/>
+            <Button Content="Remove Skill" Click="RemoveSkill_Click" Margin="5" Padding="10, 5"/>
+        </StackPanel>
+
+        <!-- Skills List -->
+        <DataGrid Grid.Row="1" x:Name="SkillsDataGrid" Margin="10" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Alias" Binding="{Binding Alias}"/>
+                <DataGridTextColumn Header="Resource Cost" Binding="{Binding ResourceCost}"/>
+                <DataGridTextColumn Header="Action Cost" Binding="{Binding ActionCost}"/>
+                <DataGridTextColumn Header="Accuracy" Binding="{Binding Accuracy}"/>
+                <DataGridTextColumn Header="Hits" Binding="{Binding Hits}"/>
+                <DataGridTextColumn Header="Effects" Binding="{Binding Effects, Converter={StaticResource EffectsListConverter}}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Save All" Click="SaveAll_Click" Margin="5" Padding="10, 5"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -32,12 +32,14 @@
     <Compile Remove="Quests\SideQuestManager.cs" />
     <Compile Remove="Items\Lootbags\WeaponLootbag.cs" />
     <Compile Remove="Items\Lootbags\ArmorLootbag.cs" />
+    <Compile Remove="SkillEditor\**" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="locale.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Remove="SkillEditor\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +51,7 @@
     <None Include="bin\Debug\net6.0\json\plant-drop-table.json" />
     <None Include="bin\Debug\net6.0\json\potion-components.json" />
     <None Include="bin\Debug\net6.0\json\quests.json" />
+    <None Remove="SkillEditor\**" />
   </ItemGroup>
 
   <ItemGroup>
