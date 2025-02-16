@@ -51,11 +51,11 @@
 
         <!-- Buttons -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-            <Button Content="{x:Static skillEditor:locale.AddNewEffectText}" Click="AddEffect_Click" Margin="5"/>
-            <Button Content="{x:Static skillEditor:locale.RemoveEffectText}" Click="RemoveEffect_Click" Margin="5"/>
+            <Button Content="Add New Effect" Click="AddEffect_Click" Margin="5" Padding="10, 5"/>
+            <Button Content="Remove Effect" Click="RemoveEffect_Click" Margin="5" Padding="10, 5"/>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="{x:Static skillEditor:locale.SaveText}" Click="Save_Click" Margin="5"/>
+            <Button Content="Save" Click="Save_Click" Margin="5" Padding="10, 5"/>
         </StackPanel>
     </Grid>
 </Window>

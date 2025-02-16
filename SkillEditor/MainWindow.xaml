@@ -16,9 +16,9 @@
 
         <!-- Buttons -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-            <Button Content="Add New Skill" Click="AddSkill_Click" Margin="5"/>
-            <Button Content="Edit Skill" Click="EditSkill_Click" Margin="5"/>
-            <Button Content="Remove Skill" Click="RemoveSkill_Click" Margin="5"/>
+            <Button Content="Add New Skill" Click="AddSkill_Click" Margin="5" Padding="10, 5"/>
+            <Button Content="Edit Skill" Click="EditSkill_Click" Margin="5" Padding="10, 5"/>
+            <Button Content="Remove Skill" Click="RemoveSkill_Click" Margin="5" Padding="10, 5"/>
         </StackPanel>
 
         <!-- Skills List -->
@@ -34,7 +34,7 @@
         </DataGrid>
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Save All" Click="SaveAll_Click" Margin="5"/>
+            <Button Content="Save All" Click="SaveAll_Click" Margin="5" Padding="10, 5"/>
         </StackPanel>
     </Grid>
 </Window>

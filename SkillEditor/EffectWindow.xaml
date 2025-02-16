@@ -34,6 +34,6 @@
         </ScrollViewer>
 
         <!-- Save Button -->
-        <Button Grid.Row="2" Content="{x:Static SkillEditor:locale.SaveText}" Click="Save_Click" HorizontalAlignment="Right" Margin="10" Padding="10,5"/>
+        <Button Grid.Row="2" Content="Save" Click="Save_Click" HorizontalAlignment="Right" Margin="10" Padding="10,5"/>
     </Grid>
 </Window>
