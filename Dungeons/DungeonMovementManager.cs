@@ -56,7 +56,7 @@ public static class DungeonMovementManager
                     QuestLog.OpenLog();
                     break;
                 case 4:
-                    //Show Character Info
+                    CharacterEventTextService.DisplayCharacterMenuText(PlayerHandler.player);
                     break;
                 case 5:
                     PlayerHandler.player.Heal(PlayerHandler.player.MaximalHealth / 4);
@@ -82,7 +82,10 @@ public static class DungeonMovementManager
                     CurrentLocation.Clear();
                     break;
                 case 7:
-                    //Open Stash
+                    var stash = new Stash(CurrentDungeon.DungeonLevel, CurrentDungeon.DungeonType);
+                    foreach (var item in stash.GetDrops())
+                        PlayerHandler.player.Inventory.AddItem(item.Key, item.Value);
+                    CurrentLocation.Clear();
                     break;
                 case 8:
                     var trap = CurrentDungeon.CurrentFloor.Traps

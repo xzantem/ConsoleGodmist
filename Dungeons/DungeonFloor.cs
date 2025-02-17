@@ -35,6 +35,7 @@ public class DungeonFloor
             {DungeonFieldType.Battle, difficulty},
             {DungeonFieldType.Bonfire, 4},
             {DungeonFieldType.Trap, 1 + difficulty},
+            {DungeonFieldType.Stash, 6}
         };
         for (var i = 0; i < length; i++)
         {

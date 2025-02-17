@@ -19,7 +19,7 @@ public static class QuestNPCHandler
             quests.AddRange(QuestManager.Quests.Where(prerequisite => quest.Prerequisites
                     .Contains(prerequisite.Alias))
                 .TakeWhile(prerequisite => prerequisite.QuestState is QuestState.Completed or QuestState.HandedIn)
-                .Select(prerequisite => quest));
+                .Select(_ => quest));
         }
         return quests;
     }

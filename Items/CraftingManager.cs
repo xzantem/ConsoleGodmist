@@ -446,9 +446,13 @@ public static class CraftingManager
                 _ => throw new ArgumentOutOfRangeException()
             });
             var powder = GalduriteManager.GetColorMaterial(tier, color);
-            AnsiConsole.Write($"{locale.Color}: {NameAliasHelper.GetName(color)} ({NameAliasHelper.GetName(powder)} " +
-                              $"({player.Inventory.Items.FirstOrDefault(x => x.Key.Alias == powder).Value}))\n");
+            if (powder == "")
+                AnsiConsole.Write($"{locale.Color}: {NameAliasHelper.GetName(color)}\n");
+            else
+                AnsiConsole.Write($"{locale.Color}: {NameAliasHelper.GetName(color + "MAdj")} ({NameAliasHelper.GetName(powder)} " +
+                                  $"({player.Inventory.Items.FirstOrDefault(x => x.Key.Alias == powder).Value}))\n");
             AnsiConsole.Write(galduriteType ? $"{locale.Type}: {locale.ArmorGaldurite}\n" : $"{locale.Type}: {locale.WeaponGaldurite}\n");
+            
             AnsiConsole.Write(tier switch
             {
                 1 => $"{locale.Level}: 11 ({stone.Name} ({player.Inventory.Items.FirstOrDefault
@@ -489,13 +493,14 @@ public static class CraftingManager
                     galduriteType = !galduriteType;
                     break;
                 case 2:
-                    var colors = new HashSet<string>();
-                    foreach (var component in GalduriteManager.GalduriteComponents)
-                        colors.Add(component.PoolColor);
+                    var colors = new Dictionary<string, string>();
+                    foreach (var component in GalduriteManager.GalduriteComponents
+                                 .Where(component => !colors.ContainsValue(component.PoolColor))) 
+                        colors.Add(NameAliasHelper.GetName(component.PoolColor + "MAdj"), component.PoolColor);
                     var colorChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                        .AddChoices(colors)
+                        .AddChoices(colors.Keys)
                         .HighlightStyle(Stylesheet.Styles["npc-enchanter"]));
-                    color = colorChoice;
+                    color = colors[colorChoice];
                     break;
                 case 3: 
                     string[] tierChoices = [

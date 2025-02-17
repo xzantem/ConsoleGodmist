@@ -21,10 +21,11 @@ public class Inventory
             AnsiConsole.WriteLine(item.Stackable
                 ? $"{locale.NotEnoughWeight}: {item.Name} + ({quantity})!"
                 : $"{locale.NotEnoughWeight}: {item.Name}!", Stylesheet.Styles["error"]);
+            return;
         }
-        if (item.Stackable && Items.ContainsKey(item))
+        if (item.Stackable && Items.Keys.Any(x => x.Alias == item.Alias))
         {
-            Items[item] += quantity;
+            Items[Items.FirstOrDefault(x => x.Key.Alias == item.Alias).Key] += quantity;
             AnsiConsole.Write(new Text($"{locale.YouGain}: {quantity}x {item.Name} ({Items[item]})\n", item.NameStyle()));
         }
         else
@@ -80,7 +81,8 @@ public class Inventory
     {
         if (Items.ContainsKey(item))
         {
-            if (item.Use())
+            if (item is not IUsable usable) return;
+            if (usable.Use())
             {
                 TryRemoveItem(item);
             }

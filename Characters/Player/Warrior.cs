@@ -45,7 +45,7 @@ namespace ConsoleGodmist.Characters
             ActiveSkills[1] = new ActiveSkill("Kick", 15, 0.4, false, 73,
                 [new DebuffStat(SkillTarget.Enemy, StatType.Dodge, ModifierType.Additive, 15, 0.8, 3)]);
             ActiveSkills[2] = new ActiveSkill("WarCry", 20, 0.35, true, 100,
-                [new BuffStat(SkillTarget.Self, StatType.DamageDealt, ModifierType.Multiplicative, 0.2, 1, 3),
+                [new BuffStat(SkillTarget.Self, StatType.MaximalAttack, ModifierType.Multiplicative, 0.2, 1, 3),
                     new BuffStat(SkillTarget.Self, StatType.MaximalAttack, ModifierType.Multiplicative, 0.2, 1, 3)]);
             ActiveSkills[3] = new ActiveSkill("RightHook", 25, 0.6, false, 72,
             [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0, 0),

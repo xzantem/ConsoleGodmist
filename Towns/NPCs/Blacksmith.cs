@@ -39,8 +39,8 @@ public class Blacksmith : NPC
             { { locale.OpenShop, 0 }, { locale.CreateSmithing, 1 }, { locale.CreateWeapon, 2 }, 
                 { locale.CreateArmor, 3 }, { locale.UpgradeWeapon, 4 }, { locale.UpgradeArmor, 5 },
                 { locale.ReforgeWeapon, 6 }, { locale.ReforgeArmor, 7 } };
-            if (QuestNPCHandler.GetAvailableQuests(Name).Count > 0) choices.Add(locale.AcceptQuest, 8);
-            if (QuestNPCHandler.GetReturnableQuests(Name).Count > 0) choices.Add(locale.ReturnQuest, 9);
+            if (QuestNPCHandler.GetAvailableQuests(Alias).Count > 0) choices.Add(locale.AcceptQuest, 8);
+            if (QuestNPCHandler.GetReturnableQuests(Alias).Count > 0) choices.Add(locale.ReturnQuest, 9);
             choices.Add( locale.Return, 10 );
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
                 .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]));
@@ -54,8 +54,8 @@ public class Blacksmith : NPC
                 case 5: UpgradeArmor(); break;
                 case 6: ReforgeWeapon(); break;
                 case 7: ReforgeArmor(); break;
-                case 8: QuestNPCHandler.SelectQuestToAccept(Name); break;
-                case 9: QuestNPCHandler.SelectQuestToReturn(Name); break;
+                case 8: QuestNPCHandler.SelectQuestToAccept(Alias); break;
+                case 9: QuestNPCHandler.SelectQuestToReturn(Alias); break;
                 case 10: return;
             }
             AnsiConsole.Write(new FigletText(locale.Blacksmith).Centered()

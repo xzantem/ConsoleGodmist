@@ -14,7 +14,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ConsoleGodmist.csproj" />
-      <ProjectReference Include="..\ConsoleGodmist\ConsoleGodmist.csproj" />
     </ItemGroup>
 
     <ItemGroup>

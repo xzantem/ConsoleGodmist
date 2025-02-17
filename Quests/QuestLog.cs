@@ -8,11 +8,11 @@ public static class QuestLog
 {
     public static void InspectQuest(Quest quest)
     {
-        AnsiConsole.Write(new Text($"{quest.Name} - {quest.QuestGiver} " +
+        AnsiConsole.Write(new Text($"{quest.Name} - {NameAliasHelper.GetName(quest.QuestGiver)} " +
                                    $"({locale.Level} {quest.RecommendedLevel})\n{quest.Description}\n", Stylesheet.Styles["gold"]));
         foreach (var stage in quest.Stages)
         {
-            AnsiConsole.Write(new Text($"- {stage.Name}\n{stage.Description}\n", 
+            AnsiConsole.Write(new Text($"- {stage.Name}\n", 
                 stage.Objectives.All(x => x.IsComplete) ? 
                     Stylesheet.Styles["quest-completed"] : Stylesheet.Styles["default"]));
             foreach (var objective in stage.Objectives)
@@ -59,7 +59,7 @@ public static class QuestLog
                 case 1: index -= scrollAmount; break;
                 case 2:
                     try { InspectQuest(quests[ChooseQuest(rows)]); }
-                    catch { AnsiConsole.Write(new Text(locale.QuestListEmpty, Stylesheet.Styles["error"])); }
+                    catch { AnsiConsole.Write(new Text("", Stylesheet.Styles["error"])); }
                     break;
                 case 3: filters = ChangeFilters(); break;
                 case 4: return;

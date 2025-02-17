@@ -1,2 +1,1136 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ConsoleGodmist.Characters.Paladin">
+    <Position X="32" Y="25.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Player\Paladin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.PlayerCharacter">
+    <Position X="30.25" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAQCSAkAiBAAQCAIIAAggQAAAAEgAUIAAggAAAAE=</HashCode>
+      <FileName>Characters\Player\PlayerCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.PlayerHandler">
+    <Position X="26.75" Y="28" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAABAAAAAAABAAA=</HashCode>
+      <FileName>Characters\Player\PlayerHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.Scout">
+    <Position X="32" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Player\Scout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.Sorcerer">
+    <Position X="33.75" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAIAAQAAAAAAAAAAAAAAAIAAAE=</HashCode>
+      <FileName>Characters\Player\Sorcerer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.Warrior">
+    <Position X="32" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Player\Warrior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.BossEnemy">
+    <Position X="26.75" Y="24.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\BossEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.Character">
+    <Position X="28.5" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQRAARAAQjYyAACQAAIoQRwBAAiAAAABBAAEgEMABAE=</HashCode>
+      <FileName>Characters\Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.EnemyCharacter">
+    <Position X="26.75" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAACQAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\EnemyCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.EnemyFactory">
+    <Position X="26.75" Y="25.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAIAAAAgAAAAAAAAAAgA=</HashCode>
+      <FileName>Characters\EnemyFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Battles.Battle">
+    <Position X="48.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIACQAAAgAAAAAAAIAAAgAAAAAIAgJACAAACAAAAQ=</HashCode>
+      <FileName>Combat\Battles\Battle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Battles.BattleManager">
+    <Position X="50.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAIAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Battles\BattleManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Battles.BattleUser">
+    <Position X="50.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAgAAACAgAAiAAEAAAgAABAAAAAIAAAhA=</HashCode>
+      <FileName>Combat\Battles\BattleUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.BattleEventData">
+    <Position X="39.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAACAEAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\PassiveEffects\BattleEventData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.InnatePassiveEffect">
+    <Position X="37.5" Y="9.25" Width="1.75" />
+    <InheritanceLine Type="ConsoleGodmist.Combat.Modifiers.PassiveEffect" FixedToPoint="true">
+      <Path>
+        <Point X="38.25" Y="8.796" />
+        <Point X="38.25" Y="9.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\PassiveEffects\InnatePassiveEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.ListenerPassiveEffect">
+    <Position X="39.5" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\PassiveEffects\ListenerPassiveEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.PassiveEffect">
+    <Position X="37.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\PassiveEffects\PassiveEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.PassiveEffectList">
+    <Position X="41.25" Y="11.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAEAAAAAABAgAAAABAgAQAAAIAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\PassiveEffects\PassiveEffectList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.TimedPassiveEffect">
+    <Position X="37.5" Y="11.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Combat\Modifiers\PassiveEffects\TimedPassiveEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.DoTStatusEffect">
+    <Position X="46.75" Y="7.5" Width="1.5" />
+    <InheritanceLine Type="ConsoleGodmist.Combat.Modifiers.StatusEffect" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="42.25" Y="7.5" />
+        <Point X="42.25" Y="7.125" />
+        <Point X="46.627" Y="7.125" />
+        <Point X="46.627" Y="8.062" />
+        <Point X="46.75" Y="8.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\StatusEffects\DoTStatusEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.Freeze">
+    <Position X="45" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\StatusEffects\Freeze.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.Frostbite">
+    <Position X="46.75" Y="9.5" Width="1.5" />
+    <InheritanceLine Type="ConsoleGodmist.Combat.Modifiers.StatusEffect" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="42.25" Y="7.5" />
+        <Point X="42.25" Y="7.125" />
+        <Point X="46.627" Y="7.125" />
+        <Point X="46.627" Y="10.062" />
+        <Point X="46.75" Y="10.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\StatusEffects\Frostbite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.Regeneration">
+    <Position X="43.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIBAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\StatusEffects\Regeneration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.Shield">
+    <Position X="43.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAIAAAAAgAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\StatusEffects\Shield.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.Sleep">
+    <Position X="45" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAABAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\StatusEffects\Sleep.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.StatusEffect">
+    <Position X="41.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAggCAAAAAAAAAAAAAAAAAAAAAQAAAAAAQAA=</HashCode>
+      <FileName>Combat\Modifiers\StatusEffects\StatusEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.StatusEffectHandler">
+    <Position X="39.5" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAACAEAAAAAAgAAAAABAIAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Modifiers\StatusEffects\StatusEffectHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.Stat">
+    <Position X="37.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAABAAAAAIAAAAAAAAAAAgAAAAAAAAAAACgAAAAQAA=</HashCode>
+      <FileName>Combat\Modifiers\Stat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Modifiers.StatModifier">
+    <Position X="39.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgACAAAAAAAAAAAAAAQAAAAAAQAAAAAAQAA=</HashCode>
+      <FileName>Combat\Modifiers\StatModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.AdvanceMove" BaseTypeListCollapsed="true">
+    <Position X="46.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAACCAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\AdvanceMove.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.BuffStat" BaseTypeListCollapsed="true">
+    <Position X="45" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAQAGAAAACAAAAAAAEAAAAAEAAAAAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\BuffStat.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.ClearStatusEffect" BaseTypeListCollapsed="true">
+    <Position X="43.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAACAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\ClearStatusEffect.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.DealDamage" BaseTypeListCollapsed="true">
+    <Position X="48.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAoIAAAQAIAAAACAgIAAAAAAAAAAAAAAAgQA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\DealDamage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.DebuffResistance" BaseTypeListCollapsed="true">
+    <Position X="50.25" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQACAAAACgAAAAACAAAQAAAAAAAAAQ=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\DebuffResistance.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.DebuffStat" BaseTypeListCollapsed="true">
+    <Position X="45" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQACAAAACAAAAAACAAAQAAAAACAAAQ=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\DebuffStat.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.ExtendDoT" BaseTypeListCollapsed="true">
+    <Position X="43.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAAAAACAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\ExtendDoT.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.GainShield" BaseTypeListCollapsed="true">
+    <Position X="46.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAICAwAAAAQAAAAAACAAAAAAAAAAABAAAAAAAQA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\GainShield.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.HealTarget" BaseTypeListCollapsed="true">
+    <Position X="46.75" Y="17.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAABAAQAAAAAACAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\HealTarget.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.InflictDoTStatusEffect" BaseTypeListCollapsed="true">
+    <Position X="41.25" Y="14.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgACAAQAAAAAACAAAABAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\InflictDoTStatusEffect.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.InflictGenericStatusEffect" BaseTypeListCollapsed="true">
+    <Position X="43.5" Y="17.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAggCAAQAAAAAACCAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\InflictGenericStatusEffect.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.InflictTimedPassiveEffect" BaseTypeListCollapsed="true">
+    <Position X="39" Y="16.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAAQAACAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\InflictTimedPassiveEffect.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.RegenResource" BaseTypeListCollapsed="true">
+    <Position X="50.25" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAQAQAAAACAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\RegenResource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffects.TradeHealthForResource" BaseTypeListCollapsed="true">
+    <Position X="41.25" Y="17.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAQAAAAAACAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkillEffects\TradeHealthForResource.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkill">
+    <Position X="48.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACpAAAAAAAQIBAQAAAAEAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Combat\Skills\ActiveSkill.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.PlantDropManager">
+    <Position X="10.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dungeons\Interactables\PlantDropManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.Stash">
+    <Position X="14.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Dungeons\Interactables\Stash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.Trap">
+    <Position X="16" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAARBAAAIAAAAAAAAAAAAAAABAAAAAEAA=</HashCode>
+      <FileName>Dungeons\Interactables\Trap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.TrapMinigameManager">
+    <Position X="10.75" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAABIAAAAgAAAAAAAAACAAIAAAAAAAAA=</HashCode>
+      <FileName>Dungeons\Interactables\TrapMinigameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.Dungeon">
+    <Position X="14.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAgAAAAAAAAEAAAgAAAAAAAAgAAAFAg=</HashCode>
+      <FileName>Dungeons\Dungeon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.DungeonField">
+    <Position X="12.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAIAAABAAAA=</HashCode>
+      <FileName>Dungeons\DungeonField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.DungeonFloor">
+    <Position X="16" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAACAAAAAAAACAgAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Dungeons\DungeonFloor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.DungeonMovementManager">
+    <Position X="9" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAACAAAAAAAAAICgAAAEgiAAAAAAMAAAAAAA=</HashCode>
+      <FileName>Dungeons\DungeonMovementManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.DungeonRoom">
+    <Position X="12.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dungeons\DungeonRoom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Dungeons.DungeonCorridor">
+    <Position X="12.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dungeons\DungeonCorridor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.DropPool">
+    <Position X="73" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAQAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Drops\DropPool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.DropTable">
+    <Position X="73" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Drops\DropTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.ItemDrop">
+    <Position X="81" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAACAAAABAIAAEA=</HashCode>
+      <FileName>Items\Drops\ItemDrop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.Armor">
+    <Position X="67" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAwAghABQAAAoABwQASAEQAACAUAIACgAQgA=</HashCode>
+      <FileName>Items\Equippable\Armors\Armor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.ArmorBase" BaseTypeListCollapsed="true">
+    <Position X="77" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUEAAAAAAgIAAAEAACAAAAQAACAAAABAAAAAgAAAAAA=</HashCode>
+      <FileName>Items\Equippable\Armors\ArmorBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.ArmorBinder" BaseTypeListCollapsed="true">
+    <Position X="75" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUEACAAAAAIAAAEAACAAAAQAACAAAAAAAAAAgAIAAAA=</HashCode>
+      <FileName>Items\Equippable\Armors\ArmorBinder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.ArmorPlate" BaseTypeListCollapsed="true">
+    <Position X="73" Y="23" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAAAAAAIAAAEQACAAAAwAAAAAABBAAAAAgAIAAAA=</HashCode>
+      <FileName>Items\Equippable\Armors\ArmorPlate.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.Weapon">
+    <Position X="65" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAIAQAChIBAAAIoABQQASAEQAICAUAIACAAAgE=</HashCode>
+      <FileName>Items\Equippable\Weapons\Weapon.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.WeaponBinder" BaseTypeListCollapsed="true">
+    <Position X="75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAAABAAIAAAEAACAAAgQAAAAAAAAAAAAAoAAAAAE=</HashCode>
+      <FileName>Items\Equippable\Weapons\WeaponBinder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.WeaponHandle" BaseTypeListCollapsed="true">
+    <Position X="77" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAAABAAIAAAEAACAIAgQAAAAAAAAAAAAAgIAAAAA=</HashCode>
+      <FileName>Items\Equippable\Weapons\WeaponHandle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.WeaponHead" BaseTypeListCollapsed="true">
+    <Position X="73" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAQAAAAICAAEAACIAAAQAAAAAABAAAAAAoIAAAAA=</HashCode>
+      <FileName>Items\Equippable\Weapons\WeaponHead.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.186" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.EquipmentPartManager">
+    <Position X="75" Y="13.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAgAAAAAAAAACAEAAAAASAAIBA=</HashCode>
+      <FileName>Items\Equippable\EquipmentPartManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.EquippableItemService">
+    <Position X="78.75" Y="19.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CQBAAgAAAAAAIAAAAAAAJAAAAAAAAAAAABAAAAgBAAA=</HashCode>
+      <FileName>Items\Equippable\EquippableItemService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.Galdurite">
+    <Position X="60.5" Y="21.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgIAAAAAgABQAgSAAQAEAAAIAgCAAAAA=</HashCode>
+      <FileName>Items\Galdurites\Galdurite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.GalduriteComponent">
+    <Position X="81" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAgAIAAAAAACAAAAASAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Items\Galdurites\GalduriteComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.GalduriteManager">
+    <Position X="58" Y="21.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAIAAA=</HashCode>
+      <FileName>Items\Galdurites\GalduriteManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.Lootbag">
+    <Position X="62.75" Y="23" Width="1.5" />
+    <InheritanceLine Type="ConsoleGodmist.Items.BaseItem" FixedToPoint="true">
+      <Path>
+        <Point X="63.5" Y="18.247" />
+        <Point X="63.5" Y="18.547" />
+        <Point X="64.55" Y="18.547" />
+        <Point X="64.55" Y="23.125" />
+        <Point X="64.25" Y="23.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAACAEQAABAAAAACAAAgA=</HashCode>
+      <FileName>Items\Lootbags\Lootbag.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.LootbagManager">
+    <Position X="77.25" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAQAAAAACAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Items\Lootbags\LootbagManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.Antidote">
+    <Position X="69" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIggAAAAAAAABAAACAEQAQIAAAAACAAAgA=</HashCode>
+      <FileName>Items\MiscItems\Antidote.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.Bandage">
+    <Position X="69" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIggAAAAAAAABAAACAEQAQIAAAAACAAAgA=</HashCode>
+      <FileName>Items\MiscItems\Bandage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.TownPortalScroll">
+    <Position X="71" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIggAAAAAAAABAAACAEQAQIAAAAACAAAgA=</HashCode>
+      <FileName>Items\MiscItems\TownPortalScroll.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.WetTowel">
+    <Position X="71" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIggAAAAAAAABAAACAEQAQIAAAAACAAAgA=</HashCode>
+      <FileName>Items\MiscItems\WetTowel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.Potion">
+    <Position X="62.75" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAgIAAQAAAABUAACAEQAAAAAAAACAAAgA=</HashCode>
+      <FileName>Items\Potions\Potion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.PotionCatalyst">
+    <Position X="79.25" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEAAAAAAAgAAAAAAAAAAAAAAABAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Items\Potions\PotionCatalyst.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.PotionComponent">
+    <Position X="79.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAIgAAAAAAAAAAAAAAAAAAABAAAAAAAABAAA=</HashCode>
+      <FileName>Items\Potions\PotionComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.PotionManager">
+    <Position X="77.25" Y="13.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAEAAQBIAAAAAAAABAAIAAA=</HashCode>
+      <FileName>Items\Potions\PotionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.BaseIngredient">
+    <Position X="65" Y="16.5" Width="1.5" />
+    <InheritanceLine Type="ConsoleGodmist.Items.BaseItem" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="64.25" Y="16.938" />
+        <Point X="64.625" Y="16.938" />
+        <Point X="64.625" Y="16.938" />
+        <Point X="65" Y="16.938" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\BaseIngredient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.BaseItem">
+    <Position X="62.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACBAAAAAAIggAAAAAACABQAACAAQEBAAAAAACAAAgA=</HashCode>
+      <FileName>Items\BaseItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.CraftableIngredient">
+    <Position X="60.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAQIAAAAAAAAAAA=</HashCode>
+      <FileName>Items\CraftableIngredient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Items.CraftingManager">
+    <Position X="58.25" Y="15.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAFAAAAAAAAAAAAAAAAAQAAAAAAACgAAACA=</HashCode>
+      <FileName>Items\CraftingManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.Inventory">
+    <Position X="71" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAQAAAAACAAAAAAAAQAAgAGAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\Inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.ItemManager">
+    <Position X="60.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACEAAAAAAQAAAAAAAAAAAgAAAAQAAAAA=</HashCode>
+      <FileName>Items\ItemManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Items.NPCInventory">
+    <Position X="58.5" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgBAAAAAECAgAAAQAAAA=</HashCode>
+      <FileName>Items\NPCInventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.DescendQuestObjective" BaseTypeListCollapsed="true">
+    <Position X="47" Y="27.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAgAAAAAAAAACAAAAAAEAAAAAAAAACAAAA=</HashCode>
+      <FileName>Quests\Objectives\DescendQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.KillInDungeonQuestObjective" BaseTypeListCollapsed="true">
+    <Position X="49.25" Y="27.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAgAAAIQAAAACAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Quests\Objectives\KillInDungeonQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.KillQuestObjective" BaseTypeListCollapsed="true">
+    <Position X="51.75" Y="27.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAgAAAIQAAAACAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Quests\Objectives\KillQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.QuestObjectiveContext">
+    <Position X="54.25" Y="30" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAIAAAAAQAAAAAAwAAAgAAAAABAAAA=</HashCode>
+      <FileName>Quests\Objectives\QuestObjectiveContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.TalkQuestObjective" BaseTypeListCollapsed="true">
+    <Position X="53.75" Y="27.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAQAIgAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Quests\Objectives\TalkQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.Quest">
+    <Position X="52.5" Y="30" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAADAAAAAJgAAAAICQAIAQAAAgABAAEQIoAAAAAIAA=</HashCode>
+      <FileName>Quests\Quest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.QuestLog">
+    <Position X="48.75" Y="30" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAACAAAAAAAAgAAAAEAAAAA=</HashCode>
+      <FileName>Quests\QuestLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.QuestManager">
+    <Position X="50.5" Y="30" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEgAAAAABBAgABAAAEABIACAAAgAAAAAAAAAAAAAAgQ=</HashCode>
+      <FileName>Quests\QuestManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.QuestNPCHandler">
+    <Position X="54.25" Y="33" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAgAQAA=</HashCode>
+      <FileName>Quests\QuestNPCHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.QuestReward">
+    <Position X="48.75" Y="31.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAAQAE=</HashCode>
+      <FileName>Quests\QuestReward.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.QuestStage">
+    <Position X="47" Y="31.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAIgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Quests\QuestStage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.TextService.ActiveSkillTextService">
+    <Position X="58.25" Y="28" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAACAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Text\ActiveSkillTextService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.TextService.BattleTextService">
+    <Position X="60.5" Y="28" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAABAAAAAEAAAAAEAIABBgAAAgAQABAAAAAAAA=</HashCode>
+      <FileName>Text\BattleTextService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.TextService.CharacterEventTextService">
+    <Position X="62.75" Y="28" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EACAACAQAQEAACAAAAARAAAAABAAAAgAAAAAAAAACgA=</HashCode>
+      <FileName>Text\CharacterEventTextService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.TextService.DungeonTextService">
+    <Position X="58.25" Y="29.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAIAAAACAAAAAAgAEAAA=</HashCode>
+      <FileName>Text\DungeonTextService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.TextService.InventoryMenuHandler">
+    <Position X="65.25" Y="28" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAABAIAAAAAAAAAAQAAAAAAAAAAAACAAAAAAgAAgAA=</HashCode>
+      <FileName>Text\InventoryMenuHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.TextService.NPCMenuHandler">
+    <Position X="65.25" Y="30.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Text\NPCMenuHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Town.NPCs.Alchemist">
+    <Position X="72.5" Y="28.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgAAAAAAAAABACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Towns\NPCs\Alchemist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Town.NPCs.Blacksmith">
+    <Position X="72.5" Y="33.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIAAAAAAABAAAAAIAAIAAAAAAAAAAAAAQCAAAABA=</HashCode>
+      <FileName>Towns\NPCs\Blacksmith.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Town.NPCs.Enchanter">
+    <Position X="72.5" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAoAAAAAAAAAhAAAAAAAAAAAAAAAAAAACAAAAAICAAA=</HashCode>
+      <FileName>Towns\NPCs\Enchanter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Town.NPCs.NPC">
+    <Position X="74.25" Y="28.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgAACAqAAIABAAAAEFQAAQAAAAAQASAAABAAgAAAAA=</HashCode>
+      <FileName>Towns\NPCs\NPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Town.Town">
+    <Position X="76" Y="28.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAABAAIAAAA=</HashCode>
+      <FileName>Towns\Town.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Town.TownsHandler">
+    <Position X="76" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Towns\TownsHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Utilities.DataPersistanceManager">
+    <Position X="85.25" Y="28.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAE=</HashCode>
+      <FileName>Utilities\DataPersistance\DataPersistanceManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Utilities.SaveData">
+    <Position X="85.25" Y="32.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAgAQAAAAAAAAAAABAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Utilities\DataPersistance\SaveData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Utilities.GameSettings">
+    <Position X="81" Y="32" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\GameSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Utilities.MainMenu">
+    <Position X="85.25" Y="30.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAIAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Utilities\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Utilities.NameAliasHelper">
+    <Position X="82.75" Y="32" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Utilities\NameAliasHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.ActiveSkillEffectConverter">
+    <Position X="79" Y="28.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Utilities\JsonConverters\ActiveSkillEffectConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Combat.Skills.EquipmentPartConverter">
+    <Position X="81.25" Y="28.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Utilities\JsonConverters\EquipmentPartConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemConverter">
+    <Position X="79" Y="30.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\JsonConverters\ItemConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Town.NPCs.NPCConverter">
+    <Position X="83.5" Y="28.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Utilities\JsonConverters\NPCConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Characters.PlayerJsonConverter">
+    <Position X="80.75" Y="30.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Utilities\JsonConverters\PlayerJsonConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Quests.QuestObjectiveConverter">
+    <Position X="82.75" Y="30.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Utilities\JsonConverters\QuestObjectiveConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.Stylesheet">
+    <Position X="81" Y="33.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABABAAAAAAAA=</HashCode>
+      <FileName>Utilities\Stylesheet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleGodmist.UtilityMethods">
+    <Position X="79" Y="32" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAIBAEQAAIAAAAAAAAgAAAEABAAAMCABAgAAAQA=</HashCode>
+      <FileName>Utilities\UtilityMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ConsoleGodmist.Combat.Skills.IActiveSkillEffect">
+    <Position X="50.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Skills\IActiveSkillEffect.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ConsoleGodmist.Items.IEquippable" Collapsed="true">
+    <Position X="65" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAABABAAAAgAAAQAQAAAEAAAAAIAAAAAAA=</HashCode>
+      <FileName>Items\Equippable\IEquippable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ConsoleGodmist.Items.ICraftable">
+    <Position X="65" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIAAAAAAAAAAA=</HashCode>
+      <FileName>Items\ICraftable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ConsoleGodmist.Items.IItem">
+    <Position X="67" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACBAAAAAAIggAAAAAACABQAACAEQEBAAAAAACAAAgA=</HashCode>
+      <FileName>Items\IItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ConsoleGodmist.Items.IEquipmentPart">
+    <Position X="69" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAIAAAEAACAAAAQAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Items\Equippable\IEquipmentPart.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ConsoleGodmist.Items.IUsable">
+    <Position X="69" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Items\IUsable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ConsoleGodmist.Quests.IQuestObjective">
+    <Position X="47" Y="29.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Quests\Objectives\IQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ConsoleGodmist.Enums.Direction">
+    <Position X="32" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABAAQ=</HashCode>
+      <FileName>Enums\Dungeons\Direction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.DungeonFieldType">
+    <Position X="33.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAEAAAIAAAAAIACAAEAAAAAAAAIAAAQAAAAAA=</HashCode>
+      <FileName>Enums\Dungeons\DungeonFieldType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.DungeonType">
+    <Position X="26.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAACAACAAAAgCAAAAEAIAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Enums\Dungeons\DungeonType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.ItemRarity">
+    <Position X="32" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAQQAAAAAEAgQAAAAAAAAAIIAAAAAAAAIAAAAAIA=</HashCode>
+      <FileName>Enums\Items\ItemRarity.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.ItemType">
+    <Position X="32" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAIAAAAAAAAAAAIAAAAAAAAAAgAEIAAAASAAIA=</HashCode>
+      <FileName>Enums\Items\ItemType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.PotionCatalystEffect">
+    <Position X="33.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAACAAAAAAAAAAACAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\Items\PotionCatalystEffect.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.PotionEffect">
+    <Position X="30.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACAAAAACAABAAAQBAAAAACAACAAEAAAAAAFAAAAAA=</HashCode>
+      <FileName>Enums\Items\PotionEffect.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.Quality">
+    <Position X="30.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAIAAAIAAAAAIAAAAA=</HashCode>
+      <FileName>Enums\Items\Quality.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.SortType">
+    <Position X="30.25" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABQAAAAAQAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Enums\Items\SortType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.ModifierType">
+    <Position X="28.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Enums\Modifiers\ModifierType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.StatType">
+    <Position X="32" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACgAiAABQAAIIAAgBAAAAAAAAAAAAAAIAAAE=</HashCode>
+      <FileName>Enums\Modifiers\StatType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.StatusEffectType">
+    <Position X="26.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAQGCgAAAAAAAAAAAgAAAECggAAAAAAACAAI=</HashCode>
+      <FileName>Enums\Modifiers\StatusEffectType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.CharacterClass">
+    <Position X="33.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAIAAAAAAAAAAAAAAAAAAAAAAAAECAAAAAAAAAA=</HashCode>
+      <FileName>Enums\CharacterClass.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.DamageBase">
+    <Position X="26.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAABQACAAAAACAAAAEAIAAQAgBAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\DamageBase.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.DamageType">
+    <Position X="28.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAACCAAAAAAAAAAAAAAAAAAIgAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\DamageTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.Difficulty">
+    <Position X="30.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAIAAAAAAAAAAAwAAA=</HashCode>
+      <FileName>Enums\Difficulty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.EnemyType">
+    <Position X="28.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAQAAQAAAAAAAAAAAAAAAAAAAAAQQAAA=</HashCode>
+      <FileName>Enums\EnemyType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.HonorLevel">
+    <Position X="33.75" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAEAAAAQAAAAAEAAAAQAAAQADAAAAAAAAAA=</HashCode>
+      <FileName>Enums\HonorLevel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.QuestState">
+    <Position X="33.75" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAIAAAAAAABAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Enums\QuestState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.ResourceType">
+    <Position X="28.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAIAAAAAA=</HashCode>
+      <FileName>Enums\ResourceType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ConsoleGodmist.Enums.SkillTarget">
+    <Position X="28.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\SkillTarget.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

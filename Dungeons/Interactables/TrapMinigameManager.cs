@@ -6,7 +6,8 @@ namespace ConsoleGodmist.Dungeons;
 
 public static class TrapMinigameManager
 {
-    public static readonly int MinigameCount = 5;
+    public const int MinigameCount = 5;
+
     public static bool StartMinigame(Difficulty difficulty, int TrapType)
     {
         switch (TrapType)
@@ -35,52 +36,52 @@ public static class TrapMinigameManager
         var tries = 0;
         for (var i = 0; i < size; i++)
             correctCode[i] = Random.Shared.Next(0, 9);
-        AnsiConsole.Write(new Text($"Code challenge: Try to match the secret digit sequence\n"));
+        AnsiConsole.Write(new Text($"{locale.CodeChallengeIntro}\n"));
         while (true)
         {
-            AnsiConsole.Write(new Text("\nCurrent code: "));
+            AnsiConsole.Write(new Text($"\n{locale.CurrentCode}: "));
             foreach (var t in playerCode)
                 AnsiConsole.Write(new Text($"[{t}]"));
             AnsiConsole.Write("\n");
-            
+            List<string> choices = [locale.AdjustDigit, locale.ChangeWholeCode, locale.CheckAnswer];
             var selectedAction = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                    .Title("Select action:")
-                    .AddChoices("Adjust digit", "Change whole code", "Check answer"));
-            switch (selectedAction)
+                    .Title($"{locale.ChooseNextAction}:")
+                    .AddChoices(choices));
+            switch (choices.IndexOf(selectedAction))
             {
-                case "Adjust digit":
+                case 0:
                     var selectedDigit = AnsiConsole.Prompt(
-                        new TextPrompt<int>("Type the digit's index: ")
+                        new TextPrompt<int>($"{locale.TypeDigitIndex}: ")
                             .AddChoices(Enumerable.Range(1, size))) - 1;
                     playerCode[selectedDigit] = AnsiConsole.Prompt(
-                        new TextPrompt<int>("Type the digit's desired value: ")
+                        new TextPrompt<int>($"{locale.TypeDigitDesiredValue}: ")
                             .AddChoices(Enumerable.Range(1, 9)));
                     break;
-                case "Change whole code":
+                case 1:
                     var str = AnsiConsole.Prompt(
-                        new TextPrompt<string>("Type the code desired value: ")
+                        new TextPrompt<string>($"{locale.TypeCodeDesiredValue}: ")
                             .Validate(x => x.Length == size && x
-                                .All(char.IsDigit), "Invalid code"));
+                                .All(char.IsDigit), locale.InvalidCode));
                     playerCode = str.Select(x => int.Parse(x.ToString())).ToArray();
                     break;
-                case "Check answer" when !playerCode.Where((t, i) => t != correctCode[i]).Any():
+                case 2 when !playerCode.Where((t, i) => t != correctCode[i]).Any():
                     return true;
-                case "Check answer" when tries < 10:
-                    AnsiConsole.Write("Incorrect code. Try again!\nTips: \n");
+                case 2 when tries < 10:
+                    AnsiConsole.Write($"{locale.IncorrectCode}\n{locale.Tips}: \n");
                     for (var i = 0; i < size; i++)
                     {
                         var txt = (correctCode[i] - playerCode[i]) switch
                         {
-                            > 0 => $"The number at position {i + 1} is too low.\n",
-                            < 0 => $"The number at position {i + 1} is too high.\n",
-                            _ => $"The number at position {i + 1} is correct.\n"
+                            > 0 => $"{locale.DigitAtPosition} {i + 1} {locale.IsTooLow}.\n",
+                            < 0 => $"{locale.DigitAtPosition} {i + 1} {locale.IsTooHigh}.\n",
+                            _ => $"{locale.DigitAtPosition} {i + 1} {locale.IsCorrect}.\n"
                         };
                         AnsiConsole.Write(txt);
                     }
                     tries++;
                     break;
-                case "Check answer":
+                case 2:
                     return false;
             }
         }
@@ -104,13 +105,13 @@ public static class TrapMinigameManager
             answer[i] = characters[Random.Shared.Next(0, characters.Length)];
         for (var i = 0; i < 5; i++)
         {
-            AnsiConsole.Write(new Text($"Memory challenge: Remember the sequence that will show up in {5 - i}\n"));
+            AnsiConsole.Write(new Text($"{locale.MemoryChallengeIntro} {5 - i}\n"));
             Thread.Sleep(1000);
             UtilityMethods.ClearConsole();
         }
         for (var i = size - 1; i >= 0; i--)
         {
-            AnsiConsole.Write(new Text($"Memorize this sequence: "));
+            AnsiConsole.Write(new Text($"{locale.MemorizeThisSequence}: "));
             for (var j = 0; j < size; j++)
             {
                 var color = answer[j] switch
@@ -142,17 +143,19 @@ public static class TrapMinigameManager
             };
             AnsiConsole.Write(new Text($"{t} ", color));
         }
-
+        
+        AnsiConsole.Write(new Text(string.Join("", Enumerable
+            .Repeat("? ", answer.Except(playerAnswer).Count()))));
         while (answer.Length > playerAnswer.Count)
         {
             var selectedChar = AnsiConsole.Prompt(
-                new TextPrompt<char>("Type the next character: ")
+                new TextPrompt<char>($"{locale.TypeNextCharacter}: ")
                     .AddChoices(characters));
             if (selectedChar == answer[playerAnswer.Count])
                 playerAnswer.Add(selectedChar);
             else if (tries < 5)
             {
-                AnsiConsole.Write("Incorrect code. Try again!\n");
+                AnsiConsole.Write($"{locale.IncorrectCode}\n");
                 tries++;
             }
             else
@@ -174,7 +177,7 @@ public static class TrapMinigameManager
         var keys = new char[] { 'a', 's', 'd', 'q', 'w', 'e', 'z', 'x', 'c'};
         for (var i = 0; i < 5; i++)
         {
-            AnsiConsole.Write(new Text($"Reaction challenge: Quickly press the buttons that will start appearing in {5 - i}\n"));
+            AnsiConsole.Write(new Text($"{locale.ReactionChallengeIntro} {5 - i}\n"));
             Thread.Sleep(1000);
             UtilityMethods.ClearConsole();
         }
@@ -192,17 +195,14 @@ public static class TrapMinigameManager
                     break;
                 }
                 double remainingTime = timeLimit * 1000 - elapsedMiliSeconds;
-                AnsiConsole.Write($"Quick! Type the character [{Math.Round(remainingTime / 1000, 2)}] ");
+                AnsiConsole.Write($"{locale.ReactionTypeCharacter} [{Math.Round(remainingTime / 1000, 2)}] ");
                 AnsiConsole.Write(new Text($"({desiredKey}): ", Stylesheet.Styles["level-up"]));
                 if (Console.KeyAvailable)
                 {
                     var keyInfo = Console.ReadKey(true);
-                    if (keyInfo.KeyChar == desiredKey)
-                    {
-                        keyPressDetected = true;
-                        break;
-                    }
-                    else return false;
+                    if (keyInfo.KeyChar != desiredKey) return false;
+                    keyPressDetected = true;
+                    break;
                 }
                 
                 Thread.Sleep(100);
@@ -210,7 +210,7 @@ public static class TrapMinigameManager
                 UtilityMethods.ClearConsole();
             }
             if (!keyPressDetected) return false;
-            AnsiConsole.Write(new Text("Good!", Stylesheet.Styles["rarity-uncommon"]));
+            AnsiConsole.Write(new Text($"{locale.GoodAdverb}!", Stylesheet.Styles["rarity-uncommon"]));
             Thread.Sleep(1000);
         }
 
@@ -238,7 +238,7 @@ public static class TrapMinigameManager
             colorMap.Add(character, color);
             colors.Remove(color);
         }
-        AnsiConsole.Write(new Text("Color code challenge: Try to decipher what word is hidden behind the colors!\n"));
+        AnsiConsole.Write(new Text($"{locale.ColorChallengeIntro}\n"));
         while (true)
         {
             var canvas = new Canvas(word.Length, 1);
@@ -246,28 +246,28 @@ public static class TrapMinigameManager
             {
                 canvas.SetPixel(i, 0, colorMap[word[i]]);
             }
-            AnsiConsole.Write(new Text($"Word (encoded): \n"));
+            AnsiConsole.Write(new Text($"{locale.WordEncoded}: \n"));
             AnsiConsole.Write(canvas);
             AnsiConsole.Write("\n");
             var typedWord = AnsiConsole.Prompt(
-                new TextPrompt<string>("Type in the decoded word: ")
-                    .Validate(x => x.Length == word.Length, "The word's length does not match"))
+                new TextPrompt<string>($"{locale.TypeDecodedWord}: ")
+                    .Validate(x => x.Length == word.Length, locale.IncorrectWordLength))
                 .ToUpper();
             if (typedWord == word)
                 return true;
             tries++;
             if (tries >= 5)
                 return false;
-            AnsiConsole.Write("Incorrect word. Try again!\nTips: \n");
+            AnsiConsole.Write($"{locale.IncorrectWord}\n{locale.Tips}: \n");
             for (var i = 0; i < word.Length; i++)
             {
                 var txt = new Text("");
                 if (word[i] == typedWord[i])
-                    txt = new Text($"The letter at position {i + 1} is in the word, and at the correct position.\n", Stylesheet.Styles["rarity-uncommon"]);
+                    txt = new Text($"{locale.LetterAtPosition} {i + 1} {locale.CorrectWordAndPosition}\n", Stylesheet.Styles["rarity-uncommon"]);
                 else if (word.Contains(typedWord[i]))
-                    txt =  new Text($"The letter at position {i + 1} is in the word, but in another position.\n", Stylesheet.Styles["rarity-ancient"]);
+                    txt =  new Text($"{locale.LetterAtPosition} {i + 1} {locale.CorrectWordWrongPosition}\n", Stylesheet.Styles["rarity-ancient"]);
                 else
-                    txt =  new Text($"The letter at position {i + 1} is not in the word.\n", Stylesheet.Styles["rarity-damaged"]);
+                    txt =  new Text($"{locale.LetterAtPosition} {i + 1} {locale.WrongLetter}\n", Stylesheet.Styles["rarity-damaged"]);
                 AnsiConsole.Write(txt);
             }
         }
@@ -297,7 +297,7 @@ public static class TrapMinigameManager
             _ => 3,
         };
         var bombPosition = Random.Shared.Next(0, 9);
-        AnsiConsole.Write(new Text($"Gamba grid challenge: Try to guess which squares don't contain the bomb! (You must select exactly {size} fields)\n"));
+        AnsiConsole.Write(new Text($"{locale.GambaGridChallengeIntro} {size})\n"));
         var table = new Grid();
         table.AddColumn();
         table.AddColumn();
@@ -314,23 +314,23 @@ public static class TrapMinigameManager
             {
                 choices = AnsiConsole.Prompt(
                     new MultiSelectionPrompt<string>()
-                        .Title("Feeling lucky? Choose a tile, any tile")
+                        .Title(locale.GambaGridTitle)
                         .PageSize(9)
                         .InstructionsText(
-                            "Space: Select, " + 
-                            "Enter: Accept")
+                            $"Space: {locale.Select}, " + 
+                            $"Enter: {locale.Accept}")
                         .AddChoices(items).Required());
             }
 
             if (choices.Any(choice => Array.IndexOf(choices.ToArray(), choice) == bombPosition))
             {
                 tries--;
-                AnsiConsole.Write(new Text("Bomb was triggered on one of the chosen squares! ", Stylesheet.Styles["failure"]));
+                AnsiConsole.Write(new Text($"{locale.BombTriggered} ", Stylesheet.Styles["failure"]));
                 if (tries > 0)
-                    AnsiConsole.Write(new Text($"Tries left: {tries}\n", Stylesheet.Styles["default"]));
+                    AnsiConsole.Write(new Text($"{locale.TriesLeft}: {tries}\n", Stylesheet.Styles["default"]));
                 else
                 {
-                    AnsiConsole.Write(new Text("The bomb explodes!\n", Stylesheet.Styles["failure"]));
+                    AnsiConsole.Write(new Text($"{locale.BombExplodes}\n", Stylesheet.Styles["failure"]));
                     return false;
                 }
             }

@@ -15,7 +15,6 @@ public interface IItem
     public bool Stackable { get; set; }
     public string Description { get; set; }
     public ItemType ItemType { get; set; }
-    public bool Use() { return false; }
     public void Inspect(int amount = 1);
     public void WriteName();
     public Style NameStyle();

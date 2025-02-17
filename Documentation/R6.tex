@@ -1,0 +1,112 @@
+% ********** Rozdział 6 **********
+\chapter{Przydatne informacje do pisania w \LaTeX}
+
+\section{Pierwszy dokument}
+
+W rozdziale tym przedstawiono podstawowe informacje dotyczące struktury prostych plików \LaTeX a. Omówiono również metody kompilacji plików z zastosowaniem programów \emph{latex} oraz \emph{pdflatex}.
+
+%---------------------------------------------------------------------------
+
+\section{Struktura dokumentu}
+\label{sec:strukturaDokumentu}
+
+Plik \LaTeX owy jest plikiem tekstowym, który oprócz tekstu zawiera polecenia formatujące ten tekst (analogicznie do języka HTML). Plik składa się z dwóch części:
+\begin{enumerate}%[1)]
+      \item Preambuły -- określającej klasę dokumentu oraz zawierającej m.in. polecenia dołączającej dodatkowe pakiety;
+
+      \item Części głównej -- zawierającej zasadniczą treść dokumentu.
+\end{enumerate}
+
+
+\section{Sztuczne życie}
+
+Nie ma żadnych przeciwskazań do tworzenia dokumentów w~\LaTeX u w~języku polskim. Plik źródłowy jest zwykłym plikiem tekstowym i~do jego przygotowania można użyć dowolnego edytora tekstów, a~polskie znaki wprowadzać używając prawego klawisza \texttt{Alt}. Jeżeli po kompilacji dokumentu polskie znaki nie są wyświetlane poprawnie, to na 95\% źle określono sposób kodowania znaków (należy zmienić opcje wykorzystywanych pakietów).
+%---------------------------------------------------------------------------
+
+
+% ------------------------
+\section{Kompilacja}
+\label{sec:kompilacja}
+
+
+Załóżmy, że przygotowany przez nas dokument zapisany jest w pliku \texttt{test.tex}. Kolejno wykonane poniższe polecenia (pod warunkiem, że w pierwszym przypadku nie wykryto błędów i kompilacja zakończyła się sukcesem) pozwalają uzyskać nasz dokument w formacie pdf:
+\begin{lstlisting}
+latex test.tex
+dvips test.dvi -o test.ps
+ps2pdf test.ps
+\end{lstlisting}
+%
+lub za pomocą PDF\LaTeX:
+\begin{lstlisting}
+pdflatex test.tex
+\end{lstlisting}
+
+Przy pierwszej kompilacji po zmiane tekstu, dodaniu nowych etykiet itp., \LaTeX~tworzy sobie spis rozdziałów, obrazków, tabel itp., a dopiero przy następnej kompilacji korzysta z tych informacji.
+
+W pierwszym przypadku rysunki powinny być przygotowane w~formacie eps, a~w~drugim w~formacie pdf. Ponadto, jeżeli używamy polecenia \texttt{pdflatex test.tex} można wstawiać grafikę bitową (np. w formacie jpg).
+
+%---------------------------------------------------------------------------
+
+\section{Narzędzia}
+\label{sec:narzedzia}
+
+Istnieje wiele narzędzi do pisania w \LaTeX, które mogą pomóc w tworzeniu dokumentów i zarządzaniu nimi. Oto lista popularnych narzędzi i edytorów \LaTeX, które są dostępne zarówno w wersji online, jak i offline.
+
+\noindent \textbf{Narzędzia online do pisania w \LaTeX.}
+\begin{itemize}
+      \item Overleaf -- jeden z najpopularniejszych edytorów \LaTeX online. Umożliwia współpracę z innymi użytkownikami w czasie rzeczywistym oraz zapewnia automatyczną kompilację dokumentów. Overleaf oferuje szereg gotowych szablonów (np. prace dyplomowe, CV, artykuły naukowe). Wsród funkcji można wyróżnić m.in.: kompilacja \LaTeX w czasie rzeczywistym, wsparcie dla XeLaTeX, LuaLaTeX, BibTeX, Biber, współpraca z wieloma użytkownikami, gotowe szablony oraz integracja z GitHub. Zobacz: \url{https://www.overleaf.com/}.
+      \item Papeeria -- edytor \LaTeX online podobny do Overleaf. Umożliwia współpracę w czasie rzeczywistym i ma integrację z GitHub. Oferuje bezpłatną wersję z podstawowymi funkcjami. Funkcje: wsparcie dla współpracy online, kompilacja \LaTeX w chmurze. Zobacz: \url{https://www.papeeria.com/}.
+\end{itemize}
+
+\noindent \textbf{Edytory offline do pisania w \LaTeX.}
+
+\begin{itemize}
+      \item Visual Studio Code (VSC) -- to potężne narzędzie do pisania dokumentów w \LaTeX, szczególnie po zainstalowaniu rozszerzenia \LaTeX Workshop. Zapewnia ono pełne wsparcie dla kompilacji, podglądu PDF, inteligentnego uzupełniania składni oraz współpracy z narzędziami bibliograficznymi jak BibTeX i Biber. Dzięki integracji z systemem zarządzania plikami i narzędziami do wersjonowania (jak Git), VS Code staje się bardzo elastycznym narzędziem do pisania profesjonalnych dokumentów, artykułów naukowych i prac dyplomowych w \LaTeX. Szczegółowe informacje odnośnie konfiguracji środowiska do pisania \LaTeX w VSC można znelźć a instrukcji \textit{"How to write LaTeX documents using Visual Studio Code"} pod \href{https://www.geekering.com/programming-languages/filipesalgueiro/how-to-write-latex-documents-using-visual-studio-code/}{adresem}
+      \item TeXstudio -- to zintegrowane środowisko do tworzenia dokumentów LaTeX. Celem jest uczynienie pisania w LaTeXu tak łatwym i wygodnym, jak to tylko możliwe. Dlatego TeXstudio ma wiele funkcji, takich jak podświetlanie składni, zintegrowana przeglądarka, sprawdzanie referencji i różni asystenci. Więcej szczegółów można znaleźć w funkcjach. Zobacz: \url{https://www.texstudio.org/}
+\end{itemize}
+
+\noindent \textbf{Dodatkowe narzędzia wspierające pisanie w \LaTeX.}
+\begin{itemize}
+      \item Mendeley -- popularne narzędzie do zarządzania bibliografią i organizacji dokumentów naukowych. Obsługuje format BibTeX i pozwala na łatwą integrację z \LaTeX. Zobacz: \url{https://www.mendeley.com}.
+      \item JabRef -- darmowe narzędzie do zarządzania bibliografią i referencjami, które wspiera format BibTeX i BibLaTeX. Ułatwia organizowanie źródeł bibliograficznych i integrację z \LaTeX. Zobacz: \url{https://www.jabref.org/}.
+      \item Zotero -- kolejne narzędzie do zarządzania referencjami naukowymi, które wspiera BibTeX i BibLaTeX. Zotero jest popularnym wyborem wśród studentów i badaczy. Zobacz: \url{https://www.zotero.org}.
+\end{itemize}
+
+Wśród środowisk online wyrżnić można: Overleaf, Papeeria i Authorea oferują wygodną współpracę i szybki dostęp do narzędzi \LaTeX z dowolnego miejsca. Środowiska offline: TeXmaker, TeXworks, Kile i LyX to doskonałe edytory dla pracy lokalnej z rozbudowanymi funkcjami. Dodatkowe narzędzia: JabRef, Mendeley i Zotero ułatwiają zarządzanie bibliografią i cytowaniami w \LaTeX. Wybór odpowiedniego narzędzia zależy od Twoich potrzeb, czy preferujesz pracę lokalną, czy online, a także jak bardzo zaawansowane funkcje są Ci potrzebne.
+
+%---------------------------------------------------------------------------
+
+\section{Przygotowanie dokumentu}
+\label{sec:przygotowanieDokumentu}
+
+Plik źródłowy \LaTeX a jest zwykłym plikiem tekstowym. Przygotowując plik
+źródłowy warto wiedzieć o kilku szczegółach:
+
+\begin{itemize}
+      \item
+            Poszczególne słowa oddzielamy spacjami, przy czym ilość spacji nie ma znaczenia.
+            Po kompilacji wielokrotne spacje i tak będą wyglądały jak pojedyncza spacja.
+            Aby uzyskać {\em twardą spację}, zamiast znaku spacji należy użyć znaku {\em
+                        tyldy}.
+
+      \item
+            Znakiem końca akapitu jest pusta linia (ilość pusty linii nie ma znaczenia), a
+            nie znaki przejścia do nowej linii.
+
+      \item
+            \LaTeX~sam formatuje tekst. \textbf{Nie starajmy się go poprawiać}, chyba, że
+            naprawdę wiemy co robimy.
+\end{itemize}
+
+
+\noindent Przydatna pomoc do pracy w \LaTeX:
+\begin{itemize}
+      \item Dokumentacja dostęna w Overleaf \url{https://www.overleaf.com/learn}.
+      \item Edytor równań dla matematyki online\url{https://editor.codecogs.com/}.
+      \item  Edytor/generator tabel \url{https://www.tablesgenerator.com/}.
+\end{itemize}
+
+
+
+
+% ********** Koniec rozdziału **********

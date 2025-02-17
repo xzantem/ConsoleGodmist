@@ -52,23 +52,7 @@ public class Stat
                 Modifiers.Remove(modifier);
         }
     }
-
-    public double TotalMod(ModifierType modType)
-    {
-        switch (modType)
-        {
-            case ModifierType.Additive:
-            case ModifierType.Absolute:
-                return Modifiers.Sum(m => m.Type == modType ? m.Mod : 0);
-            case ModifierType.Multiplicative:
-            case ModifierType.Relative:
-                return Modifiers
-                    .Where(modifier => modifier.Type == ModifierType.Multiplicative)
-                    .Aggregate(1.0, (current, modifier) => current * (1 + modifier.Mod));
-            default:
-                throw new ArgumentOutOfRangeException(modType.ToString());
-        }
-    }
+    
 
     public void AddModifier(StatModifier modifier)
     {

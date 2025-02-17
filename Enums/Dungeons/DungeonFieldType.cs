@@ -5,9 +5,7 @@ namespace ConsoleGodmist.Enums
         Battle,
         Stash,
         Trap,
-        Exit,
         Bonfire,
-        Plant,
-        Item
+        Plant
     }
 }

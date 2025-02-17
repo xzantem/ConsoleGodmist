@@ -53,15 +53,15 @@ public static class QuestManager
             var dungeonType = Enum.GetValues<DungeonType>()[Random.Shared.Next(0,8)];
             var randomQuest = Random.Shared.Next(0, 2) switch
             {
-                0 => new Quest(dungeonType + "KillDungeon", level, [
-                        new QuestStage(dungeonType + "KillDungeon",
+                0 => new Quest("KillDungeon" + dungeonType, level, [
+                        new QuestStage("KillDungeon" + dungeonType,
                             [new KillInDungeonQuestObjective(dungeonType, Random.Shared.Next(6 / 2, 13 / 2))])
                     ], new QuestReward((int)(150 * Math.Pow(4, level / 10.0)),
                         (int)(Math.Pow(level, 1.5) + 13), 4, []), 
                     UtilityMethods.RandomChoice(TownsHandler.Arungard.NPCs.Select(x => x.Alias).ToList()),
                     "", "", true),
-                1 => new Quest(dungeonType + "Descend", level, [
-                        new QuestStage(dungeonType + "Descend",
+                1 => new Quest("Descend" + dungeonType, level, [
+                        new QuestStage("Descend" + dungeonType,
                             [new DescendQuestObjective(dungeonType, Random.Shared.Next(4 / 2, 8 / 2))])
                     ], new QuestReward((int)(150 * Math.Pow(4, level / 10.0)),
                         (int)(Math.Pow(level, 1.5) + 13), 4, []), 

@@ -34,8 +34,8 @@ namespace SkillEditor
             var effectWindow = new EffectWindow();
             if (effectWindow.ShowDialog() == true)
             {
-                EffectsListView.Items.Refresh();
                 Skill.Effects.Add(effectWindow.Effect);
+                EffectsListView.Items.Refresh();
             }
         }
         private void RemoveEffect_Click(object sender, RoutedEventArgs e)

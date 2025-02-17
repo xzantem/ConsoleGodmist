@@ -27,7 +27,6 @@ public class Alchemist : NPC
 
     public override void OpenMenu()
     {
-        PlayerHandler.player.Inventory.AddItem(LootbagManager.GetSupplyBag(DungeonType.Catacombs, 15), 20);
         AnsiConsole.Write(new FigletText(locale.Alchemist).Centered()
             .Color(Stylesheet.Styles["npc-alchemist"].Foreground));
         Say($"{locale.AlchemistGreeting1}, {PlayerHandler.player.Name}. {locale.AlchemistGreeting2}\n");
@@ -37,8 +36,8 @@ public class Alchemist : NPC
             Dictionary<string, int> choices = new() {
                 {locale.OpenShop, 0}, {locale.CureWounds, 1}, {locale.CreateAlchemy, 2}, 
                 {locale.CreatePotion, 3}, {locale.RefillPotion, 4} };
-            if (QuestNPCHandler.GetAvailableQuests(Name).Count > 0) choices.Add(locale.AcceptQuest, 5);
-            if (QuestNPCHandler.GetReturnableQuests(Name).Count > 0) choices.Add(locale.ReturnQuest, 6);
+            if (QuestNPCHandler.GetAvailableQuests(Alias).Count > 0) choices.Add(locale.AcceptQuest, 5);
+            if (QuestNPCHandler.GetReturnableQuests(Alias).Count > 0) choices.Add(locale.ReturnQuest, 6);
             choices.Add( locale.Return, 7 );
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
                 .HighlightStyle(Stylesheet.Styles["npc-alchemist"]));
@@ -49,8 +48,8 @@ public class Alchemist : NPC
                 case 2: CraftItem(); break;
                 case 3: CraftingManager.CraftPotion(); break;
                 case 4: RefillPotion(); break;
-                case 5: QuestNPCHandler.SelectQuestToAccept(Name); break;
-                case 6: QuestNPCHandler.SelectQuestToReturn(Name); break;
+                case 5: QuestNPCHandler.SelectQuestToAccept(Alias); break;
+                case 6: QuestNPCHandler.SelectQuestToReturn(Alias); break;
                 case 7: return;
             }
             AnsiConsole.Write(new FigletText(locale.Alchemist).Centered()

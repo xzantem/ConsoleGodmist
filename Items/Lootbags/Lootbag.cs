@@ -45,7 +45,7 @@ public class Lootbag : BaseItem, IUsable
     public bool Use()
     {
         var inInventory = PlayerHandler.player.Inventory.Items.FirstOrDefault(x => x.Key.Alias == Alias).Value;
-        var toOpen = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToOpen + $" Up to {inInventory}: ")
+        var toOpen = AnsiConsole.Prompt(new TextPrompt<int>(locale.HowManyToOpen + $" {locale.UpTo} {inInventory}: ")
             .DefaultValue(inInventory)
             .Validate(Validator));
         for (var i = 0; i < toOpen; i++)

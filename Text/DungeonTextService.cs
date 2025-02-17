@@ -35,11 +35,11 @@ public static class DungeonTextService
         };
         AnsiConsole.Write(new FigletText(locationText).Centered().Color(color));
         var floor = dungeon.Floors.IndexOf(dungeon.CurrentFloor) == 0
-            ? (dungeon.Floors.IndexOf(dungeon.CurrentFloor)).ToString()
-            : ("-" + dungeon.Floors.IndexOf(dungeon.CurrentFloor));
+            ? dungeon.Floors.IndexOf(dungeon.CurrentFloor).ToString()
+            : "-" + dungeon.Floors.IndexOf(dungeon.CurrentFloor);
         var visited = (dungeon.Floors.Count - 1) == 0
             ? (dungeon.Floors.Count - 1).ToString()
-            : ("-" + (dungeon.Floors.Count - 1));
+            : "-" + (dungeon.Floors.Count - 1);
         locationText = locale.Level + " " + dungeon.DungeonLevel + ", " + locale.Floor + " " + floor + " [" +
                        visited + "]\n" + locale.Map + ":";
         AnsiConsole.WriteLine(locationText);

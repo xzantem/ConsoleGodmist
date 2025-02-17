@@ -27,14 +27,6 @@ public class Enchanter : NPC
 
     public override void OpenMenu()
     {
-        PlayerHandler.player.GainExperience(10000);
-        PlayerHandler.player.Inventory.AddItem(EquippableItemService.GetRandomWeapon(2, PlayerHandler.player.CharacterClass));
-        PlayerHandler.player.Inventory.AddItem(EquippableItemService.GetRandomArmor(2, PlayerHandler.player.CharacterClass));
-        for (int i = 0; i < 5; i++)
-            PlayerHandler.player.Inventory.AddItem(new Galdurite(false, 1, 0));
-        for (int i = 0; i < 5; i++)
-            PlayerHandler.player.Inventory.AddItem(new Galdurite(true, 1, 0));
-        PlayerHandler.player.GainGold(100000);
         AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
             .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
         Say($"{locale.EnchanterGreeting}, {PlayerHandler.player.Name}?\n");
@@ -44,8 +36,8 @@ public class Enchanter : NPC
             Dictionary<string, int> choices = new() {{locale.OpenShop, 0}, {locale.CreateEnchanting, 1}, 
                 {locale.CreateGaldurite, 2}, {locale.RevealGaldurite, 3}, {locale.ApplyWeaponGaldurite, 4}, 
                 {locale.ApplyArmorGaldurite, 5}, {locale.RemoveWeaponGaldurite, 6}, {locale.RemoveArmorGaldurite, 7}};
-            if (QuestNPCHandler.GetAvailableQuests(Name).Count > 0) choices.Add(locale.AcceptQuest, 8);
-            if (QuestNPCHandler.GetReturnableQuests(Name).Count > 0) choices.Add(locale.ReturnQuest, 9);
+            if (QuestNPCHandler.GetAvailableQuests(Alias).Count > 0) choices.Add(locale.AcceptQuest, 8);
+            if (QuestNPCHandler.GetReturnableQuests(Alias).Count > 0) choices.Add(locale.ReturnQuest, 9);
             choices.Add( locale.Return, 10 );
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
                 .HighlightStyle(Stylesheet.Styles["npc-enchanter"]));
@@ -59,8 +51,8 @@ public class Enchanter : NPC
                 case 5: InsertArmorGaldurite(); break;
                 case 6: RemoveWeaponGaldurite(); break;
                 case 7: RemoveArmorGaldurite(); break;
-                case 8: QuestNPCHandler.SelectQuestToAccept(Name); break;
-                case 9: QuestNPCHandler.SelectQuestToReturn(Name); break;
+                case 8: QuestNPCHandler.SelectQuestToAccept(Alias); break;
+                case 9: QuestNPCHandler.SelectQuestToReturn(Alias); break;
                 case 10: return;
             }
             AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()

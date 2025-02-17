@@ -3,6 +3,7 @@ using ConsoleGodmist.Characters;
 using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
+using ConsoleGodmist.Utilities;
 using Spectre.Console;
 
 namespace ConsoleGodmist.TextService;
@@ -178,7 +179,7 @@ public static class BattleTextService
             foreach (var status in other.OrderByDescending(x => x.Duration).OrderBy(x => x.Type))
             {
                 AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(status.Type.ToString())} " +
-                                           $"({status.Source}): {status.Effect} [{status.Duration}]\n"));
+                                           $"({NameAliasHelper.GetName(status.Source)}): {status.Effect} [{status.Duration}]\n"));
             }
 
         }
@@ -192,7 +193,7 @@ public static class BattleTextService
                 ModifierType.Additive => modifier.Key.Mod.ToString("+#;-#;0")
             };
             AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(modifier.Value.ToString())} " +
-                                       $"({modifier.Key.Source}): {mod} [{modifier.Key.Duration}]\n"));
+                                       $"({NameAliasHelper.GetName(modifier.Key.Source)}): {mod} [{modifier.Key.Duration}]\n"));
         }
     }
 }

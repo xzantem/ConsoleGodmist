@@ -54,7 +54,7 @@ public class ActiveSkill
             for (var i = 0; i < Hits; i++)
             {
                 {
-                    if (toHit.Item1 && !AlwaysHits)
+                    if (!toHit.Item1 && !AlwaysHits)
                     {
                         ActiveSkillTextService.DisplayMissText(caster.User);
                         continue;
