@@ -192,7 +192,7 @@ public static class BattleTextService
                 ModifierType.Absolute => modifier.Key.Mod.ToString("+#;-#;0"),
                 ModifierType.Additive => modifier.Key.Mod.ToString("+#;-#;0")
             };
-            AnsiConsole.Write(new Text($"{locale.ResourceManager.GetString(modifier.Value.ToString())} " +
+            AnsiConsole.Write(new Text($"{NameAliasHelper.GetName(modifier.Value.ToString())} " +
                                        $"({NameAliasHelper.GetName(modifier.Key.Source)}): {mod} [{modifier.Key.Duration}]\n"));
         }
     }

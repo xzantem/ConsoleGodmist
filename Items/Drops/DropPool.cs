@@ -24,28 +24,19 @@ public class DropPool
             .ToDictionary(x => x, x => x.Value.Weight));
         var item = new KeyValuePair<IItem, ItemDrop>();
         var choiceSplit = choice.Key.Split('_');
-        switch (choiceSplit[0])
+        item = choiceSplit[0] switch
         {
-            case "WeaponDrop":
-                item = new KeyValuePair<IItem, ItemDrop>(EquippableItemService.GetRandomWeapon(level / 10 + 1),
-                    choice.Value);
-                break;
-            case "ArmorDrop":
-                item = new KeyValuePair<IItem, ItemDrop>(EquippableItemService.GetRandomArmor(level / 10 + 1),
-                    choice.Value);
-                break;
-            case "BossEquipmentDrop":
-                item = new KeyValuePair<IItem, ItemDrop>(
-                    EquippableItemService.GetBossDrop(level / 10 + 1, choiceSplit[1]), choice.Value);
-                break;
-            case "GalduriteDrop":
-                item = new KeyValuePair<IItem, ItemDrop>(new Galdurite(Random.Shared.Next(0, 2) == 1, 
-                    level < 21 ? 1 : level < 41 ? 2 : 3, Convert.ToInt32(choiceSplit[1])), choice.Value);
-                break;
-            default:
-                item = new KeyValuePair<IItem, ItemDrop>(ItemManager.GetItem(choice.Key), choice.Value);
-                break;
-        }
+            "WeaponDrop" => new KeyValuePair<IItem, ItemDrop>(EquippableItemService.GetRandomWeapon(level / 10 + 1),
+                choice.Value),
+            "ArmorDrop" => new KeyValuePair<IItem, ItemDrop>(EquippableItemService.GetRandomArmor(level / 10 + 1),
+                choice.Value),
+            "BossEquipmentDrop" => new KeyValuePair<IItem, ItemDrop>(
+                EquippableItemService.GetBossDrop(level / 10 + 1, choiceSplit[1]), choice.Value),
+            "GalduriteDrop" => new KeyValuePair<IItem, ItemDrop>(
+                new Galdurite(Random.Shared.Next(0, 2) == 1, level < 21 ? 1 : level < 41 ? 2 : 3,
+                    Convert.ToInt32(choiceSplit[1])), choice.Value),
+            _ => new KeyValuePair<IItem, ItemDrop>(ItemManager.GetItem(choice.Key), choice.Value)
+        };
         return item;
     }
 

@@ -13,7 +13,7 @@ public class WeaponBinder : IEquipmentPart
     public double CritChance { get; set; }
     public double CritModBonus { get; set; }
     public double AccuracyBonus { get; set; }
-    public string Name => NameAliasHelper.GetName(Alias);
+    public string Name => NameAliasHelper.GetName(Alias[..^6]);
     public string Alias { get; set; }
     public CharacterClass IntendedClass { get; set; }
     public int Tier { get; set; }

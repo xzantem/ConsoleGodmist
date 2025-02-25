@@ -23,4 +23,10 @@
     <data name="TypeText" xml:space="preserve">
         <value>Typ</value>
     </data>
+    <data name="MaximalAttack" xml:space="preserve">
+        <value>Maksymalny atak</value>
+    </data>
+    <data name="MinimalAttack" xml:space="preserve">
+        <value>Minimalny atak</value>
+    </data>
 </root>

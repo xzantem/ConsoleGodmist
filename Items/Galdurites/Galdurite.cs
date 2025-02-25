@@ -18,7 +18,7 @@ public class Galdurite : BaseItem
     
     public int BaseCost { get; set; }
     public int Tier { get; set; }
-    public int RequiredLevel => Tier == 3 ? 41 : Tier * 10 + 1; // Tier 1 is Level 11, Tier 2 is Level 21, Tier 4 is Level 41
+    public int RequiredLevel => Tier == 3 ? 41 : Tier * 10 + 1; // Tier 1 is Level 11, Tier 2 is Level 21, Tier 3 is Level 41
     public bool Revealed { get; set; }
     
     

@@ -220,6 +220,12 @@ public static class DungeonMovementManager
         StatusEffectHandler.HandleEffects(PlayerHandler.player.StatusEffects, PlayerHandler.player);
         PlayerHandler.player.HandleModifiers();
         PlayerHandler.player.PassiveEffects.TickEffects();
+        if (PlayerHandler.player.CurrentHealth <= 0)
+        {
+            BattleTextService.DisplayDeathText(PlayerHandler.player);
+            BattleTextService.DisplayEndBattleText(false);
+            Environment.Exit(0);
+        }
         switch (CurrentLocation.FieldType)
         {
             case DungeonFieldType.Battle:

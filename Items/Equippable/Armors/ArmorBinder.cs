@@ -13,7 +13,7 @@ public class ArmorBinder : IEquipmentPart
     public double DodgeBonus { get; set; }
     public double PhysicalDefenseBonus { get; set; }
     public double MagicDefenseBonus { get; set; }
-    public string Name => NameAliasHelper.GetName(Alias);
+    public string Name => NameAliasHelper.GetName(Alias[..^6]);
     public string Alias { get; set; }
     public CharacterClass IntendedClass { get; set; }
     public int Tier { get; set; }

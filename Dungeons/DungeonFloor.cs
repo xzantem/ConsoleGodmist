@@ -18,7 +18,7 @@ public class DungeonFloor
         Traps = [];
         Battles = [];
         var starterRoomField = UtilityMethods.RandomChoice(new
-            Dictionary<DungeonFieldType, double> { { DungeonFieldType.Empty, 0.5 }, { DungeonFieldType.Battle, 0.5 } });
+            Dictionary<DungeonFieldType, int> { { DungeonFieldType.Empty, 15 }, { DungeonFieldType.Battle, 9 + 3 * difficulty } });
         StarterRoom = new DungeonRoom(starterRoomField);
         if (starterRoomField == DungeonFieldType.Battle)
             Battles.Add(new Battle(new Dictionary<BattleUser, int>
@@ -35,7 +35,7 @@ public class DungeonFloor
             {DungeonFieldType.Battle, difficulty},
             {DungeonFieldType.Bonfire, 4},
             {DungeonFieldType.Trap, 1 + difficulty},
-            {DungeonFieldType.Stash, 6}
+            {DungeonFieldType.Stash, 1}
         };
         for (var i = 0; i < length; i++)
         {

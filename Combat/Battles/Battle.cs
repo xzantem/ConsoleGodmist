@@ -44,9 +44,13 @@ public class Battle
                 {
                     BattleTextService.DisplayCannotMoveText(user.User);
                     HandleEffects(user);
+                    if (CheckForResult() != -1)
+                        return;
                     continue;
                 }
                 HandleEffects(user);
+                if (CheckForResult() != -1)
+                    return;
                 switch (Users[user])
                 {
                     case 0:

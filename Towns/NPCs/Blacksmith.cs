@@ -74,9 +74,9 @@ public class Blacksmith : NPC
             {
                 case >= 2:
                     Say(locale.MaxUpgradeAlready); return;
-                case >= 1.6:
-                    //Add quest condition
-                    Say(locale.ToolsTooWeak); return;
+                //case >= 1.6:
+                    //TODO: Add quest condition
+                    //Say(locale.ToolsTooWeak); return;
             }
             var cost = PlayerHandler.HonorDiscountModifier * ServiceCostMod * (1 + player.Weapon.Cost) / 2.0 * 
                 ((7 * chosenModifier + 3) / (12 - 11 * chosenModifier) * ((57 - 37 * upgradeChance) / (76 - 75 * upgradeChance)));
@@ -110,7 +110,7 @@ public class Blacksmith : NPC
                 case 1:
                     chosenModifier = AnsiConsole.Prompt(
                         new TextPrompt<int>(
-                                $"{locale.ChooseModifier} {player.Weapon.UpgradeModifier - 1:P0} {locale.And2} 60%): ")
+                                $"{locale.ChooseModifier} {player.Weapon.UpgradeModifier - 1:P0} {locale.And2} 100%): ")
                             .Validate(ModValidator)) * 0.01;
                     break;
                 case 2:
@@ -135,9 +135,9 @@ public class Blacksmith : NPC
             {
                 case >= 2:
                     Say(locale.MaxUpgradeAlready); return;
-                case >= 1.6:
+                //case >= 1.6:
                     //TODO: Add quest condition
-                    Say(locale.ToolsTooWeak); return;
+                    //Say(locale.ToolsTooWeak); return;
             }
             var cost = PlayerHandler.HonorDiscountModifier * ServiceCostMod * (1 + player.Armor.Cost) / 2.0 * 
                 ((7 * chosenModifier + 3) / (12 - 11 * chosenModifier) * ((57 - 37 * upgradeChance) / (76 - 75 * upgradeChance)));
@@ -171,7 +171,7 @@ public class Blacksmith : NPC
                 case 1:
                     chosenModifier = AnsiConsole.Prompt(
                         new TextPrompt<int>(
-                                $"{locale.ChooseModifier} {player.Armor.UpgradeModifier - 1:P0} {locale.And2} 60%): ")
+                                $"{locale.ChooseModifier} {player.Armor.UpgradeModifier - 1:P0} {locale.And2} 100%): ")
                             .Validate(ModValidator)) * 0.01;
                     break;
                 case 2:
@@ -277,7 +277,7 @@ public class Blacksmith : NPC
     }
     ValidationResult ModValidator(int m)
     { 
-        if (m > 60) return ValidationResult.Error(locale.ChoseTooMany);
+        if (m > 100) return ValidationResult.Error(locale.ChoseTooMany);
         return m < 1 ? ValidationResult.Error(locale.IntBelowZero) : ValidationResult.Success();
     }
     ValidationResult ChanceValidator(int c)

@@ -129,25 +129,24 @@ public static class TrapMinigameManager
             Thread.Sleep(1000);
             UtilityMethods.ClearConsole();
         }
-        AnsiConsole.Write(new Text($"Current sequence: "));
-        foreach (var t in playerAnswer)
-        {
-            var color = t switch
-            {
-                '!' => Color.Red,
-                '@' => Color.Yellow,
-                '#' => Color.Green,
-                '$' => Color.Aqua,
-                '%' => Color.Fuchsia,
-                _ => Color.White,
-            };
-            AnsiConsole.Write(new Text($"{t} ", color));
-        }
-        
-        AnsiConsole.Write(new Text(string.Join("", Enumerable
-            .Repeat("? ", answer.Except(playerAnswer).Count()))));
         while (answer.Length > playerAnswer.Count)
         {
+            AnsiConsole.Write(new Text($"{locale.CurrentSequence}: "));
+            foreach (var t in playerAnswer)
+            {
+                var color = t switch
+                {
+                    '!' => Color.Red,
+                    '@' => Color.Yellow,
+                    '#' => Color.Green,
+                    '$' => Color.Aqua,
+                    '%' => Color.Fuchsia,
+                    _ => Color.White,
+                };
+                AnsiConsole.Write(new Text($"{t} ", color));
+            }
+            AnsiConsole.Write(new Text(string.Join("", Enumerable
+                .Repeat("? ", size - playerAnswer.Count))));
             var selectedChar = AnsiConsole.Prompt(
                 new TextPrompt<char>($"{locale.TypeNextCharacter}: ")
                     .AddChoices(characters));

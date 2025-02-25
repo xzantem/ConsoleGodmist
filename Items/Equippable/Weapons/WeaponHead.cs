@@ -14,7 +14,7 @@ public class WeaponHead : IEquipmentPart
     public double CritMod { get; set; }
     public double CritChanceBonus { get; set; }
     public double AccuracyBonus { get; set; }
-    public string Name => NameAliasHelper.GetName(Alias);
+    public string Name => NameAliasHelper.GetName(Alias[..^4]);
     public string Alias { get; set; }
     public CharacterClass IntendedClass { get; set; }
     public string Adjective { get; set; }
@@ -38,6 +38,6 @@ public class WeaponHead : IEquipmentPart
                   Items.FirstOrDefault(x => x.Key.Alias == Material).Value}))\n{locale.Attack}: " +
               $"{MinimalAttack}-{MaximalAttack} | " +
               $"{locale.CritChance}: *{1 + CritChanceBonus:P0} | " +
-              $"{locale.Crit}: {CritMod} | {locale.Accuracy}: *{1 + AccuracyBonus:P0}\n";
+              $"{locale.Crit}: {CritMod}x | {locale.Accuracy}: *{1 + AccuracyBonus:P0}\n";
     }
 }

@@ -13,7 +13,7 @@ public class ArmorPlate : IEquipmentPart
     public double DodgeBonus { get; set; }
     public int PhysicalDefense { get; set; }
     public int MagicDefense { get; set; }
-    public string Name => NameAliasHelper.GetName(Alias);
+    public string Name => NameAliasHelper.GetName(Alias[..^5]);
     public string Alias { get; set; }
     public CharacterClass IntendedClass { get; set; }
     public string Adjective { get; set; }

@@ -30,4 +30,10 @@
     <data name="TypeText" xml:space="preserve">
         <value>Type</value>
     </data>
+    <data name="MaximalAttack" xml:space="preserve">
+        <value>Maximal attack</value>
+    </data>
+    <data name="MinimalAttack" xml:space="preserve">
+        <value>Minimal attack</value>
+    </data>
 </root>

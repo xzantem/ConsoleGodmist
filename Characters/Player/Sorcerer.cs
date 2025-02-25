@@ -71,8 +71,9 @@ namespace ConsoleGodmist.Characters
             [new TradeHealthForResource(SkillTarget.Self, 0.1, 2)]);
             ActiveSkills[3] = new ActiveSkill("MagicShield", 55, 0.3, true, 100,
             [new GainShield(SkillTarget.Self, "MagicShield", DamageBase.Random, 1.25, 1, -1)]);
-            ActiveSkills[4] = new ActiveSkill("ExhaustingSpells", -1, 0, true, 100,
-            [new InflictGenericStatusEffect(StatusEffectType.Buff, -1, 1, "ExhaustingSpells", "Halts mana regen, but attacks have a 70% chance to slow by 12 for 3 turns", SkillTarget.Self)]);
+            ActiveSkills[4] = new ActiveSkill("ExhaustingSpells", 0, 0, true, 100,
+            [new ToggleInnatePassiveEffect(SkillTarget.Self, "NoResourceRegen"), 
+                new ToggleListenerPassiveEffect(SkillTarget.Self, "SlowOnHit", [ModifierType.Additive, 12, 0.7, 3])]);
         }
         public Sorcerer() {}
     }

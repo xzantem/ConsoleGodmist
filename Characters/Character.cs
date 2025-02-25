@@ -178,6 +178,7 @@ namespace ConsoleGodmist.Characters
 
         public void RegenResource(int amount)
         {
+            if (PassiveEffects.InnateEffects.Any(x => x.Type == "NoResourceRegen")) return;
             CurrentResource = Math.Min(CurrentResource + UtilityMethods.
                 CalculateModValue(amount, PassiveEffects.GetModifiers("ResourceRegenMod")), MaximalResource);
             //CharacterEventTextService.DisplayResourceRegenText(this, amount);

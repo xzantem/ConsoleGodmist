@@ -135,9 +135,9 @@ public static class CraftingManager
             }; 
             AnsiConsole.Write($"{locale.Part} 1 - ");
             AnsiConsole.Write(head == null ? $"{locale.None}\n" : head.DescriptionText(costMultiplier));
-            AnsiConsole.Write($"{locale.Part} 2 - ");
+            AnsiConsole.Write($"\n{locale.Part} 2 - ");
             AnsiConsole.Write(binder == null ? $"{locale.None}\n" : binder.DescriptionText(costMultiplier));
-            AnsiConsole.Write($"{locale.Part} 3 - ");
+            AnsiConsole.Write($"\n{locale.Part} 3 - ");
             AnsiConsole.Write(handle == null ? $"{locale.None}\n" : handle.DescriptionText(costMultiplier));
 
             var levelMultiplier = quality switch
@@ -147,7 +147,7 @@ public static class CraftingManager
                 Quality.Excellent => "+3",
                 Quality.Masterpiece => "+5"
             };
-            AnsiConsole.Write($"{locale.Quality}: {NameAliasHelper.GetName(quality.ToString())} " +
+            AnsiConsole.Write($"\n{locale.Quality}: {NameAliasHelper.GetName(quality.ToString())} " +
                               $"({locale.Level} {levelMultiplier})\n\n");
             string[] choices = [locale.CreateWeapon, locale.ChangePart + " 1", locale.ChangePart + " 2", 
                 locale.ChangePart + " 3", locale.ChangeQuality, locale.Return];

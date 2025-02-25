@@ -69,6 +69,24 @@ namespace SkillEditor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximal attack.
+        /// </summary>
+        internal static string MaximalAttack {
+            get {
+                return ResourceManager.GetString("MaximalAttack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal attack.
+        /// </summary>
+        internal static string MinimalAttack {
+            get {
+                return ResourceManager.GetString("MinimalAttack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove Effect.
         /// </summary>
         internal static string RemoveEffectText {

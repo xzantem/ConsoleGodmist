@@ -59,10 +59,22 @@ public class NPCInventory
                         RotatingShop.TryAdd(PotionManager.GetRandomPotion(tier), 1);
                     break;
                 case ItemType.WeaponGaldurite:
-                    // Generate 5 random weapon galdurites adjusted to level
+                    while (RotatingShop.Count - initial < 5)
+                        RotatingShop.TryAdd(new Galdurite(false, tier switch
+                        {
+                            1 or 2 => 1,
+                            3 or 4 => 2,
+                            _ => 3
+                        }, 0), 1);
                     break;
                 case ItemType.ArmorGaldurite:
-                    // Generate 5 random armor galdurites adjusted to level
+                    while (RotatingShop.Count - initial < 5)
+                        RotatingShop.TryAdd(new Galdurite(true, tier switch
+                        {
+                            1 or 2 => 1,
+                            3 or 4 => 2,
+                            _ => 3
+                        }, 0), 1);
                     break;
                 case ItemType.LootBag:
                     throw new ArgumentOutOfRangeException();

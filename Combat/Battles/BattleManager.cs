@@ -49,6 +49,7 @@ public static class BattleManager
         const double lootBagChance = 0.5;
         const double weaponBagChance = 0.125;
         const double armorBagChance = 0.125;
+        const double galduriteBagChance = 0.1;
         
         foreach (var enemy in usersTeams.Where(x => x.Value == 1).Select(x => x.Key.User as EnemyCharacter))
         {
@@ -66,6 +67,8 @@ public static class BattleManager
                 player.Inventory.AddItem(LootbagManager.GetLootbag("WeaponBag", enemy.Level));
             if (Random.Shared.NextDouble() < armorBagChance)
                 player.Inventory.AddItem(LootbagManager.GetLootbag("ArmorBag", enemy.Level));
+            if (Random.Shared.NextDouble() < galduriteBagChance)
+                player.Inventory.AddItem(LootbagManager.GetLootbag("GalduriteBag", enemy.Level));
             if (enemy.EnemyType.Contains(EnemyType.Boss))
                 player.Inventory.AddItem(LootbagManager.GetLootbag(enemy.Alias + "Bag", enemy.Level));
             foreach (var item in enemy.DropTable.GetDrops(enemy.Level))

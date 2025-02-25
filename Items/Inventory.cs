@@ -26,7 +26,7 @@ public class Inventory
         if (item.Stackable && Items.Keys.Any(x => x.Alias == item.Alias))
         {
             Items[Items.FirstOrDefault(x => x.Key.Alias == item.Alias).Key] += quantity;
-            AnsiConsole.Write(new Text($"{locale.YouGain}: {quantity}x {item.Name} ({Items[item]})\n", item.NameStyle()));
+            AnsiConsole.Write(new Text($"{locale.YouGain}: {quantity}x {item.Name} ({Items[Items.FirstOrDefault(x => x.Key.Alias == item.Alias).Key]})\n", item.NameStyle()));
         }
         else
         {
