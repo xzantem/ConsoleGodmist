@@ -94,20 +94,18 @@ public static class TrapMinigameManager
         var playerAnswer = new List<char>();
         var size = difficulty switch
         {
-            Difficulty.Easy => 5,  
-            Difficulty.Normal => 7,
-            Difficulty.Hard => 10,
-            Difficulty.Nightmare => 12,
-            _ => 3,
+            Difficulty.Easy => 4,  
+            Difficulty.Normal => 5,
+            Difficulty.Hard => 6,
+            Difficulty.Nightmare => 8,
+            _ => 5,
         };
         var answer = new char[size];
         for (var i = 0; i < size; i++)
             answer[i] = characters[Random.Shared.Next(0, characters.Length)];
         for (var i = 0; i < 5; i++)
         {
-            AnsiConsole.Write(new Text($"{locale.MemoryChallengeIntro} {5 - i}\n"));
-            Thread.Sleep(1000);
-            UtilityMethods.ClearConsole();
+            WaitForSeconds(1, $"{locale.MemoryChallengeIntro} {5 - i}\n").Wait();
         }
         for (var i = size - 1; i >= 0; i--)
         {
@@ -125,9 +123,7 @@ public static class TrapMinigameManager
                 };
                 AnsiConsole.Write(new Text($"{answer[j]} ", color));
             }
-            AnsiConsole.Write(new Text($"({i})\n"));
-            Thread.Sleep(1000);
-            UtilityMethods.ClearConsole();
+            WaitForSeconds(1, $"({i})\n").Wait();
         }
         while (answer.Length > playerAnswer.Count)
         {
@@ -162,9 +158,20 @@ public static class TrapMinigameManager
         }
         return true;
     }
+
+    static async Task WaitForSeconds(double seconds, string txt = "")
+    {
+        await Task.Run(() =>
+        {
+            AnsiConsole.Write(new Text(txt));
+            Thread.Sleep((int)(seconds * 1000.0));
+            UtilityMethods.ClearConsole();
+        });
+    }
     
     private static bool ReactionChallenge(Difficulty difficulty)
     {
+        
         var timeLimit = difficulty switch
         {
             Difficulty.Easy => 2,
@@ -176,9 +183,7 @@ public static class TrapMinigameManager
         var keys = new char[] { 'a', 's', 'd', 'q', 'w', 'e', 'z', 'x', 'c'};
         for (var i = 0; i < 5; i++)
         {
-            AnsiConsole.Write(new Text($"{locale.ReactionChallengeIntro} {5 - i}\n"));
-            Thread.Sleep(1000);
-            UtilityMethods.ClearConsole();
+            WaitForSeconds(1, $"{locale.ReactionChallengeIntro} {5 - i}\n").Wait();
         }
         for (var i = 0; i < 5; i++)
         {
@@ -318,7 +323,7 @@ public static class TrapMinigameManager
                         .InstructionsText(
                             $"Space: {locale.Select}, " + 
                             $"Enter: {locale.Accept}")
-                        .AddChoices(items).Required());
+                        .AddChoices(items).Required().WrapAround());
             }
 
             if (choices.Any(choice => Array.IndexOf(choices.ToArray(), choice) == bombPosition))

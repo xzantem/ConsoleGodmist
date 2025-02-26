@@ -37,7 +37,7 @@ public static class QuestNPCHandler
             if (availableQuests.Count == 0) return;
             var choices = availableQuests.Select(x => x.Name).ToList();
             choices.Add(locale.Return);
-            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices));
+            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices).WrapAround());
             if (choices.IndexOf(choice) == choices.Count - 1) return;
             var quest = availableQuests[choices.IndexOf(choice)];
             AnsiConsole.Write(new Text($"{quest.Name} ({locale.Level} {quest.RecommendedLevel})\n{quest.Description}\n"));

@@ -20,7 +20,7 @@ public class Potion : BaseItem, IUsable
     
     public List<PotionComponent> Components { get; set; }
     
-    public PotionCatalyst Catalyst { get; set; }
+    public PotionCatalyst? Catalyst { get; set; }
     public int CurrentCharges { get; set; }
     public int MaximalCharges { get; set; }
 

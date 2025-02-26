@@ -27,8 +27,8 @@ public class Alchemist : NPC
 
     public override void OpenMenu()
     {
-        AnsiConsole.Write(new FigletText(locale.Alchemist).Centered()
-            .Color(Stylesheet.Styles["npc-alchemist"].Foreground));
+        //AnsiConsole.Write(new FigletText(locale.Alchemist).Centered()
+        //    .Color(Stylesheet.Styles["npc-alchemist"].Foreground));
         Say($"{locale.AlchemistGreeting1}, {PlayerHandler.player.Name}. {locale.AlchemistGreeting2}\n");
         while (true)
         {
@@ -40,7 +40,7 @@ public class Alchemist : NPC
             if (QuestNPCHandler.GetReturnableQuests(Alias).Count > 0) choices.Add(locale.ReturnQuest, 6);
             choices.Add( locale.Return, 7 );
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
-                .HighlightStyle(Stylesheet.Styles["npc-alchemist"]));
+                .HighlightStyle(Stylesheet.Styles["npc-alchemist"]).WrapAround());
             switch (choices[choice])
             {
                 case 0: DisplayShop(); break;
@@ -52,8 +52,8 @@ public class Alchemist : NPC
                 case 6: QuestNPCHandler.SelectQuestToReturn(Alias); break;
                 case 7: return;
             }
-            AnsiConsole.Write(new FigletText(locale.Alchemist).Centered()
-                .Color(Stylesheet.Styles["npc-alchemist"].Foreground));
+            //AnsiConsole.Write(new FigletText(locale.Alchemist).Centered()
+            //    .Color(Stylesheet.Styles["npc-alchemist"].Foreground));
         }
     }
 

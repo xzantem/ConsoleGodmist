@@ -29,6 +29,7 @@ public class Battle
 
     public void NewTurn()
     {
+        AnsiConsole.Write(new Text($"\n\n----------------------- {locale.Turn} {TurnCount} -----------------------\n\n", Stylesheet.Styles["highlight-good"]));
         foreach (var user in Users.Keys)
         {
             user.StartNewTurn();
@@ -97,7 +98,7 @@ public class Battle
                          $"{(int)(x.ActionCost * player.MaxActionPoints.BaseValue)} {locale.ActionPointsShort})").ToArray();
         var choices = skills.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)));
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
         if (choice == locale.Return) return;
         if (!((player.User as PlayerCharacter)?.ActiveSkills[Array.IndexOf(choices, choice)]
                 .ActionCost * player.MaxActionPoints.BaseValue > player.CurrentActionPoints))
@@ -114,8 +115,8 @@ public class Battle
         if (CanEscape)
             choices.Add(locale.Escape);
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)).Title($"{locale.ChooseNextAction} " +
-                $"({player.CurrentActionPoints:F0}/{player.MaxActionPoints.Value(player.User, "MaxActionPoints"):F0} {locale.ActionPointsShort})"));
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround().Title($"{locale.ChooseNextAction} " +
+                                                                         $"({player.CurrentActionPoints:F0}/{player.MaxActionPoints.Value(player.User, "MaxActionPoints"):F0} {locale.ActionPointsShort})"));
         switch (Array.IndexOf(choices.ToArray(), choice))
         {
             case 0:
@@ -140,7 +141,7 @@ public class Battle
                 }
                 var characterStatsChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .AddChoices(charactersStats)
-                    .HighlightStyle(new Style(Color.Gold3_1)));
+                    .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
                 BattleTextService.DisplayBattleStatsText(Users
                     .ElementAt(Array.IndexOf(charactersStats, characterStatsChoice)).Key.User);
                 return false;
@@ -152,7 +153,7 @@ public class Battle
                 }
                 var characterStatusChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .AddChoices(charactersStatus)
-                    .HighlightStyle(new Style(Color.Gold3_1)));
+                    .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
                 BattleTextService.DisplayStatusEffectText(Users
                     .ElementAt(Array.IndexOf(charactersStatus, characterStatusChoice)).Key.User);
                 return false;

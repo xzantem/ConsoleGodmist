@@ -52,7 +52,7 @@ public static class QuestLog
             choices.Add(locale.Return, 4);
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices.Keys)
-                .HighlightStyle(new Style(Color.Gold3_1)));
+                .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
             switch (choices[choice])
             {
                 case 0: index += scrollAmount; break;
@@ -72,7 +72,7 @@ public static class QuestLog
         if (selection.Count <= 1) return 0;
         var choice = AnsiConsole.Prompt(new SelectionPrompt<Text>()
             .AddChoices(selection)
-            .HighlightStyle(new Style(Color.Gold3_1)));
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
         return selection.IndexOf(choice);
     }
 

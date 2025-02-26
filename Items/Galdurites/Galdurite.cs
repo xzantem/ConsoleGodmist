@@ -81,6 +81,8 @@ public class Galdurite : BaseItem
             excludedColors.Add(Components[i].PoolColor);
         }
     }
+    
+    public Galdurite() {}
 
     public override void Inspect(int amount = 1)
     {

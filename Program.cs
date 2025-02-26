@@ -22,8 +22,8 @@ class Program
     static void Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
-        //IntPtr handle = GetConsoleWindow();
-        //ShowWindow(handle, SW_MAXIMIZE);
+        DisableConsoleQuickEdit.Go();
+        SetFullScreenConsole.Go();
         Stylesheet.InitStyles();
         ItemManager.InitItems();
         LootbagManager.InitItems();

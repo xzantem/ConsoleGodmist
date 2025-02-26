@@ -29,8 +29,8 @@ public class Blacksmith : NPC
 
     public override void OpenMenu()
     {
-        AnsiConsole.Write(new FigletText(locale.Blacksmith).Centered()
-            .Color(Stylesheet.Styles["npc-blacksmith"].Foreground));
+        //AnsiConsole.Write(new FigletText(locale.Blacksmith).Centered()
+        //    .Color(Stylesheet.Styles["npc-blacksmith"].Foreground));
         Say($"{locale.BlacksmithGreeting1}, {PlayerHandler.player.Name}. {locale.BlacksmithGreeting2}\n");
         while (true)
         {
@@ -43,7 +43,7 @@ public class Blacksmith : NPC
             if (QuestNPCHandler.GetReturnableQuests(Alias).Count > 0) choices.Add(locale.ReturnQuest, 9);
             choices.Add( locale.Return, 10 );
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
-                .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]));
+                .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround());
             switch (choices[choice])
             {
                 case 0: DisplayShop(); break;
@@ -58,8 +58,8 @@ public class Blacksmith : NPC
                 case 9: QuestNPCHandler.SelectQuestToReturn(Alias); break;
                 case 10: return;
             }
-            AnsiConsole.Write(new FigletText(locale.Blacksmith).Centered()
-                .Color(Stylesheet.Styles["npc-blacksmith"].Foreground));
+            //AnsiConsole.Write(new FigletText(locale.Blacksmith).Centered()
+            //    .Color(Stylesheet.Styles["npc-blacksmith"].Foreground));
         }
     }
 
@@ -148,7 +148,7 @@ public class Blacksmith : NPC
             string[] choices = [locale.UpgradeArmor, locale.ChangeModifier, 
                 locale.ChangeUpgradeChance, locale.Return];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-                .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]));
+                .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround());
             switch (Array.IndexOf(choices, choice))
             {
                 case 0: 

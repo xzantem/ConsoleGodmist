@@ -2,6 +2,7 @@ using Spectre.Console;
 using System.Globalization;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Characters;
+using ConsoleGodmist.Items;
 using ConsoleGodmist.Quests;
 using ConsoleGodmist.Town;
 
@@ -18,7 +19,7 @@ namespace ConsoleGodmist.Utilities
                 ];
                 var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .AddChoices(choices)
-                    .HighlightStyle(new Style(Color.MediumPurple3)));
+                    .HighlightStyle(new Style(Color.MediumPurple3)).WrapAround());
                 switch (Array.IndexOf(choices, choice))
                 {
                     case 0: NewGame(); return;
@@ -36,7 +37,7 @@ namespace ConsoleGodmist.Utilities
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices)
                 .Title(locale.ChooseLanguage)
-                .HighlightStyle(new Style(Color.MediumPurple3)));
+                .HighlightStyle(new Style(Color.MediumPurple3)).WrapAround());
 
             Thread.CurrentThread.CurrentUICulture = Array.IndexOf(choices, choice) switch
             {
@@ -60,7 +61,7 @@ namespace ConsoleGodmist.Utilities
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices)
                 .Title(locale.ChooseDifficulty)
-                .HighlightStyle(new Style(Color.MediumPurple3)));
+                .HighlightStyle(new Style(Color.MediumPurple3)).WrapAround());
             GameSettings.Difficulty = Array.IndexOf(choices, choice) switch
             {
                 0 => Difficulty.Easy,
@@ -84,7 +85,7 @@ namespace ConsoleGodmist.Utilities
             var choice1 = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices1)
                 .Title($"\n...: {locale.Iam} ")
-                .HighlightStyle(new Style(Color.MediumPurple3)));
+                .HighlightStyle(new Style(Color.MediumPurple3)).WrapAround());
             var characterClass = Array.IndexOf(choices1, choice1) switch
             {
                 0 => CharacterClass.Warrior,
@@ -108,6 +109,7 @@ namespace ConsoleGodmist.Utilities
                 CharacterClass.Paladin => new Paladin(name),
                 _ => throw new NotImplementedException()
             };
+            PlayerHandler.player.GainGold(100000);
         }
     }
 }

@@ -9,13 +9,13 @@ namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 public class ToggleListenerPassiveEffect : IActiveSkillEffect
 {
     public SkillTarget Target { get; set; }
-    public string Type { get; set; }
+    public string PassiveEffect { get; set; }
     public dynamic[]? Effects { get; set; }
 
-    public ToggleListenerPassiveEffect(SkillTarget target, string type, dynamic[]? effects = null)
+    public ToggleListenerPassiveEffect(SkillTarget target, string passiveEffect, dynamic[]? effects = null)
     {
         Target = target;
-        Type = type;
+        PassiveEffect = passiveEffect;
         Effects = effects;
     }
     
@@ -42,7 +42,7 @@ public class ToggleListenerPassiveEffect : IActiveSkillEffect
 
     private ListenerPassiveEffect GetPassiveEffect(Character caster, Character enemy, string source)
     {
-        return Type switch
+        return PassiveEffect switch
         {
             "SlowOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
                 data => new DebuffStat(SkillTarget.Enemy, StatType.Speed, 

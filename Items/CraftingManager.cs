@@ -44,7 +44,7 @@ public static class CraftingManager
             choices.Add(locale.Return, 3);
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices.Keys)
-                .HighlightStyle(new Style(Color.Gold3_1)));
+                .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
             switch (choices[choice])
             {
                 case 0:
@@ -86,7 +86,7 @@ public static class CraftingManager
             return null;
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)));
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
         var chosenItem = possibleItems[Array.IndexOf(choices, choice)];
         return chosenItem;
     }
@@ -152,7 +152,7 @@ public static class CraftingManager
             string[] choices = [locale.CreateWeapon, locale.ChangePart + " 1", locale.ChangePart + " 2", 
                 locale.ChangePart + " 3", locale.ChangeQuality, locale.Return];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-                .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]));
+                .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround());
             switch (Array.IndexOf(choices, choice))
             {
                 case 0:
@@ -197,7 +197,7 @@ public static class CraftingManager
                     var headsChoices = heads.Select(h => h.DescriptionText(costMultiplier)).ToArray();
                     head = heads[Array.IndexOf(headsChoices, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(headsChoices)
-                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround()))];
                     break;
                 case 2: 
                     var binders = EquipmentPartManager.WeaponBinders
@@ -205,7 +205,7 @@ public static class CraftingManager
                     var bindersChoices = binders.Select(b => b.DescriptionText(costMultiplier)).ToArray();
                     binder = binders[Array.IndexOf(bindersChoices, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(bindersChoices)
-                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround()))];
                     break;
                 case 3: 
                     var handles = EquipmentPartManager.WeaponHandles
@@ -213,14 +213,14 @@ public static class CraftingManager
                     var handleChoices = handles.Select(h => h.DescriptionText(costMultiplier)).ToArray();
                     handle = handles[Array.IndexOf(handleChoices, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(handleChoices)
-                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround()))];
                     break;
                 case 4:
                     var qualities = Enum.GetNames(typeof(Quality)).Select(NameAliasHelper.GetName).ToArray();
                     quality = Enum.GetValues<Quality>()[
                         Array.IndexOf(qualities, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(qualities)
-                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround()))];
                     break;
                 case 5: return;
             }
@@ -264,7 +264,7 @@ public static class CraftingManager
             string[] choices = [locale.CreateArmor, locale.ChangePart + " 1", locale.ChangePart + " 2", 
                 locale.ChangePart + " 3", locale.ChangeQuality, locale.Return];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-                .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]));
+                .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround());
             switch (Array.IndexOf(choices, choice))
             {
                 case 0:
@@ -310,7 +310,7 @@ public static class CraftingManager
                     var platesChoices = plates.Select(p => p.DescriptionText(costMultiplier)).ToArray();
                     plate = plates[Array.IndexOf(platesChoices, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(platesChoices)
-                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround()))];
                     break;
                 case 2: 
                     var binders = EquipmentPartManager.ArmorBinders
@@ -318,7 +318,7 @@ public static class CraftingManager
                     var bindersChoices = binders.Select(b => b.DescriptionText(costMultiplier)).ToArray();
                     binder = binders[Array.IndexOf(bindersChoices, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(bindersChoices)
-                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround()))];
                     break;
                 case 3: 
                     var bases = EquipmentPartManager.ArmorBases
@@ -326,14 +326,14 @@ public static class CraftingManager
                     var basesChoices = bases.Select(b => b.DescriptionText(costMultiplier)).ToArray();
                     armorBase = bases[Array.IndexOf(basesChoices, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(basesChoices)
-                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround()))];
                     break;
                 case 4:
                     var qualities = Enum.GetNames(typeof(Quality)).Select(NameAliasHelper.GetName).ToArray();
                     quality = Enum.GetValues<Quality>()[
                         Array.IndexOf(qualities, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(qualities)
-                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-blacksmith"]).WrapAround()))];
                     break;
                 case 5: return;
             }
@@ -366,7 +366,7 @@ public static class CraftingManager
             string[] choices = [locale.CreatePotion, locale.ChangeEffect + " 1", locale.ChangeEffect + " 2", 
                 locale.ChangeEffect + " 3", locale.ChangeCatalyst, locale.Return];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-                .HighlightStyle(Stylesheet.Styles["npc-alchemist"]));
+                .HighlightStyle(Stylesheet.Styles["npc-alchemist"]).WrapAround());
             switch (Array.IndexOf(choices, choice))
             {
                 case 0:
@@ -406,7 +406,7 @@ public static class CraftingManager
                     var effectsChoices = effects.Select(e => e.EffectDescription(catalyst, true, 3)).ToArray();
                     components[Array.IndexOf(choices, choice) - 1] = effects[Array.IndexOf(effectsChoices, AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(effectsChoices)
-                        .HighlightStyle(Stylesheet.Styles["npc-alchemist"])))];
+                        .HighlightStyle(Stylesheet.Styles["npc-alchemist"]).WrapAround()))];
                     break;
                 case 4:
                     var catalysts = new List<PotionCatalyst>();
@@ -423,7 +423,7 @@ public static class CraftingManager
                     }
                     catalyst = catalysts.ElementAt(Array.IndexOf(catalystsTexts.ToArray(), AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(catalystsTexts)
-                        .HighlightStyle(Stylesheet.Styles["npc-alchemist"]))));
+                        .HighlightStyle(Stylesheet.Styles["npc-alchemist"]).WrapAround())));
                     break;
                 case 5: return;
             }
@@ -466,7 +466,7 @@ public static class CraftingManager
             string[] choices = [locale.CreateGaldurite, locale.ChangeType, locale.ChangeColor, 
                 locale.ChangeLevel, locale.Return];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-                .HighlightStyle(Stylesheet.Styles["npc-enchanter"]));
+                .HighlightStyle(Stylesheet.Styles["npc-enchanter"]).WrapAround());
             switch (Array.IndexOf(choices, choice))
             {
                 case 0:
@@ -499,7 +499,7 @@ public static class CraftingManager
                         colors.Add(NameAliasHelper.GetName(component.PoolColor + "MAdj"), component.PoolColor);
                     var colorChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(colors.Keys)
-                        .HighlightStyle(Stylesheet.Styles["npc-enchanter"]));
+                        .HighlightStyle(Stylesheet.Styles["npc-enchanter"]).WrapAround());
                     color = colors[colorChoice];
                     break;
                 case 3: 
@@ -509,7 +509,7 @@ public static class CraftingManager
                         $"41 ({NameAliasHelper.GetName("MarbleGalduriteStone")} ({player.Inventory.Items.FirstOrDefault(x => x.Key.Alias == "MarbleGalduriteStone").Value}))"];
                     var tierChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .AddChoices(tierChoices)
-                        .HighlightStyle(Stylesheet.Styles["npc-enchanter"]));
+                        .HighlightStyle(Stylesheet.Styles["npc-enchanter"]).WrapAround());
                     tier = Array.IndexOf(tierChoices, tierChoice) + 1;
                     break;
                 case 4: return;

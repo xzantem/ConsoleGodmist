@@ -9,13 +9,13 @@ namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 public class ToggleInnatePassiveEffect : IActiveSkillEffect
 {
     public SkillTarget Target { get; set; }
-    public string Type { get; set; }
+    public string PassiveEffect { get; set; }
     public dynamic[]? Effects { get; set; }
 
-    public ToggleInnatePassiveEffect(SkillTarget target, string type, dynamic[]? effects = null)
+    public ToggleInnatePassiveEffect(SkillTarget target, string passiveEffect, dynamic[]? effects = null)
     {
         Target = target;
-        Type = type;
+        PassiveEffect = passiveEffect;
         Effects = effects;
     }
     
@@ -26,16 +26,16 @@ public class ToggleInnatePassiveEffect : IActiveSkillEffect
         switch (Target)
         {
             case SkillTarget.Self:
-                if (caster.PassiveEffects.InnateEffects.Any(x => x.Type == Type))
-                    caster.PassiveEffects.InnateEffects.RemoveAll(x => x.Type == Type);
+                if (caster.PassiveEffects.InnateEffects.Any(x => x.Type == PassiveEffect))
+                    caster.PassiveEffects.InnateEffects.RemoveAll(x => x.Type == PassiveEffect);
                 else
-                    caster.PassiveEffects.Add(new InnatePassiveEffect(caster, source, Type, Effects));
+                    caster.PassiveEffects.Add(new InnatePassiveEffect(caster, source, PassiveEffect, Effects));
                 break;
             case SkillTarget.Enemy:
-                if (enemy.PassiveEffects.InnateEffects.Any(x => x.Type == Type))
-                    enemy.PassiveEffects.InnateEffects.RemoveAll(x => x.Type == Type);
+                if (enemy.PassiveEffects.InnateEffects.Any(x => x.Type == PassiveEffect))
+                    enemy.PassiveEffects.InnateEffects.RemoveAll(x => x.Type == PassiveEffect);
                 else
-                    enemy.PassiveEffects.Add(new InnatePassiveEffect(enemy, source, Type, Effects));
+                    enemy.PassiveEffects.Add(new InnatePassiveEffect(enemy, source, PassiveEffect, Effects));
                 break;
         }
     }

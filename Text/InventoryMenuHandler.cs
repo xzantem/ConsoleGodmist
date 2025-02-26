@@ -17,7 +17,7 @@ public static class InventoryMenuHandler
         while (true)
         {
             var tempIndex = 0;
-            AnsiConsole.Write(new FigletText(locale.Inventory).Centered().Color(Color.Gold3_1));
+            //AnsiConsole.Write(new FigletText(locale.Inventory).Centered().Color(Color.Gold3_1));
             var rows = Inventory.Items.Select(item => 
                 new Text(
                     item.Key.Stackable ? 
@@ -44,7 +44,7 @@ public static class InventoryMenuHandler
             choices.Add(locale.Return, 7);
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices.Keys)
-                .HighlightStyle(new Style(Color.Gold3_1)));
+                .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
             switch (choices[choice])
             {
                 case 0:
@@ -97,7 +97,7 @@ public static class InventoryMenuHandler
             return -1;
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)));
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
         return Array.IndexOf(choices, choice);
     }
     private static void DeleteItem()
@@ -135,7 +135,7 @@ public static class InventoryMenuHandler
         ];
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)));
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
         Inventory.SortInventory((SortType)Array.IndexOf(choices, choice));
     }
 

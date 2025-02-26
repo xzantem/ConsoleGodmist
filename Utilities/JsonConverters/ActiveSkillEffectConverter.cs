@@ -24,13 +24,15 @@ public class ActiveSkillEffectConverter : JsonConverter
             "DealDamage" => new DealDamage(),
             "DebuffResistance" => new DebuffResistance(),
             "DebuffStat" => new DebuffStat(),
+            "ExtendDoT" => new ExtendDoT(),
             "GainShield" => new GainShield(),
             "HealTarget" => new HealTarget(),
-            "InflictGenericStatusEffect" => new InflictGenericStatusEffect(),
             "InflictDoTStatusEffect" => new InflictDoTStatusEffect(),
+            "InflictGenericStatusEffect" => new InflictGenericStatusEffect(),
             "InflictTimedPassiveEffect" => new InflictTimedPassiveEffect(),
-            "ExtendDoT" => new ExtendDoT(),
             "RegenResource" => new RegenResource(),
+            "ToggleInnatePassiveEffect" => new ToggleInnatePassiveEffect(),
+            "ToggleListenerPassiveEffect" => new ToggleListenerPassiveEffect(),
             "TradeHealthForResource" => new TradeHealthForResource(),  
             _ => throw new NotSupportedException($"Unknown type: {type}")
         };

@@ -170,12 +170,9 @@ namespace ConsoleGodmist
 
         public static bool Confirmation(string message, bool defaultValue = false)
         {
-            return AnsiConsole.Prompt(
-                new TextPrompt<bool>(message)
-                    .AddChoice(true)
-                    .AddChoice(false)
-                    .DefaultValue(defaultValue)
-                    .WithConverter(choice => choice ? locale.Y : "N"));
+            var prompt = new ConfirmationPrompt(message).Yes(locale.Y[0]).No('N');
+            prompt.DefaultValue = defaultValue;
+            return AnsiConsole.Prompt(prompt);
         }
 
         public static void ClearConsole(int lines = 1)

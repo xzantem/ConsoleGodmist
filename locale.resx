@@ -3758,4 +3758,7 @@
   <data name="Ovarice" xml:space="preserve">
     <value>Ovarice</value>
   </data>
+  <data name="Turn" xml:space="preserve">
+    <value>TURN</value>
+  </data>
 </root>

@@ -81,7 +81,7 @@ public static class GalduriteManager
             .Join("", x.Components.Select(c => $"{c.EffectTier} - {c.EffectText}\n"))}" : $"{x.Name} ({x.RarityName()})").ToArray();
         var choices = gals.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)));
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
         return choice == locale.Return ? null : galdurites.ElementAt(Array.IndexOf(choices, choice));
     }
 }

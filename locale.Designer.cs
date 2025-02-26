@@ -10212,6 +10212,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TURN.
+        /// </summary>
+        internal static string Turn {
+            get {
+                return ResourceManager.GetString("Turn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New turn order.
         /// </summary>
         internal static string TurnOrder {

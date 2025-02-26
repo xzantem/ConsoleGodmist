@@ -30,7 +30,7 @@ namespace ConsoleGodmist.Town
         {
             while (true)
             {
-                //AnsiConsole.Clear();
+                AnsiConsole.Clear();
                 AnsiConsole.Write(new FigletText(TownName).Centered().Color(Color.Gold3_1));
                 string[] choices =
                 [
@@ -40,7 +40,7 @@ namespace ConsoleGodmist.Town
                 ];
                 var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .AddChoices(choices)
-                    .HighlightStyle(new Style(Color.Gold3_1)));
+                    .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
                 switch (Array.IndexOf(choices, choice))
                 {
                     case 0:
@@ -78,7 +78,7 @@ namespace ConsoleGodmist.Town
             ];
             var dungeonChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(dungeonChoices)
-                .HighlightStyle(new Style(Color.Gold3_1)));
+                .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
             var dungeonType = Array.IndexOf(dungeonChoices, dungeonChoice) switch
             {
                 0 => DungeonType.Catacombs,

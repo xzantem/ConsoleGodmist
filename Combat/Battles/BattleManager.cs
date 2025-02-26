@@ -67,7 +67,7 @@ public static class BattleManager
                 player.Inventory.AddItem(LootbagManager.GetLootbag("WeaponBag", enemy.Level));
             if (Random.Shared.NextDouble() < armorBagChance)
                 player.Inventory.AddItem(LootbagManager.GetLootbag("ArmorBag", enemy.Level));
-            if (Random.Shared.NextDouble() < galduriteBagChance)
+            if (Random.Shared.NextDouble() < galduriteBagChance && enemy.Level > 10)
                 player.Inventory.AddItem(LootbagManager.GetLootbag("GalduriteBag", enemy.Level));
             if (enemy.EnemyType.Contains(EnemyType.Boss))
                 player.Inventory.AddItem(LootbagManager.GetLootbag(enemy.Alias + "Bag", enemy.Level));

@@ -32,12 +32,13 @@ public static class DungeonMovementManager
     
     private static void DisplayCurrentFloorMap()
     {
-        DungeonTextService.DisplayDungeonHeader(CurrentDungeon);
         DungeonTextService.DisplayDungeonMap(CurrentDungeon, LocationIndex, CurrentLocation);
     }
 
     public static void TraverseDungeon()
     {
+        AnsiConsole.Clear();
+        DungeonTextService.DisplayDungeonHeader(CurrentDungeon);
         while(!Exited)
         {
             DisplayCurrentFloorMap();
@@ -158,7 +159,7 @@ public static class DungeonMovementManager
         choices.Add(locale.ShowCharacter, 4);
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .AddChoices(choices.Keys)
-            .HighlightStyle(new Style(Color.MediumPurple3)));
+            .HighlightStyle(new Style(Color.MediumPurple3)).WrapAround());
         if (choices[choice] >= 0 && choices[choice] <= 3)
             LastMovement = choices[choice];
         return choices[choice];

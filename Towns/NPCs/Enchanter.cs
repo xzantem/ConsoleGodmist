@@ -27,8 +27,8 @@ public class Enchanter : NPC
 
     public override void OpenMenu()
     {
-        AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
-            .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
+        //AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
+        //    .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
         Say($"{locale.EnchanterGreeting}, {PlayerHandler.player.Name}?\n");
         while (true)
         {
@@ -40,7 +40,7 @@ public class Enchanter : NPC
             if (QuestNPCHandler.GetReturnableQuests(Alias).Count > 0) choices.Add(locale.ReturnQuest, 9);
             choices.Add( locale.Return, 10 );
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices.Keys)
-                .HighlightStyle(Stylesheet.Styles["npc-enchanter"]));
+                .HighlightStyle(Stylesheet.Styles["npc-enchanter"]).WrapAround());
             switch (choices[choice])
             {
                 case 0: DisplayShop(); break;
@@ -55,8 +55,8 @@ public class Enchanter : NPC
                 case 9: QuestNPCHandler.SelectQuestToReturn(Alias); break;
                 case 10: return;
             }
-            AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
-                .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
+            //AnsiConsole.Write(new FigletText(locale.Enchanter).Centered()
+            //    .Color(Stylesheet.Styles["npc-enchanter"].Foreground));
         }
     }
     public void ExamineGaldurite()
