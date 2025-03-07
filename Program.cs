@@ -11,13 +11,6 @@ using Spectre.Console;
 
 class Program
 {
-    /*[DllImport("kernel32.dll", ExactSpelling = true)]
-    private static extern IntPtr GetConsoleWindow();
-
-    [DllImport("user32.dll")]
-    private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-    private const int SW_MAXIMIZE = 3;*/
 
     static void Main(string[] args)
     {
@@ -32,12 +25,20 @@ class Program
         PlantDropManager.InitPlantDrops();
         PotionManager.InitComponents();
         GalduriteManager.InitComponents();
-        
         while (true)
         {
-            MainMenu.Menu();
-            TownsHandler.Arungard.EnterTown();
-            AnsiConsole.Clear();
+            try
+            {
+                AnsiConsole.Clear();
+                MainMenu.Menu();
+                TownsHandler.Arungard.EnterTown();
+            }
+            catch(Exception ex)
+            {
+                AnsiConsole.WriteException(ex);
+                AnsiConsole.Write(new Text("An unexpected error occurred. Make sure to send error log to developer! Press any key to continue..."));
+                Console.ReadLine();
+            }
         }
     }
 }

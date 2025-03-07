@@ -19,29 +19,22 @@ public static class DungeonMovementManager
 
     public static void EnterDungeon(Dungeon dungeon)
     {
-        if (CurrentDungeon != null)
-            throw new Exception("Attempted to enter new dungeon, but player is already in a dungeon!");
         Exited = false;
         CurrentDungeon = dungeon;
         CurrentLocation = CurrentDungeon.CurrentFloor.StarterRoom;
         LocationIndex = 0;
         LastMovement = 0;
         CurrentLocation.Reveal();
+        AnsiConsole.Clear();
+        DungeonTextService.DisplayDungeonHeader(CurrentDungeon);
         OnMove();
-    }
-    
-    private static void DisplayCurrentFloorMap()
-    {
-        DungeonTextService.DisplayDungeonMap(CurrentDungeon, LocationIndex, CurrentLocation);
     }
 
     public static void TraverseDungeon()
     {
-        AnsiConsole.Clear();
-        DungeonTextService.DisplayDungeonHeader(CurrentDungeon);
         while(!Exited)
         {
-            DisplayCurrentFloorMap();
+            DungeonTextService.DisplayDungeonMap(CurrentDungeon, LocationIndex, CurrentLocation);
             switch (ChooseAction())
             {
                 case 0:
@@ -162,6 +155,7 @@ public static class DungeonMovementManager
             .HighlightStyle(new Style(Color.MediumPurple3)).WrapAround());
         if (choices[choice] >= 0 && choices[choice] <= 3)
             LastMovement = choices[choice];
+        UtilityMethods.ClearConsole(2);
         return choices[choice];
     }
 
@@ -218,13 +212,14 @@ public static class DungeonMovementManager
 
     private static void OnMove()
     {
-        StatusEffectHandler.HandleEffects(PlayerHandler.player.StatusEffects, PlayerHandler.player);
-        PlayerHandler.player.HandleModifiers();
+        //StatusEffectHandler.HandleEffects(PlayerHandler.player.StatusEffects, PlayerHandler.player);
+        PlayerHandler.player.HandleModifiers(); 
+        //PlayerHandler.player.PassiveEffects.HandleBattleEvent(new BattleEventData("PerTurn", PlayerHandler.player));
         PlayerHandler.player.PassiveEffects.TickEffects();
         if (PlayerHandler.player.CurrentHealth <= 0)
         {
-            BattleTextService.DisplayDeathText(PlayerHandler.player);
-            BattleTextService.DisplayEndBattleText(false);
+            AnsiConsole.Write(new Text($"{PlayerHandler.player.Name} {locale.Dies}\n", Stylesheet.Styles["value-lost"]));
+            AnsiConsole.Write(new Text($"{locale.Defeat}! {locale.GameOver}!\n\n", Stylesheet.Styles["highlight-bad"]));
             Environment.Exit(0);
         }
         switch (CurrentLocation.FieldType)

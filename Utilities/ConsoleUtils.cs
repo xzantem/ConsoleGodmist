@@ -49,6 +49,9 @@ static class SetFullScreenConsole
     [DllImport("user32.dll")]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
     
+    [DllImport("user32.dll", SetLastError=true)]
+    static extern bool GetWindowRect(IntPtr hwnd, out RECT lpRect);
+    
     [StructLayout(LayoutKind.Sequential)]
     public struct COORD
     {
@@ -61,6 +64,15 @@ static class SetFullScreenConsole
             this.Y = Y;
         }
     };
+    
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RECT
+    {
+        public int Left;        // x position of upper-left corner
+        public int Top;         // y position of upper-left corner
+        public int Right;       // x position of lower-right corner
+        public int Bottom;      // y position of lower-right corner
+    }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct CONSOLE_FONT_INFO_EX
@@ -91,17 +103,19 @@ static class SetFullScreenConsole
     internal static void Go()
     {
         var consoleWindowHandle = GetConsoleWindow();
-        ShowWindow(consoleWindowHandle, SW_MAXIMIZE);
-
         var consoleOutputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
         var consoleFontInfo = new CONSOLE_FONT_INFO_EX();
         consoleFontInfo.cbSize = (uint)Marshal.SizeOf(consoleFontInfo);
 
-        /*GetCurrentConsoleFontEx(consoleOutputHandle, false, ref consoleFontInfo);
-        consoleFontInfo.dwFontSize.X = 13;
-        consoleFontInfo.dwFontSize.Y = 28;
+        GetCurrentConsoleFontEx(consoleOutputHandle, false, ref consoleFontInfo);
+        var consoleWindowRect = new RECT();
+        ShowWindow(consoleWindowHandle, SW_MAXIMIZE);
+        GetWindowRect(consoleWindowHandle, out consoleWindowRect);
+        var windowHeight = consoleWindowRect.Top + consoleWindowRect.Bottom;
+        consoleFontInfo.dwFontSize.Y = (short)(windowHeight / 40);
+        consoleFontInfo.dwFontSize.X = (short)(windowHeight / 80 - 1);
 
-        SetCurrentConsoleFontEx(consoleOutputHandle, false, ref consoleFontInfo);*/
+        SetCurrentConsoleFontEx(consoleOutputHandle, false, ref consoleFontInfo);
     }
 }   

@@ -66,11 +66,11 @@ namespace ConsoleGodmist.Characters
             [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 0, 0)]);
             ActiveSkills[1] = new ActiveSkill("Fireball", 60, 0.65, true, 100,
                 [new DealDamage(DamageType.Magic, DamageBase.Random, 1, false, false, 0, 0),
-                new InflictDoTStatusEffect(SkillTarget.Enemy, 3, 0.8, "Fireball", StatusEffectType.Burn, 0.75)]);
+                new InflictDoTStatusEffect(SkillTarget.Enemy, 3, 0.8, "Burn", 0.75)]);
             ActiveSkills[2] = new ActiveSkill("Focus", 0, 0.85, true, 100,
             [new TradeHealthForResource(SkillTarget.Self, 0.1, 2)]);
             ActiveSkills[3] = new ActiveSkill("MagicShield", 55, 0.3, true, 100,
-            [new GainShield(SkillTarget.Self, "MagicShield", DamageBase.Random, 1.25, 1, -1)]);
+            [new GainShield(SkillTarget.Self, DamageBase.Random, 1.25, 1, 4)]);
             ActiveSkills[4] = new ActiveSkill("ExhaustingSpells", 0, 0, true, 100,
             [new ToggleInnatePassiveEffect(SkillTarget.Self, "NoResourceRegen"), 
                 new ToggleListenerPassiveEffect(SkillTarget.Self, "SlowOnHit", [ModifierType.Additive, 12, 0.7, 3])]);

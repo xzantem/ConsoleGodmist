@@ -1,8 +1,10 @@
-﻿using ConsoleGodmist.Characters;
+﻿using System.Reflection.Metadata;
+using ConsoleGodmist.Characters;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
 using ConsoleGodmist.TextService;
+using Spectre.Console;
 
 namespace ConsoleGodmist.Combat.Battles;
 
@@ -21,7 +23,10 @@ public static class BattleManager
             else
                 user.User.UseResource((int)user.User.CurrentResource);
         CurrentBattle = battle;
-        BattleTextService.DisplayBattleStartText(battle.Users.ElementAt(^1).Key.User as EnemyCharacter);
+        battle.Interface.AddBattleLogLines(new Text($"{locale.BattleStart}: " +
+                                                    $"{(battle.Users.ElementAt(^1).Key.User as EnemyCharacter).Name}", 
+            Stylesheet.Styles["dungeon-icon-battle"]));
+        battle.Interface.DisplayInterface(battle.Users.ElementAt(0).Key, battle.Users.Keys.ToList(), false);
         while(CurrentBattle.CheckForResult() == -1)
             CurrentBattle.NewTurn();
         var battleResult = CurrentBattle.CheckForResult() switch
@@ -30,10 +35,13 @@ public static class BattleManager
             1 => false,
             _ => false
         };
-        if (CurrentBattle.CheckForResult() == 2)
-            return;
-        BattleTextService.DisplayEndBattleText(battleResult);
+        if (CurrentBattle.CheckForResult() == 2) return;
+        CurrentBattle.Interface.AddBattleLogLines(battleResult
+            ? new Text($"{locale.Victory}!", Stylesheet.Styles["highlight-good"])
+            : new Text($"{locale.Defeat}! {locale.GameOver}!", Stylesheet.Styles["highlight-bad"]));
+        battle.Interface.DisplayInterface(battle.Users.ElementAt(0).Key, battle.Users.Keys.ToList());
         Thread.Sleep(2000);
+        //AnsiConsole.Clear();
         if (!battleResult)
             Environment.Exit(0);
         GenerateReward(initial);
@@ -71,7 +79,7 @@ public static class BattleManager
                 player.Inventory.AddItem(LootbagManager.GetLootbag("GalduriteBag", enemy.Level));
             if (enemy.EnemyType.Contains(EnemyType.Boss))
                 player.Inventory.AddItem(LootbagManager.GetLootbag(enemy.Alias + "Bag", enemy.Level));
-            foreach (var item in enemy.DropTable.GetDrops(enemy.Level))
+            foreach (var item in enemy.DropTable?.GetDrops(enemy.Level))
                 player.Inventory.AddItem(item.Key, item.Value);
         }
         player!.GainGold(moneyReward);

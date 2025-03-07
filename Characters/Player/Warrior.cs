@@ -48,7 +48,7 @@ namespace ConsoleGodmist.Characters
                 [new BuffStat(SkillTarget.Self, StatType.MaximalAttack, ModifierType.Multiplicative, 0.2, 1, 3)]);
             ActiveSkills[3] = new ActiveSkill("RightHook", 25, 0.6, false, 72,
             [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0, 0),
-                new InflictGenericStatusEffect(StatusEffectType.Stun, 2, 0.8, "RightHook", "")]);
+                new InflictGenericStatusEffect("Stun", 2, 0.8, "RightHook")]);
             ActiveSkills[4] = new ActiveSkill("FieldBandage", 20, 0.65, true, 100,
                 [new HealTarget(SkillTarget.Self, 0.08, DamageBase.CasterMissingHealth),
                 new ClearStatusEffect(SkillTarget.Self, StatusEffectType.Bleed)]);

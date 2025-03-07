@@ -33,7 +33,7 @@ public static class DungeonTextService
             DungeonType.Swamp => Color.DarkGreen,
             _ => Color.White,
         };
-        AnsiConsole.Write(new FigletText(locationText).Centered().Color(color));
+        AnsiConsole.Write(new FigletText(locationText).Color(color));
         var floor = dungeon.Floors.IndexOf(dungeon.CurrentFloor) == 0
             ? dungeon.Floors.IndexOf(dungeon.CurrentFloor).ToString()
             : "-" + dungeon.Floors.IndexOf(dungeon.CurrentFloor);

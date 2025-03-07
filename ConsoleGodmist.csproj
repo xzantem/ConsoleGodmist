@@ -33,6 +33,7 @@
     <Compile Remove="Items\Lootbags\WeaponLootbag.cs" />
     <Compile Remove="Items\Lootbags\ArmorLootbag.cs" />
     <Compile Remove="SkillEditor\**" />
+    <Compile Remove="Text\ActiveSkillTextService.cs" />
   </ItemGroup>
 
   <ItemGroup>

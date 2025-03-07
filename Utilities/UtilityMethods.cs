@@ -108,9 +108,7 @@ namespace ConsoleGodmist
                 case ' ':
                     return Random.Next(15, 25);
                 default:
-                    if (char.IsLetterOrDigit(c))
-                        return Random.Next(25, 35);
-                    return 0;
+                    return char.IsLetterOrDigit(c) ? Random.Next(25, 35) : 0;
             }
         }
         public static double ScaledStat(double baseStat, double scaleFactor, int level) {
@@ -161,11 +159,6 @@ namespace ConsoleGodmist
         {
             var result = Random.Next(0, choices.Count);
             return choices[result];
-        }
-
-        public static Dictionary<string, int> ChoiceSelector()
-        {
-            return new Dictionary<string, int>();
         }
 
         public static bool Confirmation(string message, bool defaultValue = false)

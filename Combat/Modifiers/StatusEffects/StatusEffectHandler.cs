@@ -45,13 +45,14 @@ public static class StatusEffectHandler
         }
     }
 
-    public static double TakeShieldsDamage(List<Shield> shields, Character target, double damage)
+    public static double TakeShieldsDamage(List<TimedPassiveEffect> shields, Character target, double damage)
     {
         foreach (var shield in shields.Where(x => damage > 0).ToList())
         {
-            damage = shield.TakeDamage(damage);
-            if (damage > 0)
-                target.StatusEffects.Remove(shield);
+            shield.Effects[1] -= damage;
+            if (shield.Effects[1] > 0) break;
+            damage = -shield.Effects[0];
+            target.PassiveEffects.Remove(shield);
         }
         return damage;
     }
@@ -76,7 +77,6 @@ public static class StatusEffectHandler
     }
     public static void AddStatusEffect(StatusEffect statusEffect, Character target)
     {
-        CharacterEventTextService.DisplayStatusEffectText(target, statusEffect);
         switch (statusEffect.Type)
         {
             case StatusEffectType.Stun:

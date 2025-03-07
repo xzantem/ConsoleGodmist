@@ -44,7 +44,7 @@ namespace ConsoleGodmist.Characters
                 [new DebuffStat(SkillTarget.Enemy, StatType.Accuracy, ModifierType.Additive, 20, 0.8, 3)]);
             ActiveSkills[3] = new ActiveSkill("Hookshot", 25, 0.3, false, 80,
             [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0, 0),
-                new InflictGenericStatusEffect(StatusEffectType.Stun, 2, 0.75, "Hookshot", "")]);
+                new InflictGenericStatusEffect("Stun", 2, 0.75, "Hookshot")]);
             ActiveSkills[4] = new ActiveSkill("AccurateThrow", 50, 0.7, true, 85,
             [new DealDamage(DamageType.Physical, DamageBase.Maximal, 1, true, true, 0, 0)]);
         }

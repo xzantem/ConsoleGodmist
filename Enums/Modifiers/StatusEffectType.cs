@@ -9,7 +9,7 @@ public enum StatusEffectType
     Burn, // Causes user to take DoT (Damage over Time)
     Stun, // User is unable to take turns
     Freeze, // User is unable to take turns, and is slowed once the effect ends
-    Frostbite, // Speed is overridden to 1
+    Frostbite, // Speed is reduced to 10
     Sleep, // User is stunned but regenerates health over time
     Invisible, // User cannot be targeted by skills
     Paralysis, // User is unable to act, and cannot be targeted by skills

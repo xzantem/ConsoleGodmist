@@ -11,16 +11,13 @@ public class Stash(int dungeonLevel, DungeonType dungeonType)
     {
         var drops = new Dictionary<IItem, int>();
         // Add drops from supply lootbag pool
-        for (var i = 0; i < UtilityMethods.RandomChoice(new Dictionary<int, int> { { 1, 4 }, { 2, 2 }, { 3, 1 } }); i++)
+        var lootDrop = LootbagManager.GetSupplyBag(DungeonType, DungeonLevel);
+        foreach (var item in lootDrop.DropTable.GetDrops(DungeonLevel))
         {
-            var lootDrop = LootbagManager.GetSupplyBag(DungeonType, DungeonLevel);
-            foreach (var item in lootDrop.DropTable.GetDrops(DungeonLevel))
-            {
-                if (drops.ContainsKey(item.Key))
-                    drops[item.Key] += item.Value;
-                else
-                    drops.Add(item.Key, item.Value);
-            }
+            if (drops.ContainsKey(item.Key))
+                drops[item.Key] += item.Value;
+            else
+                drops.Add(item.Key, item.Value);
         }
         //Add drops from equipment lootbag pool
         if (Random.Shared.Next(0, 2) == 0)

@@ -10,26 +10,21 @@ using Spectre.Console;
 
 namespace ConsoleGodmist.Combat.Battles;
 
-public class Battle
+public class Battle(Dictionary<BattleUser, int> usersTeams, DungeonField location, bool canEscape = true)
 {
-    public Dictionary<BattleUser, int> Users { get; private set; }
-    public int TurnCount { get; private set; }
+    public Dictionary<BattleUser, int> Users { get; } = usersTeams;
+    public int TurnCount { get; private set; } = 1;
     public bool Escaped { get; set; }
-    public bool CanEscape { get; private set; }
+    public bool CanEscape { get; } = canEscape;
     private int EscapeAttempts { get; set; }
-    public DungeonField Location { get; private set; }
-    
-    public Battle(Dictionary<BattleUser, int> usersTeams, DungeonField location, bool canEscape = true)
-    {
-        Users = usersTeams;
-        TurnCount = 1;
-        Location = location;
-        CanEscape = canEscape;
-    }
+    public DungeonField Location { get; private set; } = location;
+
+    public BattleInterface Interface { get; } = new(usersTeams.Last().Key);
 
     public void NewTurn()
     {
-        AnsiConsole.Write(new Text($"\n\n----------------------- {locale.Turn} {TurnCount} -----------------------\n\n", Stylesheet.Styles["highlight-good"]));
+        Interface.AddBattleLogLines(new Text($"- {locale.Turn} {TurnCount} -", Stylesheet.Styles["highlight-good"]));
+        Interface.DisplayInterface(Users.ElementAt(0).Key, Users.Keys.ToList());
         foreach (var user in Users.Keys)
         {
             user.StartNewTurn();
@@ -38,13 +33,17 @@ public class Battle
         {
             foreach (var user in Users.Keys.Where(user => user.TryMove()))
             {
-                BattleTextService.DisplayMovementText(user.User);
-                if (user.User.StatusEffects
-                    .Any(x => x.Type is StatusEffectType.Stun or
-                        StatusEffectType.Freeze or StatusEffectType.Sleep))
+                if (CheckForResult() != -1)
+                    return;
+                Interface.AddBattleLogLines(new Text($"{locale.Moving}: {user.User.Name}", Stylesheet.Styles["dungeon-icon-exit"]));
+                Interface.DisplayInterface(Users.ElementAt(0).Key, Users.Keys.ToList());
+                Thread.Sleep(1000);
+                if (!user.User.PassiveEffects.CanMove())
                 {
-                    BattleTextService.DisplayCannotMoveText(user.User);
+                    Interface.AddBattleLogLines(new Text($"{user.User.Name} {locale.CannotMoveThisTurn}\n", Stylesheet.Styles["highlight-bad"]));
+                    Thread.Sleep(1000);
                     HandleEffects(user);
+                    Interface.DisplayInterface(Users.ElementAt(0).Key, Users.Keys.ToList());
                     if (CheckForResult() != -1)
                         return;
                     continue;
@@ -59,12 +58,12 @@ public class Battle
                         while (!hasMoved)
                         {
                             CheckForDead();
+                            Interface.DisplayInterface(Users.ElementAt(0).Key, Users.Keys.ToList());
                             if (CheckForResult() != -1)
                                 return;
-                            BattleTextService.DisplayStatusText(user, Users
-                                .FirstOrDefault(x => x.Key != user).Key);
                             hasMoved = PlayerMove(user, Users
                                 .FirstOrDefault(x => x.Key != user).Key);
+                            Interface.DisplayInterface(Users.ElementAt(0).Key, Users.Keys.ToList());
                         }
                         break;
                     case 1:
@@ -93,34 +92,70 @@ public class Battle
 
     public void ChooseSkill(BattleUser player, BattleUser target)
     {
-        var skills = (player.User as PlayerCharacter)?.ActiveSkills
+        var activeSkills = (player.User as PlayerCharacter)?.ActiveSkills;  
+        var possibleSkills = activeSkills
+            .Where(x => (x.ResourceCost <= player.User.CurrentResource ||
+                         Math.Abs(player.User.MaximalResource - player.User.CurrentResource) < 0.01)
+                        && x.ActionCost * player.MaxActionPoints.Value(player.User, "MaxActionPoints") <= player.CurrentActionPoints)
+            .ToArray();
+        var possibleSkillsNames = possibleSkills
             .Select(x => x.Name + $" ({(int)UtilityMethods.CalculateModValue(x.ResourceCost, player.User.PassiveEffects.GetModifiers("ResourceCost"))} {BattleTextService.ResourceShortText(player.User as PlayerCharacter)}, " +
                          $"{(int)(x.ActionCost * player.MaxActionPoints.BaseValue)} {locale.ActionPointsShort})").ToArray();
-        var choices = skills.Append(locale.Return).ToArray();
+        var unselectableSkillsNames = activeSkills.Where(x => !possibleSkills.Contains(x))
+            .Select(x => BattleTextService.UnselectableSkillMarkup(x, player)).ToArray();
+        var choices = possibleSkillsNames.Append(locale.Return).ToArray();
         var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround()
+            .Title(unselectableSkillsNames.Length == 0 ? 
+                $"{locale.ChooseNextAction} ({player.CurrentActionPoints:F0}/" +
+                $"{player.MaxActionPoints.Value(player.User, "MaxActionPoints"):F0} {locale.ActionPointsShort})" :
+                $"{locale.ChooseNextAction} ({player.CurrentActionPoints:F0}/" +
+                $"{player.MaxActionPoints.Value(player.User, "MaxActionPoints"):F0} {locale.ActionPointsShort})" +
+                $"\n{locale.Unavailable}: {string.Join(' ', unselectableSkillsNames)}"));
         if (choice == locale.Return) return;
-        if (!((player.User as PlayerCharacter)?.ActiveSkills[Array.IndexOf(choices, choice)]
+        if (!(possibleSkills[Array.IndexOf(choices, choice)]
                 .ActionCost * player.MaxActionPoints.BaseValue > player.CurrentActionPoints))
-            (player.User as PlayerCharacter)!.ActiveSkills[Array.IndexOf(choices, choice)]
-                .Use(player, target);
+            possibleSkills[Array.IndexOf(choices, choice)].Use(player, target);
     }
     public bool PlayerMove(BattleUser player, BattleUser target)
     {
-        List<string> choices =
-        [
-            locale.EndTurn, locale.UseSkill, locale.UsePotion + $" ({(int)(0.2 * player.MaxActionPoints.Value(player.User, "MaxActionPoints"))} {locale.ActionPointsShort})", 
-            locale.ShowStats, locale.ShowStatus
-        ];
+        var choices = new Dictionary<string, int>
+        {
+            {locale.EndTurn, 0},
+            {locale.UseSkill, 1},
+            {locale.UseItem, 2}
+        };
         if (CanEscape)
-            choices.Add(locale.Escape);
-        var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices)
-            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround().Title($"{locale.ChooseNextAction} " +
-                                                                         $"({player.CurrentActionPoints:F0}/{player.MaxActionPoints.Value(player.User, "MaxActionPoints"):F0} {locale.ActionPointsShort})"));
-        switch (Array.IndexOf(choices.ToArray(), choice))
+            choices.Add(locale.Escape, 7);
+        var displayChoices = new Dictionary<string, int>
+        {
+            {locale.ChangeAdditionalCharacterInfo, 3},
+            {locale.ChangeDisplayedCharacter, 4},
+        };
+        if (Interface.CanScroll(true))
+            displayChoices.Add(locale.ScrollBattleLogUp, 5);
+        if (Interface.CanScroll(false))
+            displayChoices.Add(locale.ScrollBattleLogDown, 6);
+
+        var prompt = new SelectionPrompt<string>().AddChoices(choices.Keys)
+            .AddChoiceGroup("Display options", displayChoices.Keys)
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround()
+            .Title($"{locale.ChooseNextAction} ({player.CurrentActionPoints:F0}/" +
+                   $"{player.MaxActionPoints.Value(player.User, "MaxActionPoints"):F0} {locale.ActionPointsShort})");
+        var choice = AnsiConsole.Prompt(prompt);
+        switch (choices.Concat(displayChoices).ToDictionary()[choice])
         {
             case 0:
-                return true;
+                var activeSkills = (player.User as PlayerCharacter)?.ActiveSkills;
+                var canUseSkill = activeSkills
+                    .Any(x => (x.ResourceCost <= player.User.CurrentResource ||
+                               Math.Abs(player.User.MaximalResource - player.User.CurrentResource) < 0.01)
+                              && x.ActionCost * player.MaxActionPoints.Value(player.User, "MaxActionPoints") <=
+                              player.CurrentActionPoints && x is not { ResourceCost: 0, ActionCost: 0 });
+                var ended = !canUseSkill || UtilityMethods.Confirmation(locale.ConfirmEndTurn);
+                if (canUseSkill) 
+                    UtilityMethods.ClearConsole();
+                return ended;
             case 1:
                 ChooseSkill(player, target);
                 CheckForDead();
@@ -129,45 +164,36 @@ public class Battle
                 var potion = PotionManager.ChoosePotion((player.User as PlayerCharacter).Inventory.Items
                     .Where(x => x.Key.ItemType == ItemType.Potion)
                     .Select(x => x.Key).Cast<Potion>().ToList(), false);
-                if (potion == null) return false;
-                player.UseActionPoints(0.2 * player.MaxActionPoints.Value(player.User, "MaxActionPoints"));
-                potion.Use();
+                potion?.Use();
                 return false;
             case 3:
-                var charactersStats = new string[Users.Keys.Count];
-                for (var i = 0; i < Users.Keys.Count; i++)
-                {
-                    charactersStats[i] = Users.Keys.ElementAt(i).User.Name;
-                }
-                var characterStatsChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                    .AddChoices(charactersStats)
-                    .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
-                BattleTextService.DisplayBattleStatsText(Users
-                    .ElementAt(Array.IndexOf(charactersStats, characterStatsChoice)).Key.User);
+                Interface.ChangeDisplayMode();
                 return false;
             case 4:
-                var charactersStatus = new string[Users.Keys.Count];
-                for (var i = 0; i < Users.Keys.Count; i++)
-                {
-                    charactersStatus[i] = Users.Keys.ElementAt(i).User.Name;
-                }
-                var characterStatusChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                    .AddChoices(charactersStatus)
-                    .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
-                BattleTextService.DisplayStatusEffectText(Users
-                    .ElementAt(Array.IndexOf(charactersStatus, characterStatusChoice)).Key.User);
+                Interface.ChangeDisplayedUser(Users.Keys.ToList());
                 return false;
             case 5:
-                BattleTextService.DisplayTryEscapeText();
+                Interface.ScrollBattleLog(true);
+                return false;
+            case 6:
+                Interface.ScrollBattleLog(false);
+                return false;
+            case 7:
+                Interface.AddBattleLogLines(new Text($"{locale.TryEscape}...\n", Stylesheet.Styles["default"]));
+                Interface.DisplayInterface(player, Users.Keys.ToList());
+                Thread.Sleep(2000);
                 if (!(Random.Shared.NextDouble() < 0.5 + EscapeAttempts * 0.1))
                 {
-                    BattleTextService.DisplayEscapeFailText();
+                    Interface.AddBattleLogLines(new Text($"{locale.EscapeFail}!\n", Stylesheet.Styles["failure"]));
+                    Interface.DisplayInterface(player, Users.Keys.ToList());
                     EscapeAttempts++;
                     return true;
                 }
-                BattleTextService.DisplayEscapeSuccessText();
+                Interface.AddBattleLogLines(new Text($"{locale.EscapeSuccess}!\n", Stylesheet.Styles["success"]));
+                Interface.DisplayInterface(player, Users.Keys.ToList());
                 (player.User as PlayerCharacter).LoseHonor((int)Users.Where(x => x.Value == 1)
                     .Average(x => x.Key.User.Level) / 3 + 4);
+                EscapeAttempts = 0;
                 Escaped = true;
                 return true;
         }
@@ -175,7 +201,7 @@ public class Battle
     }
     public void AIMove(BattleUser enemy, BattleUser target)
     {
-        BattleTextService.DisplayStatusText(target, enemy);
+        //BattleTextService.DisplayStatusText(target, enemy);
         while (CheckForResult() == -1)
         {
             var activeSkills = enemy.User is BossEnemy boss
@@ -192,6 +218,7 @@ public class Battle
                 break;
             var usedSkill = UtilityMethods.RandomChoice(possibleSkills);
             usedSkill.Use(enemy, target);
+            Interface.DisplayInterface(target, Users.Keys.ToList());
             CheckForDead();
             Thread.Sleep(1000);
         } 
@@ -214,7 +241,7 @@ public class Battle
             .Where(x => x.Key.User.CurrentHealth == 0);
         foreach (var deadUser in dead)
         {
-            BattleTextService.DisplayDeathText(deadUser.Key.User);
+            Interface.AddBattleLogLines(new Text($"{deadUser.Key.User.Name} {locale.Dies}", Stylesheet.Styles["value-lost"]));
             QuestManager.CheckForProgress(
                 new QuestObjectiveContext((deadUser.Key.User as EnemyCharacter)?.Alias, deadUser.Key.User.Level));
             QuestManager.CheckForProgress(

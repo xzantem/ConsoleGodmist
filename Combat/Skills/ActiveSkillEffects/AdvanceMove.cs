@@ -2,6 +2,7 @@
 using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
+using Spectre.Console;
 
 namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 
@@ -19,18 +20,16 @@ public class AdvanceMove : IActiveSkillEffect
 
     public void Execute(Character caster, Character enemy, string source)
     {
-        BattleUser? target = null;
-        switch (Target)
+        var target = Target switch
         {
-            case SkillTarget.Self:
-                target = BattleManager.CurrentBattle!.Users
-                    .FirstOrDefault(x => x.Key.User == caster).Key;
-                break;
-            case SkillTarget.Enemy:
-                target = BattleManager.CurrentBattle!.Users
-                    .FirstOrDefault(x => x.Key.User == enemy).Key;
-                break;
-        }
+            SkillTarget.Self => BattleManager.CurrentBattle!.Users
+                .FirstOrDefault(x => x.Key.User == caster).Key,
+            SkillTarget.Enemy => BattleManager.CurrentBattle!.Users
+                .FirstOrDefault(x => x.Key.User == enemy).Key,
+            _ => null
+        };
         target?.AdvanceMove((int)(target.ActionPointer / target.User.Speed * Amount));
+        BattleManager.CurrentBattle?.Interface.AddBattleLogLines(
+            new Text($"{target} {locale.AdvancesMove} {locale.By} {Amount:P}", Stylesheet.Styles["default"]));
     }
 }

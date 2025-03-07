@@ -1,8 +1,10 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Utilities;
 using Spectre.Console;
+using Spectre.Console.Rendering;
 
 namespace ConsoleGodmist.TextService;
 
@@ -28,8 +30,33 @@ public static class CharacterEventTextService
             if (damageType.Key != damage.Keys.Last())
                 AnsiConsole.Write(new Text("+", Stylesheet.Styles["default"]));
         }
-        AnsiConsole.Write(new Text($" {locale.DamageGenitive}\n", Stylesheet.Styles["default"]));
+        AnsiConsole.Write(new Text($" {locale.DamageGenitive}", Stylesheet.Styles["default"]));
     }
+    public static void DisplayBattleTakeDamageText(Character character, Dictionary<DamageType, int> damage)
+    {
+        var txt = new List<Markup>
+        {
+            new($"{character.Name} {locale.Takes} ", Stylesheet.Styles["default"])
+        };
+        foreach (var damageType in damage)
+        {
+            var style = damageType.Key switch
+            {
+                DamageType.Physical => Stylesheet.Styles["damage-physical"],
+                DamageType.Magic => Stylesheet.Styles["damage-magic"],
+                DamageType.Bleed => Stylesheet.Styles["damage-bleed"],
+                DamageType.Poison => Stylesheet.Styles["damage-poison"],
+                DamageType.Burn => Stylesheet.Styles["damage-burn"],
+                DamageType.True => Stylesheet.Styles["damage-true"],
+                _ => Stylesheet.Styles["default"]
+            };
+            txt.Add(new Markup($"{damageType.Value}", style));
+            if (damageType.Key != damage.Keys.Last())
+                txt.Add(new Markup("+", Stylesheet.Styles["default"]));
+        }
+        txt.Add(new Markup($" {locale.DamageGenitive}", Stylesheet.Styles["default"]));
+        BattleManager.CurrentBattle?.Interface.AddBattleLogLines(new Columns(txt).Collapse().Padding(0,0));
+    } 
 
     public static void DisplayHealText(Character character, int heal)
     {
@@ -114,56 +141,7 @@ public static class CharacterEventTextService
             _ => throw new ArgumentOutOfRangeException(nameof(honorLevel), honorLevel, null)
         });
     }
-    public static void DisplayStatusEffectText(Character target, StatusEffect statusEffect)
-    {
-        switch (statusEffect.Type)
-        {
-            case StatusEffectType.Bleed:
-                AnsiConsole.Write(new Text($"{target.Name} {locale.Bleeds} {locale.And1} {locale.Takes}", Stylesheet.Styles["default"]));
-                AnsiConsole.Write(new Text($" {(int)((DoTStatusEffect)statusEffect).Strength}", Stylesheet.Styles["damage-bleed"]));
-                AnsiConsole.Write(new Text($" {locale.DamageGenitive} {locale.ForTheNext} " +
-                                           $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
-                break;
-            case StatusEffectType.Buff:
-                break;
-            case StatusEffectType.Debuff:
-                break;
-            case StatusEffectType.Poison:
-                AnsiConsole.Write(new Text($"{target.Name} {locale.IsPoisoned} {locale.And1} {locale.Takes}", Stylesheet.Styles["default"]));
-                AnsiConsole.Write(new Text($" {(int)((DoTStatusEffect)statusEffect).Strength}", Stylesheet.Styles["damage-poison"]));
-                AnsiConsole.Write(new Text($" {locale.DamageGenitive} {locale.ForTheNext} " +
-                                           $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
-                break;
-            case StatusEffectType.Burn:
-                AnsiConsole.Write(new Text($"{target.Name} {locale.Burns} {locale.And1} {locale.Takes}", Stylesheet.Styles["default"]));
-                AnsiConsole.Write(new Text($" {(int)((DoTStatusEffect)statusEffect).Strength}", Stylesheet.Styles["damage-burn"]));
-                AnsiConsole.Write(new Text($" {locale.DamageGenitive} {locale.ForTheNext} " +
-                                           $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
-                break;
-            case StatusEffectType.Stun:
-                AnsiConsole.Write(new Text($"{target.Name} is stunned {locale.And1} cannot move {locale.ForTheNext} " +
-                                           $"{statusEffect.Duration} {locale.Turns}\n", Stylesheet.Styles["default"]));
-                break;
-            case StatusEffectType.Freeze:
-                break;
-            case StatusEffectType.Frostbite:
-                break;
-            case StatusEffectType.Sleep:
-                break;
-            case StatusEffectType.Invisible:
-                break;
-            case StatusEffectType.Paralysis:
-                break;
-            case StatusEffectType.Provocation:
-                break;
-            case StatusEffectType.Shield:
-                break;
-            case StatusEffectType.Regeneration:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
+
 
     public static void DisplayCharacterMenuText(PlayerCharacter player)
     {

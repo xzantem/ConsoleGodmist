@@ -1,6 +1,8 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
+using Spectre.Console;
 
 namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 
@@ -27,23 +29,35 @@ public class BuffStat : IActiveSkillEffect
 
     public void Execute(Character caster, Character enemy, string source)
     {
-        switch (Target)
+        var target = Target switch
         {
-            case SkillTarget.Self:
-                if (Random.Shared.NextDouble() < BuffChance)
-                {
-                    caster.AddModifier(StatToBuff,
-                        new StatModifier(ModifierType, BuffStrength, source, BuffDuration));
-                }
-                break;
-            case SkillTarget.Enemy:
-                if (Random.Shared.NextDouble() <
-                    UtilityMethods.EffectChance(enemy.Resistances[StatusEffectType.Buff].Value(enemy, "BuffResistance"), BuffChance))
-                {
-                    enemy.AddModifier(StatToBuff,
-                        new StatModifier(ModifierType, BuffStrength, source, BuffDuration));
-                }
-                break;
-        }
+            SkillTarget.Self => caster,
+            SkillTarget.Enemy => enemy
+        };
+        if (!(Random.Shared.NextDouble() < BuffChance)) return;
+        target.AddModifier(StatToBuff,
+            new StatModifier(ModifierType, BuffStrength, source, BuffDuration));
+        var txt1 = StatToBuff switch
+        {
+            StatType.MaximalHealth => $"{locale.HealthC}",
+            StatType.MinimalAttack => $"{locale.MinimalAttack}",
+            StatType.MaximalAttack => $"{locale.MaximalAttack}",
+            StatType.Dodge => $"{locale.Dodge}",
+            StatType.PhysicalDefense => $"{locale.PhysicalDefense}",
+            StatType.MagicDefense => $"{locale.MagicDefense}",
+            StatType.CritChance => $"{locale.CritChance}",
+            StatType.Speed => $"{locale.Speed}",
+            StatType.Accuracy => $"{locale.Accuracy}",
+            StatType.MaximalResource => $"{locale.MaximalResource}",
+        };
+        var txt2 = ModifierType switch
+        {
+            ModifierType.Relative or ModifierType.Multiplicative => $"{BuffStrength:P}",
+            ModifierType.Absolute or ModifierType.Additive => $"{BuffStrength:#}",
+        };
+        BattleManager.CurrentBattle?.Interface.AddBattleLogLines(
+            new Text($"{target.Name}: {txt1} {locale.IsBuffed} {txt2} {locale.ForTheNext} {BuffDuration} {locale.Turns}", Stylesheet.Styles["default"]));
+
+
     }
 }

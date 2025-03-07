@@ -35,10 +35,10 @@ public class EnemyCharacter : Character
         DropTable = new DropTable(other.DropTable.Table.ToList());
         var diffFactor = GameSettings.Difficulty switch
         {
-            Difficulty.Easy => 0.5,
+            Difficulty.Easy => 0.75,
             Difficulty.Normal => 1,
-            Difficulty.Hard => 1.5,
-            Difficulty.Nightmare => 2,
+            Difficulty.Hard => 1.25,
+            Difficulty.Nightmare => 1.5,
             _ => throw new ArgumentOutOfRangeException(nameof(GameSettings.Difficulty), GameSettings.Difficulty, null)
         };
         _maximalHealth = new Stat(other._maximalHealth.BaseValue * diffFactor, other._maximalHealth.ScalingFactor * diffFactor);

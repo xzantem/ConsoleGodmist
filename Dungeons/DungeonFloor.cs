@@ -30,11 +30,11 @@ public class DungeonFloor
         Corridor = new List<DungeonCorridor>();
         Dictionary<DungeonFieldType, int> weights = new()
         {
-            {DungeonFieldType.Empty, 9},
-            {DungeonFieldType.Plant, 4},
-            {DungeonFieldType.Battle, difficulty},
-            {DungeonFieldType.Bonfire, 4},
-            {DungeonFieldType.Trap, 1 + difficulty},
+            {DungeonFieldType.Empty, 16},
+            {DungeonFieldType.Plant, 8},
+            {DungeonFieldType.Battle, 2 * difficulty},
+            {DungeonFieldType.Bonfire, 8},
+            {DungeonFieldType.Trap, 1 + 2 * difficulty},
             {DungeonFieldType.Stash, 1}
         };
         for (var i = 0; i < length; i++)

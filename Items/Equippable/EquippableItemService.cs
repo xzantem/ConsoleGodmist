@@ -173,16 +173,16 @@ public static class EquippableItemService
         return components.Select(component => component.EffectType switch
             {
                 "BleedOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
-                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5, source,
-                            StatusEffectType.Bleed, component.EffectStrength)
+                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5,
+                            "Bleed", component.EffectStrength)
                         .Execute(player, data.Target?.User, source), player, source),
                 "PoisonOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
-                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5, source,
-                            StatusEffectType.Poison, component.EffectStrength)
+                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5,
+                            "Poison", component.EffectStrength)
                         .Execute(player, data.Target?.User, source), player, source),
                 "BurnOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
-                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5, source,
-                            StatusEffectType.Burn, component.EffectStrength)
+                    data => new InflictDoTStatusEffect(SkillTarget.Enemy, 2, 0.5,
+                            "Burn", component.EffectStrength)
                         .Execute(player, data.Target?.User, source), player, source),
                 "HealOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
                     data => new HealTarget(SkillTarget.Self, component.EffectStrength, DamageBase.Random).Execute(
@@ -193,12 +193,12 @@ public static class EquippableItemService
                 "AdvanceMoveOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
                     data => data.Source.AdvanceMove((int)component.EffectStrength), player, source),
                 "StunOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
-                    data => new InflictGenericStatusEffect(StatusEffectType.Stun, 1, component.EffectStrength,
-                        source, "Stun").Execute(player, data.Target?.User, source), player,
+                    data => new InflictGenericStatusEffect("Stun", 1, component.EffectStrength,
+                        source).Execute(player, data.Target?.User, source), player,
                     source),
                 "FreezeOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
-                    data => new InflictGenericStatusEffect(StatusEffectType.Freeze, 1, component.EffectStrength,
-                        source, "Stun").Execute(player, data.Target?.User, source), player,
+                    data => new InflictGenericStatusEffect("Freeze", 1, component.EffectStrength,
+                        source).Execute(player, data.Target?.User, source), player,
                     source),
                 "SlowOnHit" => new ListenerPassiveEffect(data => data.EventType == "OnHit",
                     data => new DebuffStat(SkillTarget.Enemy, StatType.Speed, ModifierType.Additive, 20,

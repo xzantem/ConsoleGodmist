@@ -5,6 +5,7 @@ using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.TextService;
 using ConsoleGodmist.Utilities;
+using Spectre.Console;
 
 namespace ConsoleGodmist.Combat.Skills;
 
@@ -43,8 +44,11 @@ public class ActiveSkill
             (caster.User.ResourceType != ResourceType.Fury || 
              !(Math.Abs(caster.User.MaximalResource - caster.User.CurrentResource) < 0.001)) && resourceCost > 0) || 
             caster.CurrentActionPoints < caster.MaxActionPoints.BaseValue * ActionCost) return; // Skill not used, too little Resource or ActionPoints, TODO: Split conditions, add info banner
-        var toHit = CheckHit(caster.User, enemy.User);
-        ActiveSkillTextService.DisplayUseSkillText(caster.User, enemy.User, this, AlwaysHits ? 1 : toHit.Item2);
+        var toHit = AlwaysHits ? (true, 1) : CheckHit(caster.User, enemy.User);
+        BattleManager.CurrentBattle!.Interface.AddBattleLogLines(new Text(Effects.Any(x => x.Target == SkillTarget.Enemy)?
+                $"{caster.User.Name} {locale.Uses} {Name} {locale.On} {enemy.User.Name}! ({locale.ToHit}: {toHit.Item2:P0})" : 
+                $"{caster.User.Name} {locale.Uses} {Name}!", 
+            Stylesheet.Styles["default"]));
         caster.User.UseResource(resourceCost);
         caster.UseActionPoints(caster.MaxActionPoints.BaseValue * ActionCost);
         foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Self)) 
@@ -54,9 +58,11 @@ public class ActiveSkill
             for (var i = 0; i < Hits; i++)
             {
                 {
-                    if (!toHit.Item1 && !AlwaysHits)
+                    if (!toHit.Item1)
                     {
-                        ActiveSkillTextService.DisplayMissText(caster.User);
+                        BattleManager.CurrentBattle.Interface.AddBattleLogLines(new Text(
+                            $"{caster.User.Name} {locale.Misses}!",
+                            Stylesheet.Styles["default"]));
                         continue;
                     }
                     foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Enemy))

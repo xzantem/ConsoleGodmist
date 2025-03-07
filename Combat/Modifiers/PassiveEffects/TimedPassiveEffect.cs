@@ -20,4 +20,8 @@ public class TimedPassiveEffect(Character owner, string source, string type, int
     {
         Duration += turns;
     }
+    
+    public void UpdateOnTick(Action newOnTick) {
+        onTick = newOnTick;
+    }
 }

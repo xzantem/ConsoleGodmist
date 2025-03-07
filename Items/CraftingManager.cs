@@ -75,12 +75,15 @@ public static class CraftingManager
             var ingredientStr = new List<string>();
             foreach (var ingredient in item.CraftingRecipe)
             {
-                var ingredientItem = new KeyValuePair<IItem, int>(ItemManager.GetItem(ingredient.Key), ingredient.Value);
+                var ingredientItem =
+                    new KeyValuePair<IItem, int>(ItemManager.GetItem(ingredient.Key), ingredient.Value);
                 var itemCount = Inventory.Items.GetValueOrDefault(ingredientItem.Key, 0);
                 ingredientStr.Add($"{ingredientItem.Key.Name} " + $"({itemCount}/{ingredientItem.Value})");
             }
+
             list.Add(mainStr + string.Join(", ", ingredientStr));
         }
+
         var choices = list.ToArray();
         if (choices.Length <= 1)
             return null;

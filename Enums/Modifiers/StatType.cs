@@ -12,6 +12,4 @@ public enum StatType
     Speed,
     Accuracy,
     MaximalResource,
-    DamageDealt,
-    DamageTaken
 }

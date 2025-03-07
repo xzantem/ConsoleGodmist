@@ -147,10 +147,13 @@ namespace ConsoleGodmist.Characters
             var damageTaken = damage
                 .ToDictionary(damageType => damageType.Key, 
                     damageType => (double)DamageMitigated(damageType.Value, damageType.Key, source));
-            CharacterEventTextService.DisplayTakeDamageText(this, damageTaken
-                .ToDictionary(x => x.Key, x => (int)x.Value));
-            var shields = StatusEffects
-                .Where(effect => effect.Type == StatusEffectType.Shield).Cast<Shield>().ToList();
+            if (source is Character)
+                CharacterEventTextService.DisplayBattleTakeDamageText(this, damageTaken
+                    .ToDictionary(x => x.Key, x => (int)x.Value));
+            else
+                CharacterEventTextService.DisplayTakeDamageText(this, damageTaken
+                    .ToDictionary(x => x.Key, x => (int)x.Value));
+            var shields = PassiveEffects.TimedEffects.Where(e => e.Type == "Shield").ToList();
             var damageSum = damageTaken.Sum(x => x.Value);
             if (shields.Count > 0)
                 damageSum = StatusEffectHandler.TakeShieldsDamage(shields, this, damageSum);
@@ -159,10 +162,13 @@ namespace ConsoleGodmist.Characters
         public double TakeDamage(DamageType damageType, double damage, dynamic source)
         {
             double damageTaken = DamageMitigated(damage, damageType, source);
-            CharacterEventTextService.DisplayTakeDamageText
-                (this, new Dictionary<DamageType, int> { {damageType, (int)damageTaken}});
-            var shields = StatusEffects
-                .Where(effect => effect.Type == StatusEffectType.Shield).Cast<Shield>().ToList();
+            if (BattleManager.CurrentBattle != null)
+                CharacterEventTextService.DisplayBattleTakeDamageText
+                    (this, new Dictionary<DamageType, int> { { damageType, (int)damageTaken}});
+            else
+                CharacterEventTextService.DisplayTakeDamageText
+                    (this, new Dictionary<DamageType, int> { {damageType, (int)damageTaken}});
+            var shields = PassiveEffects.TimedEffects.Where(e => e.Type == "Shield").ToList();
             if (shields.Count > 0)
                 damageTaken = StatusEffectHandler.TakeShieldsDamage(shields, this, damageTaken);
             CurrentHealth -= damageTaken;

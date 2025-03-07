@@ -1,4 +1,5 @@
 ﻿using ConsoleGodmist.Characters;
+using ConsoleGodmist.Combat.Battles;
 using ConsoleGodmist.Combat.Modifiers;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.TextService;
@@ -46,7 +47,9 @@ public class DealDamage : IActiveSkillEffect
         if (Random.Shared.NextDouble() <
             UtilityMethods.CalculateModValue(0, target.PassiveEffects.GetModifiers("CritSaveChance"))) return damage;
         damage *= caster.CritMod;
-        ActiveSkillTextService.DisplayCritText(caster);
+        
+        BattleManager.CurrentBattle!.Interface.AddBattleLogLines(new Text($"{caster.Name} {locale.StrikesCritically}! ", 
+            Stylesheet.Styles["default"]));
         return damage;
     }
 
@@ -60,8 +63,8 @@ public class DealDamage : IActiveSkillEffect
         };
         var mitigatedDamage = Target switch
         {
-            SkillTarget.Self => caster.TakeDamage(DamageType, CalculateDamage(caster, caster), caster),
-            SkillTarget.Enemy => enemy.TakeDamage(DamageType, CalculateDamage(caster, enemy), caster),
+            SkillTarget.Self => caster.TakeDamage(DamageType, damage, caster),
+            SkillTarget.Enemy => enemy.TakeDamage(DamageType, damage, caster),
             _ => damage
         };
         if (!(LifeSteal > 0) || !(damage > 0)) return;

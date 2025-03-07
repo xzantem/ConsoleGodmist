@@ -8,13 +8,17 @@ namespace ConsoleGodmist.Combat.Skills.ActiveSkillEffects;
 public class ExtendDoT : IActiveSkillEffect
 {
     public SkillTarget Target { get; set; }
-    public StatusEffectType Type { get; set; }
+    public string DoTType { get; set; }
     public int Duration { get; set; }
 
-    public ExtendDoT(SkillTarget target, StatusEffectType type, int duration)
+    public ExtendDoT(SkillTarget target, string doTType, int duration)
     {
+        if (doTType != "Bleed" && doTType != "Poison" && doTType != "Burn")
+        {
+            throw new ArgumentException("Invalid DoT type. Must be Bleed, Poison, or Burn.");
+        }
         Target = target;
-        Type = type;
+        DoTType = doTType;
         Duration = duration;
     }
     
@@ -25,14 +29,14 @@ public class ExtendDoT : IActiveSkillEffect
         switch (Target)
         {
             case SkillTarget.Self:
-                foreach (var effect in caster.StatusEffects.Where(e => e.Type == Type))
+                foreach (var effect in caster.PassiveEffects.TimedEffects.Where(e => e.Type == DoTType))
                 {
                     effect.Extend(Duration);
                     return;
                 }
                 break;
             case SkillTarget.Enemy:
-                foreach (var effect in enemy.StatusEffects.Where(e => e.Type == Type))
+                foreach (var effect in caster.PassiveEffects.TimedEffects.Where(e => e.Type == DoTType))
                 {
                     effect.Extend(Duration);
                     return;

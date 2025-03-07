@@ -39,7 +39,7 @@ namespace ConsoleGodmist.Characters
             ActiveSkills[1] = new ActiveSkill("CrushingStrike", 30,0.7, false, 75,
                 [new DealDamage(DamageType.Physical, DamageBase.Minimal, 1, true, false, 0, 0),
                     new DebuffResistance(SkillTarget.Enemy, StatusEffectType.Stun, ModifierType.Additive, 0.3, 0.9, 3),
-                    new InflictGenericStatusEffect(StatusEffectType.Stun, 3, 0.5, "CrushingStrike", "")]);
+                    new InflictGenericStatusEffect("Stun", 3, 0.5, "CrushingStrike")]);
             ActiveSkills[2] = new ActiveSkill("Cure", 50, 0.4, true, 100,
             [new HealTarget(SkillTarget.Self, 1.5, DamageBase.Random)]);
             ActiveSkills[3] = new ActiveSkill("HolyTransfusion", 60, 0.65, true, 100,

@@ -31,7 +31,7 @@ namespace ConsoleGodmist.Town
             while (true)
             {
                 AnsiConsole.Clear();
-                AnsiConsole.Write(new FigletText(TownName).Centered().Color(Color.Gold3_1));
+                AnsiConsole.Write(new FigletText(TownName).Color(Color.Gold3_1));
                 string[] choices =
                 [
                     locale.StartExpedition, locale.Alchemist, locale.Blacksmith,

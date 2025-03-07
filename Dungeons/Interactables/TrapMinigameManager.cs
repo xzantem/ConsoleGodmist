@@ -321,12 +321,12 @@ public static class TrapMinigameManager
                         .Title(locale.GambaGridTitle)
                         .PageSize(9)
                         .InstructionsText(
-                            $"Space: {locale.Select}, " + 
-                            $"Enter: {locale.Accept}")
+                            $"{locale.Space}: {locale.Select}, " + 
+                            $"Enter, Bomb Position ({bombPosition}): {locale.Accept}")
                         .AddChoices(items).Required().WrapAround());
             }
 
-            if (choices.Any(choice => Array.IndexOf(choices.ToArray(), choice) == bombPosition))
+            if (choices.Any(choice => Array.IndexOf(items.ToArray(), choice) == bombPosition))
             {
                 tries--;
                 AnsiConsole.Write(new Text($"{locale.BombTriggered} ", Stylesheet.Styles["failure"]));

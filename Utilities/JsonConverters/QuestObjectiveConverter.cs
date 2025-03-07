@@ -21,10 +21,10 @@ public class QuestObjectiveConverter : JsonConverter
 
         IQuestObjective result = type switch
         {
-            "KillQuestObjective" => new KillQuestObjective(),
-            "KillInDungeonQuestObjective" => new KillInDungeonQuestObjective(),
-            "TalkQuestObjective" => new TalkQuestObjective(),
             "DescendQuestObjective" => new DescendQuestObjective(),
+            "KillInDungeonQuestObjective" => new KillInDungeonQuestObjective(),
+            "KillQuestObjective" => new KillQuestObjective(),
+            "TalkQuestObjective" => new TalkQuestObjective(),
             _ => throw new NotSupportedException($"Unknown type: {type}")
         };
 

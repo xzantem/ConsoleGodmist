@@ -41,6 +41,11 @@ public class PassiveEffectList
             effect.Tick();
     }
 
+    public bool CanMove()
+    {
+        return !TimedEffects.Any(e => e.Type is "Stun" or "Freeze" or "Sleep");
+    }
+
     public void ExtendEffects(int turns)
     {
         foreach (var effect in TimedEffects)

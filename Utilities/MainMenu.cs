@@ -12,7 +12,7 @@ namespace ConsoleGodmist.Utilities
     {
         public static void Menu()
         {
-            AnsiConsole.Write(new FigletText("Godmist").Centered().Color(Color.DarkViolet_1));
+            AnsiConsole.Write(new FigletText("Godmist").Color(Color.DarkViolet_1));
             while(true)
             {
                 string[] choices = [locale.NewGame, locale.LoadGame, locale.DeleteSaveFile, locale.ChooseLanguage, locale.ExitGame
@@ -56,7 +56,7 @@ namespace ConsoleGodmist.Utilities
         private static void NewGame()
         {
             TownsHandler.Arungard = new Town.Town("Arungard");
-            string[] choices = [$"{locale.Easy} (50%)", $"{locale.Normal} (100%)", $"{locale.Hard} (150%)", $"{locale.Nightmare} (200%)"
+            string[] choices = [$"{locale.Easy}", $"{locale.Normal}", $"{locale.Hard}", $"{locale.Nightmare}"
             ];
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices)
@@ -84,7 +84,7 @@ namespace ConsoleGodmist.Utilities
             ];
             var choice1 = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices1)
-                .Title($"\n...: {locale.Iam} ")
+                .Title($"\n???: {locale.Iam} ")
                 .HighlightStyle(new Style(Color.MediumPurple3)).WrapAround());
             var characterClass = Array.IndexOf(choices1, choice1) switch
             {
@@ -94,8 +94,8 @@ namespace ConsoleGodmist.Utilities
                 3 => CharacterClass.Paladin,
                 _ => CharacterClass.Warrior
             };
-            Console.WriteLine($"\n...: {locale.Iam} {choice1}");
-            var prompt = new TextPrompt<string>($"...: {locale.MyNameIs} ").Validate(n => n.Length switch
+            Console.WriteLine($"\n???: {locale.Iam} {choice1}");
+            var prompt = new TextPrompt<string>($"???: {locale.MyNameIs} ").Validate(n => n.Length switch
             {
                 > 32 => ValidationResult.Error(locale.NameTooLong),
                 <= 32 => ValidationResult.Success(),
@@ -109,7 +109,6 @@ namespace ConsoleGodmist.Utilities
                 CharacterClass.Paladin => new Paladin(name),
                 _ => throw new NotImplementedException()
             };
-            PlayerHandler.player.GainGold(100000);
         }
     }
 }

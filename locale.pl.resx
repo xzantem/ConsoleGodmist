@@ -559,7 +559,7 @@
     <value>Rusza się</value>
   </data>
   <data name="TurnOrder" xml:space="preserve">
-    <value>Nowa kolejność</value>
+    <value>Kolejka Ruchów</value>
   </data>
   <data name="Victory" xml:space="preserve">
     <value>Wygrana</value>
@@ -924,7 +924,7 @@
   <data name="ArmorDestroyed" xml:space="preserve">
     <value>Pancerz zniszczony</value>
   </data>
-  <data name="CannotMove" xml:space="preserve">
+  <data name="CannotMoveThisTurn" xml:space="preserve">
     <value>nie może się ruszyć w tej turze</value>
   </data>
   <data name="Regeneration" xml:space="preserve">
@@ -3758,5 +3758,77 @@
   </data>
   <data name="Turn" xml:space="preserve">
     <value>TURA</value>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>Umiejętności</value>
+  </data>
+  <data name="PassiveEffects" xml:space="preserve">
+    <value>Efekty pasywne</value>
+  </data>
+  <data name="ChangeAdditionalCharacterInfo" xml:space="preserve">
+    <value>Zmień wyświetlane informacje o postaci</value>
+  </data>
+  <data name="ScrollBattleLogUp" xml:space="preserve">
+    <value>Przewiń log walki do góry</value>
+  </data>
+  <data name="ScrollBattleLogDown" xml:space="preserve">
+    <value>Przewiń log walki w dół</value>
+  </data>
+  <data name="ChangeDisplayedCharacter" xml:space="preserve">
+    <value>Zmień wyświetlaną postać</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Statystyki</value>
+  </data>
+  <data name="BattleLog" xml:space="preserve">
+    <value>Log Walki</value>
+  </data>
+  <data name="Space" xml:space="preserve">
+    <value>Spacja</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Niedostępne</value>
+  </data>
+  <data name="ConfirmEndTurn" xml:space="preserve">
+    <value>Czy na pewno chcesz zakończyć turę? Nadal możesz użyć niektórych umiejętności</value>
+  </data>
+  <data name="Taking" xml:space="preserve">
+    <value>otrzymując</value>
+  </data>
+  <data name="CannotMove" xml:space="preserve">
+    <value>nie może się ruszać</value>
+  </data>
+  <data name="IsStunned" xml:space="preserve">
+    <value>jest ogłuszony</value>
+  </data>
+  <data name="IsFrozen" xml:space="preserve">
+    <value>jest zamrożony</value>
+  </data>
+  <data name="AdvancesMove" xml:space="preserve">
+    <value>przyspiesza swój następny ruch</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>o</value>
+  </data>
+  <data name="IsBuffed" xml:space="preserve">
+    <value>zwiększa się o</value>
+  </data>
+  <data name="MinimalAttack" xml:space="preserve">
+    <value>Minimalny atak</value>
+  </data>
+  <data name="MaximalAttack" xml:space="preserve">
+    <value>Maksymalny atak</value>
+  </data>
+  <data name="PhysicalDefense" xml:space="preserve">
+    <value>Obrona fizyczna</value>
+  </data>
+  <data name="MagicDefense" xml:space="preserve">
+    <value>Obrona magiczna</value>
+  </data>
+  <data name="MaximalResource" xml:space="preserve">
+    <value>Maksymalny surowiec</value>
+  </data>
+  <data name="IsDebuffed" xml:space="preserve">
+    <value>zmniejsza się o</value>
   </data>
 </root>

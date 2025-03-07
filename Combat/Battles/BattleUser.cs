@@ -22,6 +22,16 @@ public class BattleUser
         ResetAction();
     }
 
+    public BattleUser(BattleUser other)
+    {
+        User = other.User;
+        MovedThisTurn = other.MovedThisTurn;
+        ActionPointer = other.ActionPointer;
+        ActionValue = other.ActionValue;
+        MaxActionPoints = other.MaxActionPoints;
+        CurrentActionPoints = other.CurrentActionPoints;
+    }
+
     public void ResetAction()
     {
         ActionPointer = Math.Pow(10, ActionPointerInitial);
