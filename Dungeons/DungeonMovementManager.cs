@@ -34,6 +34,7 @@ public static class DungeonMovementManager
     {
         while(!Exited)
         {
+            DungeonTextService.DisplayDungeonFloor(CurrentDungeon);
             DungeonTextService.DisplayDungeonMap(CurrentDungeon, LocationIndex, CurrentLocation);
             switch (ChooseAction())
             {
@@ -155,7 +156,7 @@ public static class DungeonMovementManager
             .HighlightStyle(new Style(Color.MediumPurple3)).WrapAround());
         if (choices[choice] >= 0 && choices[choice] <= 3)
             LastMovement = choices[choice];
-        UtilityMethods.ClearConsole(2);
+        UtilityMethods.ClearConsole(4);
         return choices[choice];
     }
 
@@ -212,9 +213,7 @@ public static class DungeonMovementManager
 
     private static void OnMove()
     {
-        //StatusEffectHandler.HandleEffects(PlayerHandler.player.StatusEffects, PlayerHandler.player);
         PlayerHandler.player.HandleModifiers(); 
-        //PlayerHandler.player.PassiveEffects.HandleBattleEvent(new BattleEventData("PerTurn", PlayerHandler.player));
         PlayerHandler.player.PassiveEffects.TickEffects();
         if (PlayerHandler.player.CurrentHealth <= 0)
         {

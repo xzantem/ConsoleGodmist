@@ -224,10 +224,57 @@ public static class TrapMinigameManager
     {
         string[] words = difficulty switch
         {
-            Difficulty.Easy => ["MALAD", "MIST"], // 3-4 unique letters
-            Difficulty.Normal => ["GHORN", "ARUNGARD", "CERIA", "NYLIA", "GAERASAR"], // 5 unique letters
-            Difficulty.Hard => ["ARUNGARD", "SIDRIEL", "KALIGAR", "TYWYLLYCH", "MELEAUX", ], // 6 unique letters
-            Difficulty.Nightmare => ["DIMONEHRIN", "TREGANDA", "SHELLANIA", "KHILRAM", "THALONIA"], // 7 unique letters
+            Difficulty.Easy =>
+            [
+            "MALAD", "MIST", "FIRM", "GOLD", "JUMP", "WIND", "CRUX", "VAST", "ZEAL", "LUSH",
+            "BOLD", "GRIT", "RISK", "CALM", "FAIR", "DEFT", "HUSH", "KNIT", "LAZY", "MEAL",
+            "NEST", "OATH", "PEAR", "QUIZ", "RIFT", "SWAN", "TOMB", "VINE", "WAVE", "YARN",
+            "ZEST", "BLUR", "CHAR", "DOCK", "ELMS", "FANG", "GLOW", "HORN", "IVY", "JOLT",
+            "KITE", "LACE", "MINT", "NOVA", "ORCA", "PLUM", "QUAD", "RUNE", "SKIM", "TRIM",
+            "UPON", "VIAL", "WISP", "XYLO", "YOLK", "ZONE", "ALMS", "BRIM", "CHOP", "DRUM",
+            "ECHO", "FLUX", "GAZE", "HERO", "INCH", "JURY", "KNOB", "LUCK", "MOAT", "NUDE",
+            "OPAL", "PIKE", "QUIP", "ROAM", "SNOW", "TRACE", "UMBRA", "VEXED", "WREAK",
+            "XENON", "YEARN", "ABLY", "BAIT", "CREW", "DUSK", "EMBER", "FROG", "GRIM",
+            "HAZE", "IVORY", "JOKER", "KNOCK", "LIGHT", "MAGIC", "NOTCH", "OZONE", "POWER",
+            "QUIRK", "RHYME", "SWORD", "THRUM", "KUSEK"
+            ], // 3-4 unique letters
+            Difficulty.Normal =>
+            [
+            "PLANT", "STONE", "BRAVE", "CLOUD", "FLOUR", "SHINY", "GLIDE", "ROGUE", "CRISP", "DWELL",
+            "FRUIT", "KNAVE", "QUILT", "STORM", "WAGER", "FROST", "BLAZE", "NORTH", "SHARD", "TOWER",
+            "WISER", "GLORY", "MARCH", "PEARL", "MIRTH", "SCOUT", "DEALT", "EPOCH", "LANCE", "PRIME",
+            "SHOUT", "VIGOR", "SWEEP", "UNITE", "WORTH", "CITRO", "DREAM", "FLOAT", "HUMOR", "JOUST",
+            "KNOLL", "LIVID", "MOUNT", "NOVEL", "OCTAL", "PATIO", "RAVEN", "SLEEP", "TRUTH", "VISTA",
+            "WORST", "ABYSS", "BISON", "CRAVE", "DUSKY", "ELFIN", "FLARE", "GUILD", "HAVEN", "INFER",
+            "JOLLY", "KNOCK", "LOYAL", "MAGIC", "NEVER", "OCEAN", "PLUSH", "QUIRK", "RELAX", "SOLID",
+            "THORN", "URBAN", "VIRAL", "WOVEN", "YIELD", "ZEBRA", "ANGEL", "BEAST", "CHARM", "DAUNT",
+            "EAGLE", "FABLE", "GRASP", "HONOR", "IMAGE", "JUNIP", "KAPPA", "LEMON", "MYSTO", "NIMBL",
+            "OPERA", "PLAZA", "QUIET", "REBEL", "STORM", "TORCH", "URSAE", "VIXEN", "WALTZ", "XYLAN"
+            ], // 5 unique letters
+            Difficulty.Hard =>
+            [
+            "MARKED", "JUNGLE", "HARBOR", "SILVER", "BORDER", "FROSTY", "VELVET", "THRONE", "PRANCE", "GLYPHS",
+            "MELLOW", "KNIGHT", "SWERVE", "FORGED", "PLIGHT", "ABOUND", "BLITHE", "CIPHER", "DRENCH", "FIERCE",
+            "GRAVEL", "HUMBLE", "INSPIRE", "JAGGED", "KERNEL", "LANTER", "MAGNET", "NOVICE", "OYSTER", "PONDER",
+            "QUAINT", "RUSTIC", "SPLICE", "TRUDGE", "UPROOT", "VORTEX", "WHIRLY", "XYLOID", "YOUNGS", "ZODIAC",
+            "ANGLER", "BRISKY", "CANYON", "DUSTER", "ENGULF", "FLORAL", "GROUSE", "HUNTER", "INVOKE", "JIGSAW",
+            "KARMIC", "LEGACY", "MIRROR", "NESTLE", "OBLATE", "PLUNGE", "QUAVER", "RAVISH", "SUMMIT", "TWIRLS",
+            "UPTAKE", "VALISE", "WREAKS", "XENOPS", "YEOMAN", "ZITHER", "AUSTIN", "BOSQUE", "CLEFTS", "DODGER",
+            "ESSENT", "FOSSIL", "GLOWER", "HICKLE", "IMPACT", "JOCKEY", "KETTLE", "LURING", "MASCOT", "NIMBLE",
+            "OCTAVE", "PORTAL", "QUIZZY", "REVERB", "SELDOM", "TUNICS", "URGENT", "VERBAL", "WALTZ", "XYLENE"
+            ], // 6 unique letters
+            Difficulty.Nightmare =>
+            [
+            "MANDOLINE", "SHIPWRECK", "LABYRINTH", "TURBULENT", "ADVENTURE", "SHADOWING", "NOSTALGIA", "PROMPTING", 
+            "LIGHTNING", "TRANQUIL", "CHRONICLE", "RESONANCE", "WINDSWEPT", "BREATHTAKING", "MISFORTUNE", "WHIRLPOOL",
+            "CONQUEST", "BREAKFAST", "TOLERANCE", "EXISTENCE", "SYNERGIZE", "AMPLITUDE", "BACKSTORY", "EPHEMERAL",
+            "FORESHADOW", "GALVANIZE", "HARMONIZE", "INCENTIVE", "JOURNALING", "KINDLINESS", "LUXURIOUS", "MESMERIZE",
+            "NONENTITY", "OBSIDIAN", "PANDEMONY", "QUOTATION", "RADIATION", "SIMPLICITY", "TEMPTATION", "UNFATHOMED",
+            "VIBRATION", "WONDERFUL", "XYLOPHONE", "YOUNGERLY", "ZENITHAL", "ALGORITHM", "BITTERNESS", "CONVERGENCE",
+            "DIVERSION", "ENHANCERS", "FRAGMENT", "GLORIOUS", "HALLMARK", "INTRICATE", "JEOPARDY", "KILOGRAMS",
+            "LUMINANCE", "MELODIOUS", "NEGATIVE", "OBLIVIOUS", "PERSUADED", "QUIVERING", "REPLENISH", "SUSPICION",
+            "TANGIBLES", "UPHOLSTER", "VEGETABLE", "WONDERING", "XEROGRAPH", "YESTERDAY", "ZIGZAGGED"
+            ], // 7+ unique letters
             _ => [""]
         };
         var word = words[Random.Shared.Next(0, words.Length)];
@@ -243,6 +290,8 @@ public static class TrapMinigameManager
             colors.Remove(color);
         }
         AnsiConsole.Write(new Text($"{locale.ColorChallengeIntro}\n"));
+        var notInWord = new HashSet<char>();
+        var inWord = new HashSet<char>();
         while (true)
         {
             var canvas = new Canvas(word.Length, 1);
@@ -252,6 +301,10 @@ public static class TrapMinigameManager
             }
             AnsiConsole.Write(new Text($"{locale.WordEncoded}: \n"));
             AnsiConsole.Write(canvas);
+            if (inWord.Count != 0)
+                AnsiConsole.Write($"\n{locale.InWord}: {string.Join(", ", inWord)}");
+            if (notInWord.Count != 0)
+                AnsiConsole.Write($"\n{locale.NotInWord}: {string.Join(", ", notInWord)}");
             AnsiConsole.Write("\n");
             var typedWord = AnsiConsole.Prompt(
                 new TextPrompt<string>($"{locale.TypeDecodedWord}: ")
@@ -267,11 +320,20 @@ public static class TrapMinigameManager
             {
                 var txt = new Text("");
                 if (word[i] == typedWord[i])
+                {
+                    inWord.Add(typedWord[i]);
                     txt = new Text($"{locale.LetterAtPosition} {i + 1} {locale.CorrectWordAndPosition}\n", Stylesheet.Styles["rarity-uncommon"]);
+                }
                 else if (word.Contains(typedWord[i]))
+                {
+                    inWord.Add(typedWord[i]);
                     txt =  new Text($"{locale.LetterAtPosition} {i + 1} {locale.CorrectWordWrongPosition}\n", Stylesheet.Styles["rarity-ancient"]);
+                }
                 else
+                {
+                    notInWord.Add(typedWord[i]);
                     txt =  new Text($"{locale.LetterAtPosition} {i + 1} {locale.WrongLetter}\n", Stylesheet.Styles["rarity-damaged"]);
+                }
                 AnsiConsole.Write(txt);
             }
         }

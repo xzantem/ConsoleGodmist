@@ -34,6 +34,13 @@
     <Compile Remove="Items\Lootbags\ArmorLootbag.cs" />
     <Compile Remove="SkillEditor\**" />
     <Compile Remove="Text\ActiveSkillTextService.cs" />
+    <Compile Remove="Combat\Modifiers\StatusEffects\Frostbite.cs" />
+    <Compile Remove="Combat\Modifiers\StatusEffects\DoTStatusEffect.cs" />
+    <Compile Remove="Combat\Modifiers\StatusEffects\Freeze.cs" />
+    <Compile Remove="Combat\Modifiers\StatusEffects\Regeneration.cs" />
+    <Compile Remove="Combat\Modifiers\StatusEffects\Shield.cs" />
+    <Compile Remove="Combat\Modifiers\StatusEffects\Sleep.cs" />
+    <Compile Remove="Combat\Modifiers\StatusEffects\StatusEffect.cs" />
   </ItemGroup>
 
   <ItemGroup>

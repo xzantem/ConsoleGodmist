@@ -9,9 +9,9 @@ namespace ConsoleGodmist.Quests;
 
 public static class QuestManager
 {
-    public static List<Quest> MainQuests { get; set; }
-    public static List<Quest> RandomizedSideQuests { get; set; }
-    public static List<Quest> BossSideQuests { get; set; }
+    public static List<Quest>? MainQuests { get; set; }
+    public static List<Quest>? RandomizedSideQuests { get; set; }
+    public static List<Quest>? BossSideQuests { get; set; }
 
     public static List<Quest> Quests
     {
@@ -24,7 +24,7 @@ public static class QuestManager
             return quests;
         }
     }
-    public static Dictionary<DungeonType, int> BossProgress { get; set; }
+    public static Dictionary<DungeonType, int>? BossProgress { get; set; }
     
     public const int QuestCount = 4;
     public const int ProgressTarget = 3;

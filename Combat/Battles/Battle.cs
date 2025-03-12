@@ -82,7 +82,6 @@ public class Battle(Dictionary<BattleUser, int> usersTeams, DungeonField locatio
     }
     public void HandleEffects(BattleUser user)
     {
-        StatusEffectHandler.HandleEffects(user.User.StatusEffects, user.User);
         user.User.HandleModifiers();
         user.User.RegenResource((int)user.User.ResourceRegen);
         user.User.PassiveEffects.HandleBattleEvent(new BattleEventData("PerTurn", user));
@@ -161,10 +160,11 @@ public class Battle(Dictionary<BattleUser, int> usersTeams, DungeonField locatio
                 CheckForDead();
                 return false;
             case 2:
-                var potion = PotionManager.ChoosePotion((player.User as PlayerCharacter).Inventory.Items
+                /*var potion = PotionManager.ChoosePotion((player.User as PlayerCharacter).Inventory.Items
                     .Where(x => x.Key.ItemType == ItemType.Potion)
                     .Select(x => x.Key).Cast<Potion>().ToList(), false);
-                potion?.Use();
+                potion?.Use();*/
+                (player.User as PlayerCharacter).Inventory.UseItem(InventoryMenuHandler.ChooseUsableItem());
                 return false;
             case 3:
                 Interface.ChangeDisplayMode();
@@ -179,17 +179,17 @@ public class Battle(Dictionary<BattleUser, int> usersTeams, DungeonField locatio
                 Interface.ScrollBattleLog(false);
                 return false;
             case 7:
-                Interface.AddBattleLogLines(new Text($"{locale.TryEscape}...\n", Stylesheet.Styles["default"]));
+                Interface.AddBattleLogLines(new Text($"{locale.TryEscape}...", Stylesheet.Styles["default"]));
                 Interface.DisplayInterface(player, Users.Keys.ToList());
                 Thread.Sleep(2000);
                 if (!(Random.Shared.NextDouble() < 0.5 + EscapeAttempts * 0.1))
                 {
-                    Interface.AddBattleLogLines(new Text($"{locale.EscapeFail}!\n", Stylesheet.Styles["failure"]));
+                    Interface.AddBattleLogLines(new Text($"{locale.EscapeFail}!", Stylesheet.Styles["failure"]));
                     Interface.DisplayInterface(player, Users.Keys.ToList());
                     EscapeAttempts++;
                     return true;
                 }
-                Interface.AddBattleLogLines(new Text($"{locale.EscapeSuccess}!\n", Stylesheet.Styles["success"]));
+                Interface.AddBattleLogLines(new Text($"{locale.EscapeSuccess}!", Stylesheet.Styles["success"]));
                 Interface.DisplayInterface(player, Users.Keys.ToList());
                 (player.User as PlayerCharacter).LoseHonor((int)Users.Where(x => x.Value == 1)
                     .Average(x => x.Key.User.Level) / 3 + 4);
@@ -242,11 +242,6 @@ public class Battle(Dictionary<BattleUser, int> usersTeams, DungeonField locatio
         foreach (var deadUser in dead)
         {
             Interface.AddBattleLogLines(new Text($"{deadUser.Key.User.Name} {locale.Dies}", Stylesheet.Styles["value-lost"]));
-            QuestManager.CheckForProgress(
-                new QuestObjectiveContext((deadUser.Key.User as EnemyCharacter)?.Alias, deadUser.Key.User.Level));
-            QuestManager.CheckForProgress(
-                new QuestObjectiveContext(DungeonMovementManager.CurrentDungeon.DungeonType, 
-                    DungeonMovementManager.CurrentDungeon.DungeonType, deadUser.Key.User.Level));
             Users.Remove(deadUser.Key);
         }
     }

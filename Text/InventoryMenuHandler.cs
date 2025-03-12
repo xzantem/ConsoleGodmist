@@ -74,7 +74,7 @@ public static class InventoryMenuHandler
                 case 6:
                     AnsiConsole.Write(new Text($"{locale.ChooseItem} {locale.ToUse}:\n\n", 
                         Stylesheet.Styles["default"]));
-                    Inventory.UseItem(Inventory.Items.ElementAt(ChooseItem(false)).Key);
+                    Inventory.UseItem(ChooseUsableItem());
                     break;
                 case 7:
                     return;
@@ -99,6 +99,22 @@ public static class InventoryMenuHandler
             .AddChoices(choices)
             .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
         return Array.IndexOf(choices, choice);
+    }
+
+    public static IItem? ChooseUsableItem()
+    {
+        var tempIndex = 0;
+        var items = Inventory.Items.Where(x => x.Key is IUsable).ToList();
+        var choices = items.Select(item =>
+            (item.Key.Stackable
+                ? $"{1 + tempIndex++}. {item.Key.Name} - {item.Value}x"
+                : $"{1 + tempIndex++}. {item.Key.Name}").ToString()).ToArray();
+        if (choices.Length < 1)
+            return null;
+        var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            .AddChoices(choices)
+            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
+        return items[Array.IndexOf(choices, choice)].Key;
     }
     private static void DeleteItem()
     {

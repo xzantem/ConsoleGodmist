@@ -74,7 +74,15 @@ namespace ConsoleGodmist.Town
         }
         private Dungeon ChooseDungeon() {
             AnsiConsole.WriteLine(locale.SelectDestination);
-            string[] dungeonChoices = [locale.Catacombs, locale.Forest, locale.ElvishRuins, locale.Cove, locale.Desert, locale.Temple, locale.Mountains, locale.Swamp
+            string[] dungeonChoices = [
+                locale.Catacombs + $" ({locale.BossProgress}: {QuestManager.BossProgress[DungeonType.Catacombs] % QuestManager.ProgressTarget}/{QuestManager.ProgressTarget})", 
+                locale.Forest + $" ({locale.BossProgress}: {QuestManager.BossProgress[DungeonType.Forest] % QuestManager.ProgressTarget}/{QuestManager.ProgressTarget})", 
+                locale.ElvishRuins + $" ({locale.BossProgress}: {QuestManager.BossProgress[DungeonType.ElvishRuins] % QuestManager.ProgressTarget}/{QuestManager.ProgressTarget})", 
+                locale.Cove + $" ({locale.BossProgress}: {QuestManager.BossProgress[DungeonType.Cove] % QuestManager.ProgressTarget}/{QuestManager.ProgressTarget})",
+                locale.Desert + $" ({locale.BossProgress}: {QuestManager.BossProgress[DungeonType.Desert] % QuestManager.ProgressTarget}/{QuestManager.ProgressTarget})", 
+                locale.Temple + $" ({locale.BossProgress}: {QuestManager.BossProgress[DungeonType.Temple] % QuestManager.ProgressTarget}/{QuestManager.ProgressTarget})", 
+                locale.Mountains + $" ({locale.BossProgress}: {QuestManager.BossProgress[DungeonType.Mountains] % QuestManager.ProgressTarget}/{QuestManager.ProgressTarget})", 
+                locale.Swamp + $" ({locale.BossProgress}: {QuestManager.BossProgress[DungeonType.Swamp] % QuestManager.ProgressTarget}/{QuestManager.ProgressTarget})"
             ];
             var dungeonChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(dungeonChoices)

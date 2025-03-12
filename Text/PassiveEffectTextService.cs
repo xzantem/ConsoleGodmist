@@ -18,14 +18,24 @@ public static class PassiveEffectTextService
     
     public static Text ModifierText(StatModifier modifier, StatType statType)
     {
+        /*return modifier.Type switch
+        {
+            ModifierType.Absolute or ModifierType.Additive => 
+                new Text($"{NameAliasHelper.GetName(statType.ToString())} ({modifier.Source}): " +
+                         $"{modifier.Mod:+#;-#;0} [{modifier.Duration}]"),
+            ModifierType.Relative or ModifierType.Multiplicative =>
+                new Text($"{NameAliasHelper.GetName(statType.ToString())} ({modifier.Source}): " +
+                         $"*{1+modifier.Mod} [{modifier.Duration}]")
+        };*/
         return modifier.Type switch
         {
             ModifierType.Absolute or ModifierType.Additive => 
-                new Text($"{NameAliasHelper.GetName(statType.ToString())} ({modifier.Source}) - " +
+                new Text($"{NameAliasHelper.GetName(statType.ToString())}: " +
                          $"{modifier.Mod:+#;-#;0} [{modifier.Duration}]"),
             ModifierType.Relative or ModifierType.Multiplicative =>
-                new Text($"{NameAliasHelper.GetName(statType.ToString())} ({modifier.Source}) - " +
-                         $"{modifier.Mod:*#} [{modifier.Duration}]")
+                new Text($"{NameAliasHelper.GetName(statType.ToString())}: " +
+                         $"*{1+modifier.Mod:P} [{modifier.Duration}]")
         };
     }
 }
+

@@ -9,18 +9,7 @@ public static class DungeonTextService
 {
     public static void DisplayDungeonHeader(Dungeon dungeon)
     {
-        var locationText = dungeon.DungeonType switch
-        {
-            DungeonType.Catacombs => locale.Catacombs,
-            DungeonType.Forest => locale.Forest,
-            DungeonType.ElvishRuins => locale.ElvishRuins,
-            DungeonType.Cove => locale.Cove,
-            DungeonType.Desert => locale.Desert,
-            DungeonType.Temple => locale.Temple,
-            DungeonType.Mountains => locale.Mountains,
-            DungeonType.Swamp => locale.Swamp,
-            _ => locale.Catacombs,
-        };
+        var locationText = LocationText(dungeon);
         var color = dungeon.DungeonType switch
         {
             DungeonType.Catacombs => Color.Grey37,
@@ -34,15 +23,37 @@ public static class DungeonTextService
             _ => Color.White,
         };
         AnsiConsole.Write(new FigletText(locationText).Color(color));
+    }
+
+    public static void DisplayDungeonFloor(Dungeon dungeon)
+    {
+        var locationText = LocationText(dungeon);
         var floor = dungeon.Floors.IndexOf(dungeon.CurrentFloor) == 0
             ? dungeon.Floors.IndexOf(dungeon.CurrentFloor).ToString()
             : "-" + dungeon.Floors.IndexOf(dungeon.CurrentFloor);
-        var visited = (dungeon.Floors.Count - 1) == 0
+        var visited = dungeon.Floors.Count - 1 == 0
             ? (dungeon.Floors.Count - 1).ToString()
             : "-" + (dungeon.Floors.Count - 1);
         locationText = locale.Level + " " + dungeon.DungeonLevel + ", " + locale.Floor + " " + floor + " [" +
                        visited + "]\n" + locale.Map + ":";
         AnsiConsole.WriteLine(locationText);
+    }
+
+    private static string LocationText(Dungeon dungeon)
+    {
+        var locationText = dungeon.DungeonType switch
+        {
+            DungeonType.Catacombs => locale.Catacombs,
+            DungeonType.Forest => locale.Forest,
+            DungeonType.ElvishRuins => locale.ElvishRuins,
+            DungeonType.Cove => locale.Cove,
+            DungeonType.Desert => locale.Desert,
+            DungeonType.Temple => locale.Temple,
+            DungeonType.Mountains => locale.Mountains,
+            DungeonType.Swamp => locale.Swamp,
+            _ => locale.Catacombs,
+        };
+        return locationText;
     }
 
     public static void DisplayDungeonMap(Dungeon dungeon, int locationIndex, DungeonRoom currentLocation)
@@ -114,8 +125,8 @@ public static class DungeonTextService
     public static void DisplayTrapDisarmText(bool success)
     {
         AnsiConsole.Write(success
-            ? new Text($"{locale.TrapDisarmed}!\n", Stylesheet.Styles["success"])
-            : new Text($"{locale.TrapDisarmedFail}!\n", Stylesheet.Styles["failure"]));
+            ? new Text($"\n{locale.TrapDisarmed}!\n", Stylesheet.Styles["success"])
+            : new Text($"\n{locale.TrapDisarmedFail}!\n", Stylesheet.Styles["failure"]));
     }
 
     public static void DisplayRestAtBonfire(bool ambushed)

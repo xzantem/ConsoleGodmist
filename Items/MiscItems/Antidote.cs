@@ -28,7 +28,7 @@ public class Antidote : BaseItem, ICraftable, IUsable
 
     public bool Use()
     {
-        PlayerHandler.player.StatusEffects.RemoveAll(x => x.Type == StatusEffectType.Poison);
+        PlayerHandler.player.PassiveEffects.TimedEffects.RemoveAll(x => x.Type == "Poison");
         return true;
     }
 }

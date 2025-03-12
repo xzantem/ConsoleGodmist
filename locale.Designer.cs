@@ -1212,6 +1212,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to to boss.
+        /// </summary>
+        internal static string BossProgress {
+            get {
+                return ResourceManager.GetString("BossProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bought.
         /// </summary>
         internal static string Bought {
@@ -4515,6 +4524,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Greater.
+        /// </summary>
+        internal static string Greater {
+            get {
+                return ResourceManager.GetString("Greater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Green energy dust.
         /// </summary>
         internal static string GreenEnergyDust {
@@ -5622,6 +5640,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Letters in word.
+        /// </summary>
+        internal static string InWord {
+            get {
+                return ResourceManager.GetString("InWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Iron.
         /// </summary>
         internal static string Iron {
@@ -5892,7 +5919,7 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cleraing the Cove.
+        ///   Looks up a localized string similar to Clearing the Cove.
         /// </summary>
         internal static string KillDungeonCove {
             get {
@@ -6095,6 +6122,15 @@ namespace ConsoleGodmist {
         internal static string LeopardSkin {
             get {
                 return ResourceManager.GetString("LeopardSkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lesser.
+        /// </summary>
+        internal static string Lesser {
+            get {
+                return ResourceManager.GetString("Lesser", resourceCulture);
             }
         }
         
@@ -7305,6 +7341,15 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Letters not in the word.
+        /// </summary>
+        internal static string NotInWord {
+            get {
+                return ResourceManager.GetString("NotInWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no wares in the  inventory.
         /// </summary>
         internal static string NoWares {
@@ -7346,6 +7391,15 @@ namespace ConsoleGodmist {
         internal static string OakWood {
             get {
                 return ResourceManager.GetString("OakWood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of .
+        /// </summary>
+        internal static string Of {
+            get {
+                return ResourceManager.GetString("Of", resourceCulture);
             }
         }
         
@@ -7872,11 +7926,11 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pirate Harponeer.
+        ///   Looks up a localized string similar to Pirate Harpooner.
         /// </summary>
-        internal static string PirateHarponeer {
+        internal static string PirateHarpooner {
             get {
-                return ResourceManager.GetString("PirateHarponeer", resourceCulture);
+                return ResourceManager.GetString("PirateHarpooner", resourceCulture);
             }
         }
         
@@ -8016,11 +8070,227 @@ namespace ConsoleGodmist {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        internal static string PotionAccuracyIncrease {
+            get {
+                return ResourceManager.GetString("PotionAccuracyIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stimulating.
+        /// </summary>
+        internal static string PotionAccuracyIncreaseAdv {
+            get {
+                return ResourceManager.GetString("PotionAccuracyIncreaseAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Charge amount.
         /// </summary>
         internal static string PotionCapacity {
             get {
                 return ResourceManager.GetString("PotionCapacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accuracy.
+        /// </summary>
+        internal static string PotionCritChanceIncrease {
+            get {
+                return ResourceManager.GetString("PotionCritChanceIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Precise.
+        /// </summary>
+        internal static string PotionCritChanceIncreaseAdv {
+            get {
+                return ResourceManager.GetString("PotionCritChanceIncreaseAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strength.
+        /// </summary>
+        internal static string PotionDamageDealtIncrease {
+            get {
+                return ResourceManager.GetString("PotionDamageDealtIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empowering.
+        /// </summary>
+        internal static string PotionDamageDealtIncreaseAdv {
+            get {
+                return ResourceManager.GetString("PotionDamageDealtIncreaseAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protection.
+        /// </summary>
+        internal static string PotionDamageTakenDecrease {
+            get {
+                return ResourceManager.GetString("PotionDamageTakenDecrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fortifying.
+        /// </summary>
+        internal static string PotionDamageTakenDecreaseAdv {
+            get {
+                return ResourceManager.GetString("PotionDamageTakenDecreaseAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agility.
+        /// </summary>
+        internal static string PotionDodgeIncrease {
+            get {
+                return ResourceManager.GetString("PotionDodgeIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Evasive.
+        /// </summary>
+        internal static string PotionDodgeIncreaseAdv {
+            get {
+                return ResourceManager.GetString("PotionDodgeIncreaseAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health.
+        /// </summary>
+        internal static string PotionHealthRegain {
+            get {
+                return ResourceManager.GetString("PotionHealthRegain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Healing.
+        /// </summary>
+        internal static string PotionHealthRegainAdv {
+            get {
+                return ResourceManager.GetString("PotionHealthRegainAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regeneration.
+        /// </summary>
+        internal static string PotionHealthRegen {
+            get {
+                return ResourceManager.GetString("PotionHealthRegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regenerating.
+        /// </summary>
+        internal static string PotionHealthRegenAdv {
+            get {
+                return ResourceManager.GetString("PotionHealthRegenAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spirit.
+        /// </summary>
+        internal static string PotionMaxResourceIncrease {
+            get {
+                return ResourceManager.GetString("PotionMaxResourceIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mental.
+        /// </summary>
+        internal static string PotionMaxResourceIncreaseAdv {
+            get {
+                return ResourceManager.GetString("PotionMaxResourceIncreaseAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Endurance.
+        /// </summary>
+        internal static string PotionResistanceIncrease {
+            get {
+                return ResourceManager.GetString("PotionResistanceIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tempering.
+        /// </summary>
+        internal static string PotionResistanceIncreaseAdv {
+            get {
+                return ResourceManager.GetString("PotionResistanceIncreaseAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Energy.
+        /// </summary>
+        internal static string PotionResourceRegain {
+            get {
+                return ResourceManager.GetString("PotionResourceRegain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invigorating.
+        /// </summary>
+        internal static string PotionResourceRegainAdv {
+            get {
+                return ResourceManager.GetString("PotionResourceRegainAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovery.
+        /// </summary>
+        internal static string PotionResourceRegen {
+            get {
+                return ResourceManager.GetString("PotionResourceRegen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovering.
+        /// </summary>
+        internal static string PotionResourceRegenAdv {
+            get {
+                return ResourceManager.GetString("PotionResourceRegenAdv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Swiftness.
+        /// </summary>
+        internal static string PotionSpeedIncrease {
+            get {
+                return ResourceManager.GetString("PotionSpeedIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accelerating.
+        /// </summary>
+        internal static string PotionSpeedIncreaseAdv {
+            get {
+                return ResourceManager.GetString("PotionSpeedIncreaseAdv", resourceCulture);
             }
         }
         
@@ -9146,6 +9416,24 @@ namespace ConsoleGodmist {
         internal static string ShowCharacter {
             get {
                 return ResourceManager.GetString("ShowCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show craftable and uncraftable.
+        /// </summary>
+        internal static string ShowCraftableAndUncraftable {
+            get {
+                return ResourceManager.GetString("ShowCraftableAndUncraftable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show only craftable.
+        /// </summary>
+        internal static string ShowOnlyCraftable {
+            get {
+                return ResourceManager.GetString("ShowOnlyCraftable", resourceCulture);
             }
         }
         

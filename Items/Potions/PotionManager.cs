@@ -52,9 +52,6 @@ public static class PotionManager
             case PotionEffect.ResourceRegen:
                 var totalResourceRegen = PlayerHandler.player.MaximalResource * strength * duration / 10;
                 var resourcePerTurn = totalResourceRegen / condensedDuration;
-                StatusEffectHandler.AddStatusEffect(
-                    new Regeneration(resourcePerTurn, component.Material, condensedDuration, "Resource"), 
-                    PlayerHandler.player);
                 PlayerHandler.player.PassiveEffects.Add(new TimedPassiveEffect(
                     PlayerHandler.player, "Potion", "Regeneration", condensedDuration, [], 
                     () => { PlayerHandler.player.RegenResource((int)resourcePerTurn); }));
@@ -113,6 +110,67 @@ public static class PotionManager
 
         return new Potion("Potion", "", components,
                 new PotionCatalyst(UtilityMethods.RandomChoice(Enum.GetValues<PotionCatalystEffect>().ToList()), tier));
+    }
+
+    public static string GetPotionName(List<PotionEffect> effects, int tier)
+    {
+        var distinct = effects.ToHashSet().ToList();
+        var txt = distinct[0] switch
+        {
+            PotionEffect.HealthRegain => locale.PotionHealthRegainAdv,
+            PotionEffect.HealthRegen => locale.PotionHealthRegenAdv,
+            PotionEffect.ResourceRegain => locale.PotionResourceRegainAdv,
+            PotionEffect.ResourceRegen => locale.PotionResourceRegenAdv,
+            PotionEffect.MaxResourceIncrease => locale.PotionMaxResourceIncreaseAdv,
+            PotionEffect.DamageDealtIncrease => locale.PotionDamageDealtIncreaseAdv,
+            PotionEffect.DamageTakenDecrease => locale.PotionDamageTakenDecreaseAdv,
+            PotionEffect.ResistanceIncrease => locale.PotionResistanceIncreaseAdv,
+            PotionEffect.SpeedIncrease => locale.PotionSpeedIncreaseAdv,
+            PotionEffect.CritChanceIncrese => locale.PotionCritChanceIncreaseAdv,
+            PotionEffect.DodgeIncrease => locale.PotionDodgeIncreaseAdv,
+            PotionEffect.AccuracyIncrease => locale.PotionAccuracyIncreaseAdv
+        } + " ";
+        txt += tier switch
+        {
+            1 => locale.Lesser,
+            2 => "",
+            3 => locale.Greater,
+            _ => throw new ArgumentOutOfRangeException()
+        } + " " + locale.Potion + " " + locale.Of;
+        txt += distinct[1] switch
+        {
+            PotionEffect.HealthRegain => locale.PotionHealthRegain,
+            PotionEffect.HealthRegen => locale.PotionHealthRegen,
+            PotionEffect.ResourceRegain => locale.PotionResourceRegain,
+            PotionEffect.ResourceRegen => locale.PotionResourceRegen,
+            PotionEffect.MaxResourceIncrease => locale.PotionMaxResourceIncrease,
+            PotionEffect.DamageDealtIncrease => locale.PotionDamageDealtIncrease,
+            PotionEffect.DamageTakenDecrease => locale.PotionDamageTakenDecrease,
+            PotionEffect.ResistanceIncrease => locale.PotionResistanceIncrease,
+            PotionEffect.SpeedIncrease => locale.PotionSpeedIncrease,
+            PotionEffect.CritChanceIncrese => locale.PotionCritChanceIncrease,
+            PotionEffect.DodgeIncrease => locale.PotionDodgeIncrease,
+            PotionEffect.AccuracyIncrease => locale.PotionAccuracyIncrease
+        };
+        if (distinct.Count > 2)
+        {
+            txt += " " + locale.And1 + " " + distinct[2] switch
+            {
+                PotionEffect.HealthRegain => locale.PotionHealthRegain,
+                PotionEffect.HealthRegen => locale.PotionHealthRegen,
+                PotionEffect.ResourceRegain => locale.PotionResourceRegain,
+                PotionEffect.ResourceRegen => locale.PotionResourceRegen,
+                PotionEffect.MaxResourceIncrease => locale.PotionMaxResourceIncrease,
+                PotionEffect.DamageDealtIncrease => locale.PotionDamageDealtIncrease,
+                PotionEffect.DamageTakenDecrease => locale.PotionDamageTakenDecrease,
+                PotionEffect.ResistanceIncrease => locale.PotionResistanceIncrease,
+                PotionEffect.SpeedIncrease => locale.PotionSpeedIncrease,
+                PotionEffect.CritChanceIncrese => locale.PotionCritChanceIncrease,
+                PotionEffect.DodgeIncrease => locale.PotionDodgeIncrease,
+                PotionEffect.AccuracyIncrease => locale.PotionAccuracyIncrease
+            };
+        }
+        return txt;
     }
 
     public static string GetCatalystMaterial(PotionCatalystEffect effect, int tier)

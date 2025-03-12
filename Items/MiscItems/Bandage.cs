@@ -28,7 +28,7 @@ public class Bandage : BaseItem, ICraftable, IUsable
 
     public bool Use()
     {
-        PlayerHandler.player.StatusEffects.RemoveAll(x => x.Type == StatusEffectType.Bleed);
+        PlayerHandler.player.PassiveEffects.TimedEffects.RemoveAll(x => x.Type == "Burn");
         return true;
     }
 }

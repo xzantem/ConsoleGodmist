@@ -2919,7 +2919,7 @@
   <data name="PirateCombatant" xml:space="preserve">
     <value>Pirat Kombatant</value>
   </data>
-  <data name="PirateHarponeer" xml:space="preserve">
+  <data name="PirateHarpooner" xml:space="preserve">
     <value>Pirat Harpunnik</value>
   </data>
   <data name="SandyPhoenix" xml:space="preserve">
@@ -3830,5 +3830,101 @@
   </data>
   <data name="IsDebuffed" xml:space="preserve">
     <value>zmniejsza się o</value>
+  </data>
+  <data name="BossProgress" xml:space="preserve">
+    <value>do bossa</value>
+  </data>
+  <data name="ShowOnlyCraftable" xml:space="preserve">
+    <value>Pokaż tylko wytwarzalne</value>
+  </data>
+  <data name="ShowCraftableAndUncraftable" xml:space="preserve">
+    <value>Pokaż wytwarzalne i niewytwarzalne</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Lesser" xml:space="preserve">
+    <value>Pomniejsza</value>
+  </data>
+  <data name="Greater" xml:space="preserve">
+    <value>Większa</value>
+  </data>
+  <data name="PotionHealthRegainAdv" xml:space="preserve">
+    <value>Lecząca</value>
+  </data>
+  <data name="PotionHealthRegenAdv" xml:space="preserve">
+    <value>Regenerująca</value>
+  </data>
+  <data name="PotionResourceRegainAdv" xml:space="preserve">
+    <value>Okrzepiająca</value>
+  </data>
+  <data name="PotionResourceRegenAdv" xml:space="preserve">
+    <value>Odnawiająca</value>
+  </data>
+  <data name="PotionMaxResourceIncreaseAdv" xml:space="preserve">
+    <value>Psychiczna</value>
+  </data>
+  <data name="PotionDamageDealtIncreaseAdv" xml:space="preserve">
+    <value>Wzmacniająca</value>
+  </data>
+  <data name="PotionDamageTakenDecreaseAdv" xml:space="preserve">
+    <value>Umacniająca</value>
+  </data>
+  <data name="PotionResistanceIncreaseAdv" xml:space="preserve">
+    <value>Hartująca</value>
+  </data>
+  <data name="PotionSpeedIncreaseAdv" xml:space="preserve">
+    <value>Przyspieszająca</value>
+  </data>
+  <data name="PotionCritChanceIncreaseAdv" xml:space="preserve">
+    <value>Precyzyjna</value>
+  </data>
+  <data name="PotionDodgeIncreaseAdv" xml:space="preserve">
+    <value>Wymijajaca</value>
+  </data>
+  <data name="PotionAccuracyIncreaseAdv" xml:space="preserve">
+    <value>Stymulująca</value>
+  </data>
+  <data name="PotionHealthRegain" xml:space="preserve">
+    <value>Zdrowia</value>
+  </data>
+  <data name="PotionHealthRegen" xml:space="preserve">
+    <value>Regeneracji</value>
+  </data>
+  <data name="PotionResourceRegain" xml:space="preserve">
+    <value>Energii</value>
+  </data>
+  <data name="PotionResourceRegen" xml:space="preserve">
+    <value>Odnowy</value>
+  </data>
+  <data name="PotionMaxResourceIncrease" xml:space="preserve">
+    <value>Ducha</value>
+  </data>
+  <data name="PotionDamageDealtIncrease" xml:space="preserve">
+    <value>Siły</value>
+  </data>
+  <data name="PotionDamageTakenDecrease" xml:space="preserve">
+    <value>Obrony</value>
+  </data>
+  <data name="PotionResistanceIncrease" xml:space="preserve">
+    <value>Wytrzymałosci</value>
+  </data>
+  <data name="PotionCritChanceIncrease" xml:space="preserve">
+    <value>Celności</value>
+  </data>
+  <data name="PotionSpeedIncrease" xml:space="preserve">
+    <value>Szybkości</value>
+  </data>
+  <data name="PotionDodgeIncrease" xml:space="preserve">
+    <value>Zwinności</value>
+  </data>
+  <data name="PotionAccuracyIncrease" xml:space="preserve">
+    <value>Akcji</value>
+  </data>
+  <data name="InWord" xml:space="preserve">
+    <value>Litery, które są w słowie</value>
+  </data>
+  <data name="NotInWord" xml:space="preserve">
+    <value>Litery, których nie ma w słowie</value>
   </data>
 </root>

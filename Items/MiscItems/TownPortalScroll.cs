@@ -1,4 +1,5 @@
-﻿using ConsoleGodmist.Dungeons;
+﻿using ConsoleGodmist.Combat.Battles;
+using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using Newtonsoft.Json;
 
@@ -19,6 +20,8 @@ public class TownPortalScroll : BaseItem, ICraftable, IUsable
     
     public bool Use()
     {
+        if (BattleManager.IsInBattle())
+            return false;
         DungeonMovementManager.ExitDungeon();
         return true;
     }

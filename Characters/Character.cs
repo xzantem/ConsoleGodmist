@@ -112,7 +112,6 @@ namespace ConsoleGodmist.Characters
         }
 
         public ResourceType ResourceType { get; set; }
-        public List<StatusEffect> StatusEffects { get; set; }
         public PassiveEffectList PassiveEffects { get; set; }
         public Dictionary<StatusEffectType, Stat> Resistances { get; set; }
         public int Level {get; set;}
@@ -139,7 +138,6 @@ namespace ConsoleGodmist.Characters
             _accuracy = accuracy;
             _critMod = critMod;
             Level = level;
-            StatusEffects = [];
             ActiveSkills = new ActiveSkill[5];
         }
         public void TakeDamage(Dictionary<DamageType, double> damage, dynamic source)

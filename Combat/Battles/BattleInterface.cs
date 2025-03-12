@@ -74,6 +74,7 @@ public class BattleInterface(BattleUser displayedUser)
             new Text($"{x.Item1.User.Name} ({x.Item2})")));
         
         table.AddRow(movingUserTable, battleLog, displayedUserTable, turnOrder);
+        table.Width(Console.WindowWidth);
         if (clear)
             UtilityMethods.ClearConsole(ToClear);
         var before = Console.CursorTop;
@@ -156,8 +157,13 @@ public class BattleInterface(BattleUser displayedUser)
                 break;
             case "PassiveEffects":
                 table.AddColumn(locale.PassiveEffects);
-                table.AddRow(stats, new Rows(user.User.PassiveEffects.TimedEffects.
+                /*table.AddRow(stats, new Rows(user.User.PassiveEffects.TimedEffects.
                     Select(x => new Text($"{x.Type} ({x.Source}) - [{x.Duration}]"))
+                    .Concat(user.User.PassiveEffects.ListenerEffects.Select(x => new Text(x.Source))
+                        .Concat(user.User.GetModifiers().Select(x => 
+                            PassiveEffectTextService.ModifierText(x.Key, x.Value))))));*/
+                table.AddRow(stats, new Rows(user.User.PassiveEffects.TimedEffects.
+                    Select(x => new Text($"{x.Type} [{x.Duration}]"))
                     .Concat(user.User.PassiveEffects.ListenerEffects.Select(x => new Text(x.Source))
                         .Concat(user.User.GetModifiers().Select(x => 
                             PassiveEffectTextService.ModifierText(x.Key, x.Value))))));

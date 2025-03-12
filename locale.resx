@@ -2921,8 +2921,8 @@
   <data name="PirateCombatant" xml:space="preserve">
     <value>Pirate Combatant</value>
   </data>
-  <data name="PirateHarponeer" xml:space="preserve">
-    <value>Pirate Harponeer</value>
+  <data name="PirateHarpooner" xml:space="preserve">
+    <value>Pirate Harpooner</value>
   </data>
   <data name="SandyPhoenix" xml:space="preserve">
     <value>Sandy Phoenix</value>
@@ -3225,7 +3225,7 @@
     <value>Clearing the Elvish Ruins</value>
   </data>
   <data name="KillDungeonCove" xml:space="preserve">
-    <value>Cleraing the Cove</value>
+    <value>Clearing the Cove</value>
   </data>
   <data name="KillDungeonDesert" xml:space="preserve">
     <value>Clearing the Desert</value>
@@ -3832,5 +3832,101 @@
   </data>
   <data name="IsDebuffed" xml:space="preserve">
     <value>decreases by</value>
+  </data>
+  <data name="BossProgress" xml:space="preserve">
+    <value>to boss</value>
+  </data>
+  <data name="ShowOnlyCraftable" xml:space="preserve">
+    <value>Show only craftable</value>
+  </data>
+  <data name="ShowCraftableAndUncraftable" xml:space="preserve">
+    <value>Show craftable and uncraftable</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>of </value>
+  </data>
+  <data name="Lesser" xml:space="preserve">
+    <value>Lesser</value>
+  </data>
+  <data name="Greater" xml:space="preserve">
+    <value>Greater</value>
+  </data>
+  <data name="PotionHealthRegainAdv" xml:space="preserve">
+    <value>Healing</value>
+  </data>
+  <data name="PotionHealthRegenAdv" xml:space="preserve">
+    <value>Regenerating</value>
+  </data>
+  <data name="PotionResourceRegainAdv" xml:space="preserve">
+    <value>Invigorating</value>
+  </data>
+  <data name="PotionResourceRegenAdv" xml:space="preserve">
+    <value>Recovering</value>
+  </data>
+  <data name="PotionMaxResourceIncreaseAdv" xml:space="preserve">
+    <value>Mental</value>
+  </data>
+  <data name="PotionDamageDealtIncreaseAdv" xml:space="preserve">
+    <value>Empowering</value>
+  </data>
+  <data name="PotionDamageTakenDecreaseAdv" xml:space="preserve">
+    <value>Fortifying</value>
+  </data>
+  <data name="PotionResistanceIncreaseAdv" xml:space="preserve">
+    <value>Tempering</value>
+  </data>
+  <data name="PotionSpeedIncreaseAdv" xml:space="preserve">
+    <value>Accelerating</value>
+  </data>
+  <data name="PotionCritChanceIncreaseAdv" xml:space="preserve">
+    <value>Precise</value>
+  </data>
+  <data name="PotionDodgeIncreaseAdv" xml:space="preserve">
+    <value>Evasive</value>
+  </data>
+  <data name="PotionAccuracyIncreaseAdv" xml:space="preserve">
+    <value>Stimulating</value>
+  </data>
+  <data name="PotionHealthRegain" xml:space="preserve">
+    <value>Health</value>
+  </data>
+  <data name="PotionHealthRegen" xml:space="preserve">
+    <value>Regeneration</value>
+  </data>
+  <data name="PotionResourceRegain" xml:space="preserve">
+    <value>Energy</value>
+  </data>
+  <data name="PotionResourceRegen" xml:space="preserve">
+    <value>Recovery</value>
+  </data>
+  <data name="PotionMaxResourceIncrease" xml:space="preserve">
+    <value>Spirit</value>
+  </data>
+  <data name="PotionDamageDealtIncrease" xml:space="preserve">
+    <value>Strength</value>
+  </data>
+  <data name="PotionDamageTakenDecrease" xml:space="preserve">
+    <value>Protection</value>
+  </data>
+  <data name="PotionResistanceIncrease" xml:space="preserve">
+    <value>Endurance</value>
+  </data>
+  <data name="PotionCritChanceIncrease" xml:space="preserve">
+    <value>Accuracy</value>
+  </data>
+  <data name="PotionSpeedIncrease" xml:space="preserve">
+    <value>Swiftness</value>
+  </data>
+  <data name="PotionDodgeIncrease" xml:space="preserve">
+    <value>Agility</value>
+  </data>
+  <data name="PotionAccuracyIncrease" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="InWord" xml:space="preserve">
+    <value>Letters in word</value>
+  </data>
+  <data name="NotInWord" xml:space="preserve">
+    <value>Letters not in the word</value>
   </data>
 </root>

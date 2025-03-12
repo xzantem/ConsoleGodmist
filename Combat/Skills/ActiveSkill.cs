@@ -67,7 +67,7 @@ public class ActiveSkill
                     }
                     foreach (var effect in Effects.Where(x => x.Target == SkillTarget.Enemy))
                     {
-                        effect.Execute(caster.User, enemy.User, Alias);
+                        effect.Execute(caster.User, enemy.User, Name);
                         caster.User.PassiveEffects.HandleBattleEvent(new BattleEventData("OnHit", caster, enemy));
                     }
                 }

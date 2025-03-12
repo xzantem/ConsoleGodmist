@@ -4,6 +4,7 @@ using ConsoleGodmist.Town;
 using ConsoleGodmist.Town.NPCs;
 using ConsoleGodmist.Utilities;
 using Newtonsoft.Json;
+using Spectre.Console;
 
 namespace ConsoleGodmist.Quests;
 
@@ -53,6 +54,11 @@ public class Quest
         foreach (var objective in GetCurrentStage().Objectives.Where(objective => !objective.IsComplete))
         {
             objective.Progress(context);
+            if (!objective.IsComplete || GetCurrentStage() == default) continue;
+            AnsiConsole.Write(new Text($"{Name}\n", Stylesheet.Styles["gold"]));
+            AnsiConsole.Write(new Text($"Objective complete!: {objective.Description}\n", Stylesheet.Styles["highlight-good"]));
+            AnsiConsole.Write(new Text($"New objective: {GetCurrentStage()
+                .Objectives.FirstOrDefault(incomplete => !incomplete.IsComplete)?.Description}\n"));
         }
         if (GetCurrentStage() == default)
             TryCompleteQuest();
@@ -75,12 +81,28 @@ public class Quest
         if (QuestState != QuestState.Accepted || Stages.Count <= 0 || 
             !Stages.All(s => s.Objectives.All(o => o.IsComplete))) return;
         QuestState = QuestState.Completed;
+        AnsiConsole.Write(new Text($"{Name}\nQuest completed! Return to {QuestEnder}\n", Stylesheet.Styles["quest-completed"]));
     }
 
     public void HandInQuest()
     {
         GetRewards();
         QuestState = QuestState.HandedIn;
+        if (QuestManager.RandomizedSideQuests.Contains(this))
+        {
+            foreach (var objective in Stages.SelectMany(stage => stage.Objectives))
+            {
+                switch (objective)
+                {
+                    case KillInDungeonQuestObjective killObjective:
+                        QuestManager.BossProgress[killObjective.Target]++;
+                        break;
+                    case DescendQuestObjective descendObjective:
+                        QuestManager.BossProgress[descendObjective.Target]++;
+                        break;
+                }
+            }
+        }
         foreach (var str in HandInDialogue)
             TownsHandler.FindNPC(QuestEnder).Say(str);
     }

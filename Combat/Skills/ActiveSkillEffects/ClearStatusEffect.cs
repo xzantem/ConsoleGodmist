@@ -16,14 +16,6 @@ public class ClearStatusEffect : IActiveSkillEffect
     public ClearStatusEffect() {}
     public void Execute(Character caster, Character enemy, string source)
     {
-        switch (Target)
-        {
-            case SkillTarget.Self:
-                caster.StatusEffects.RemoveAll(x => x.Type == StatusEffectType);
-                break;
-            case SkillTarget.Enemy:
-                enemy.StatusEffects.RemoveAll(x => x.Type == StatusEffectType);
-                break;
-        }
+        //TODO
     }
 }

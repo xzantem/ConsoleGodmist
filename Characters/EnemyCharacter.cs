@@ -22,7 +22,6 @@ public class EnemyCharacter : Character
 
     public EnemyCharacter()
     {
-        StatusEffects = [];
     } // For JSON Serialization
 
     public EnemyCharacter(EnemyCharacter other, int level) // Deep Copy for initializing new monsters
@@ -56,7 +55,6 @@ public class EnemyCharacter : Character
         _speed = new Stat(other._speed.BaseValue, other._speed.ScalingFactor);
         _accuracy = new Stat(other._accuracy.BaseValue, other._accuracy.ScalingFactor);
         _critMod = new Stat(other._critMod.BaseValue, other._critMod.ScalingFactor);
-        StatusEffects = [];
         Resistances = other.Resistances.ToDictionary(x => x.Key, x => 
             new Stat(x.Value.BaseValue, x.Value.ScalingFactor));
         ActiveSkills = (ActiveSkill[])other.ActiveSkills.Clone();

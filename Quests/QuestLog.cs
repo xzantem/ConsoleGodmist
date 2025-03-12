@@ -6,6 +6,7 @@ namespace ConsoleGodmist.Quests;
 
 public static class QuestLog
 {
+    private static readonly List<QuestState> Filters = [QuestState.Accepted, QuestState.Completed, QuestState.HandedIn];
     public static void InspectQuest(Quest quest)
     {
         AnsiConsole.Write(new Text($"{quest.Name} - {NameAliasHelper.GetName(quest.QuestGiver)} " +
@@ -29,14 +30,13 @@ public static class QuestLog
     {
         var quests = QuestManager.Quests.Where(x => x.QuestState != QuestState.Available)
             .OrderBy(x => x.QuestState).ToList();
-        var filters = new List<QuestState>{QuestState.Accepted, QuestState.Completed, QuestState.HandedIn};
         const int scrollAmount = 10;
         const int pageSize = 10;
         var index = 0;
         while (true)
         {
             
-            var rows = quests.Where(x => filters.Contains(x.QuestState)).Select(x => 
+            var rows = quests.Where(x => Filters.Contains(x.QuestState)).Select(x => 
                 new Text($"{NameAliasHelper.GetName(x.QuestState.ToString())} - " +
                          $"{x.Name} ({x.RecommendedLevel})")).ToList();
             if (rows.Count == 0) { AnsiConsole.Write(new Text(locale.QuestListEmpty, Stylesheet.Styles["default"])); }
@@ -58,32 +58,31 @@ public static class QuestLog
                 case 0: index += scrollAmount; break;
                 case 1: index -= scrollAmount; break;
                 case 2:
-                    try { InspectQuest(quests[ChooseQuest(rows)]); }
+                    try { InspectQuest(quests[ChooseQuest(quests)]); }
                     catch { AnsiConsole.Write(new Text("", Stylesheet.Styles["error"])); }
                     break;
-                case 3: filters = ChangeFilters(); break;
+                case 3: ChangeFilters(); break;
                 case 4: return;
             }
         }
     }
 
-    private static int ChooseQuest(List<Text> selection)
+    private static int ChooseQuest(List<Quest> selection)
     {
         if (selection.Count <= 1) return 0;
-        var choice = AnsiConsole.Prompt(new SelectionPrompt<Text>()
-            .AddChoices(selection)
-            .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
-        return selection.IndexOf(choice);
+        var choices = selection.Select(x => x.Name).ToList();
+        choices.Add(locale.Return);
+        var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().AddChoices(choices).WrapAround());
+        return choices.IndexOf(choice);
     }
 
-    private static List<QuestState> ChangeFilters()
+    private static void ChangeFilters()
     {
+        Filters.Clear();
         var str = AnsiConsole.Prompt(new MultiSelectionPrompt<string>()
             .AddChoices([locale.Accepted, locale.Completed, locale.HandedIn]));
-        var filters = new List<QuestState>();
-        if (str.Contains(locale.Accepted)) filters.Add(QuestState.Accepted);
-        if (str.Contains(locale.Completed)) filters.Add(QuestState.Completed);
-        if (str.Contains(locale.HandedIn)) filters.Add(QuestState.HandedIn);
-        return filters;
+        if (str.Contains(locale.Accepted)) Filters.Add(QuestState.Accepted);
+        if (str.Contains(locale.Completed)) Filters.Add(QuestState.Completed);
+        if (str.Contains(locale.HandedIn)) Filters.Add(QuestState.HandedIn);
     }
 }

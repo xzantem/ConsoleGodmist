@@ -29,7 +29,7 @@ public class WetTowel : BaseItem, ICraftable, IUsable
 
     public bool Use()
     {
-        PlayerHandler.player.StatusEffects.RemoveAll(x => x.Type == StatusEffectType.Bleed);
+        PlayerHandler.player.PassiveEffects.TimedEffects.RemoveAll(x => x.Type == "Bleed");
         return true;
     }
 }

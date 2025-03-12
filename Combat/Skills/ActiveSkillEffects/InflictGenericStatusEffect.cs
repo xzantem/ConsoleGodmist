@@ -46,9 +46,9 @@ public class InflictGenericStatusEffect : IActiveSkillEffect
         var text = EffectType switch
         {
             "Stun" => $"{target.Name} {locale.IsStunned} {locale.And1} {locale.CannotMove}" +
-                      $"{locale.ForTheNext} {Duration} {locale.Turns}",
+                      $" {locale.ForTheNext} {Duration} {locale.Turns}",
             "Freeze" => $"{target.Name} {locale.IsFrozen} {locale.And1} {locale.CannotMove}" +
-                        $"{locale.ForTheNext} {Duration} {locale.Turns}"
+                        $" {locale.ForTheNext} {Duration} {locale.Turns}"
         };
         BattleManager.CurrentBattle?.Interface.AddBattleLogLines(new Text(text, Stylesheet.Styles["default"]));
     }

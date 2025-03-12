@@ -3,6 +3,7 @@ using ConsoleGodmist.Characters;
 using ConsoleGodmist.Dungeons;
 using ConsoleGodmist.Enums;
 using ConsoleGodmist.Items;
+using ConsoleGodmist.Quests;
 using ConsoleGodmist.TextService;
 using Spectre.Console;
 
@@ -45,6 +46,14 @@ public static class BattleManager
         if (!battleResult)
             Environment.Exit(0);
         GenerateReward(initial);
+        foreach (var user in initial.Where(u => u is { Value: 1, Key.User.CurrentHealth: <= 0 }))
+        {
+            QuestManager.CheckForProgress(
+                new QuestObjectiveContext((user.Key.User as EnemyCharacter)?.Alias, user.Key.User.Level));
+            QuestManager.CheckForProgress(
+                new QuestObjectiveContext(DungeonMovementManager.CurrentDungeon.DungeonType, 
+                    DungeonMovementManager.CurrentDungeon.DungeonType, user.Key.User.Level));
+        }
     }
 
     private static void GenerateReward(Dictionary<BattleUser, int> usersTeams)
@@ -85,5 +94,11 @@ public static class BattleManager
         player!.GainGold(moneyReward);
         player.GainHonor(honorReward);
         player.GainExperience(experienceReward);
+    }
+
+    public static bool IsInBattle()
+    {
+        if (CurrentBattle == null) return false;
+        return CurrentBattle.CheckForResult() != -1;
     }
 }

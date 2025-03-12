@@ -10,38 +10,50 @@ namespace ConsoleGodmist.Items;
 public static class CraftingManager
 {
     private static readonly Inventory Inventory = PlayerHandler.player.Inventory;
+    private static readonly List<ItemRarity> RarityFilters = [ItemRarity.Common, 
+        ItemRarity.Uncommon, ItemRarity.Rare, ItemRarity.Ancient, ItemRarity.Legendary];
+    private static bool _showOnlyCraftable;
 
     public static void OpenCraftingMenu(List<ICraftable> possibleItems)
     {
         const int scrollAmount = 10;
         const int pageSize = 10;
         var index = 0;
-        
+        var before = Console.CursorTop;
         while (true)
         {
             var tempIndex = 0;
-            for (var i = index; i < Math.Min(pageSize + index, possibleItems.Count); i++)
+            var shownItems = _showOnlyCraftable
+                ? possibleItems.Where(x => RarityFilters.Contains(x.Rarity) && x.CraftingRecipe
+                    .All(s => s.Value <= Inventory.Items
+                        .GetValueOrDefault(ItemManager.GetItem(s.Key)))).ToList()
+                : possibleItems.Where(x => RarityFilters.Contains(x.Rarity)).ToList();
+            UtilityMethods.ClearConsole(Console.CursorTop - before);
+            before = Console.CursorTop;
+            for (var i = index; i < Math.Min(pageSize + index, shownItems.Count); i++)
             {
-                AnsiConsole.Write(new Text($"\n{1 + i}. {possibleItems[i].CraftedAmount}x {possibleItems[i].Name}: ", 
-                    possibleItems[i].NameStyle()));
-                for (var j = 0; j < possibleItems[i].CraftingRecipe.Count; j++)
+                AnsiConsole.Write(new Text($"\n{1 + i}. {shownItems[i].CraftedAmount}x {shownItems[i].Name}: ", 
+                    shownItems[i].NameStyle()));
+                for (var j = 0; j < shownItems[i].CraftingRecipe.Count; j++)
                 {
-                    var item = ItemManager.GetItem(possibleItems[i].CraftingRecipe.ElementAt(j).Key);
+                    var item = ItemManager.GetItem(shownItems[i].CraftingRecipe.ElementAt(j).Key);
                     var itemCount = Inventory.Items.GetValueOrDefault(item, 0);
                     AnsiConsole.Write(j != 0 ? new Text($", {item.Name}") : new Text($"{item.Name}"));
-                    AnsiConsole.Write(new Text($" ({itemCount}/{possibleItems[i].CraftingRecipe.ElementAt(j).Value})", 
-                        itemCount >= possibleItems[i].CraftingRecipe.ElementAt(j).Value ? 
+                    AnsiConsole.Write(new Text($" ({itemCount}/{shownItems[i].CraftingRecipe.ElementAt(j).Value})", 
+                        itemCount >= shownItems[i].CraftingRecipe.ElementAt(j).Value ? 
                             Stylesheet.Styles["success"] : Stylesheet.Styles["failure"]));
                 }
             }
             AnsiConsole.Write("\n\n");
             Dictionary<string, int> choices = [];
-            if (index < possibleItems.Count - scrollAmount)
+            if (index < shownItems.Count - scrollAmount)
                 choices.Add(locale.GoDown, 0);
             if (index >= scrollAmount)
                 choices.Add(locale.GoUp, 1);
             choices.Add(locale.SelectItem, 2);
-            choices.Add(locale.Return, 3);
+            choices.Add(locale.ChangeFilter, 3);
+            choices.Add(_showOnlyCraftable ? locale.ShowCraftableAndUncraftable : locale.ShowOnlyCraftable, 4);
+            choices.Add(locale.Return, 5);
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .AddChoices(choices.Keys)
                 .HighlightStyle(new Style(Color.Gold3_1)).WrapAround());
@@ -54,13 +66,27 @@ public static class CraftingManager
                     index -= scrollAmount;
                     break;
                 case 2:
-                    var item = ChooseItem(possibleItems.Where(x => x.CraftingRecipe
+                    var item = ChooseItem(shownItems.Where(x => x.CraftingRecipe
                         .All(s => s.Value <= Inventory.Items
                             .GetValueOrDefault(ItemManager.GetItem(s.Key)))).ToList());
                     if (item != null)
                         CraftItem(item);
                     break;
+                case 3:
+                    RarityFilters.Clear();
+                    var str = AnsiConsole.Prompt(new MultiSelectionPrompt<string>()
+                        .AddChoices([locale.Common, locale.Uncommon, locale.Rare, locale.Ancient, locale.Legendary]));
+                    if (str.Contains(locale.Common)) RarityFilters.Add(ItemRarity.Common);
+                    if (str.Contains(locale.Uncommon)) RarityFilters.Add(ItemRarity.Uncommon);
+                    if (str.Contains(locale.Rare)) RarityFilters.Add(ItemRarity.Rare);
+                    if (str.Contains(locale.Ancient)) RarityFilters.Add(ItemRarity.Ancient);
+                    if (str.Contains(locale.Legendary)) RarityFilters.Add(ItemRarity.Legendary);
+                    break;
+                case 4:
+                    _showOnlyCraftable =!_showOnlyCraftable;
+                    break;
                 default:
+                    UtilityMethods.ClearConsole(Console.CursorTop - before + 1);
                     return;
             }
         }

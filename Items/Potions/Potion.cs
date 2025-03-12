@@ -8,7 +8,9 @@ namespace ConsoleGodmist.Items;
 
 public class Potion : BaseItem, IUsable
 {
-    public new string Name => NameAliasHelper.GetName(Alias);
+    public override string Name => PotionManager
+        .GetPotionName(Components.Select(x => x.Effect).ToList(), 
+            Components.Max(x => x.StrengthTier));
     public override int Weight => 2;
     public override int ID => 561;
     public override bool Stackable => false;

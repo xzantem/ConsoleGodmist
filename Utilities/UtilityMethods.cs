@@ -7,7 +7,7 @@ namespace ConsoleGodmist
 {
     internal static class UtilityMethods
     {
-        public static Random Random = new();
+        private static readonly Random Random = new();
         public static double RandomDouble(double minValue, double maxValue)
         {
             var number = Random.NextDouble();
@@ -112,15 +112,15 @@ namespace ConsoleGodmist
             }
         }
         public static double ScaledStat(double baseStat, double scaleFactor, int level) {
-            for (int i = 1; i < Math.Min(10, level); i++)
+            for (var i = 1; i < Math.Min(10, level); i++)
                 baseStat += scaleFactor;
-            for (int i = 10; i < Math.Min(20, level); i++)
+            for (var i = 10; i < Math.Min(20, level); i++)
                 baseStat += 2 * scaleFactor;
-            for (int i = 20; i < Math.Min(30, level); i++)
+            for (var i = 20; i < Math.Min(30, level); i++)
                 baseStat += 3 * scaleFactor;
-            for (int i = 30; i < Math.Min(40, level); i++)
+            for (var i = 30; i < Math.Min(40, level); i++)
                 baseStat += 5 * scaleFactor;
-            for (int i = 40; i < Math.Min(50, level); i++)
+            for (var i = 40; i < Math.Min(50, level); i++)
                 baseStat += 9 * scaleFactor;
             return baseStat;
         }
